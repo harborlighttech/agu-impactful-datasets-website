@@ -1,0 +1,928 @@
+#!/usr/bin/env python3
+"""
+Build the two-page "Impactful Datasets" wireframe as one standalone HTML file,
+in AGU brand: Montserrat + Lora, primary #244C5A, secondary #007DBA, white ground.
+
+Reads the RDF graph produced by restructure_impactful_datasets.py and inlines a
+compact payload for all 133 datasets, plus the AGU logo as a base64 CSS token,
+so the result is a single file with no external assets.
+
+Requirements:
+    pip install pillow      # only to downscale + embed the logo
+
+Usage:
+    python build_wireframe.py impactful_datasets.jsonld --logo AGU_Logo_H_CMYK.png [-o OUTDIR]
+
+Notes
+-----
+Shelf layout: uniform books, PER_SHELF (20) to a shelf, grouped by discipline.
+Search is client-side over title, discipline, repository, nominators, creators
+and curators; edit the `hay` assignment in the embedded JS to change the fields.
+The eight discipline colours are anchored on the two brand colours and every one
+clears 4.5:1 against the white spine text.
+"""
+import argparse, base64, collections, io, json, re
+from pathlib import Path
+
+ap = argparse.ArgumentParser(description=__doc__,
+                             formatter_class=argparse.RawDescriptionHelpFormatter)
+ap.add_argument("jsonld", type=Path)
+ap.add_argument("--logo", type=Path, default=None,
+                help="AGU logo PNG; omitted = logo slots render empty")
+ap.add_argument("-o", "--outdir", type=Path, default=Path("out"))
+ap.add_argument("--featured", default="Argo",
+                help="title of the dataset shown on page 2 (default: Argo)")
+ap.add_argument("--nominators", type=int, default=149,
+                help="distinct nominator count shown in the tally")
+ap.add_argument("--logo-width", type=int, default=620,
+                help="px width the logo is downscaled to before embedding")
+args = ap.parse_args()
+JSONLD = args.jsonld
+args.outdir.mkdir(parents=True, exist_ok=True)
+OUT = args.outdir / "impactful_datasets_wireframe.html"
+
+
+def _logo_png():
+    """Downscale the brand logo so the embedded copy stays small."""
+    if not args.logo:
+        return b""
+    from PIL import Image
+    im = Image.open(args.logo).convert("RGBA")
+    w = args.logo_width
+    im = im.resize((w, round(w * im.size[1] / im.size[0])), Image.LANCZOS)
+    buf = io.BytesIO()
+    im.save(buf, "PNG", optimize=True)
+    return buf.getvalue()
+
+
+d = json.load(open(JSONLD))
+g = d['@graph']; by = {n['@id']: n for n in g}
+
+THEME_ORDER = [
+ ("id:theme/atmospheric-science-space-weather", "Atmospheric Science, Space Weather", "atmos"),
+ ("id:theme/ocean-science-hydrology-cryosphere", "Ocean Science, Hydrology, Cryosphere", "ocean"),
+ ("id:theme/global-environmental-change-paleoceanography-and-paleoclimatology-biogeoscience", "Global Environmental Change, Paleoclimatology, Biogeoscience", "biosphere"),
+ ("id:theme/earth-s-interior-geodesy", "Earth's Interior, Geodesy", "interior"),
+ ("id:theme/earth-surface-natural-hazards-geology-near-surface-geophysics", "Earth Surface, Natural Hazards, Geology", "surface"),
+ ("id:theme/education-geohealth-society-education", "Education, GeoHealth, Society", "society"),
+ ("id:theme/space-and-planetary-science", "Space and Planetary Science", "space"),
+ ("id:theme/earth-planetary-materials", "Earth & Planetary Materials", "materials"),
+]
+tkey = {t[0]: t[2] for t in THEME_ORDER}
+# verify every theme id resolves
+real = {n['@id'] for n in g if n.get('@type')=='skos:Concept'}
+missing = real - set(tkey)
+assert not missing, f"unmapped themes: {missing}"
+
+nom_of = {}
+for n in g:
+    if 'agu:Nomination' in (n.get('@type') or []):
+        nom_of[n['nominates']] = n
+
+def txt(v, cap=None):
+    if v is None: return None
+    if isinstance(v, list):
+        v = " ".join(txt(x) or "" for x in v)
+    elif isinstance(v, dict):
+        v = v.get('schema:text') or v.get('name') or ""
+    v = re.sub(r'\s+', ' ', str(v)).strip()
+    return (v[:cap].rsplit(' ', 1)[0] + '…') if cap and len(v) > cap else v
+
+out = []
+for x in g:
+    if 'dcat:Dataset' not in (x.get('@type') or []): continue
+    nm = nom_of.get(x['@id'], {})
+    people = []
+    for pid in (nm.get('nominator') or []):
+        p = by.get(pid, {})
+        affs = [by[a]['name'] for a in (p.get('affiliation') or []) if a in by]
+        people.append({"name": p.get('name'), "orcid": pid if pid.startswith('http') else None,
+                       "affil": affs[0] if affs else None})
+    just = []
+    for j in (nm.get('justification') or []):
+        dims = [{"label": dd.get('prefLabel'), "text": txt(dd.get('schema:text'), 420)}
+                for dd in (j.get('impactDimension') or [])]
+        just.append({"seq": j.get('sequence'), "text": txt(j.get('schema:text'), 900), "dims": dims})
+    lp = x.get('landingPage') or []
+    doi = next((u for u in lp if 'doi.org/' in u), None)
+    repos = [by[r] for r in (x.get('inCatalog') or []) if r in by]
+    refs = [txt(r.get('schema:citation'), 260) for r in (x.get('isReferencedBy') or [])][:6]
+    reuse = [txt(r.get('schema:text'), 200) for r in (x.get('reuseExample') or [])][:5]
+    out.append({
+        "id": x['@id'].split('/')[-1],
+        "title": x.get('title'),
+        "theme": tkey[(x.get('theme') or [None])[0]] if x.get('theme') else "society",
+        "nomCount": len(people),
+        "nominators": people,
+        "doi": doi,
+        "links": [u for u in lp if u != doi][:3],
+        "repo": repos[0].get('name') if repos else None,
+        "repoIds": (repos[0].get('identifier') if repos else None) or [],
+        "creators": [c.get('name') for c in (x.get('creator') or [])][:4],
+        "curators": [c.get('name') for c in (x.get('curator') or [])][:3],
+        "desc": txt(x.get('description'), 1100),
+        "just": just[:4],
+        "refs": refs,
+        "reuse": reuse,
+        "reuseTotal": len(x.get('reuseExample') or []),
+        "refsTotal": len(x.get('isReferencedBy') or []),
+    })
+
+out.sort(key=lambda r: (-r['nomCount'], r['title'].lower()))
+payload = {"themes": [{"key": k, "label": l} for _, l, k in THEME_ORDER], "datasets": out}
+
+
+
+DATA = payload
+DATA['featured'] = next((d['id'] for d in DATA['datasets'] if d['title'] == args.featured),
+                        DATA['datasets'][0]['id'])
+DATA['nominatorCount'] = args.nominators
+
+
+
+HTML = r"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impactful Datasets — wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* AGU brand: primary #244C5A, secondary #007DBA, white ground */
+  --primary:#244C5A; --secondary:#007DBA;
+  --paper:#FFF; --surface:#FFF; --surface-2:#F5F7F8;
+  --ink:#244C5A; --ink-2:#587380; --ink-3:#5E7682;
+  --rule:#D5DFE3; --rule-2:#E8EEF0;
+  --mark:#007DBA; --mark-bg:#E4F2FA;
+  --chrome:#16323D;
+  /* discipline ramp, anchored on the two brand colours; all >=4.5:1 vs white */
+  --atmos:#007DBA; --ocean:#00778A; --biosphere:#2F7D5C; --interior:#A24B2E;
+  --surface-c:#8C6410; --society:#6B4C93; --space:#244C5A; --materials:#6B5B4B;
+  --f-display:'Montserrat','Helvetica Neue',Arial,sans-serif;
+  --f-body:'Lora',Georgia,'Times New Roman',serif;
+  --f-label:'Montserrat','Helvetica Neue',Arial,sans-serif;
+  --f-code:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --shell:1180px;
+  --logo:url(data:image/png;base64,__LOGO__);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-display);
+  font-size:15px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;font-weight:800;letter-spacing:-.024em;line-height:1.14}
+p{margin:0 0 .9em}
+a{color:inherit}
+.shell{max-width:var(--shell);margin:0 auto;padding:0 32px}
+.mono{font-family:var(--f-label);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+[class*="label"],.pagemark,.chip,.dl dt,.tip dt,.sec>h2,.card>h2,.dc-bar h2,.legend button,
+.searchbar .count,.searchbar .clear,.linklist .k,.dim,.just .who,.more,.dc-status,
+.shelf-head .n,.tally span,.readlink,.chrome-tag,.chrome-nav button,.chrome-toggle,.back,.note{
+  font-weight:600}
+/* prose runs in Lora */
+.masthead .lede,.callout p,.btn-nominate p,.sec p,.just p,.reuse li,.refs li,
+.people .aff,.dl dd,.tip dd,.empty p,.repo-sub{font-family:var(--f-body);letter-spacing:0}
+.endpoint,.people .oid{font-family:var(--f-code)}
+
+/* ---------- wireframe chrome ---------- */
+.chrome{position:sticky;top:0;z-index:60;background:var(--chrome);color:#fff}
+.chrome .shell{display:flex;align-items:center;gap:20px;height:46px}
+.chrome-tag{font-family:var(--f-label);font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:#A6C0CC;white-space:nowrap}
+.chrome-tag b{color:#fff;font-weight:700}
+.chrome-nav{display:flex;gap:4px;margin-left:auto}
+.chrome-nav button,.chrome-toggle{font-family:var(--f-label);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;background:transparent;color:#A6C0CC;border:1px solid #365060;
+  padding:5px 11px;border-radius:3px;cursor:pointer}
+.chrome-nav button[aria-current="true"]{background:#fff;color:var(--chrome);border-color:#fff}
+.chrome-toggle[aria-pressed="true"]{background:var(--mark);color:#fff;border-color:var(--mark)}
+.chrome-nav button:focus-visible,.chrome-toggle:focus-visible{outline:2px solid #4FB3E8;outline-offset:2px}
+
+/* ---------- brand header / footer ---------- */
+.site{background:#fff;border-bottom:1px solid var(--rule)}
+.site .shell{display:flex;align-items:center;gap:32px;height:82px}
+.brand{display:flex;align-items:center;text-decoration:none;flex:none}
+.logo{display:block;background:var(--logo) no-repeat left center;background-size:contain;
+  height:38px;width:128px;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.logo.foot{height:30px;width:101px;opacity:.92}
+.site-nav{display:flex;align-items:center;gap:28px;margin-left:auto}
+.site-nav a{font-family:var(--f-label);font-size:12px;font-weight:600;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink-2);text-decoration:none;padding:4px 0;
+  border-bottom:2px solid transparent}
+.site-nav a:hover{color:var(--primary);border-bottom-color:var(--secondary)}
+.site-nav a[aria-current="page"]{color:var(--primary);border-bottom-color:var(--primary)}
+.site-foot{border-top:3px solid var(--primary);background:var(--surface-2);margin-top:60px}
+.site-foot .shell{display:flex;align-items:center;gap:28px;padding-top:28px;padding-bottom:28px}
+
+.site-foot p{margin:0;margin-left:auto;font-family:var(--f-label);font-size:11px;font-weight:500;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);text-align:right}
+
+/* ---------- annotation layer ---------- */
+.pin{display:none;position:absolute;z-index:40;width:24px;height:24px;border-radius:50%;
+  background:var(--mark);color:#fff;font-family:var(--f-label);font-size:11px;font-weight:500;
+  align-items:center;justify-content:center;box-shadow:0 0 0 3px var(--paper)}
+body.annotated .pin{display:flex}
+.note{display:none;margin:10px 0 0;padding:11px 14px;border-left:3px solid var(--mark);
+  background:var(--mark-bg);color:#0B4D6E;font-family:var(--f-label);font-size:11.5px;
+  line-height:1.6;letter-spacing:0;text-transform:none;font-weight:500}
+body.annotated .note{display:block}
+.note b{font-weight:500}
+
+/* ---------- page frame ---------- */
+.page{display:none;padding:44px 0 80px}
+.page.active{display:block}
+.pagemark{font-family:var(--f-label);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);display:flex;align-items:center;gap:10px;margin-bottom:26px}
+.pagemark::after{content:"";flex:1;height:1px;background:var(--rule)}
+
+/* ---------- page 1 header ---------- */
+.masthead{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:56px;align-items:end;
+  padding-bottom:26px;border-bottom:3px solid var(--primary)}
+.masthead h1{font-size:clamp(38px,5.4vw,62px);letter-spacing:-.032em}
+.masthead .lede{margin:14px 0 0;font-size:17px;color:var(--ink-2);max-width:46ch}
+.tally{display:flex;flex-direction:column;gap:12px}
+.tally div{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  border-bottom:1px solid var(--rule-2);padding-bottom:7px}
+.tally b{font-size:29px;font-weight:800;letter-spacing:-.025em;color:var(--primary)}
+.tally span{font-family:var(--f-label);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-2);text-align:right}
+
+/* ---------- actions ---------- */
+.actions{position:relative;display:grid;grid-template-columns:290px minmax(0,1fr);gap:22px;margin:30px 0 46px}
+.act{position:relative;background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:22px}
+.btn-nominate{display:flex;flex-direction:column;justify-content:space-between;gap:16px;
+  background:var(--primary);border-color:var(--primary);color:#fff}
+.btn-nominate .cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;
+  background:#fff;color:var(--ink);border:none;border-radius:4px;padding:13px 16px;cursor:pointer;
+  font-family:var(--f-display);font-size:15px;font-weight:600;letter-spacing:-.01em}
+.btn-nominate .cta{color:var(--primary);font-weight:700}
+.btn-nominate .cta:hover{background:#D9E7EE}
+.btn-nominate .cta:focus-visible{outline:2px solid #4FB3E8;outline-offset:3px}
+.btn-nominate p{color:#BBD2DC;font-size:13.5px;margin:0}
+.callout{display:grid;grid-template-columns:112px minmax(0,1fr);gap:22px;align-items:center}
+.callout .thumb{aspect-ratio:1;border:1px solid var(--rule);border-radius:4px;background:var(--surface-2);
+  display:flex;align-items:center;justify-content:center;color:var(--ink-3);
+  font-family:var(--f-label);font-size:9px;letter-spacing:.1em;text-align:center;line-height:1.5}
+.callout h3{font-size:21px;letter-spacing:-.022em;margin-bottom:7px}
+.callout p{font-size:14px;color:var(--ink-2);margin-bottom:11px}
+.readlink{font-family:var(--f-label);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--mark);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
+
+/* ---------- bookshelf ---------- */
+.shelfwrap{position:relative}
+.shelf{margin-bottom:34px;scroll-margin-top:74px}
+.shelf-head{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
+.shelf-swatch{width:11px;height:11px;border-radius:2px;flex:none;transform:translateY(1px)}
+.shelf-head h3{font-size:15px;font-weight:600;letter-spacing:-.012em}
+.shelf-head .n{font-family:var(--f-label);font-size:11px;color:var(--ink-3);margin-left:auto}
+.books{display:grid;grid-template-columns:repeat(20,1fr);align-items:end;
+  padding:18px 0 0;background:linear-gradient(180deg,transparent 0 60%,var(--surface-2) 60%);
+  border-bottom:5px solid var(--primary);border-radius:2px;margin-bottom:9px}
+.books:last-child{margin-bottom:0}
+.book{position:relative;height:176px;border:none;border-radius:2px 2px 0 0;cursor:pointer;
+  padding:10px 0 12px;display:flex;align-items:flex-end;justify-content:center;
+  transition:transform .13s ease;color:#fff;font-family:var(--f-label);font-size:10px;
+  letter-spacing:.03em;overflow:hidden;box-shadow:inset -1px 0 0 rgba(0,0,0,.22)}
+.book span{writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;max-height:100%;opacity:.96}
+.book:hover,.book:focus-visible{transform:translateY(-9px);outline:none;
+  box-shadow:0 5px 14px rgba(22,32,42,.26)}
+.book:focus-visible{box-shadow:0 0 0 2px var(--mark),0 5px 14px rgba(22,32,42,.26)}
+.book::after{content:"";position:absolute;inset:0 auto 0 0;width:1px;background:rgba(255,255,255,.20)}
+.legend{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 24px}
+.legend button{display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+  background:var(--surface);border:1px solid var(--rule);border-radius:99px;padding:6px 13px 6px 9px;
+  font-family:var(--f-label);font-size:10px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--ink-2);transition:border-color .12s,color .12s}
+.legend button:hover{border-color:var(--ink);color:var(--ink)}
+.legend button:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+.legend button i{width:10px;height:10px;border-radius:2px;flex:none}
+.legend button .c{color:var(--ink-3);font-variant-numeric:tabular-nums}
+
+/* ---------- search ---------- */
+.searchbar{display:flex;align-items:center;gap:14px;height:54px;padding:0 8px 0 17px;
+  background:var(--surface);border:1px solid var(--rule);border-radius:6px;margin:0 0 16px}
+.searchbar:focus-within{border-color:var(--ink);box-shadow:0 0 0 3px rgba(27,77,184,.11)}
+.searchbar input{flex:1;min-width:0;border:none;background:none;outline:none;
+  font-family:var(--f-display);font-size:16px;letter-spacing:-.01em;color:var(--ink)}
+.searchbar input::placeholder{color:var(--ink-3)}
+.searchbar .glyph{font-size:15px;color:var(--ink-3);flex:none;line-height:1}
+.searchbar .count{font-family:var(--f-label);font-size:10px;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--ink-2);white-space:nowrap;flex:none;
+  font-variant-numeric:tabular-nums}
+.searchbar .clear{flex:none;border:1px solid var(--rule);background:var(--surface-2);
+  border-radius:4px;padding:6px 11px;cursor:pointer;font-family:var(--f-label);font-size:10px;
+  letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2)}
+.searchbar .clear:hover{border-color:var(--ink);color:var(--ink)}
+.searchbar .clear[hidden]{display:none}
+.empty{padding:44px 8px;text-align:center;border:1px dashed var(--rule);border-radius:6px;
+  background:var(--surface-2)}
+.empty p{font-size:15px;color:var(--ink-2);max-width:44ch;margin:0 auto .9em}
+.empty b{color:var(--ink);font-weight:600}
+[hidden]{display:none!important}
+
+/* ---------- hover bubble ---------- */
+.tip{position:fixed;z-index:80;width:310px;background:var(--primary);color:#fff;border-radius:7px;
+  padding:14px 16px;box-shadow:0 12px 34px rgba(22,32,42,.32);pointer-events:none;
+  opacity:0;transform:translateY(5px);transition:opacity .12s ease,transform .12s ease}
+.tip.on{opacity:1;transform:none}
+.tip h4{font-size:14.5px;font-weight:600;letter-spacing:-.012em;line-height:1.32;margin:0 0 11px}
+.tip dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 13px}
+.tip dt{font-family:var(--f-label);font-size:9px;font-weight:600;letter-spacing:.09em;
+  text-transform:uppercase;color:#9CC3D4;padding-top:2px;white-space:nowrap}
+.tip dd{margin:0;font-size:12.5px;line-height:1.45;color:#E4EBF0}
+.tip .tail{position:absolute;width:11px;height:11px;background:var(--primary);transform:rotate(45deg)}
+
+/* ---------- page 2 ---------- */
+.back{display:inline-flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;
+  font-family:var(--f-label);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-2);padding:0;margin-bottom:24px}
+.back:hover{color:var(--mark)}
+.d-head{padding-bottom:24px;border-bottom:3px solid var(--primary)}
+.chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-label);font-size:10px;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin-bottom:14px}
+.chip i{width:10px;height:10px;border-radius:2px}
+.d-head h1{font-size:clamp(32px,4.4vw,50px);letter-spacing:-.03em;max-width:20ch}
+.d-meta{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:16px;font-family:var(--f-label);
+  font-size:11px;color:var(--ink-2)}
+.d-meta b{color:var(--ink);font-weight:500}
+.d-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);
+  gap:44px;margin-top:34px;align-items:start}
+.sec{margin-bottom:38px}
+.sec > h2{font-size:12px;font-family:var(--f-label);font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-3);padding-bottom:9px;margin-bottom:16px;
+  border-bottom:1px solid var(--rule)}
+.sec p{font-size:15.5px;color:#31505C}
+.card{position:relative;background:var(--surface);border:1px solid var(--rule);border-radius:6px;
+  padding:20px;margin-bottom:20px}
+.card > h2{font-size:11px;font-family:var(--f-label);font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+.just{border-left:2px solid var(--rule);padding:2px 0 2px 18px;margin-bottom:20px}
+.just .who{font-family:var(--f-label);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--mark);margin-bottom:7px}
+.just p{font-size:14.5px;color:#31505C;margin-bottom:.7em}
+.dims{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.dim{font-family:var(--f-label);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--surface-2);border:1px solid var(--rule);border-radius:99px;padding:3px 10px;color:var(--ink-2)}
+.people{list-style:none;margin:0;padding:0}
+.people li{padding:12px 0;border-top:1px solid var(--rule-2)}
+.people li:first-child{border-top:none;padding-top:0}
+.people b{display:block;font-size:14.5px;font-weight:600;letter-spacing:-.01em}
+.people .aff{font-size:12.5px;color:var(--ink-2);line-height:1.45;margin-top:2px}
+.people .oid{font-family:var(--f-label);font-size:10px;color:var(--ink-3);margin-top:4px;display:block;
+  word-break:break-all}
+.linklist{list-style:none;margin:0;padding:0}
+.linklist li{border-top:1px solid var(--rule-2)}
+.linklist li:first-child{border-top:none}
+.linklist a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;
+  text-decoration:none;font-size:13.5px;word-break:break-all}
+.linklist a:hover{color:var(--mark)}
+.linklist .k{font-family:var(--f-label);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);flex:none}
+.reuse{list-style:none;margin:0;padding:0;counter-reset:r}
+.reuse li{position:relative;padding:0 0 14px 30px;font-size:14px;color:#31505C;counter-increment:r}
+.reuse li::before{content:counter(r,decimal-leading-zero);position:absolute;left:0;top:1px;
+  font-family:var(--f-label);font-size:10px;color:var(--ink-3)}
+.refs{list-style:none;margin:0;padding:0}
+.refs li{padding:11px 0;border-top:1px solid var(--rule-2);font-size:13px;color:var(--ink-2);line-height:1.5}
+.refs li:first-child{border-top:none}
+.more{font-family:var(--f-label);font-size:10px;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--ink-3);margin-top:10px}
+
+/* ---------- datacite panel ---------- */
+.dc{border-color:var(--mark);background:#FBFCFE}
+.dc-bar{display:flex;align-items:center;gap:9px;margin-bottom:13px}
+.dc-bar h2{font-size:11px;font-family:var(--f-label);font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--mark);margin:0}
+.dc-status{margin-left:auto;font-family:var(--f-label);font-size:9px;letter-spacing:.08em;
+  text-transform:uppercase;padding:2px 7px;border-radius:99px;border:1px solid var(--rule);color:var(--ink-3)}
+.dc-status[data-s="live"]{color:#0B6B4F;border-color:#9AD3BE;background:#EAF7F1}
+.dc-status[data-s="fallback"]{color:#8A5A00;border-color:#E6C68A;background:#FCF4E6}
+.endpoint{font-family:var(--f-label);font-size:10px;color:var(--ink-2);background:var(--surface-2);
+  border:1px solid var(--rule-2);border-radius:4px;padding:7px 9px;margin-bottom:14px;word-break:break-all}
+.dl{margin:0;font-size:13.5px}
+.dl div{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;padding:8px 0;
+  border-top:1px solid var(--rule-2)}
+.dl div:first-child{border-top:none}
+.dl dt{font-family:var(--f-label);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-3);padding-top:3px}
+.dl dd{margin:0;line-height:1.5}
+
+@media (max-width:940px){
+  .masthead,.actions,.d-grid{grid-template-columns:minmax(0,1fr);gap:26px}
+  .shell{padding:0 20px}
+  .callout{grid-template-columns:70px minmax(0,1fr);gap:16px}
+  .books{grid-template-columns:repeat(10,1fr)}
+  .book{height:150px}
+  .tip{width:min(310px,calc(100vw - 32px))}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+  .chrome{display:none}
+  .site{border-bottom:2px solid var(--primary)}
+  .page{display:block!important;padding:0 0 40px;break-after:page}
+  body{background:#fff}
+}
+</style>
+</head>
+<body class="annotated">
+
+<div class="chrome">
+  <div class="shell">
+    <span class="chrome-tag"><b>Wireframe</b> &nbsp;AGU Impactful Datasets &nbsp;·&nbsp; v0.1 concept</span>
+    <div class="chrome-nav">
+      <button data-go="shelf" aria-current="true">1 — Collection</button>
+      <button data-go="detail" aria-current="false">2 — Dataset</button>
+      <button class="chrome-toggle" id="annoBtn" aria-pressed="true">Annotations</button>
+    </div>
+  </div>
+</div>
+
+<header class="site">
+  <div class="shell">
+    <a class="brand" href="#" onclick="return false" aria-label="American Geophysical Union — home">
+      <span class="logo" role="img" aria-label="AGU — Advancing Earth and Space Sciences"></span>
+    </a>
+    <nav class="site-nav">
+      <a href="#" onclick="return false" aria-current="page">The Collection</a>
+      <a href="#" onclick="return false">About the project</a>
+      <a href="#" onclick="return false">Nominate</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ PAGE 1 ============ -->
+<main class="page active" id="page-shelf">
+<div class="shell">
+  <div class="pagemark">Page 1 of 2 — the collection</div>
+
+  <header class="masthead">
+    <div>
+      <h1>Datasets that<br>changed the science.</h1>
+      <p class="lede">A community-nominated shelf of the Earth and space science
+      datasets researchers say reshaped their field. Browse by discipline; pull one off
+      the shelf to see who nominated it and why.</p>
+    </div>
+    <div class="tally">
+      <div><b id="t-ds">0</b><span>Datasets<br>on the shelf</span></div>
+      <div><b id="t-th">0</b><span>Discipline<br>groups</span></div>
+      <div><b id="t-nm">0</b><span>Researchers<br>who nominated</span></div>
+    </div>
+  </header>
+
+  <section class="actions">
+    <span class="pin" style="left:-13px;top:-11px">1</span>
+    <span class="pin" style="left:299px;top:-11px">2</span>
+    <div class="act btn-nominate">
+      <div>
+        <h3 style="font-size:18px;margin-bottom:8px">Know one we're missing?</h3>
+        <p>Nominations stay open. It takes about ten minutes.</p>
+      </div>
+      <button class="cta">Nominate a dataset →</button>
+    </div>
+    <div class="act callout">
+      <div class="thumb">FEATURE<br>IMAGE</div>
+      <div>
+        <h3>How this collection was built</h3>
+        <p>The story behind the nominations — what the community chose, what surprised
+        the editors, and what it says about how research data earns its keep.</p>
+        <a class="readlink" href="#" onclick="return false">Read the article →</a>
+      </div>
+    </div>
+  </section>
+  <div class="note"><b>① Nominate a dataset</b> — persistent primary action, dark block so it
+  holds weight against the shelf. Opens the nomination form (the same instrument that produced
+  this data).<br><b>② Article callout</b> — editorial companion piece. Sits beside the action,
+  not buried below the shelf, so it competes for attention on first paint.</div>
+
+  <div class="pagemark" style="margin-top:44px">The shelf — one book per dataset</div>
+  <div class="shelfwrap">
+    <span class="pin" style="left:-13px;top:-11px">3</span>
+    <div class="searchbar">
+      <span class="glyph" aria-hidden="true">&#9906;</span>
+      <input id="q" type="search" autocomplete="off" spellcheck="false"
+        aria-label="Search datasets by title, discipline, repository or nominator"
+        placeholder="Search titles, disciplines, repositories, nominators…">
+      <span class="count" id="q-count"></span>
+      <button class="clear" id="q-clear" hidden>Clear</button>
+    </div>
+  </div>
+  <div class="shelfwrap">
+    <span class="pin" style="left:-13px;top:-11px">4</span>
+    <div class="legend" id="legend"></div>
+  </div>
+  <div class="shelfwrap">
+    <span class="pin" style="left:-13px;top:-6px">5</span>
+    <div id="shelves"></div>
+    <div class="empty" id="empty" hidden>
+      <p>No datasets match <b id="empty-q"></b>.</p>
+      <p style="font-size:13.5px">Try a discipline group, a repository, or a nominator's name.</p>
+      <button class="clear" style="margin-top:4px" onclick="document.getElementById('q-clear').click()">Clear search</button>
+    </div>
+  </div>
+  <div class="note"><b>③ Search</b> — filters entirely in the browser, no round trip. Matches
+  title, discipline group, repository and nominator names; every term must match. Non-matching books
+  are hidden, and a shelf or a whole discipline disappears when nothing on it survives, so the page
+  never shows an empty shelf.<br><b>④ Discipline index</b> — doubles as navigation and as a live
+  result summary: each chip shows how many of its datasets currently match, and drops out when none
+  do. Clicking one jumps to that group's first shelf.<br><b>⑤ Bookshelf</b> — every dataset is one
+  clickable book, uniform size, twenty to a shelf, colour-coded to its discipline group. Hovering a
+  spine raises a bubble with the full title, discipline, holding repository and nominators; clicking
+  opens page 2.</div>
+</div>
+</main>
+
+<!-- ============ PAGE 2 ============ -->
+<main class="page" id="page-detail">
+<div class="shell">
+  <button class="back" data-go="shelf">← Back to the shelf</button>
+  <div class="pagemark">Page 2 of 2 — one dataset</div>
+
+  <header class="d-head">
+    <span class="chip"><i id="d-swatch"></i><span id="d-theme"></span></span>
+    <h1 id="d-title"></h1>
+    <div class="d-meta" id="d-meta"></div>
+  </header>
+
+  <div class="d-grid">
+    <span class="pin" style="left:-13px;top:-2px">1</span>
+    <div>
+      <section class="sec">
+        <h2>What it is</h2>
+        <p id="d-desc"></p>
+      </section>
+
+      <section class="sec">
+        <h2>Why it was nominated</h2>
+        <div id="d-just"></div>
+      </section>
+
+      <section class="sec" id="d-reuse-sec">
+        <h2>How it has been reused</h2>
+        <ol class="reuse" id="d-reuse"></ol>
+        <div class="more" id="d-reuse-more"></div>
+      </section>
+    </div>
+
+    <aside>
+      <span class="pin" style="left:-13px;top:-2px">3</span>
+      <div class="card">
+        <h2>Get the data</h2>
+        <ul class="linklist" id="d-links"></ul>
+      </div>
+
+      <div class="card">
+        <h2>Held by</h2>
+        <div id="d-repo"></div>
+      </div>
+
+      <div class="card">
+        <h2>Nominated by</h2>
+        <ul class="people" id="d-people"></ul>
+      </div>
+
+      <div class="card dc" id="d-dc">
+        <span class="pin" style="left:-13px;top:-11px">2</span>
+        <div class="dc-bar">
+          <h2>DataCite record</h2>
+          <span class="dc-status" id="dc-status" data-s="idle">idle</span>
+        </div>
+        <div class="endpoint" id="dc-endpoint"></div>
+        <dl class="dl" id="dc-body"></dl>
+      </div>
+    </aside>
+  </div>
+
+  <div class="note" style="margin-top:26px"><b>① Dataset narrative</b> — description, then the
+  nominators' own justifications kept separate and attributed, with People / Planet / Prosperity
+  tags surfaced where the nominator used them.<br><b>② DataCite panel</b> — when the dataset has a
+  DOI, the page calls the DataCite REST API at load and renders authors, publisher, year, type and
+  related publications from the registry rather than from our own record. Falls back to stored
+  metadata if the call fails, and the panel is hidden entirely for datasets with no DOI
+  (37 of 133 currently carry one).<br><b>③ Provenance rail</b> — access links, the holding
+  repository, and the nominators with ORCID and affiliation.</div>
+</div>
+</main>
+
+<footer class="site-foot">
+  <div class="shell">
+    <span class="logo foot" aria-hidden="true"></span>
+    <p>Impactful Datasets &middot; concept wireframe &middot; not for distribution</p>
+  </div>
+</footer>
+
+<div class="tip" id="tip" role="tooltip" aria-hidden="true">
+  <span class="tail"></span>
+  <h4></h4>
+  <dl></dl>
+</div>
+
+<script>
+const DATA = __DATA__;
+const THEME_LABEL = {}, THEME_VAR = {atmos:'--atmos',ocean:'--ocean',biosphere:'--biosphere',
+  interior:'--interior',surface:'--surface-c',society:'--society',space:'--space',materials:'--materials'};
+DATA.themes.forEach(t => THEME_LABEL[t.key] = t.label);
+const css = k => getComputedStyle(document.documentElement).getPropertyValue(THEME_VAR[k]).trim();
+const esc = s => (s==null?'':String(s)).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---- page 1 ---- */
+const uniqNoms = new Set();
+DATA.datasets.forEach(d => (d.nomNames||[]).forEach(n => uniqNoms.add(n)));
+document.getElementById('t-ds').textContent = DATA.datasets.length;
+document.getElementById('t-th').textContent = DATA.themes.length;
+document.getElementById('t-nm').textContent = DATA.nominatorCount;
+
+const PER_SHELF = 20;
+const shelves = document.getElementById('shelves');
+const INDEX = [];   // one entry per discipline: {key, sec, rows:[{row, books:[{el,hay}]}], chip}
+const norm = s => (s==null?'':String(s))
+  .normalize('NFD').replace(/[\u0300-\u036f]/g,'')      // fold accents: Martinez == Martínez
+  .replace(/[\u2018\u2019\u02bc']/g,'')                 // drop apostrophes: earths == Earth's
+  .replace(/[\u2013\u2014]/g,'-')                       // en/em dash -> hyphen
+  .toLowerCase();
+DATA.themes.forEach(t => {
+  const items = DATA.datasets.filter(d => d.theme === t.key);
+  if (!items.length) return;
+  const c = css(t.key);
+  const sec = document.createElement('section');
+  sec.className = 'shelf';
+  sec.id = 'shelf-' + t.key;
+  const entry = {key:t.key, sec, rows:[], chip:null, label:t.label};
+  const shelfCount = Math.ceil(items.length / PER_SHELF);
+  sec.innerHTML = `<div class="shelf-head"><span class="shelf-swatch" style="background:${c}"></span>
+    <h3>${esc(t.label)}</h3><span class="n">${items.length} ${items.length===1?'dataset':'datasets'}
+    · ${shelfCount} ${shelfCount===1?'shelf':'shelves'}</span></div>`;
+  for (let i = 0; i < items.length; i += PER_SHELF){
+    const row = document.createElement('div');
+    row.className = 'books';
+    const rowEntry = {row, books:[]};
+    items.slice(i, i + PER_SHELF).forEach(d => {
+      const b = document.createElement('button');
+      b.className = 'book';
+      b.style.background = c;
+      b.setAttribute('aria-label', `${d.title} — open dataset`);
+      b.innerHTML = `<span>${esc(d.title)}</span>`;
+      b.addEventListener('click', () => openDataset(d.id));
+      b.addEventListener('mouseenter', () => showTip(b, d, t.label));
+      b.addEventListener('focus', () => showTip(b, d, t.label));
+      b.addEventListener('mouseleave', hideTip);
+      b.addEventListener('blur', hideTip);
+      const hay = norm([
+        d.title, t.label, d.repo,
+        (d.nominators||[]).map(p => p.name).join(' '),
+        (d.creators||[]).join(' '), (d.curators||[]).join(' ')
+      ].filter(Boolean).join(' \u00b7 '));
+      rowEntry.books.push({el:b, hay});
+      row.appendChild(b);
+    });
+    entry.rows.push(rowEntry);
+    sec.appendChild(row);
+  }
+  shelves.appendChild(sec);
+  INDEX.push(entry);
+});
+
+/* ---- discipline index doubles as shelf navigation ---- */
+const legend = document.getElementById('legend');
+DATA.themes.forEach(t => {
+  const n = DATA.datasets.filter(d => d.theme === t.key).length;
+  if (!n) return;
+  const b = document.createElement('button');
+  b.innerHTML = `<i style="background:${css(t.key)}"></i>${esc(t.label)}<span class="c">${n}</span>`;
+  const ie = INDEX.find(e => e.key === t.key);
+  if (ie) ie.chip = b;
+  b.addEventListener('click', () => {
+    const sec = document.getElementById('shelf-' + t.key);
+    if (!sec) return;
+    if (sec.hidden) return;
+    sec.scrollIntoView({behavior:'smooth', block:'start'});
+    const first = sec.querySelector('.book:not([hidden])');
+    if (first) setTimeout(() => first.focus({preventScroll:true}), 380);
+  });
+  legend.appendChild(b);
+});
+
+/* ---- client-side search ---- */
+const qEl = document.getElementById('q'), qCount = document.getElementById('q-count'),
+      qClear = document.getElementById('q-clear'), emptyEl = document.getElementById('empty'),
+      emptyQ = document.getElementById('empty-q');
+const TOTAL = DATA.datasets.length;
+
+function applyFilter(){
+  const raw = qEl.value.trim();
+  const terms = norm(raw).split(/\s+/).filter(Boolean);
+  const active = terms.length > 0;
+  let shown = 0;
+
+  INDEX.forEach(entry => {
+    let inGroup = 0;
+    entry.rows.forEach(r => {
+      let inRow = 0;
+      r.books.forEach(bk => {
+        const hit = !active || terms.every(term => bk.hay.includes(term));
+        bk.el.hidden = !hit;
+        if (hit) inRow++;
+      });
+      r.row.hidden = inRow === 0;      // a shelf with nothing left disappears
+      inGroup += inRow;
+    });
+    entry.sec.hidden = inGroup === 0;  // and so does the whole discipline
+    if (entry.chip){
+      entry.chip.hidden = inGroup === 0;
+      entry.chip.querySelector('.c').textContent = inGroup;
+    }
+    shown += inGroup;
+  });
+
+  qClear.hidden = !active;
+  emptyQ.textContent = raw;
+  emptyEl.hidden = shown > 0;
+  qCount.textContent = active
+    ? `${shown} of ${TOTAL} ${shown === 1 ? 'dataset' : 'datasets'}`
+    : `${TOTAL} datasets`;
+  hideTip();
+}
+
+qEl.addEventListener('input', applyFilter);
+qEl.addEventListener('keydown', e => { if (e.key === 'Escape'){ qEl.value=''; applyFilter(); } });
+qClear.addEventListener('click', () => { qEl.value=''; applyFilter(); qEl.focus(); });
+
+/* ---- hover bubble ---- */
+const tip = document.getElementById('tip');
+const tipTitle = tip.querySelector('h4'), tipList = tip.querySelector('dl'), tipTail = tip.querySelector('.tail');
+function showTip(el, d, themeLabel){
+  const names = (d.nominators||[]).map(p => p.name).filter(Boolean);
+  const repo = !d.repo ? 'Not recorded'
+    : (/^https?:\/\//.test(d.repo) ? d.repo.replace(/^https?:\/\/(www\.)?/,'').replace(/\/$/,'') : d.repo);
+  tipTitle.textContent = d.title;
+  tipList.innerHTML =
+    `<dt>Discipline</dt><dd>${esc(themeLabel)}</dd>` +
+    `<dt>Repository</dt><dd>${esc(repo)}</dd>` +
+    `<dt>Nominated by</dt><dd>${names.length ? esc(names.join(', ')) : 'Not recorded'}</dd>`;
+  tip.classList.add('on');
+  tip.setAttribute('aria-hidden','false');
+  const r = el.getBoundingClientRect(), t = tip.getBoundingClientRect();
+  const M = 12;
+  let left = r.left + r.width/2 - t.width/2;
+  left = Math.max(M, Math.min(left, window.innerWidth - t.width - M));
+  const above = r.top - t.height - 12;
+  const below = r.bottom + 12;
+  const placeBelow = above < 60;
+  tip.style.left = left + 'px';
+  tip.style.top = (placeBelow ? below : above) + 'px';
+  const tailX = Math.max(10, Math.min(r.left + r.width/2 - left - 5.5, t.width - 21));
+  tipTail.style.left = tailX + 'px';
+  tipTail.style.top = placeBelow ? '-5px' : 'auto';
+  tipTail.style.bottom = placeBelow ? 'auto' : '-5px';
+}
+function hideTip(){ tip.classList.remove('on'); tip.setAttribute('aria-hidden','true'); }
+window.addEventListener('scroll', hideTip, {passive:true});
+
+/* ---- page 2 ---- */
+function openDataset(id){
+  const d = DATA.datasets.find(x => x.id === id) || DATA.datasets[0];
+  const c = css(d.theme);
+  document.getElementById('d-swatch').style.background = c;
+  document.getElementById('d-theme').textContent = THEME_LABEL[d.theme];
+  document.getElementById('d-title').textContent = d.title;
+
+  const meta = [];
+  if (d.doi) meta.push(`<span>DOI &nbsp;<b>${esc(d.doi.replace('https://doi.org/',''))}</b></span>`);
+  meta.push(`<span>Nominated by &nbsp;<b>${d.nomCount}</b></span>`);
+  if (d.refsTotal) meta.push(`<span>Cited in &nbsp;<b>${d.refsTotal}</b>&nbsp; publications</span>`);
+  if (d.reuseTotal) meta.push(`<span>Reuse examples &nbsp;<b>${d.reuseTotal}</b></span>`);
+  document.getElementById('d-meta').innerHTML = meta.join('');
+  document.getElementById('d-desc').textContent = d.desc || 'No description supplied in the nomination.';
+
+  document.getElementById('d-just').innerHTML = (d.just||[]).map((j,i) => {
+    const dims = (j.dims||[]).map(x => `<span class="dim">${esc(x.label)}</span>`).join('');
+    return `<div class="just"><div class="who">Nominator ${j.seq || i+1}</div>
+      <p>${esc(j.text)}</p>${dims?`<div class="dims">${dims}</div>`:''}</div>`;
+  }).join('') || '<p>No justification recorded.</p>';
+
+  const rs = document.getElementById('d-reuse-sec');
+  if ((d.reuse||[]).length){
+    rs.style.display='';
+    document.getElementById('d-reuse').innerHTML = d.reuse.map(r => `<li>${esc(r)}</li>`).join('');
+    document.getElementById('d-reuse-more').textContent =
+      d.reuseTotal > d.reuse.length ? `+ ${d.reuseTotal - d.reuse.length} more in the record` : '';
+  } else rs.style.display='none';
+
+  const links = [];
+  if (d.doi) links.push(['DOI', d.doi]);
+  (d.links||[]).forEach(u => links.push(['Site', u]));
+  document.getElementById('d-links').innerHTML = links.length
+    ? links.map(([k,u]) => `<li><a href="${esc(u)}" target="_blank" rel="noopener">
+        <span>${esc(u.replace(/^https?:\/\//,''))}</span><span class="k">${k}</span></a></li>`).join('')
+    : '<li style="padding:11px 0;color:var(--ink-3);font-size:13px">No link recorded</li>';
+
+  const repoName = !d.repo ? 'Not recorded'
+    : (/^https?:\/\//.test(d.repo) ? d.repo.replace(/^https?:\/\/(www\.)?/,'').replace(/\/$/,'') : d.repo);
+  document.getElementById('d-repo').innerHTML =
+    `<div style="font-size:15px;font-weight:600;letter-spacing:-.01em">${esc(repoName)}</div>`
+    + ((d.curators||[]).length ? `<div style="font-size:12.5px;color:var(--ink-2);margin-top:6px">
+        Curated by ${esc(d.curators.join('; '))}</div>` : '')
+    + ((d.creators||[]).length ? `<div style="font-size:12.5px;color:var(--ink-2);margin-top:6px">
+        Produced by ${esc(d.creators.join('; '))}</div>` : '');
+
+  document.getElementById('d-people').innerHTML = (d.nominators||[]).map(p =>
+    `<li><b>${esc(p.name || 'Name withheld')}</b>
+      ${p.affil ? `<span class="aff">${esc(p.affil)}</span>` : ''}
+      ${p.orcid ? `<span class="oid">${esc(p.orcid)}</span>` : ''}</li>`).join('')
+    || '<li style="color:var(--ink-3);font-size:13px">No nominator recorded</li>';
+
+  loadDataCite(d);
+  show('detail');
+  window.scrollTo({top:0});
+}
+
+/* ---- DataCite ---- */
+function loadDataCite(d){
+  const panel = document.getElementById('d-dc');
+  if (!d.doi){ panel.style.display='none'; return; }
+  panel.style.display='';
+  const doi = d.doi.replace('https://doi.org/','');
+  const url = 'https://api.datacite.org/dois/' + doi;
+  const status = document.getElementById('dc-status');
+  const body = document.getElementById('dc-body');
+  document.getElementById('dc-endpoint').textContent = 'GET ' + url;
+  status.dataset.s = 'idle'; status.textContent = 'fetching…';
+  body.innerHTML = '<div><dt>Status</dt><dd>Calling the DataCite registry…</dd></div>';
+
+  const rows = (pairs) => body.innerHTML = pairs
+    .filter(([,v]) => v)
+    .map(([k,v]) => `<div><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join('');
+
+  const fallback = (why) => {
+    status.dataset.s = 'fallback'; status.textContent = 'stored copy';
+    rows([
+      ['Registry', `Not reachable — ${esc(why)}. Showing metadata stored with the nomination.`],
+      ['Produced by', esc((d.creators||[]).join('; ') || '—')],
+      ['Repository', esc(d.repo || '—')],
+      ['Cited in', (d.refs||[]).length
+        ? `<ul class="refs" style="margin-top:2px">${d.refs.map(r=>`<li>${esc(r)}</li>`).join('')}</ul>`
+        : '—'],
+    ]);
+  };
+
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 6000);
+  fetch(url, {headers:{'Accept':'application/vnd.api+json'}, signal:ctl.signal})
+    .then(r => r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)))
+    .then(j => {
+      clearTimeout(timer);
+      const a = j.data.attributes;
+      status.dataset.s = 'live'; status.textContent = 'live from datacite';
+      const authors = (a.creators||[]).map(c => esc(c.name)).slice(0,12);
+      const related = (a.relatedIdentifiers||[])
+        .filter(r => /Cites|IsCitedBy|IsReferencedBy|IsSupplementTo/i.test(r.relationType||''))
+        .slice(0,6)
+        .map(r => `<li>${esc(r.relationType)} · ${esc(r.relatedIdentifier)}</li>`);
+      rows([
+        ['Title', esc((a.titles||[{}])[0].title || d.title)],
+        ['Authors', authors.length
+          ? authors.join(', ') + ((a.creators||[]).length > 12 ? ` <span style="color:var(--ink-3)">+${a.creators.length-12} more</span>` : '')
+          : '—'],
+        ['Publisher', esc(a.publisher && a.publisher.name ? a.publisher.name : a.publisher)],
+        ['Published', esc(a.publicationYear)],
+        ['Type', esc((a.types||{}).resourceTypeGeneral)],
+        ['Version', esc(a.version)],
+        ['Citations', a.citationCount != null ? a.citationCount : null],
+        ['Related works', related.length ? `<ul class="refs" style="margin-top:2px">${related.join('')}</ul>` : null],
+      ]);
+    })
+    .catch(e => { clearTimeout(timer); fallback(e.name === 'AbortError' ? 'request timed out' : e.message); });
+}
+
+/* ---- routing ---- */
+function show(which){
+  document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === 'page-' + which));
+  document.querySelectorAll('.chrome-nav [data-go]').forEach(b =>
+    b.setAttribute('aria-current', String(b.dataset.go === which)));
+}
+document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => {
+  if (b.dataset.go === 'detail') openDataset(DATA.featured); else show('shelf');
+  window.scrollTo({top:0});
+}));
+const annoBtn = document.getElementById('annoBtn');
+annoBtn.addEventListener('click', () => {
+  const on = document.body.classList.toggle('annotated');
+  annoBtn.setAttribute('aria-pressed', String(on));
+});
+applyFilter();
+openDataset(DATA.featured);
+show('shelf');
+</script>
+</body>
+</html>
+"""
+
+
+
+LOGO = base64.b64encode(_logo_png()).decode()
+out = (HTML.replace('__DATA__', json.dumps(DATA, ensure_ascii=False, separators=(',', ':')))
+           .replace('__LOGO__', LOGO))
+OUT.write_text(out, encoding='utf-8')
+print(f'wrote {OUT}  ({len(out)/1024:.0f} KB, {len(DATA["datasets"])} datasets)')
