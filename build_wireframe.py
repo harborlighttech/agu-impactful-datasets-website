@@ -25,6 +25,13 @@ assignment in the embedded JS to change which fields are searchable. Matching
 normalises accents, apostrophes and dashes, so "earth's interior" and "earths
 interior" both hit the curly-apostrophe discipline label.
 
+Page 2 always shows "Referenced in" from our own nomination record, up to 8
+citations with a "+N more" line beyond that; URLs and DOIs inside the citation
+text are linkified. The DataCite panel is separate and appears only when the
+registry actually answers: hidden for datasets without a DOI, and hidden again
+if the call fails or times out. The two may overlap in what they list, which is
+intended -- one is our record, the other is the registry's.
+
 The eight discipline colours are anchored on the two brand colours and every one
 clears 4.5:1 against the white spine text.
 """
@@ -113,7 +120,7 @@ for x in g:
     lp = x.get('landingPage') or []
     doi = next((u for u in lp if 'doi.org/' in u), None)
     repos = [by[r] for r in (x.get('inCatalog') or []) if r in by]
-    refs = [txt(r.get('schema:citation'), 260) for r in (x.get('isReferencedBy') or [])][:6]
+    refs = [txt(r.get('schema:citation'), 300) for r in (x.get('isReferencedBy') or [])][:8]
     reuse = [txt(r.get('schema:text'), 200) for r in (x.get('reuseExample') or [])][:5]
     out.append({
         "id": x['@id'].split('/')[-1],
@@ -382,6 +389,8 @@ a{color:inherit}
 .refs{list-style:none;margin:0;padding:0}
 .refs li{padding:11px 0;border-top:1px solid var(--rule-2);font-size:13px;color:var(--ink-2);line-height:1.5}
 .refs li:first-child{border-top:none}
+.refs a{color:var(--secondary);text-decoration:none;word-break:break-all}
+.refs a:hover{text-decoration:underline}
 .more{font-family:var(--f-label);font-size:10px;letter-spacing:.07em;text-transform:uppercase;
   color:var(--ink-3);margin-top:10px}
 
@@ -393,7 +402,6 @@ a{color:inherit}
 .dc-status{margin-left:auto;font-family:var(--f-label);font-size:9px;letter-spacing:.08em;
   text-transform:uppercase;padding:2px 7px;border-radius:99px;border:1px solid var(--rule);color:var(--ink-3)}
 .dc-status[data-s="live"]{color:#0B6B4F;border-color:#9AD3BE;background:#EAF7F1}
-.dc-status[data-s="fallback"]{color:#8A5A00;border-color:#E6C68A;background:#FCF4E6}
 .endpoint{font-family:var(--f-label);font-size:10px;color:var(--ink-2);background:var(--surface-2);
   border:1px solid var(--rule-2);border-radius:4px;padding:7px 9px;margin-bottom:14px;word-break:break-all}
 .dl{margin:0;font-size:13.5px}
@@ -533,6 +541,12 @@ a{color:inherit}
         <ol class="reuse" id="d-reuse"></ol>
         <div class="more" id="d-reuse-more"></div>
       </section>
+
+      <section class="sec" id="d-refs-sec">
+        <h2>Referenced in</h2>
+        <ul class="refs" id="d-refs"></ul>
+        <div class="more" id="d-refs-more"></div>
+      </section>
     </div>
 
     <aside>
@@ -584,6 +598,13 @@ const THEME_LABEL = {}, THEME_VAR = {atmos:'--atmos',ocean:'--ocean',biosphere:'
 DATA.themes.forEach(t => THEME_LABEL[t.key] = t.label);
 const css = k => getComputedStyle(document.documentElement).getPropertyValue(THEME_VAR[k]).trim();
 const esc = s => (s==null?'':String(s)).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// Turn URLs inside already-escaped citation text into links. Safe because esc()
+// has removed every angle bracket and quote before this runs.
+const linkify = s => s.replace(/https?:\/\/[^\s,;)\]]+/g, u => {
+  const trimmed = u.replace(/[.,;:)\]]+$/, '');
+  const tail = u.slice(trimmed.length);
+  return `<a href="${trimmed}" target="_blank" rel="noopener">${trimmed}</a>${tail}`;
+});
 
 /* ---- page 1 ---- */
 const uniqNoms = new Set();
@@ -767,6 +788,15 @@ function openDataset(id){
       d.reuseTotal > d.reuse.length ? `+ ${d.reuseTotal - d.reuse.length} more in the record` : '';
   } else rs.style.display='none';
 
+  const rf = document.getElementById('d-refs-sec');
+  if ((d.refs||[]).length){
+    rf.style.display='';
+    document.getElementById('d-refs').innerHTML =
+      d.refs.map(r => `<li>${linkify(esc(r))}</li>`).join('');
+    document.getElementById('d-refs-more').textContent =
+      d.refsTotal > d.refs.length ? `+ ${d.refsTotal - d.refs.length} more in the record` : '';
+  } else rf.style.display='none';
+
   const links = [];
   if (d.doi) links.push(['DOI', d.doi]);
   (d.links||[]).forEach(u => links.push(['Site', u]));
@@ -812,17 +842,10 @@ function loadDataCite(d){
     .filter(([,v]) => v)
     .map(([k,v]) => `<div><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join('');
 
-  const fallback = (why) => {
-    status.dataset.s = 'fallback'; status.textContent = 'stored copy';
-    rows([
-      ['Registry', `Not reachable — ${esc(why)}. Showing metadata stored with the nomination.`],
-      ['Produced by', esc((d.creators||[]).join('; ') || '—')],
-      ['Repository', esc(d.repo || '—')],
-      ['Cited in', (d.refs||[]).length
-        ? `<ul class="refs" style="margin-top:2px">${d.refs.map(r=>`<li>${esc(r)}</li>`).join('')}</ul>`
-        : '—'],
-    ]);
-  };
+  // If the registry can't be reached, drop the panel entirely rather than
+  // falling back to our own record — the page should not imply registry
+  // data it does not actually have.
+  const fallback = () => { panel.style.display = 'none'; };
 
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), 6000);
@@ -850,7 +873,7 @@ function loadDataCite(d){
         ['Related works', related.length ? `<ul class="refs" style="margin-top:2px">${related.join('')}</ul>` : null],
       ]);
     })
-    .catch(e => { clearTimeout(timer); fallback(e.name === 'AbortError' ? 'request timed out' : e.message); });
+    .catch(() => { clearTimeout(timer); fallback(); });
 }
 
 /* ---- routing ---- */
