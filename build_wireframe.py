@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Build the two-page "Impactful Datasets" wireframe as one standalone HTML file,
+Build the two-page "Impactful Datasets" site prototype as one standalone HTML file,
 in AGU brand: Montserrat + Lora, primary #244C5A, secondary #007DBA, white ground.
 
 Reads the RDF graph produced by restructure_impactful_datasets.py and inlines a
@@ -15,9 +15,16 @@ Usage:
 
 Notes
 -----
-Shelf layout: uniform books, PER_SHELF (20) to a shelf, grouped by discipline.
-Search is client-side over title, discipline, repository, nominators, creators
-and curators; edit the `hay` assignment in the embedded JS to change the fields.
+Page 1 lays the books out in uniform rows of PER_ROW (20), grouped by discipline;
+a group of 29 therefore fills one row of 20 and a second of 9. Change PER_ROW in
+the embedded JS to relayout.
+
+Search runs entirely client-side over a haystack built per book from title,
+discipline group, repository, nominators, creators and curators. Edit the `hay`
+assignment in the embedded JS to change which fields are searchable. Matching
+normalises accents, apostrophes and dashes, so "earth's interior" and "earths
+interior" both hit the curly-apostrophe discipline label.
+
 The eight discipline colours are anchored on the two brand colours and every one
 clears 4.5:1 against the white spine text.
 """
@@ -179,7 +186,7 @@ a{color:inherit}
 .mono{font-family:var(--f-label);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
 [class*="label"],.pagemark,.chip,.dl dt,.tip dt,.sec>h2,.card>h2,.dc-bar h2,.legend button,
 .searchbar .count,.searchbar .clear,.linklist .k,.dim,.just .who,.more,.dc-status,
-.shelf-head .n,.tally span,.readlink,.chrome-tag,.chrome-nav button,.chrome-toggle,.back,.note{
+.group-head .n,.tally span,.readlink,.chrome-tag,.chrome-nav button,.back{
   font-weight:600}
 /* prose runs in Lora */
 .masthead .lede,.callout p,.btn-nominate p,.sec p,.just p,.reuse li,.refs li,
@@ -193,12 +200,11 @@ a{color:inherit}
   text-transform:uppercase;color:#A6C0CC;white-space:nowrap}
 .chrome-tag b{color:#fff;font-weight:700}
 .chrome-nav{display:flex;gap:4px;margin-left:auto}
-.chrome-nav button,.chrome-toggle{font-family:var(--f-label);font-size:10px;letter-spacing:.1em;
+.chrome-nav button{font-family:var(--f-label);font-size:10px;letter-spacing:.1em;
   text-transform:uppercase;background:transparent;color:#A6C0CC;border:1px solid #365060;
   padding:5px 11px;border-radius:3px;cursor:pointer}
 .chrome-nav button[aria-current="true"]{background:#fff;color:var(--chrome);border-color:#fff}
-.chrome-toggle[aria-pressed="true"]{background:var(--mark);color:#fff;border-color:var(--mark)}
-.chrome-nav button:focus-visible,.chrome-toggle:focus-visible{outline:2px solid #4FB3E8;outline-offset:2px}
+.chrome-nav button:focus-visible{outline:2px solid #4FB3E8;outline-offset:2px}
 
 /* ---------- brand header / footer ---------- */
 .site{background:#fff;border-bottom:1px solid var(--rule)}
@@ -219,17 +225,6 @@ a{color:inherit}
 .site-foot p{margin:0;margin-left:auto;font-family:var(--f-label);font-size:11px;font-weight:500;
   letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);text-align:right}
 
-/* ---------- annotation layer ---------- */
-.pin{display:none;position:absolute;z-index:40;width:24px;height:24px;border-radius:50%;
-  background:var(--mark);color:#fff;font-family:var(--f-label);font-size:11px;font-weight:500;
-  align-items:center;justify-content:center;box-shadow:0 0 0 3px var(--paper)}
-body.annotated .pin{display:flex}
-.note{display:none;margin:10px 0 0;padding:11px 14px;border-left:3px solid var(--mark);
-  background:var(--mark-bg);color:#0B4D6E;font-family:var(--f-label);font-size:11.5px;
-  line-height:1.6;letter-spacing:0;text-transform:none;font-weight:500}
-body.annotated .note{display:block}
-.note b{font-weight:500}
-
 /* ---------- page frame ---------- */
 .page{display:none;padding:44px 0 80px}
 .page.active{display:block}
@@ -240,8 +235,8 @@ body.annotated .note{display:block}
 /* ---------- page 1 header ---------- */
 .masthead{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:56px;align-items:end;
   padding-bottom:26px;border-bottom:3px solid var(--primary)}
-.masthead h1{font-size:clamp(38px,5.4vw,62px);letter-spacing:-.032em}
-.masthead .lede{margin:14px 0 0;font-size:17px;color:var(--ink-2);max-width:46ch}
+.masthead h1{font-size:clamp(29px,4.1vw,45px);letter-spacing:-.028em;max-width:19ch}
+.masthead .lede{margin:18px 0 0;font-size:16.5px;line-height:1.65;color:var(--ink-2);max-width:58ch}
 .tally{display:flex;flex-direction:column;gap:12px}
 .tally div{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
   border-bottom:1px solid var(--rule-2);padding-bottom:7px}
@@ -270,13 +265,12 @@ body.annotated .note{display:block}
 .readlink{font-family:var(--f-label);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
   color:var(--mark);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
 
-/* ---------- bookshelf ---------- */
-.shelfwrap{position:relative}
-.shelf{margin-bottom:34px;scroll-margin-top:74px}
-.shelf-head{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
-.shelf-swatch{width:11px;height:11px;border-radius:2px;flex:none;transform:translateY(1px)}
-.shelf-head h3{font-size:15px;font-weight:600;letter-spacing:-.012em}
-.shelf-head .n{font-family:var(--f-label);font-size:11px;color:var(--ink-3);margin-left:auto}
+/* ---------- collection ---------- */
+.group{margin-bottom:34px;scroll-margin-top:74px}
+.group-head{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
+.group-swatch{width:11px;height:11px;border-radius:2px;flex:none;transform:translateY(1px)}
+.group-head h3{font-size:15px;font-weight:600;letter-spacing:-.012em}
+.group-head .n{font-family:var(--f-label);font-size:11px;color:var(--ink-3);margin-left:auto}
 .books{display:grid;grid-template-columns:repeat(20,1fr);align-items:end;
   padding:18px 0 0;background:linear-gradient(180deg,transparent 0 60%,var(--surface-2) 60%);
   border-bottom:5px solid var(--primary);border-radius:2px;margin-bottom:9px}
@@ -427,15 +421,14 @@ body.annotated .note{display:block}
 }
 </style>
 </head>
-<body class="annotated">
+<body>
 
 <div class="chrome">
   <div class="shell">
     <span class="chrome-tag"><b>Wireframe</b> &nbsp;AGU Impactful Datasets &nbsp;·&nbsp; v0.1 concept</span>
     <div class="chrome-nav">
-      <button data-go="shelf" aria-current="true">1 — Collection</button>
+      <button data-go="collection" aria-current="true">1 — Collection</button>
       <button data-go="detail" aria-current="false">2 — Dataset</button>
-      <button class="chrome-toggle" id="annoBtn" aria-pressed="true">Annotations</button>
     </div>
   </div>
 </div>
@@ -454,27 +447,26 @@ body.annotated .note{display:block}
 </header>
 
 <!-- ============ PAGE 1 ============ -->
-<main class="page active" id="page-shelf">
+<main class="page active" id="page-collection">
 <div class="shell">
   <div class="pagemark">Page 1 of 2 — the collection</div>
 
   <header class="masthead">
     <div>
-      <h1>Datasets that<br>changed the science.</h1>
-      <p class="lede">A community-nominated shelf of the Earth and space science
-      datasets researchers say reshaped their field. Browse by discipline; pull one off
-      the shelf to see who nominated it and why.</p>
+      <h1>Impactful Datasets in the Earth, Space, and Environmental Sciences</h1>
+      <p class="lede">The American Geophysical Union (AGU) is celebrating and highlighting the
+      many impactful datasets that support the broad spectrum of research, analysis, and decision
+      making by our community. The creation, stewardship, and use of these impactful datasets
+      should be broadly recognized.</p>
     </div>
     <div class="tally">
-      <div><b id="t-ds">0</b><span>Datasets<br>on the shelf</span></div>
-      <div><b id="t-th">0</b><span>Discipline<br>groups</span></div>
-      <div><b id="t-nm">0</b><span>Researchers<br>who nominated</span></div>
+      <div><b id="t-ds">0</b><span>Datasets</span></div>
+      <div><b id="t-th">0</b><span>Discipline groups</span></div>
+      <div><b id="t-nm">0</b><span>Nominators</span></div>
     </div>
   </header>
 
   <section class="actions">
-    <span class="pin" style="left:-13px;top:-11px">1</span>
-    <span class="pin" style="left:299px;top:-11px">2</span>
     <div class="act btn-nominate">
       <div>
         <h3 style="font-size:18px;margin-bottom:8px">Know one we're missing?</h3>
@@ -492,52 +484,30 @@ body.annotated .note{display:block}
       </div>
     </div>
   </section>
-  <div class="note"><b>① Nominate a dataset</b> — persistent primary action, dark block so it
-  holds weight against the shelf. Opens the nomination form (the same instrument that produced
-  this data).<br><b>② Article callout</b> — editorial companion piece. Sits beside the action,
-  not buried below the shelf, so it competes for attention on first paint.</div>
 
-  <div class="pagemark" style="margin-top:44px">The shelf — one book per dataset</div>
-  <div class="shelfwrap">
-    <span class="pin" style="left:-13px;top:-11px">3</span>
-    <div class="searchbar">
+  <div class="pagemark" style="margin-top:44px">One book per dataset</div>
+  <div class="searchbar">
       <span class="glyph" aria-hidden="true">&#9906;</span>
       <input id="q" type="search" autocomplete="off" spellcheck="false"
         aria-label="Search datasets by title, discipline, repository or nominator"
         placeholder="Search titles, disciplines, repositories, nominators…">
       <span class="count" id="q-count"></span>
       <button class="clear" id="q-clear" hidden>Clear</button>
-    </div>
   </div>
-  <div class="shelfwrap">
-    <span class="pin" style="left:-13px;top:-11px">4</span>
-    <div class="legend" id="legend"></div>
-  </div>
-  <div class="shelfwrap">
-    <span class="pin" style="left:-13px;top:-6px">5</span>
-    <div id="shelves"></div>
+  <div class="legend" id="legend"></div>
+  <div id="groups"></div>
     <div class="empty" id="empty" hidden>
       <p>No datasets match <b id="empty-q"></b>.</p>
       <p style="font-size:13.5px">Try a discipline group, a repository, or a nominator's name.</p>
       <button class="clear" style="margin-top:4px" onclick="document.getElementById('q-clear').click()">Clear search</button>
-    </div>
   </div>
-  <div class="note"><b>③ Search</b> — filters entirely in the browser, no round trip. Matches
-  title, discipline group, repository and nominator names; every term must match. Non-matching books
-  are hidden, and a shelf or a whole discipline disappears when nothing on it survives, so the page
-  never shows an empty shelf.<br><b>④ Discipline index</b> — doubles as navigation and as a live
-  result summary: each chip shows how many of its datasets currently match, and drops out when none
-  do. Clicking one jumps to that group's first shelf.<br><b>⑤ Bookshelf</b> — every dataset is one
-  clickable book, uniform size, twenty to a shelf, colour-coded to its discipline group. Hovering a
-  spine raises a bubble with the full title, discipline, holding repository and nominators; clicking
-  opens page 2.</div>
 </div>
 </main>
 
 <!-- ============ PAGE 2 ============ -->
 <main class="page" id="page-detail">
 <div class="shell">
-  <button class="back" data-go="shelf">← Back to the shelf</button>
+  <button class="back" data-go="collection">← Back to the collection</button>
   <div class="pagemark">Page 2 of 2 — one dataset</div>
 
   <header class="d-head">
@@ -547,7 +517,6 @@ body.annotated .note{display:block}
   </header>
 
   <div class="d-grid">
-    <span class="pin" style="left:-13px;top:-2px">1</span>
     <div>
       <section class="sec">
         <h2>What it is</h2>
@@ -567,7 +536,6 @@ body.annotated .note{display:block}
     </div>
 
     <aside>
-      <span class="pin" style="left:-13px;top:-2px">3</span>
       <div class="card">
         <h2>Get the data</h2>
         <ul class="linklist" id="d-links"></ul>
@@ -584,7 +552,6 @@ body.annotated .note{display:block}
       </div>
 
       <div class="card dc" id="d-dc">
-        <span class="pin" style="left:-13px;top:-11px">2</span>
         <div class="dc-bar">
           <h2>DataCite record</h2>
           <span class="dc-status" id="dc-status" data-s="idle">idle</span>
@@ -594,15 +561,6 @@ body.annotated .note{display:block}
       </div>
     </aside>
   </div>
-
-  <div class="note" style="margin-top:26px"><b>① Dataset narrative</b> — description, then the
-  nominators' own justifications kept separate and attributed, with People / Planet / Prosperity
-  tags surfaced where the nominator used them.<br><b>② DataCite panel</b> — when the dataset has a
-  DOI, the page calls the DataCite REST API at load and renders authors, publisher, year, type and
-  related publications from the registry rather than from our own record. Falls back to stored
-  metadata if the call fails, and the panel is hidden entirely for datasets with no DOI
-  (37 of 133 currently carry one).<br><b>③ Provenance rail</b> — access links, the holding
-  repository, and the nominators with ORCID and affiliation.</div>
 </div>
 </main>
 
@@ -634,8 +592,8 @@ document.getElementById('t-ds').textContent = DATA.datasets.length;
 document.getElementById('t-th').textContent = DATA.themes.length;
 document.getElementById('t-nm').textContent = DATA.nominatorCount;
 
-const PER_SHELF = 20;
-const shelves = document.getElementById('shelves');
+const PER_ROW = 20;
+const groups = document.getElementById('groups');
 const INDEX = [];   // one entry per discipline: {key, sec, rows:[{row, books:[{el,hay}]}], chip}
 const norm = s => (s==null?'':String(s))
   .normalize('NFD').replace(/[\u0300-\u036f]/g,'')      // fold accents: Martinez == Martínez
@@ -647,18 +605,17 @@ DATA.themes.forEach(t => {
   if (!items.length) return;
   const c = css(t.key);
   const sec = document.createElement('section');
-  sec.className = 'shelf';
-  sec.id = 'shelf-' + t.key;
+  sec.className = 'group';
+  sec.id = 'group-' + t.key;
   const entry = {key:t.key, sec, rows:[], chip:null, label:t.label};
-  const shelfCount = Math.ceil(items.length / PER_SHELF);
-  sec.innerHTML = `<div class="shelf-head"><span class="shelf-swatch" style="background:${c}"></span>
+  sec.innerHTML = `<div class="group-head"><span class="group-swatch" style="background:${c}"></span>
     <h3>${esc(t.label)}</h3><span class="n">${items.length} ${items.length===1?'dataset':'datasets'}
-    · ${shelfCount} ${shelfCount===1?'shelf':'shelves'}</span></div>`;
-  for (let i = 0; i < items.length; i += PER_SHELF){
+    </span></div>`;
+  for (let i = 0; i < items.length; i += PER_ROW){
     const row = document.createElement('div');
     row.className = 'books';
     const rowEntry = {row, books:[]};
-    items.slice(i, i + PER_SHELF).forEach(d => {
+    items.slice(i, i + PER_ROW).forEach(d => {
       const b = document.createElement('button');
       b.className = 'book';
       b.style.background = c;
@@ -680,11 +637,11 @@ DATA.themes.forEach(t => {
     entry.rows.push(rowEntry);
     sec.appendChild(row);
   }
-  shelves.appendChild(sec);
+  groups.appendChild(sec);
   INDEX.push(entry);
 });
 
-/* ---- discipline index doubles as shelf navigation ---- */
+/* ---- discipline index doubles as navigation ---- */
 const legend = document.getElementById('legend');
 DATA.themes.forEach(t => {
   const n = DATA.datasets.filter(d => d.theme === t.key).length;
@@ -694,7 +651,7 @@ DATA.themes.forEach(t => {
   const ie = INDEX.find(e => e.key === t.key);
   if (ie) ie.chip = b;
   b.addEventListener('click', () => {
-    const sec = document.getElementById('shelf-' + t.key);
+    const sec = document.getElementById('group-' + t.key);
     if (!sec) return;
     if (sec.hidden) return;
     sec.scrollIntoView({behavior:'smooth', block:'start'});
@@ -725,7 +682,7 @@ function applyFilter(){
         bk.el.hidden = !hit;
         if (hit) inRow++;
       });
-      r.row.hidden = inRow === 0;      // a shelf with nothing left disappears
+      r.row.hidden = inRow === 0;      // a row with nothing left disappears
       inGroup += inRow;
     });
     entry.sec.hidden = inGroup === 0;  // and so does the whole discipline
@@ -903,17 +860,12 @@ function show(which){
     b.setAttribute('aria-current', String(b.dataset.go === which)));
 }
 document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => {
-  if (b.dataset.go === 'detail') openDataset(DATA.featured); else show('shelf');
+  if (b.dataset.go === 'detail') openDataset(DATA.featured); else show('collection');
   window.scrollTo({top:0});
 }));
-const annoBtn = document.getElementById('annoBtn');
-annoBtn.addEventListener('click', () => {
-  const on = document.body.classList.toggle('annotated');
-  annoBtn.setAttribute('aria-pressed', String(on));
-});
 applyFilter();
 openDataset(DATA.featured);
-show('shelf');
+show('collection');
 </script>
 </body>
 </html>
