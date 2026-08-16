@@ -15,7 +15,6 @@
   --ink:#244C5A; --ink-2:#587380; --ink-3:#5E7682;
   --rule:#D5DFE3; --rule-2:#E8EEF0;
   --mark:#007DBA; --mark-bg:#E4F2FA;
-  --chrome:#16323D;
   /* discipline ramp, anchored on the two brand colours; all >=4.5:1 vs white */
   --atmos:#007DBA; --ocean:#00778A; --biosphere:#2F7D5C; --interior:#A24B2E;
   --surface-c:#8C6410; --society:#6B4C93; --space:#244C5A; --materials:#6B5B4B;
@@ -37,25 +36,12 @@ a{color:inherit}
 .mono{font-family:var(--f-label);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
 [class*="label"],.pagemark,.chip,.dl dt,.tip dt,.sec>h2,.card>h2,.dc-bar h2,.legend button,
 .searchbar .count,.searchbar .clear,.linklist .k,.dim,.just .who,.more,.dc-status,
-.group-head .n,.tally span,.readlink,.chrome-tag,.chrome-nav button,.back{
+.group-head .n,.tally span,.readlink,.back{
   font-weight:600}
 /* prose runs in Lora */
 .masthead .lede,.callout p,.btn-nominate p,.sec p,.just p,.reuse li,.refs li,
 .people .aff,.dl dd,.tip dd,.empty p,.repo-sub{font-family:var(--f-body);letter-spacing:0}
 .endpoint,.people .oid{font-family:var(--f-code)}
-
-/* ---------- wireframe chrome ---------- */
-.chrome{position:sticky;top:0;z-index:60;background:var(--chrome);color:#fff}
-.chrome .shell{display:flex;align-items:center;gap:20px;height:46px}
-.chrome-tag{font-family:var(--f-label);font-size:10px;letter-spacing:.16em;
-  text-transform:uppercase;color:#A6C0CC;white-space:nowrap}
-.chrome-tag b{color:#fff;font-weight:700}
-.chrome-nav{display:flex;gap:4px;margin-left:auto}
-.chrome-nav button{font-family:var(--f-label);font-size:10px;letter-spacing:.1em;
-  text-transform:uppercase;background:transparent;color:#A6C0CC;border:1px solid #365060;
-  padding:5px 11px;border-radius:3px;cursor:pointer}
-.chrome-nav button[aria-current="true"]{background:#fff;color:var(--chrome);border-color:#fff}
-.chrome-nav button:focus-visible{outline:2px solid #4FB3E8;outline-offset:2px}
 
 /* ---------- brand header / footer ---------- */
 .site{background:#fff;border-bottom:1px solid var(--rule)}
@@ -101,6 +87,7 @@ a{color:inherit}
 .btn-nominate{display:flex;flex-direction:column;justify-content:space-between;gap:16px;
   background:var(--primary);border-color:var(--primary);color:#fff}
 .btn-nominate .cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;
+  text-decoration:none;box-sizing:border-box;
   background:#fff;color:var(--ink);border:none;border-radius:4px;padding:13px 16px;cursor:pointer;
   font-family:var(--f-display);font-size:15px;font-weight:600;letter-spacing:-.01em}
 .btn-nominate .cta{color:var(--primary);font-weight:700}
@@ -117,34 +104,37 @@ a{color:inherit}
   color:var(--mark);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
 
 /* ---------- collection ---------- */
-.group{margin-bottom:34px;scroll-margin-top:74px}
+.group{margin-bottom:34px;scroll-margin-top:16px}
 .group-head{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
 .group-swatch{width:11px;height:11px;border-radius:2px;flex:none;transform:translateY(1px)}
 .group-head h3{font-size:15px;font-weight:600;letter-spacing:-.012em}
-.group-head .n{font-family:var(--f-label);font-size:11px;color:var(--ink-3);margin-left:auto}
-.books{display:grid;grid-template-columns:repeat(20,1fr);align-items:end;
-  padding:18px 0 0;background:linear-gradient(180deg,transparent 0 60%,var(--surface-2) 60%);
+
+.books{display:grid;grid-template-columns:repeat(20,1fr);gap:5px;align-items:end;
+  padding:18px 7px 0;background:linear-gradient(180deg,transparent 0 58%,var(--surface-2) 58%);
   border-bottom:5px solid var(--primary);border-radius:2px;margin-bottom:9px}
 .books:last-child{margin-bottom:0}
-.book{position:relative;height:176px;border:none;border-radius:2px 2px 0 0;cursor:pointer;
-  padding:10px 0 12px;display:flex;align-items:flex-end;justify-content:center;
-  transition:transform .13s ease;color:#fff;font-family:var(--f-label);font-size:10px;
-  letter-spacing:.03em;overflow:hidden;box-shadow:inset -1px 0 0 rgba(0,0,0,.22)}
+.book{min-width:0;position:relative;height:190px;border:none;border-radius:3px 3px 0 0;cursor:pointer;
+  padding:13px 0 13px;display:flex;align-items:flex-end;justify-content:center;
+  transition:transform .13s ease;color:#fff;font-family:var(--f-label);font-size:11.5px;
+  font-weight:600;letter-spacing:.012em;overflow:hidden;
+  box-shadow:inset -1px 0 0 rgba(0,0,0,.15),inset 1px 0 0 rgba(255,255,255,.13)}
 .book span{writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;
-  overflow:hidden;text-overflow:ellipsis;max-height:100%;opacity:.96}
+  overflow:hidden;text-overflow:ellipsis;max-height:100%;opacity:1;
+  text-shadow:0 1px 2px rgba(0,0,0,.24)}
 .book:hover,.book:focus-visible{transform:translateY(-9px);outline:none;
   box-shadow:0 5px 14px rgba(22,32,42,.26)}
 .book:focus-visible{box-shadow:0 0 0 2px var(--mark),0 5px 14px rgba(22,32,42,.26)}
-.book::after{content:"";position:absolute;inset:0 auto 0 0;width:1px;background:rgba(255,255,255,.20)}
-.legend{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 24px}
-.legend button{display:inline-flex;align-items:center;gap:8px;cursor:pointer;
-  background:var(--surface);border:1px solid var(--rule);border-radius:99px;padding:6px 13px 6px 9px;
-  font-family:var(--f-label);font-size:10px;letter-spacing:.05em;text-transform:uppercase;
-  color:var(--ink-2);transition:border-color .12s,color .12s}
-.legend button:hover{border-color:var(--ink);color:var(--ink)}
-.legend button:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
-.legend button i{width:10px;height:10px;border-radius:2px;flex:none}
-.legend button .c{color:var(--ink-3);font-variant-numeric:tabular-nums}
+.book::after{content:"";position:absolute;left:0;right:0;top:0;height:8px;
+  background:rgba(255,255,255,.17);border-radius:3px 3px 0 0}
+.legend{display:flex;flex-wrap:wrap;gap:9px;margin:0 0 28px}
+.legend button{display:inline-flex;align-items:center;gap:10px;cursor:pointer;border:none;
+  border-radius:5px;padding:10px 11px 10px 14px;font-family:var(--f-label);font-size:12px;
+  font-weight:600;letter-spacing:.035em;text-transform:uppercase;color:#fff;line-height:1.15;
+  box-shadow:0 1px 0 rgba(0,0,0,.13);transition:transform .12s ease,box-shadow .12s ease}
+.legend button:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(36,76,90,.28)}
+.legend button:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+.legend button .c{background:rgba(255,255,255,.24);border-radius:3px;padding:2px 7px;
+  font-size:11px;font-variant-numeric:tabular-nums}
 
 /* ---------- search ---------- */
 .searchbar{display:flex;align-items:center;gap:14px;height:54px;padding:0 8px 0 17px;
@@ -260,13 +250,12 @@ a{color:inherit}
   .masthead,.actions,.d-grid{grid-template-columns:minmax(0,1fr);gap:26px}
   .shell{padding:0 20px}
   .callout{grid-template-columns:70px minmax(0,1fr);gap:16px}
-  .books{grid-template-columns:repeat(10,1fr)}
-  .book{height:150px}
+  .books{gap:4px;padding:16px 5px 0}
+  .book{height:158px;font-size:11px}
   .tip{width:min(310px,calc(100vw - 32px))}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 @media print{
-  .chrome{display:none}
   .site{border-bottom:2px solid var(--primary)}
   .page{display:block!important;padding:0 0 40px;break-after:page}
   body{background:#fff}
@@ -275,25 +264,18 @@ a{color:inherit}
 </head>
 <body>
 
-<div class="chrome">
-  <div class="shell">
-    <span class="chrome-tag"><b>Wireframe</b> &nbsp;AGU Impactful Datasets &nbsp;·&nbsp; v0.1 concept</span>
-    <div class="chrome-nav">
-      <button data-go="collection" aria-current="true">1 — Collection</button>
-      <button data-go="detail" aria-current="false">2 — Dataset</button>
-    </div>
-  </div>
-</div>
-
 <header class="site">
   <div class="shell">
-    <a class="brand" href="#" onclick="return false" aria-label="American Geophysical Union — home">
+    <a class="brand" href="#" data-go="collection" onclick="return false"
+       aria-label="American Geophysical Union — home">
       <span class="logo" role="img" aria-label="AGU — Advancing Earth and Space Sciences"></span>
     </a>
     <nav class="site-nav">
-      <a href="#" onclick="return false" aria-current="page">The Collection</a>
-      <a href="#" onclick="return false">About the project</a>
-      <a href="#" onclick="return false">Nominate</a>
+      <a href="#" id="nav-collection" data-go="collection" aria-current="page"
+         onclick="return false">The Collection</a>
+      <a href="https://agupubs.onlinelibrary.wiley.com/hub/journal/23335084/call-for-papers/si-2026-000577"
+         target="_blank" rel="noopener">About the project</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSf0Tlb1a29C2I-lNyl8qf_1oG1tFBosYW5qGBBj70D42Nhn_w/viewform" target="_blank" rel="noopener">Nominate</a>
     </nav>
   </div>
 </header>
@@ -301,7 +283,6 @@ a{color:inherit}
 <!-- ============ PAGE 1 ============ -->
 <main class="page active" id="page-collection">
 <div class="shell">
-  <div class="pagemark">Page 1 of 2 — the collection</div>
 
   <header class="masthead">
     <div>
@@ -324,7 +305,7 @@ a{color:inherit}
         <h3 style="font-size:18px;margin-bottom:8px">Know one we're missing?</h3>
         <p>Nominations stay open. It takes about ten minutes.</p>
       </div>
-      <button class="cta">Nominate a dataset →</button>
+      <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSf0Tlb1a29C2I-lNyl8qf_1oG1tFBosYW5qGBBj70D42Nhn_w/viewform" target="_blank" rel="noopener">Nominate a dataset →</a>
     </div>
     <div class="act callout">
       <div class="thumb">FEATURE<br>IMAGE</div>
@@ -332,12 +313,12 @@ a{color:inherit}
         <h3>How this collection was built</h3>
         <p>The story behind the nominations — what the community chose, what surprised
         the editors, and what it says about how research data earns its keep.</p>
-        <a class="readlink" href="#" onclick="return false">Read the article →</a>
+        <a class="readlink" href="https://agupubs.onlinelibrary.wiley.com/hub/journal/23335084/call-for-papers/si-2026-000577"
+           target="_blank" rel="noopener">Read the article →</a>
       </div>
     </div>
   </section>
 
-  <div class="pagemark" style="margin-top:44px">One book per dataset</div>
   <div class="searchbar">
       <span class="glyph" aria-hidden="true">&#9906;</span>
       <input id="q" type="search" autocomplete="off" spellcheck="false"
@@ -360,7 +341,6 @@ a{color:inherit}
 <main class="page" id="page-detail">
 <div class="shell">
   <button class="back" data-go="collection">← Back to the collection</button>
-  <div class="pagemark">Page 2 of 2 — one dataset</div>
 
   <header class="d-head">
     <span class="chip"><i id="d-swatch"></i><span id="d-theme"></span></span>
@@ -457,7 +437,11 @@ document.getElementById('t-ds').textContent = DATA.datasets.length;
 document.getElementById('t-th').textContent = DATA.themes.length;
 document.getElementById('t-nm').textContent = DATA.nominatorCount;
 
-const PER_ROW = 20;
+/* Books per shelf, by viewport. Phones get 10 so the spines stay wide enough to
+   read and tap; the rows are rebuilt when the breakpoint changes. */
+const ROW_SIZES = [[640, 10], [940, 14]];
+const DEFAULT_ROW = 20;
+const perRow = () => (ROW_SIZES.find(([w]) => window.innerWidth <= w) || [0, DEFAULT_ROW])[1];
 const groups = document.getElementById('groups');
 const INDEX = [];   // one entry per discipline: {key, sec, rows:[{row, books:[{el,hay}]}], chip}
 const norm = s => (s==null?'':String(s))
@@ -465,6 +449,10 @@ const norm = s => (s==null?'':String(s))
   .replace(/[\u2018\u2019\u02bc']/g,'')                 // drop apostrophes: earths == Earth's
   .replace(/[\u2013\u2014]/g,'-')                       // en/em dash -> hyphen
   .toLowerCase();
+
+/* Each discipline is its own section. Books are uniform width, perRow() to a row;
+   a group of 29 fills one row of 20 and a second of 9 on desktop, and the short row
+   is left short rather than stretched or filled from the next discipline. */
 DATA.themes.forEach(t => {
   const items = DATA.datasets.filter(d => d.theme === t.key);
   if (!items.length) return;
@@ -472,15 +460,11 @@ DATA.themes.forEach(t => {
   const sec = document.createElement('section');
   sec.className = 'group';
   sec.id = 'group-' + t.key;
-  const entry = {key:t.key, sec, rows:[], chip:null, label:t.label};
+  const entry = {key:t.key, sec, rows:[], books:[], chip:null, label:t.label};
   sec.innerHTML = `<div class="group-head"><span class="group-swatch" style="background:${c}"></span>
-    <h3>${esc(t.label)}</h3><span class="n">${items.length} ${items.length===1?'dataset':'datasets'}
-    </span></div>`;
-  for (let i = 0; i < items.length; i += PER_ROW){
-    const row = document.createElement('div');
-    row.className = 'books';
-    const rowEntry = {row, books:[]};
-    items.slice(i, i + PER_ROW).forEach(d => {
+    <h3>${esc(t.label)}</h3></div>`;
+  {
+    items.forEach(d => {
       const b = document.createElement('button');
       b.className = 'book';
       b.style.background = c;
@@ -496,14 +480,40 @@ DATA.themes.forEach(t => {
         (d.nominators||[]).map(p => p.name).join(' '),
         (d.creators||[]).join(' '), (d.curators||[]).join(' ')
       ].filter(Boolean).join(' \u00b7 '));
-      rowEntry.books.push({el:b, hay});
-      row.appendChild(b);
+      entry.books.push({el:b, hay});
     });
-    entry.rows.push(rowEntry);
-    sec.appendChild(row);
   }
   groups.appendChild(sec);
   INDEX.push(entry);
+});
+
+/* Chunk each discipline's books into shelves of `n`, reusing the same button
+   elements so listeners and hidden state survive a re-layout. */
+function buildRows(n){
+  INDEX.forEach(entry => {
+    entry.sec.querySelectorAll('.books').forEach(r => r.remove());
+    entry.rows = [];
+    for (let i = 0; i < entry.books.length; i += n){
+      const row = document.createElement('div');
+      row.className = 'books';
+      row.style.gridTemplateColumns = `repeat(${n},1fr)`;
+      const slice = entry.books.slice(i, i + n);
+      slice.forEach(bk => row.appendChild(bk.el));
+      entry.rows.push({row, books: slice});
+      entry.sec.appendChild(row);
+    }
+  });
+}
+
+let currentRow = perRow();
+buildRows(currentRow);
+window.addEventListener('resize', () => {
+  const n = perRow();
+  if (n === currentRow) return;   // only rebuild when the breakpoint actually changes
+  currentRow = n;
+  buildRows(n);
+  applyFilter();                  // re-apply hidden state to the new rows
+  hideTip();
 });
 
 /* ---- discipline index doubles as navigation ---- */
@@ -512,13 +522,13 @@ DATA.themes.forEach(t => {
   const n = DATA.datasets.filter(d => d.theme === t.key).length;
   if (!n) return;
   const b = document.createElement('button');
-  b.innerHTML = `<i style="background:${css(t.key)}"></i>${esc(t.label)}<span class="c">${n}</span>`;
+  b.style.background = css(t.key);
+  b.innerHTML = `${esc(t.label)}<span class="c">${n}</span>`;
   const ie = INDEX.find(e => e.key === t.key);
   if (ie) ie.chip = b;
   b.addEventListener('click', () => {
     const sec = document.getElementById('group-' + t.key);
-    if (!sec) return;
-    if (sec.hidden) return;
+    if (!sec || sec.hidden) return;
     sec.scrollIntoView({behavior:'smooth', block:'start'});
     const first = sec.querySelector('.book:not([hidden])');
     if (first) setTimeout(() => first.focus({preventScroll:true}), 380);
@@ -723,11 +733,12 @@ function loadDataCite(d){
 /* ---- routing ---- */
 function show(which){
   document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === 'page-' + which));
-  document.querySelectorAll('.chrome-nav [data-go]').forEach(b =>
-    b.setAttribute('aria-current', String(b.dataset.go === which)));
+  const onCollection = which === 'collection';
+  const navHome = document.getElementById('nav-collection');
+  if (navHome) navHome.setAttribute('aria-current', onCollection ? 'page' : 'false');
 }
 document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => {
-  if (b.dataset.go === 'detail') openDataset(DATA.featured); else show('collection');
+  show(b.dataset.go);
   window.scrollTo({top:0});
 }));
 applyFilter();
