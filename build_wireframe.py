@@ -108,10 +108,13 @@ for x in g:
     if 'dcat:Dataset' not in (x.get('@type') or []): continue
     nm = nom_of.get(x['@id'], {})
     people = []
-    for pid in (nm.get('nominator') or []):
+    # Nominator order in the graph follows the "Nominator N:" blocks in the source
+    # spreadsheet, so position maps to the sequence used by the justification blocks.
+    for seq, pid in enumerate((nm.get('nominator') or []), start=1):
         p = by.get(pid, {})
         affs = [by[a]['name'] for a in (p.get('affiliation') or []) if a in by]
-        people.append({"name": p.get('name'), "orcid": pid if pid.startswith('http') else None,
+        people.append({"seq": seq, "name": p.get('name'),
+                       "orcid": pid if pid.startswith('http') else None,
                        "affil": affs[0] if affs else None})
     just = []
     for j in (nm.get('justification') or []):
@@ -385,6 +388,48 @@ a{color:inherit}
 .more{font-family:var(--f-label);font-size:10px;letter-spacing:.07em;text-transform:uppercase;
   color:var(--ink-3);margin-top:10px}
 
+/* ---------- nominator cross-links ---------- */
+.just .who{display:inline-flex;align-items:center;gap:7px;background:none;border:none;padding:0;
+  cursor:pointer;text-align:left}
+.just .who .nm{color:var(--secondary);border-bottom:1px solid transparent}
+.just .who:hover .nm,.just .who:focus-visible .nm{border-bottom-color:currentColor}
+.just .who:focus-visible{outline:2px solid var(--secondary);outline-offset:3px;border-radius:3px}
+.just .who .seq{font-size:9.5px;background:var(--surface-2);border:1px solid var(--rule);
+  border-radius:99px;padding:1px 7px;color:var(--ink-2)}
+.people li{transition:background .3s ease,box-shadow .3s ease;border-radius:5px;
+  scroll-margin-top:20px}
+.people li.lit{background:var(--mark-bg);box-shadow:0 0 0 6px var(--mark-bg)}
+.people .jump{display:inline-block;margin-top:5px;font-family:var(--f-label);font-size:9.5px;
+  font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--secondary);
+  background:none;border:none;padding:0;cursor:pointer}
+.people .jump:hover{text-decoration:underline}
+
+/* ---------- cite button + modal ---------- */
+.citebtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;
+  margin-top:14px;padding:11px 14px;cursor:pointer;background:var(--primary);color:#fff;border:none;
+  border-radius:5px;font-family:var(--f-label);font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase}
+.citebtn:hover{background:#1B3B47}
+.citebtn:focus-visible{outline:2px solid var(--secondary);outline-offset:3px}
+.modal[hidden]{display:none}
+.modal{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;
+  padding:24px;background:rgba(20,44,54,.55)}
+.modal-box{background:#fff;border-radius:8px;width:min(620px,100%);max-height:82vh;overflow:auto;
+  box-shadow:0 24px 60px rgba(16,40,50,.34);padding:26px 28px}
+.modal-box h3{font-size:19px;letter-spacing:-.02em;margin-bottom:4px}
+.modal-src{font-family:var(--f-label);font-size:10px;font-weight:600;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:16px}
+.cite-out{font-family:var(--f-body);font-size:15px;line-height:1.62;color:var(--ink);
+  background:var(--surface-2);border:1px solid var(--rule);border-radius:6px;padding:16px 18px;
+  word-break:break-word}
+.cite-out a{color:var(--secondary)}
+.modal-acts{display:flex;gap:9px;margin-top:16px}
+.modal-acts button{cursor:pointer;border-radius:5px;padding:9px 15px;font-family:var(--f-label);
+  font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
+.btn-copy{background:var(--secondary);color:#fff;border:none}
+.btn-close{background:#fff;color:var(--ink-2);border:1px solid var(--rule);margin-left:auto}
+.btn-copy:focus-visible,.btn-close:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
 /* ---------- datacite panel ---------- */
 .dc{border-color:var(--mark);background:#FBFCFE}
 .dc-bar{display:flex;align-items:center;gap:9px;margin-bottom:13px}
@@ -534,6 +579,7 @@ a{color:inherit}
       <div class="card">
         <h2>Get the data</h2>
         <ul class="linklist" id="d-links"></ul>
+        <button class="citebtn" id="citebtn" hidden>Cite this dataset</button>
       </div>
 
       <div class="card">
@@ -565,6 +611,19 @@ a{color:inherit}
     <p>Impactful Datasets &middot; concept wireframe &middot; not for distribution</p>
   </div>
 </footer>
+
+<div class="modal" id="citemodal" role="dialog" aria-modal="true"
+     aria-labelledby="cite-h" hidden>
+  <div class="modal-box">
+    <h3 id="cite-h">Cite this dataset</h3>
+    <div class="modal-src" id="cite-src"></div>
+    <div class="cite-out" id="cite-out"></div>
+    <div class="modal-acts">
+      <button class="btn-copy" id="cite-copy">Copy citation</button>
+      <button class="btn-close" id="cite-close">Close</button>
+    </div>
+  </div>
+</div>
 
 <div class="tip" id="tip" role="tooltip" aria-hidden="true">
   <span class="tail"></span>
@@ -785,9 +844,21 @@ function openDataset(id){
   document.getElementById('d-meta').innerHTML = meta.join('');
   document.getElementById('d-desc').textContent = d.desc || 'No description supplied in the nomination.';
 
+  // Match each justification block to the nominator who wrote it, so the reader
+  // sees a name rather than "Nominator 2".
+  const bySeq = {};
+  (d.nominators||[]).forEach(p => { if (p.seq != null) bySeq[p.seq] = p; });
+  const multi = (d.nominators||[]).length > 1;
   document.getElementById('d-just').innerHTML = (d.just||[]).map((j,i) => {
+    const seq = j.seq || i+1;
+    const who = bySeq[seq];
     const dims = (j.dims||[]).map(x => `<span class="dim">${esc(x.label)}</span>`).join('');
-    return `<div class="just"><div class="who">Nominator ${j.seq || i+1}</div>
+    const head = who && who.name
+      ? `<button class="who" data-seq="${seq}" aria-label="Show ${esc(who.name)} under Nominated by">
+           <span class="nm">${esc(who.name)}</span>${multi?`<span class="seq">Nominator ${seq}</span>`:''}
+         </button>`
+      : `<div class="who"><span class="nm">Nominator ${seq}</span></div>`;
+    return `<div class="just">${head}
       <p>${esc(j.text)}</p>${dims?`<div class="dims">${dims}</div>`:''}</div>`;
   }).join('') || '<p>No justification recorded.</p>';
 
@@ -825,16 +896,91 @@ function openDataset(id){
     + ((d.creators||[]).length ? `<div style="font-size:12.5px;color:var(--ink-2);margin-top:6px">
         Produced by ${esc(d.creators.join('; '))}</div>` : '');
 
+  const hasJust = {};
+  (d.just||[]).forEach((j,i) => { hasJust[j.seq || i+1] = true; });
   document.getElementById('d-people').innerHTML = (d.nominators||[]).map(p =>
-    `<li><b>${esc(p.name || 'Name withheld')}</b>
+    `<li id="nominator-${p.seq}"><b>${esc(p.name || 'Name withheld')}</b>
       ${p.affil ? `<span class="aff">${esc(p.affil)}</span>` : ''}
-      ${p.orcid ? `<span class="oid">${esc(p.orcid)}</span>` : ''}</li>`).join('')
+      ${p.orcid ? `<span class="oid">${esc(p.orcid)}</span>` : ''}
+      ${hasJust[p.seq] ? `<button class="jump" data-jump="${p.seq}">Read their justification ↑</button>` : ''}
+    </li>`).join('')
     || '<li style="color:var(--ink-3);font-size:13px">No nominator recorded</li>';
+
+  // wire both directions of the link
+  document.querySelectorAll('#d-just .who[data-seq]').forEach(b =>
+    b.addEventListener('click', () => spotlight(document.getElementById('nominator-' + b.dataset.seq))));
+  document.querySelectorAll('#d-people .jump').forEach(b =>
+    b.addEventListener('click', () => {
+      const head = document.querySelector(`#d-just .who[data-seq="${b.dataset.jump}"]`);
+      if (head) spotlight(head.closest('.just'), head);
+    }));
+
+  citeDoi = d.doi ? d.doi.replace('https://doi.org/','') : null;
+  citeBtn.hidden = !citeDoi;
+  if (!citeModal.hidden) closeCite();
 
   loadDataCite(d);
   show('detail');
   window.scrollTo({top:0});
 }
+
+/* ---- scroll to a linked element and flash it ---- */
+let litTimer;
+function spotlight(el, focusEl){
+  if (!el) return;
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+  el.classList.add('lit');
+  clearTimeout(litTimer);
+  litTimer = setTimeout(() => el.classList.remove('lit'), 1800);
+  if (focusEl) setTimeout(() => focusEl.focus({preventScroll:true}), 360);
+}
+
+/* ---- Cite this dataset (DOI Citation Formatter, APA / en-US) ---- */
+const citeBtn = document.getElementById('citebtn'),
+      citeModal = document.getElementById('citemodal'),
+      citeOut = document.getElementById('cite-out'),
+      citeSrc = document.getElementById('cite-src');
+let citeDoi = null, lastFocus = null;
+
+function openCite(){
+  if (!citeDoi) return;
+  lastFocus = document.activeElement;
+  citeModal.hidden = false;
+  citeSrc.textContent = 'APA · en-US · via citation.doi.org';
+  citeOut.textContent = 'Building citation…';
+  document.getElementById('cite-close').focus();
+  const url = 'https://citation.doi.org/format?doi=' + encodeURIComponent(citeDoi)
+            + '&style=apa&lang=en-US';
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 8000);
+  fetch(url, {signal: ctl.signal})
+    .then(r => r.ok ? r.text() : Promise.reject(new Error('HTTP ' + r.status)))
+    .then(txt => {
+      clearTimeout(timer);
+      const clean = txt.trim();
+      citeOut.innerHTML = clean ? linkify(esc(clean)) : esc('No citation returned for this DOI.');
+    })
+    .catch(() => {
+      clearTimeout(timer);
+      citeSrc.textContent = 'Citation service unavailable';
+      citeOut.innerHTML = `The citation formatter could not be reached. The DOI is
+        <a href="https://doi.org/${esc(citeDoi)}" target="_blank" rel="noopener">${esc(citeDoi)}</a>.`;
+    });
+}
+function closeCite(){
+  citeModal.hidden = true;
+  if (lastFocus) lastFocus.focus();
+}
+citeBtn.addEventListener('click', openCite);
+document.getElementById('cite-close').addEventListener('click', closeCite);
+citeModal.addEventListener('click', e => { if (e.target === citeModal) closeCite(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !citeModal.hidden) closeCite(); });
+document.getElementById('cite-copy').addEventListener('click', e => {
+  const txt = citeOut.textContent;
+  const done = () => { e.target.textContent = 'Copied'; setTimeout(() => e.target.textContent = 'Copy citation', 1600); };
+  if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done).catch(() => {});
+  else done();
+});
 
 /* ---- DataCite ---- */
 function loadDataCite(d){
@@ -867,10 +1013,12 @@ function loadDataCite(d){
       const a = j.data.attributes;
       status.dataset.s = 'live'; status.textContent = 'live from datacite';
       const authors = (a.creators||[]).map(c => esc(c.name)).slice(0,12);
-      const related = (a.relatedIdentifiers||[])
-        .filter(r => /Cites|IsCitedBy|IsReferencedBy|IsSupplementTo/i.test(r.relationType||''))
-        .slice(0,6)
+      const relAll = (a.relatedIdentifiers||[])
+        .filter(r => /Cites|IsCitedBy|IsReferencedBy|IsSupplementTo/i.test(r.relationType||''));
+      const related = relAll.slice(0,6)
         .map(r => `<li>${esc(r.relationType)} · ${esc(r.relatedIdentifier)}</li>`);
+      if (relAll.length > related.length)
+        related.push(`<li style="color:var(--ink-3)">+ ${relAll.length - related.length} more in the registry</li>`);
       rows([
         ['Title', esc((a.titles||[{}])[0].title || d.title)],
         ['Authors', authors.length
@@ -881,7 +1029,8 @@ function loadDataCite(d){
         ['Type', esc((a.types||{}).resourceTypeGeneral)],
         ['Version', esc(a.version)],
         ['Citations', a.citationCount != null ? a.citationCount : null],
-        ['Related works', related.length ? `<ul class="refs" style="margin-top:2px">${related.join('')}</ul>` : null],
+        [`Related works${relAll.length ? ` (${relAll.length})` : ''}`,
+         related.length ? `<ul class="refs" style="margin-top:2px">${related.join('')}</ul>` : null],
       ]);
     })
     .catch(() => { clearTimeout(timer); fallback(); });
