@@ -703,32 +703,29 @@ DATA.themes.forEach(t => {
   INDEX.push(entry);
 });
 
-/* Chunk each discipline's books into shelves of `n`, reusing the same button
-   elements so listeners and hidden state survive a re-layout. */
-function buildRows(n){
-  INDEX.forEach(entry => {
-    entry.sec.querySelectorAll('.books').forEach(r => r.remove());
-    entry.rows = [];
-    for (let i = 0; i < entry.books.length; i += n){
-      const row = document.createElement('div');
-      row.className = 'books';
-      row.style.gridTemplateColumns = `repeat(${n},1fr)`;
-      const slice = entry.books.slice(i, i + n);
-      slice.forEach(bk => row.appendChild(bk.el));
-      entry.rows.push({row, books: slice});
-      entry.sec.appendChild(row);
-    }
-  });
+/* Lay out one discipline's books into rows of `n`, reusing the same button elements
+   so listeners survive. `list` is the books to show, which during a search is the
+   matching subset -- results are re-packed into full rows from the top, rather than
+   left scattered across the rows they happened to start in. */
+function buildRows(entry, list, n){
+  entry.sec.querySelectorAll('.books').forEach(r => r.remove());
+  entry.rows = [];
+  for (let i = 0; i < list.length; i += n){
+    const row = document.createElement('div');
+    row.className = 'books';
+    row.style.gridTemplateColumns = `repeat(${n},1fr)`;
+    list.slice(i, i + n).forEach(bk => row.appendChild(bk.el));
+    entry.rows.push(row);
+    entry.sec.appendChild(row);
+  }
 }
 
 let currentRow = perRow();
-buildRows(currentRow);
 window.addEventListener('resize', () => {
   const n = perRow();
-  if (n === currentRow) return;   // only rebuild when the breakpoint actually changes
+  if (n === currentRow) return;   // only relayout when the breakpoint actually changes
   currentRow = n;
-  buildRows(n);
-  applyFilter();                  // re-apply hidden state to the new rows
+  applyFilter();
   hideTip();
 });
 
@@ -746,7 +743,7 @@ DATA.themes.forEach(t => {
     const sec = document.getElementById('group-' + t.key);
     if (!sec || sec.hidden) return;
     sec.scrollIntoView({behavior:'smooth', block:'start'});
-    const first = sec.querySelector('.book:not([hidden])');
+    const first = sec.querySelector('.book');
     if (first) setTimeout(() => first.focus({preventScroll:true}), 380);
   });
   legend.appendChild(b);
@@ -762,26 +759,20 @@ function applyFilter(){
   const raw = qEl.value.trim();
   const terms = norm(raw).split(/\s+/).filter(Boolean);
   const active = terms.length > 0;
+  const n = currentRow;
   let shown = 0;
 
   INDEX.forEach(entry => {
-    let inGroup = 0;
-    entry.rows.forEach(r => {
-      let inRow = 0;
-      r.books.forEach(bk => {
-        const hit = !active || terms.every(term => bk.hay.includes(term));
-        bk.el.hidden = !hit;
-        if (hit) inRow++;
-      });
-      r.row.hidden = inRow === 0;      // a row with nothing left disappears
-      inGroup += inRow;
-    });
-    entry.sec.hidden = inGroup === 0;  // and so does the whole discipline
+    const hits = active
+      ? entry.books.filter(bk => terms.every(term => bk.hay.includes(term)))
+      : entry.books;
+    buildRows(entry, hits, n);         // re-packed: results always start a new row
+    entry.sec.hidden = hits.length === 0;
     if (entry.chip){
-      entry.chip.hidden = inGroup === 0;
-      entry.chip.querySelector('.c').textContent = inGroup;
+      entry.chip.hidden = hits.length === 0;
+      entry.chip.querySelector('.c').textContent = hits.length;
     }
-    shown += inGroup;
+    shown += hits.length;
   });
 
   qClear.hidden = !active;
