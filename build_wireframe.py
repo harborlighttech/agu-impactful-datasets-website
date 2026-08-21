@@ -15,23 +15,45 @@ Usage:
 
 Notes
 -----
+Two files are produced:
+
+  impactful_datasets.data.jsonld   the collection as schema.org JSON-LD. This is
+      the published data: serve it at a stable URL and other sites can consume it
+      directly. Each dataset carries an empty "alternateName" -- the short display
+      name shown on the book spines. Fill those in; the site falls back to "name"
+      while they are blank.
+
+  impactful_datasets_wireframe.html   the site. It fetches the data file at load
+      and keeps an embedded copy as a fallback, so it still opens from disk (a
+      file:// page cannot fetch a sibling file) and survives a network failure.
+      Point it at the published URL with --data-url once one exists.
+
+Identifiers. Terms live under urn:org:agu:data:ns:. Records are
+urn:org:agu:data:impactful-datasets:id:{type}:{local}, where {type} is dataset,
+person, organization or collection. URNs are location-independent, so identifiers
+survive the site moving; the resolvable web address is carried alongside on
+schema.org/mainEntityOfPage. Nominators keep their ORCID as @id where they have
+one -- a real global identifier always beats a minted local one.
+
+Permanent URLs. Every dataset is addressable at #/dataset/agu-0096-optional-slug.
+Only the agu-#### id is authoritative; the slug is decoration and is ignored when
+parsing, so a stale slug still resolves and is then rewritten. Ids are MINTED ONCE:
+each build reads the ids already in the data file and reuses them, so ids survive
+title edits, re-sorting and added or withdrawn rows. Never hand-edit or renumber
+them -- keep the data file in version control and let it carry the ids forward.
+
 Page 1 groups the books by discipline and lays each group out in uniform rows:
-20 books per row on desktop, 14 on tablets, 10 on phones. A group of 29 therefore
-fills one row of 20 and a second of 9 on desktop. Rows are rebuilt when the
+20 books per row on desktop, 14 on tablets, 10 on phones. Rows are rebuilt when the
 viewport crosses a breakpoint; edit ROW_SIZES in the embedded JS to change them.
 
 Search runs entirely client-side over a haystack built per book from title,
-discipline group, repository, nominators, creators and curators. Edit the `hay`
-assignment in the embedded JS to change which fields are searchable. Matching
-normalises accents, apostrophes and dashes, so "earth's interior" and "earths
-interior" both hit the curly-apostrophe discipline label.
+discipline group, repository, nominators, creators and curators. Matching
+normalises accents, apostrophes and dashes. Results are re-packed into full rows,
+so a search never leaves half-empty rows behind.
 
-Page 2 always shows "Referenced in" from our own nomination record, up to 8
-citations with a "+N more" line beyond that; URLs and DOIs inside the citation
-text are linkified. The DataCite panel is separate and appears only when the
-registry actually answers: hidden for datasets without a DOI, and hidden again
-if the call fails or times out. The two may overlap in what they list, which is
-intended -- one is our record, the other is the registry's.
+The DataCite panel on page 2 appears only when the registry answers. "Cite this
+dataset" calls the DOI Citation Formatter (APA, en-US) and appears for datasets
+with a DOI.
 
 The eight discipline colours are anchored on the two brand colours and every one
 clears 4.5:1 against the white spine text.
@@ -51,6 +73,14 @@ ap.add_argument("--nominators", type=int, default=149,
                 help="distinct nominator count shown in the tally")
 ap.add_argument("--logo-width", type=int, default=620,
                 help="px width the logo is downscaled to before embedding")
+ap.add_argument("--data-file", default="impactful_datasets.data.jsonld",
+                help="filename for the public schema.org data file")
+ap.add_argument("--data-url", default=None,
+                help="URL the page fetches the data file from. Defaults to the "
+                     "filename above, i.e. served next to the HTML. Set this to an "
+                     "absolute https URL once the data file has a permanent home.")
+ap.add_argument("--base-url", default="https://impactfuldatasets.agu.org/",
+                help="site URL used to build canonical @id values in the data file")
 args = ap.parse_args()
 JSONLD = args.jsonld
 args.outdir.mkdir(parents=True, exist_ok=True)
@@ -74,14 +104,14 @@ d = json.load(open(JSONLD))
 g = d['@graph']; by = {n['@id']: n for n in g}
 
 THEME_ORDER = [
- ("id:theme/atmospheric-science-space-weather", "Atmospheric Science, Space Weather", "atmos"),
- ("id:theme/ocean-science-hydrology-cryosphere", "Ocean Science, Hydrology, Cryosphere", "ocean"),
- ("id:theme/global-environmental-change-paleoceanography-and-paleoclimatology-biogeoscience", "Global Environmental Change, Paleoclimatology, Biogeoscience", "biosphere"),
- ("id:theme/earth-s-interior-geodesy", "Earth's Interior, Geodesy", "interior"),
- ("id:theme/earth-surface-natural-hazards-geology-near-surface-geophysics", "Earth Surface, Natural Hazards, Geology", "surface"),
- ("id:theme/education-geohealth-society-education", "Education, GeoHealth, Society", "society"),
- ("id:theme/space-and-planetary-science", "Space and Planetary Science", "space"),
- ("id:theme/earth-planetary-materials", "Earth & Planetary Materials", "materials"),
+ ("id:theme:atmospheric-science-space-weather", "Atmospheric Science, Space Weather", "atmos"),
+ ("id:theme:ocean-science-hydrology-cryosphere", "Ocean Science, Hydrology, Cryosphere", "ocean"),
+ ("id:theme:global-environmental-change-paleoceanography-and-paleoclimatology-biogeoscience", "Global Environmental Change, Paleoclimatology, Biogeoscience", "biosphere"),
+ ("id:theme:earth-s-interior-geodesy", "Earth's Interior, Geodesy", "interior"),
+ ("id:theme:earth-surface-natural-hazards-geology-near-surface-geophysics", "Earth Surface, Natural Hazards, Geology", "surface"),
+ ("id:theme:education-geohealth-society-education", "Education, GeoHealth, Society", "society"),
+ ("id:theme:space-and-planetary-science", "Space and Planetary Science", "space"),
+ ("id:theme:earth-planetary-materials", "Earth & Planetary Materials", "materials"),
 ]
 tkey = {t[0]: t[2] for t in THEME_ORDER}
 # verify every theme id resolves
@@ -127,7 +157,6 @@ for x in g:
     refs = [txt(r.get('schema:citation'), 300) for r in (x.get('isReferencedBy') or [])][:8]
     reuse = [txt(r.get('schema:text'), 200) for r in (x.get('reuseExample') or [])][:5]
     out.append({
-        "id": x['@id'].split('/')[-1],
         "title": x.get('title'),
         "theme": tkey[(x.get('theme') or [None])[0]] if x.get('theme') else "society",
         "nomCount": len(people),
@@ -147,7 +176,180 @@ for x in g:
     })
 
 out.sort(key=lambda r: (-r['nomCount'], r['title'].lower()))
+
+# ---------------------------------------------------------------- permanent ids ----
+# URLs must survive edits, re-ordering and re-runs, so ids are MINTED ONCE and then
+# frozen. Every build reads the ids already published in the data file and reuses
+# them; only genuinely new datasets get a new number, taken from one past the highest
+# ever issued. Ids are never re-used, even if a dataset is withdrawn.
+DATA_PATH = args.outdir / args.data_file
+
+
+def stable_key(rec):
+    # Identity of a nomination record, not of the underlying data: three separate
+    # nominations can share one DOI (OCO-2/-3 does), and each still needs its own
+    # page and its own URL. DOI plus title is therefore the key.
+    title = re.sub(r"\s+", " ", (rec.get("title") or "")).strip().lower()
+    if rec.get("doi"):
+        return "doi:" + rec["doi"].replace("https://doi.org/", "").lower() + "|" + title
+    return "title:" + title
+
+
+known, highest = {}, 0
+if DATA_PATH.exists():
+    try:
+        prev = json.loads(DATA_PATH.read_text(encoding="utf-8"))
+        for item in prev.get("dataset", []):
+            pid = item.get("agu:datasetId")
+            key = item.get("agu:stableKey")
+            if pid:
+                highest = max(highest, int(re.sub(r"\D", "", pid) or 0))
+                if key:
+                    known[key] = pid
+    except Exception as e:                      # a corrupt file must not silently remint
+        raise SystemExit("could not read existing ids from %s: %s" % (DATA_PATH, e))
+
+# Collisions would silently point two pages at one URL, so fail loudly instead.
+seen_keys = collections.Counter(stable_key(r) for r in out)
+clashes = [k for k, n in seen_keys.items() if n > 1]
+if clashes:
+    raise SystemExit("identical stable keys for %d record(s); ids would collide:\n  %s"
+                     % (len(clashes), "\n  ".join(clashes[:5])))
+
+minted = 0
+for rec in out:
+    key = stable_key(rec)
+    if key in known:
+        rec["id"] = known[key]
+    else:
+        highest += 1
+        minted += 1
+        rec["id"] = "agu-%04d" % highest
+        known[key] = rec["id"]
+    rec["stableKey"] = key
+
 payload = {"themes": [{"key": k, "label": l} for _, l, k in THEME_ORDER], "datasets": out}
+
+# ------------------------------------------------- public schema.org data file ----
+# One file, fetched by the site and re-usable by anyone else at the same URL.
+# schema.org core terms carry the bibliographic fields; nomination-specific content
+# sits under an "agu:" prefix so the document stays valid JSON-LD.
+THEME_LABELS = {k: l for _, l, k in THEME_ORDER}
+BASE = args.base_url if args.base_url.endswith("/") else args.base_url + "/"
+
+# AGU term and identifier namespaces. URNs are location-independent, so the
+# identifiers stay valid if the site ever moves; the resolvable web address is
+# carried separately on mainEntityOfPage.
+NS_URN = "urn:org:agu:data:ns:"
+
+
+def urn(kind, local):
+    """urn:org:agu:data:impactful-datasets:id:{type}:{local}"""
+    s = re.sub(r"[^a-z0-9]+", "-", (local or "").lower()).strip("-")[:70].strip("-")
+    return ID_URN + kind + ":" + (s or "unknown")
+
+ID_URN = "urn:org:agu:data:impactful-datasets:id:"
+
+
+def sd_dataset(rec):
+    d = {
+        "@type": "Dataset",
+        "@id": ID_URN + "dataset:" + rec["id"],
+        # where this record is actually readable on the web
+        "mainEntityOfPage": BASE + "#/dataset/" + rec["id"],
+        "identifier": [
+            {"@type": "PropertyValue", "propertyID": "AGU-ID", "value": rec["id"]},
+        ],
+        "name": rec["title"],
+        # ------------------------------------------------------------------
+        # PLACEHOLDER, intentionally empty. This is the short display name used
+        # on the book spines on the home page. schema.org/alternateName is the
+        # right field: it is the standard term for an additional, alternative
+        # name for the same thing, and (unlike "name") it may repeat and may be
+        # shorter or longer. Fill it in per dataset -- roughly 24 characters or
+        # fewer is what a spine can show. The site falls back to "name" while
+        # this is empty, so nothing breaks until it is populated.
+        # ------------------------------------------------------------------
+        "alternateName": "",
+        "keywords": [THEME_LABELS.get(rec["theme"], rec["theme"])],
+        "agu:datasetId": rec["id"],
+        "agu:stableKey": rec["stableKey"],
+        "agu:themeKey": rec["theme"],
+        "agu:nominatorCount": rec["nomCount"],
+        "agu:citationCount": rec["refsTotal"],
+        "agu:reuseCount": rec["reuseTotal"],
+    }
+    if rec.get("desc"):
+        d["description"] = rec["desc"]
+    if rec.get("doi"):
+        d["url"] = rec["doi"]
+        d["identifier"].append({"@type": "PropertyValue", "propertyID": "DOI",
+                                "value": rec["doi"]})
+    elif rec.get("links"):
+        d["url"] = rec["links"][0]
+    extra = [u for u in (rec.get("links") or []) if u != d.get("url")]
+    if extra:
+        d["sameAs"] = extra
+    if rec.get("creators"):
+        d["creator"] = [{"@type": "Person", "@id": urn("person", n), "name": n}
+                        for n in rec["creators"] if n]
+    if rec.get("curators"):
+        d["agu:curator"] = [{"@type": "Person", "@id": urn("person", n), "name": n}
+                            for n in rec["curators"] if n]
+    if rec.get("repo"):
+        d["includedInDataCatalog"] = {"@type": "DataCatalog",
+                                      "@id": urn("organization", rec["repo"]),
+                                      "name": rec["repo"]}
+    if rec.get("refs"):
+        d["citation"] = [{"@type": "CreativeWork", "text": c} for c in rec["refs"]]
+    if rec.get("reuse"):
+        d["agu:reuseExample"] = [{"@type": "CreativeWork", "text": c} for c in rec["reuse"]]
+    if rec.get("nominators"):
+        d["agu:nominator"] = [
+            {k: v for k, v in {
+                "@type": "Person",
+                # a real ORCID beats a minted id; fall back to a name-derived urn
+                "@id": p.get("orcid") or urn("person", p.get("name")),
+                "name": p.get("name"),
+                "affiliation": ({"@type": "Organization",
+                                 "@id": urn("organization", p["affil"]),
+                                 "name": p["affil"]}
+                                if p.get("affil") else None),
+                "agu:sequence": p.get("seq"),
+            }.items() if v is not None}
+            for p in rec["nominators"]]
+    if rec.get("just"):
+        d["agu:justification"] = [
+            {k: v for k, v in {
+                "@type": "CreativeWork",
+                "agu:sequence": j.get("seq"),
+                "text": j.get("text"),
+                "agu:impactDimension": ([{"@type": "DefinedTerm", "name": x["label"],
+                                          "description": x["text"]}
+                                         for x in j["dims"]] if j.get("dims") else None),
+            }.items() if v is not None}
+            for j in rec["just"]]
+    return d
+
+
+data_doc = {
+    "@context": {
+        "@vocab": "https://schema.org/",
+        "agu": NS_URN,
+    },
+    "@type": "DataCatalog",
+    "@id": ID_URN + "collection:impactful-datasets",
+    "name": "Impactful Datasets in the Earth, Space, and Environmental Sciences",
+    "publisher": {"@type": "Organization", "name": "American Geophysical Union",
+                  "url": "https://www.agu.org/"},
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "dateModified": __import__("datetime").date.today().isoformat(),
+    "agu:themes": [{"agu:themeKey": k, "name": l} for _, l, k in THEME_ORDER],
+    "dataset": [sd_dataset(r) for r in out],
+}
+DATA_PATH.write_text(json.dumps(data_doc, indent=2, ensure_ascii=False), encoding="utf-8")
+print("data file: %s  (%d datasets, %d new id%s minted)"
+      % (DATA_PATH, len(out), minted, "" if minted == 1 else "s"))
 
 
 
@@ -632,7 +834,45 @@ a{color:inherit}
 </div>
 
 <script>
+/* The collection is published as a standalone schema.org file so other sites can
+   consume it at a stable URL. The page fetches that file; the embedded copy below is
+   a fallback so the prototype still opens straight from disk (a file:// page cannot
+   fetch a sibling file in most browsers) and so a network blip never blanks the page. */
+const DATA_URL = "__DATA_URL__";
 const DATA = __DATA__;
+
+/* Map a schema.org Dataset from the public file onto the shape the page renders. */
+function adopt(sd){
+  const idOf = v => (v || []).find(x => x && x.propertyID === "AGU-ID");
+  const doiOf = v => (v || []).find(x => x && x.propertyID === "DOI");
+  const doi = doiOf(sd.identifier) ? doiOf(sd.identifier).value : null;
+  const links = [];
+  if (sd.url && sd.url !== doi) links.push(sd.url);
+  (sd.sameAs || []).forEach(u => { if (u !== doi) links.push(u); });
+  return {
+    id: sd["agu:datasetId"] || (idOf(sd.identifier) || {}).value,
+    title: sd.name,
+    shortName: (sd.alternateName || "").trim(),   // spine label; blank falls back to title
+    theme: sd["agu:themeKey"],
+    nomCount: sd["agu:nominatorCount"] || 0,
+    doi, links: links.slice(0, 3),
+    repo: (sd.includedInDataCatalog || {}).name || null,
+    creators: (sd.creator || []).map(c => c.name).filter(Boolean),
+    curators: (sd["agu:curator"] || []).map(c => c.name).filter(Boolean),
+    desc: sd.description || null,
+    refs: (sd.citation || []).map(c => c.text).filter(Boolean),
+    reuse: (sd["agu:reuseExample"] || []).map(c => c.text).filter(Boolean),
+    refsTotal: sd["agu:citationCount"] || 0,
+    reuseTotal: sd["agu:reuseCount"] || 0,
+    nominators: (sd["agu:nominator"] || []).map(p => ({
+      seq: p["agu:sequence"], name: p.name,
+      orcid: (p["@id"] || "").startsWith("http") ? p["@id"] : null,
+      affil: (p.affiliation || {}).name || null })),
+    just: (sd["agu:justification"] || []).map(j => ({
+      seq: j["agu:sequence"], text: j.text,
+      dims: (j["agu:impactDimension"] || []).map(x => ({label: x.name, text: x.description})) })),
+  };
+}
 const THEME_LABEL = {}, THEME_VAR = {atmos:'--atmos',ocean:'--ocean',biosphere:'--biosphere',
   interior:'--interior',surface:'--surface-c',society:'--society',space:'--space',materials:'--materials'};
 DATA.themes.forEach(t => THEME_LABEL[t.key] = t.label);
@@ -669,6 +909,15 @@ const norm = s => (s==null?'':String(s))
 /* Each discipline is its own section. Books are uniform width, perRow() to a row;
    a group of 29 fills one row of 20 and a second of 9 on desktop, and the short row
    is left short rather than stretched or filled from the next discipline. */
+function rebuildBooks(){
+  groups.textContent = '';
+  INDEX.length = 0;
+  legend.textContent = '';
+  buildGroups();
+  buildLegend();
+}
+
+function buildGroups(){
 DATA.themes.forEach(t => {
   const items = DATA.datasets.filter(d => d.theme === t.key);
   if (!items.length) return;
@@ -685,7 +934,7 @@ DATA.themes.forEach(t => {
       b.className = 'book';
       b.style.background = c;
       b.setAttribute('aria-label', `${d.title} — open dataset`);
-      b.innerHTML = `<span>${esc(d.title)}</span>`;
+      b.innerHTML = `<span>${esc(d.shortName || d.title)}</span>`;
       b.addEventListener('click', () => openDataset(d.id));
       b.addEventListener('mouseenter', () => showTip(b, d, t.label));
       b.addEventListener('focus', () => showTip(b, d, t.label));
@@ -702,6 +951,7 @@ DATA.themes.forEach(t => {
   groups.appendChild(sec);
   INDEX.push(entry);
 });
+}
 
 /* Lay out one discipline's books into rows of `n`, reusing the same button elements
    so listeners survive. `list` is the books to show, which during a search is the
@@ -731,6 +981,7 @@ window.addEventListener('resize', () => {
 
 /* ---- discipline index doubles as navigation ---- */
 const legend = document.getElementById('legend');
+function buildLegend(){
 DATA.themes.forEach(t => {
   const n = DATA.datasets.filter(d => d.theme === t.key).length;
   if (!n) return;
@@ -748,6 +999,9 @@ DATA.themes.forEach(t => {
   });
   legend.appendChild(b);
 });
+}
+buildGroups();
+buildLegend();
 
 /* ---- client-side search ---- */
 const qEl = document.getElementById('q'), qCount = document.getElementById('q-count'),
@@ -820,8 +1074,16 @@ function hideTip(){ tip.classList.remove('on'); tip.setAttribute('aria-hidden','
 window.addEventListener('scroll', hideTip, {passive:true});
 
 /* ---- page 2 ---- */
-function openDataset(id){
+function openDataset(id, opts){
   const d = DATA.datasets.find(x => x.id === id) || DATA.datasets[0];
+  if (!d) return;
+  const want = hashFor(d);
+  if (location.hash !== want){
+    // replace when arriving via a link so Back leaves the site as the user expects;
+    // push when the user clicked a book, so Back returns to the collection
+    if (opts && opts.fromHash) history.replaceState(null, '', want);
+    else history.pushState(null, '', want);
+  }
   const c = css(d.theme);
   document.getElementById('d-swatch').style.background = c;
   document.getElementById('d-theme').textContent = THEME_LABEL[d.theme];
@@ -1027,10 +1289,49 @@ function loadDataCite(d){
     .catch(() => { clearTimeout(timer); fallback(); });
 }
 
+/* ---- addressable datasets -------------------------------------------------
+   Every dataset has a permanent URL of the form
+
+       .../#/dataset/agu-0096
+       .../#/dataset/agu-0096-argo      <- same page, slug is decoration
+
+   Only the agu-#### id is authoritative. It is minted once, never re-used and
+   never re-derived from position or title, so a URL keeps working when the title
+   is edited, the collection is re-sorted, or rows are added or withdrawn. The
+   trailing slug is generated for readability and is ignored on the way back in;
+   if it is stale or missing the page still resolves, then rewrites the address
+   bar to the current slug. Unknown ids fall back to the collection.            */
+const ID_RE = /^(agu-\d{4,})/i;
+
+function slugify(s){
+  return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,48).replace(/-+$/,'');
+}
+function hashFor(d){
+  const slug = slugify(d.shortName || d.title);
+  return '#/dataset/' + d.id + (slug ? '-' + slug : '');
+}
+function parseHash(){
+  const m = (location.hash || '').match(/^#\/dataset\/(.+)$/);
+  if (!m) return null;
+  const id = decodeURIComponent(m[1]).match(ID_RE);
+  return id ? id[1].toLowerCase() : null;
+}
+function routeFromHash(){
+  const id = parseHash();
+  if (!id){ show('collection'); return; }
+  const d = DATA.datasets.find(x => (x.id || '').toLowerCase() === id);
+  if (!d){ show('collection'); return; }   // withdrawn or mistyped id
+  openDataset(d.id, {fromHash: true});
+}
+window.addEventListener('hashchange', routeFromHash);
+
 /* ---- routing ---- */
 function show(which){
   document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === 'page-' + which));
   const onCollection = which === 'collection';
+  if (onCollection && location.hash)
+    history.pushState(null, '', location.pathname + location.search);
   const navHome = document.getElementById('nav-collection');
   if (navHome) navHome.setAttribute('aria-current', onCollection ? 'page' : 'false');
 }
@@ -1038,9 +1339,27 @@ document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', 
   show(b.dataset.go);
   window.scrollTo({top:0});
 }));
-applyFilter();
-openDataset(DATA.featured);
-show('collection');
+/* Prefer the published file; fall back to the embedded copy without blocking render. */
+function boot(){
+  applyFilter();
+  routeFromHash();
+}
+
+fetch(DATA_URL, {cache: "no-cache"})
+  .then(r => r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status)))
+  .then(doc => {
+    const rows = (doc.dataset || []).map(adopt).filter(d => d.id && d.title);
+    if (!rows.length) throw new Error("no datasets in " + DATA_URL);
+    const order = {};
+    DATA.datasets.forEach((d, i) => { order[d.id] = i; });
+    rows.sort((a, b) => (order[a.id] ?? 1e6) - (order[b.id] ?? 1e6));
+    DATA.datasets = rows;
+    if (doc["agu:themes"] && doc["agu:themes"].length)
+      DATA.themes = doc["agu:themes"].map(x => ({key: x["agu:themeKey"], label: x.name}));
+    rebuildBooks();
+  })
+  .catch(() => { /* embedded copy already loaded */ })
+  .finally(boot);
 </script>
 </body>
 </html>
@@ -1050,6 +1369,7 @@ show('collection');
 
 LOGO = base64.b64encode(_logo_png()).decode()
 out = (HTML.replace('__DATA__', json.dumps(DATA, ensure_ascii=False, separators=(',', ':')))
+           .replace('__DATA_URL__', args.data_url or args.data_file)
            .replace('__LOGO__', LOGO))
 OUT.write_text(out, encoding='utf-8')
 print(f'wrote {OUT}  ({len(out)/1024:.0f} KB, {len(DATA["datasets"])} datasets)')
