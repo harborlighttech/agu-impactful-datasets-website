@@ -12,41 +12,86 @@
     "url": "https://www.agu.org/"
   },
   "license": "https://creativecommons.org/licenses/by/4.0/",
-  "dateModified": "2026-08-21",
-  "agu:themes": [
-    {
-      "agu:themeKey": "atmos",
-      "name": "Atmospheric Science, Space Weather"
-    },
-    {
-      "agu:themeKey": "ocean",
-      "name": "Ocean Science, Hydrology, Cryosphere"
-    },
-    {
-      "agu:themeKey": "biosphere",
-      "name": "Global Environmental Change, Paleoclimatology, Biogeoscience"
-    },
-    {
-      "agu:themeKey": "interior",
-      "name": "Earth's Interior, Geodesy"
-    },
-    {
-      "agu:themeKey": "surface",
-      "name": "Earth Surface, Natural Hazards, Geology"
-    },
-    {
-      "agu:themeKey": "society",
-      "name": "Education, GeoHealth, Society"
-    },
-    {
-      "agu:themeKey": "space",
-      "name": "Space and Planetary Science"
-    },
-    {
-      "agu:themeKey": "materials",
-      "name": "Earth & Planetary Materials"
-    }
-  ],
+  "dateModified": "2026-08-22",
+  "agu:themes": {
+    "@type": "DefinedTermSet",
+    "@id": "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups",
+    "name": "AGU discipline groups",
+    "hasDefinedTerm": [
+      {
+        "@type": "DefinedTerm",
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos",
+        "identifier": "atmos",
+        "name": "Atmospheric Science, Space Weather",
+        "inDefinedTermSet": {
+          "@id": "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups"
+        }
+      },
+      {
+        "@type": "DefinedTerm",
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean",
+        "identifier": "ocean",
+        "name": "Ocean Science, Hydrology, Cryosphere",
+        "inDefinedTermSet": {
+          "@id": "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups"
+        }
+      },
+      {
+        "@type": "DefinedTerm",
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere",
+        "identifier": "biosphere",
+        "name": "Global Environmental Change, Paleoclimatology, Biogeoscience",
+        "inDefinedTermSet": {
+          "@id": "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups"
+        }
+      },
+      {
+        "@type": "DefinedTerm",
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior",
+        "identifier": "interior",
+        "name": "Earth's Interior, Geodesy",
+        "inDefinedTermSet": {
+          "@id": "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups"
+        }
+      },
+      {
+        "@type": "DefinedTerm",
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface",
+        "identifier": "surface",
+        "name": "Earth Surface, Natural Hazards, Geology",
+        "inDefinedTermSet": {
+          "@id": "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups"
+        }
+      },
+      {
+        "@type": "DefinedTerm",
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society",
+        "identifier": "society",
+        "name": "Education, GeoHealth, Society",
+        "inDefinedTermSet": {
+          "@id": "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups"
+        }
+      },
+      {
+        "@type": "DefinedTerm",
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space",
+        "identifier": "space",
+        "name": "Space and Planetary Science",
+        "inDefinedTermSet": {
+          "@id": "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups"
+        }
+      },
+      {
+        "@type": "DefinedTerm",
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:materials",
+        "identifier": "materials",
+        "name": "Earth & Planetary Materials",
+        "inDefinedTermSet": {
+          "@id": "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups"
+        }
+      }
+    ]
+  },
   "dataset": [
     {
       "@type": "Dataset",
@@ -55,18 +100,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0001"
         }
       ],
       "name": "2020 TCCON Data Release",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0001",
       "agu:stableKey": "title:2020 tccon data release",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 9,
       "agu:citationCount": 3,
       "agu:reuseCount": 9,
@@ -258,7 +302,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0002"
         },
         {
@@ -269,12 +313,11 @@
       ],
       "name": "Integrated Multi-satellitE Retrievals for the Global Precipitation Measurement (GPM) mission (IMERG)",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0002",
       "agu:stableKey": "doi:10.5067/gpm/imerg/3b-hh-e/07|integrated multi-satellite retrievals for the global precipitation measurement (gpm) mission (imerg)",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 6,
       "agu:citationCount": 3,
       "agu:reuseCount": 5,
@@ -448,18 +491,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0003"
         }
       ],
       "name": "International Sunspot Number",
       "alternateName": "",
-      "keywords": [
-        "Space and Planetary Science"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+      },
       "agu:datasetId": "agu-0003",
       "agu:stableKey": "title:international sunspot number",
-      "agu:themeKey": "space",
       "agu:nominatorCount": 5,
       "agu:citationCount": 11,
       "agu:reuseCount": 8,
@@ -627,7 +669,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0004"
         },
         {
@@ -638,12 +680,11 @@
       ],
       "name": "Argo",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0004",
       "agu:stableKey": "doi:10.17882/42182|argo",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 3,
       "agu:citationCount": 5,
       "agu:reuseCount": 2,
@@ -763,18 +804,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0005"
         }
       ],
       "name": "ARTMIP Database",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0005",
       "agu:stableKey": "title:artmip database",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 3,
       "agu:citationCount": 7,
       "agu:reuseCount": 2,
@@ -899,7 +939,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0006"
         },
         {
@@ -910,12 +950,11 @@
       ],
       "name": "ECOSTRESS Tiled Land Surface Temperature and Emissivity Instantaneous L2 Global 70 m V002",
       "alternateName": "",
-      "keywords": [
-        "Earth Surface, Natural Hazards, Geology"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+      },
       "agu:datasetId": "agu-0006",
       "agu:stableKey": "doi:10.5067/ecostress/eco_l2t_lste.002|ecostress tiled land surface temperature and emissivity instantaneous l2 global 70 m v002",
-      "agu:themeKey": "surface",
       "agu:nominatorCount": 3,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -993,18 +1032,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0007"
         }
       ],
       "name": "Fluxnet (or Ameriflux for N America)",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0007",
       "agu:stableKey": "title:fluxnet (or ameriflux for n america)",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 3,
       "agu:citationCount": 1,
       "agu:reuseCount": 7,
@@ -1148,18 +1186,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0008"
         }
       ],
       "name": "OMNI",
       "alternateName": "",
-      "keywords": [
-        "Space and Planetary Science"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+      },
       "agu:datasetId": "agu-0008",
       "agu:stableKey": "title:omni",
-      "agu:themeKey": "space",
       "agu:nominatorCount": 2,
       "agu:citationCount": 3,
       "agu:reuseCount": 1,
@@ -1270,18 +1307,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0009"
         }
       ],
       "name": "Ozone data collection at WOUDC",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0009",
       "agu:stableKey": "title:ozone data collection at woudc",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 2,
       "agu:citationCount": 2,
       "agu:reuseCount": 0,
@@ -1382,18 +1418,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0010"
         }
       ],
       "name": "PetDB",
       "alternateName": "",
-      "keywords": [
-        "Earth's Interior, Geodesy"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+      },
       "agu:datasetId": "agu-0010",
       "agu:stableKey": "title:petdb",
-      "agu:themeKey": "interior",
       "agu:nominatorCount": 2,
       "agu:citationCount": 2,
       "agu:reuseCount": 1,
@@ -1481,18 +1516,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0011"
         }
       ],
       "name": "A Comprehensive Northern Hemisphere Particle Microphysics Dataset from the Precipitation Imaging Package",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0011",
       "agu:stableKey": "title:a comprehensive northern hemisphere particle microphysics dataset from the precipitation imaging package",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 3,
@@ -1565,18 +1599,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0012"
         }
       ],
       "name": "A global open-source dataset of monthly irrigated and rainfed cropped areas (MIRCA-OS) for the 21st century",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0012",
       "agu:stableKey": "title:a global open-source dataset of monthly irrigated and rainfed cropped areas (mirca-os) for the 21st century",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 7,
@@ -1674,7 +1707,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0013"
         },
         {
@@ -1685,12 +1718,11 @@
       ],
       "name": "ABCFlux v2: Arctic–Boreal CO2 and CH4 In-situ Flux and Environmental Data",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0013",
       "agu:stableKey": "doi:10.3334/ornldaac/2448|abcflux v2: arctic–boreal co2 and ch4 in-situ flux and environmental data",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -1742,7 +1774,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0014"
         },
         {
@@ -1753,12 +1785,11 @@
       ],
       "name": "Agricultural nitrogen fertilizer uses in the continental U.S. during 1850-2015: a set of gridded time-series data",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0014",
       "agu:stableKey": "doi:10.1594/pangaea.883585|agricultural nitrogen fertilizer uses in the continental u.s. during 1850-2015: a set of gridded time-series data",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -1844,18 +1875,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0015"
         }
       ],
       "name": "Air NOW Fire and Smoke map",
       "alternateName": "",
-      "keywords": [
-        "Education, GeoHealth, Society"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+      },
       "agu:datasetId": "agu-0015",
       "agu:stableKey": "title:air now fire and smoke map",
-      "agu:themeKey": "society",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -1908,18 +1938,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0016"
         }
       ],
       "name": "Airborne and Satellite Investigation of Air Quality",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0016",
       "agu:stableKey": "title:airborne and satellite investigation of air quality",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 2,
@@ -1982,7 +2011,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0017"
         },
         {
@@ -1993,12 +2022,11 @@
       ],
       "name": "Annual crop-specific management history of phosphorus fertilizer input (CMH-P) in the croplands of United States from 1850 to 2022: Application rate, timing, and method",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0017",
       "agu:stableKey": "doi:10.5281/zenodo.13357690|annual crop-specific management history of phosphorus fertilizer input (cmh-p) in the croplands of united states from 1850 to 2022: application rate, timing, and method",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -2089,18 +2117,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0018"
         }
       ],
       "name": "ArcticDEM and the Reference Elevation Model of Antarctica (REMA)",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0018",
       "agu:stableKey": "title:arcticdem and the reference elevation model of antarctica (rema)",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 1,
@@ -2172,18 +2199,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0019"
         }
       ],
       "name": "Astromaterials Data Synthesis",
       "alternateName": "",
-      "keywords": [
-        "Space and Planetary Science"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+      },
       "agu:datasetId": "agu-0019",
       "agu:stableKey": "title:astromaterials data synthesis",
-      "agu:themeKey": "space",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 1,
@@ -2256,18 +2282,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0020"
         }
       ],
       "name": "Atmospheric Infrared Sounder (AIRS)",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0020",
       "agu:stableKey": "title:atmospheric infrared sounder (airs)",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -2313,7 +2338,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0021"
         },
         {
@@ -2324,12 +2349,11 @@
       ],
       "name": "Australian Thermochronology - 2002 and prior",
       "alternateName": "",
-      "keywords": [
-        "Earth's Interior, Geodesy"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+      },
       "agu:datasetId": "agu-0021",
       "agu:stableKey": "doi:10.58024/agum46bd292f|australian thermochronology - 2002 and prior",
-      "agu:themeKey": "interior",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 1,
@@ -2402,7 +2426,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0022"
         },
         {
@@ -2413,12 +2437,11 @@
       ],
       "name": "Australian Thermochronology - 2002 to 2022",
       "alternateName": "",
-      "keywords": [
-        "Earth's Interior, Geodesy"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+      },
       "agu:datasetId": "agu-0022",
       "agu:stableKey": "doi:10.58024/agumcad7b7cb|australian thermochronology - 2002 to 2022",
-      "agu:themeKey": "interior",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -2471,18 +2494,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0023"
         }
       ],
       "name": "AutoTerm",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0023",
       "agu:stableKey": "title:autoterm",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -2528,18 +2550,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0024"
         }
       ],
       "name": "CALCOFI fish larvae at 66 standard stations, 1966 - ongoing",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0024",
       "agu:stableKey": "title:calcofi fish larvae at 66 standard stations, 1966 - ongoing",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 1,
@@ -2602,18 +2623,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0025"
         }
       ],
       "name": "CalCOFI SIO Hydrographic CTD Bottle/Cast Data",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0025",
       "agu:stableKey": "title:calcofi sio hydrographic ctd bottle/cast data",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 1,
@@ -2685,18 +2705,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0026"
         }
       ],
       "name": "California Climate Projections",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0026",
       "agu:stableKey": "title:california climate projections",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 1,
@@ -2769,18 +2788,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0027"
         }
       ],
       "name": "CAMELS-IND (Catchment Attributes and Meteorology for Large-sample Studies - India)",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0027",
       "agu:stableKey": "title:camels-ind (catchment attributes and meteorology for large-sample studies - india)",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 2,
@@ -2864,18 +2882,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0028"
         }
       ],
       "name": "Catchment Attributes and MEteorology for Large-sample Studies (CAMELS)",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0028",
       "agu:stableKey": "title:catchment attributes and meteorology for large-sample studies (camels)",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 36,
@@ -2958,18 +2975,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0029"
         }
       ],
       "name": "Cenomanian-Turonian Eagle Ford Research: Core dataset",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0029",
       "agu:stableKey": "title:cenomanian-turonian eagle ford research: core dataset",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 24,
@@ -3069,7 +3085,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0030"
         },
         {
@@ -3080,12 +3096,11 @@
       ],
       "name": "Cenozoic Global Reference benthic foraminifer carbon and oxygen Isotope Dataset (CENOGRID)",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0030",
       "agu:stableKey": "doi:10.1594/pangaea.917503|cenozoic global reference benthic foraminifer carbon and oxygen isotope dataset (cenogrid)",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 6,
@@ -3162,7 +3177,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0031"
         },
         {
@@ -3173,12 +3188,11 @@
       ],
       "name": "ChemLotUS: A Benchmark Data Set of Lotic Chemistry Across US River Networks",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0031",
       "agu:stableKey": "doi:10.1029/2024wr039355|chemlotus: a benchmark data set of lotic chemistry across us river networks",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -3243,18 +3257,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0032"
         }
       ],
       "name": "China Meteorological Forcing Dataset",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0032",
       "agu:stableKey": "title:china meteorological forcing dataset",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 6,
@@ -3340,18 +3353,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0033"
         }
       ],
       "name": "Climate Ready DC: What does it mean to be Climate Ready?",
       "alternateName": "",
-      "keywords": [
-        "Education, GeoHealth, Society"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+      },
       "agu:datasetId": "agu-0033",
       "agu:stableKey": "title:climate ready dc: what does it mean to be climate ready?",
-      "agu:themeKey": "society",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -3397,18 +3409,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0034"
         }
       ],
       "name": "Community Earth Models",
       "alternateName": "",
-      "keywords": [
-        "Earth's Interior, Geodesy"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+      },
       "agu:datasetId": "agu-0034",
       "agu:stableKey": "title:community earth models",
-      "agu:themeKey": "interior",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -3471,18 +3482,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0035"
         }
       ],
       "name": "Coupled Model Intercomparison Project 6 (CMIP6)",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0035",
       "agu:stableKey": "title:coupled model intercomparison project 6 (cmip6)",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -3534,18 +3544,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0036"
         }
       ],
       "name": "Daily 4 km Gridded SWE and Snow Depth from Assimilated In-Situ and Observation-Based Data over the Conterminous US",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0036",
       "agu:stableKey": "title:daily 4 km gridded swe and snow depth from assimilated in-situ and observation-based data over the conterminous us",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 4,
       "agu:reuseCount": 0,
@@ -3616,18 +3625,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0037"
         }
       ],
       "name": "Data and code for Mapping greenhouse gas emissions from global cropland circa 2020",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0037",
       "agu:stableKey": "title:data and code for mapping greenhouse gas emissions from global cropland circa 2020",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -3703,7 +3711,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0038"
         },
         {
@@ -3714,12 +3722,11 @@
       ],
       "name": "EnvClim Grids: Global Urban Environmental Vulnerability and Climate Risk, 500m Resolution (circa 2020–2050)",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0038",
       "agu:stableKey": "doi:10.7910/dvn/33jjxt|envclim grids: global urban environmental vulnerability and climate risk, 500m resolution (circa 2020–2050)",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -3789,18 +3796,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0039"
         }
       ],
       "name": "ESA WorldCereal 10 m 2021 v100",
       "alternateName": "",
-      "keywords": [
-        "Education, GeoHealth, Society"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+      },
       "agu:datasetId": "agu-0039",
       "agu:stableKey": "title:esa worldcereal 10 m 2021 v100",
-      "agu:themeKey": "society",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 1,
@@ -3869,18 +3875,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0040"
         }
       ],
       "name": "EStreams",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0040",
       "agu:stableKey": "title:estreams",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 6,
@@ -3976,18 +3981,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0041"
         }
       ],
       "name": "FDSN Databases",
       "alternateName": "",
-      "keywords": [
-        "Earth Surface, Natural Hazards, Geology"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+      },
       "agu:datasetId": "agu-0041",
       "agu:stableKey": "title:fdsn databases",
-      "agu:themeKey": "surface",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -4039,18 +4043,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0042"
         }
       ],
       "name": "FLUXNET 2015",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0042",
       "agu:stableKey": "title:fluxnet 2015",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 6,
@@ -4136,18 +4139,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0043"
         }
       ],
       "name": "FORMOSAT-7/COSMIC-2 Global Ionospheric Specification",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0043",
       "agu:stableKey": "title:formosat-7/cosmic-2 global ionospheric specification",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -4227,18 +4229,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0044"
         }
       ],
       "name": "Frictional behavior of quartz and clay mixtures",
       "alternateName": "",
-      "keywords": [
-        "Earth's Interior, Geodesy"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+      },
       "agu:datasetId": "agu-0044",
       "agu:stableKey": "title:frictional behavior of quartz and clay mixtures",
-      "agu:themeKey": "interior",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -4296,18 +4297,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0045"
         }
       ],
       "name": "GEDI02_B GEDI L2B Footprint Level Canopy Cover and Vertical Profile Metrics",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0045",
       "agu:stableKey": "title:gedi02_b gedi l2b footprint level canopy cover and vertical profile metrics",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -4370,18 +4370,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0046"
         }
       ],
       "name": "GEONET",
       "alternateName": "",
-      "keywords": [
-        "Earth's Interior, Geodesy"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+      },
       "agu:datasetId": "agu-0046",
       "agu:stableKey": "title:geonet",
-      "agu:themeKey": "interior",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 0,
@@ -4444,18 +4443,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0047"
         }
       ],
       "name": "GeoNet (NZ) Geohazard Monitoring Datasets",
       "alternateName": "",
-      "keywords": [
-        "Earth Surface, Natural Hazards, Geology"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+      },
       "agu:datasetId": "agu-0047",
       "agu:stableKey": "title:geonet (nz) geohazard monitoring datasets",
-      "agu:themeKey": "surface",
       "agu:nominatorCount": 1,
       "agu:citationCount": 6,
       "agu:reuseCount": 9,
@@ -4555,18 +4553,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0048"
         }
       ],
       "name": "GeoReM",
       "alternateName": "",
-      "keywords": [
-        "Earth's Interior, Geodesy"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+      },
       "agu:datasetId": "agu-0048",
       "agu:stableKey": "title:georem",
-      "agu:themeKey": "interior",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 6,
@@ -4667,18 +4664,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0049"
         }
       ],
       "name": "Geoscope Network Seismic Data",
       "alternateName": "",
-      "keywords": [
-        "Earth's Interior, Geodesy"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+      },
       "agu:datasetId": "agu-0049",
       "agu:stableKey": "title:geoscope network seismic data",
-      "agu:themeKey": "interior",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 2,
@@ -4751,7 +4747,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0050"
         },
         {
@@ -4762,12 +4758,11 @@
       ],
       "name": "Geospace Regions and Magnetospheric Boundaries (GRMB) identification dataset",
       "alternateName": "",
-      "keywords": [
-        "Space and Planetary Science"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+      },
       "agu:datasetId": "agu-0050",
       "agu:stableKey": "doi:10.57780/esa-85c563c|geospace regions and magnetospheric boundaries (grmb) identification dataset",
-      "agu:themeKey": "space",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -4832,18 +4827,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0051"
         }
       ],
       "name": "GLDAS Catchment Land Surface Model L4 daily 0.25 x 0.25 degree GRACE-DA1 V2.2",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0051",
       "agu:stableKey": "title:gldas catchment land surface model l4 daily 0.25 x 0.25 degree grace-da1 v2.2",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 1,
@@ -4912,7 +4906,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0052"
         },
         {
@@ -4923,12 +4917,11 @@
       ],
       "name": "Global 1-km Downscaled Urban Land Fraction Grids, SSP-Consistent Projections and Base Year, v1 (2000 - 2100)",
       "alternateName": "",
-      "keywords": [
-        "Earth Surface, Natural Hazards, Geology"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+      },
       "agu:datasetId": "agu-0052",
       "agu:stableKey": "doi:10.7910/dvn/0egdok|global 1-km downscaled urban land fraction grids, ssp-consistent projections and base year, v1 (2000 - 2100)",
-      "agu:themeKey": "surface",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 5,
@@ -5013,7 +5006,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0053"
         },
         {
@@ -5024,12 +5017,11 @@
       ],
       "name": "Global Extreme Sea Level Analysis (GESLA)",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0053",
       "agu:stableKey": "doi:10.1002/gdj3.174|global extreme sea level analysis (gesla)",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 2,
@@ -5116,7 +5108,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0054"
         },
         {
@@ -5127,12 +5119,11 @@
       ],
       "name": "Global Lithological Map (GLIM) v1.0",
       "alternateName": "",
-      "keywords": [
-        "Earth Surface, Natural Hazards, Geology"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+      },
       "agu:datasetId": "agu-0054",
       "agu:stableKey": "doi:10.1029/2012gc004370|global lithological map (glim) v1.0",
-      "agu:themeKey": "surface",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 8,
@@ -5206,18 +5197,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0055"
         }
       ],
       "name": "Global Network of Isotopes in Precipitation - The GNIP Database",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0055",
       "agu:stableKey": "title:global network of isotopes in precipitation - the gnip database",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -5263,18 +5253,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0056"
         }
       ],
       "name": "Global Ocean Data Analysis Project (GLODAP)",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0056",
       "agu:stableKey": "title:global ocean data analysis project (glodap)",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -5339,7 +5328,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0057"
         },
         {
@@ -5350,12 +5339,11 @@
       ],
       "name": "Global Reservoir Inventory of Lost Storage by Sedimentation (GRILSS)",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0057",
       "agu:stableKey": "doi:10.17605/osf.io/w4ug8|global reservoir inventory of lost storage by sedimentation (grilss)",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 2,
@@ -5424,18 +5412,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0058"
         }
       ],
       "name": "GNSS Radio Occultation data set atmPhs/ConPhs",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0058",
       "agu:stableKey": "title:gnss radio occultation data set atmphs/conphs",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -5481,18 +5468,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0059"
         }
       ],
       "name": "GOSIF and GOSIF GPP (two sister products)",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0059",
       "agu:stableKey": "title:gosif and gosif gpp (two sister products)",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 2,
@@ -5565,7 +5551,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0060"
         },
         {
@@ -5576,12 +5562,11 @@
       ],
       "name": "GPCP Version 3.3 Satellite-Gauge (SG) Combined Precipitation Data Set",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0060",
       "agu:stableKey": "doi:10.5067/measures/gpcp/data306|gpcp version 3.3 satellite-gauge (sg) combined precipitation data set",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 2,
@@ -5658,18 +5643,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0061"
         }
       ],
       "name": "GRAIN - Global Registry of Agricultural Irrigation Networks",
       "alternateName": "",
-      "keywords": [
-        "Education, GeoHealth, Society"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+      },
       "agu:datasetId": "agu-0061",
       "agu:stableKey": "title:grain - global registry of agricultural irrigation networks",
-      "agu:themeKey": "society",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -5751,18 +5735,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0062"
         }
       ],
       "name": "Greenland Ecosystem Monitoring (GEM) – MarineBasis",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0062",
       "agu:stableKey": "title:greenland ecosystem monitoring (gem) – marinebasis",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -5815,7 +5798,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0063"
         },
         {
@@ -5826,12 +5809,11 @@
       ],
       "name": "Greenland liquid water discharge from 1958 through 2019",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0063",
       "agu:stableKey": "doi:10.22008/promice/freshwater|greenland liquid water discharge from 1958 through 2019",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 11,
@@ -5920,7 +5902,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0064"
         },
         {
@@ -5931,12 +5913,11 @@
       ],
       "name": "Gridded Population of the World (GPW)",
       "alternateName": "",
-      "keywords": [
-        "Education, GeoHealth, Society"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+      },
       "agu:datasetId": "agu-0064",
       "agu:stableKey": "doi:10.7927/h4np22dq|gridded population of the world (gpw)",
-      "agu:themeKey": "society",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -6016,18 +5997,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0065"
         }
       ],
       "name": "Gridded U.S. Anthropogenic Methane Greenhouse Gas Inventory (gridded GHGI)",
       "alternateName": "",
-      "keywords": [
-        "Education, GeoHealth, Society"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+      },
       "agu:datasetId": "agu-0065",
       "agu:stableKey": "title:gridded u.s. anthropogenic methane greenhouse gas inventory (gridded ghgi)",
-      "agu:themeKey": "society",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 0,
@@ -6105,7 +6085,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0066"
         },
         {
@@ -6116,12 +6096,11 @@
       ],
       "name": "Ground-Based Global Navigation Satellite System (GNSS) Hatanaka-compressed Observation Data (1-second sampling, sub-hourly files)",
       "alternateName": "",
-      "keywords": [
-        "Earth's Interior, Geodesy"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+      },
       "agu:datasetId": "agu-0066",
       "agu:stableKey": "doi:10.5067/gnss/gnss_highrate_d_001|ground-based global navigation satellite system (gnss) hatanaka-compressed observation data (1-second sampling, sub-hourly files)",
-      "agu:themeKey": "interior",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -6180,7 +6159,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0067"
         },
         {
@@ -6191,12 +6170,11 @@
       ],
       "name": "HarvestStat Africa",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0067",
       "agu:stableKey": "doi:10.5061/dryad.vq83bk42w|harveststat africa",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 3,
@@ -6277,7 +6255,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0068"
         },
         {
@@ -6288,12 +6266,11 @@
       ],
       "name": "Historical Bolide Infrasound Dataset (1960-1972)",
       "alternateName": "",
-      "keywords": [
-        "Space and Planetary Science"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+      },
       "agu:datasetId": "agu-0068",
       "agu:stableKey": "doi:10.7910/dvn/vgsn7q|historical bolide infrasound dataset (1960-1972)",
-      "agu:themeKey": "space",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 2,
@@ -6379,7 +6356,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0069"
         },
         {
@@ -6390,12 +6367,11 @@
       ],
       "name": "Historical daily discharge data of Italian rivers - SIREN project",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0069",
       "agu:stableKey": "doi:10.5281/zenodo.14996262|historical daily discharge data of italian rivers - siren project",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -6454,18 +6430,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0070"
         }
       ],
       "name": "Homogenized daily relative humidity series in China during 1960-2017",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0070",
       "agu:stableKey": "title:homogenized daily relative humidity series in china during 1960-2017",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -6532,7 +6507,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0071"
         },
         {
@@ -6543,12 +6518,11 @@
       ],
       "name": "Hourly location, current velocity, and temperature collected from Global Drifter Program drifters world-wide",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0071",
       "agu:stableKey": "doi:10.25921/x46c-3620|hourly location, current velocity, and temperature collected from global drifter program drifters world-wide",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 2,
@@ -6636,7 +6610,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0072"
         },
         {
@@ -6647,12 +6621,11 @@
       ],
       "name": "Hurricanes, mold & respiratory health issues",
       "alternateName": "",
-      "keywords": [
-        "Education, GeoHealth, Society"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+      },
       "agu:datasetId": "agu-0072",
       "agu:stableKey": "doi:10.17603/ds2-yje5-g692|hurricanes, mold & respiratory health issues",
-      "agu:themeKey": "society",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 3,
@@ -6740,7 +6713,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0073"
         },
         {
@@ -6751,12 +6724,11 @@
       ],
       "name": "Improved Italian - Rainfall Extreme Dataset (I2-RED)",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0073",
       "agu:stableKey": "doi:10.5281/zenodo.4065266|improved italian - rainfall extreme dataset (i2-red)",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 7,
@@ -6837,18 +6809,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0074"
         }
       ],
       "name": "INCOIS_TA",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0074",
       "agu:stableKey": "title:incois_ta",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -6915,18 +6886,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0075"
         }
       ],
       "name": "Increased mineral-associated organic carbon and persistent molecules in allochthonous blue carbon ecosystems",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0075",
       "agu:stableKey": "title:increased mineral-associated organic carbon and persistent molecules in allochthonous blue carbon ecosystems",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 6,
@@ -7000,18 +6970,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0076"
         }
       ],
       "name": "Indian Landslide Susceptibility Map (ILSM)",
       "alternateName": "",
-      "keywords": [
-        "Earth Surface, Natural Hazards, Geology"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+      },
       "agu:datasetId": "agu-0076",
       "agu:stableKey": "title:indian landslide susceptibility map (ilsm)",
-      "agu:themeKey": "surface",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 11,
@@ -7085,18 +7054,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0077"
         }
       ],
       "name": "Indian Subcontinent 2m Temperature Field",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0077",
       "agu:stableKey": "title:indian subcontinent 2m temperature field",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -7142,18 +7110,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0078"
         }
       ],
       "name": "International GNSS Service (IGS) Data and Products",
       "alternateName": "",
-      "keywords": [
-        "Earth's Interior, Geodesy"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+      },
       "agu:datasetId": "agu-0078",
       "agu:stableKey": "title:international gnss service (igs) data and products",
-      "agu:themeKey": "interior",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -7218,18 +7185,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0079"
         }
       ],
       "name": "International Soil Carbon Network (ISCN)",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0079",
       "agu:stableKey": "title:international soil carbon network (iscn)",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -7305,18 +7271,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0080"
         }
       ],
       "name": "ITS_LIVE Global Ice Velocity",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0080",
       "agu:stableKey": "title:its_live global ice velocity",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 7,
@@ -7405,7 +7370,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0081"
         },
         {
@@ -7416,12 +7381,11 @@
       ],
       "name": "Livneh Hydrometeorological dataset",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0081",
       "agu:stableKey": "doi:10.7289/v5x34vf6|livneh hydrometeorological dataset",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -7489,18 +7453,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0082"
         }
       ],
       "name": "Long-term chemistry from streams at La Selva Biological Station, Costa Rica",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0082",
       "agu:stableKey": "title:long-term chemistry from streams at la selva biological station, costa rica",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 2,
@@ -7563,18 +7526,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0083"
         }
       ],
       "name": "LTREB: Aboveground biomass, plant density, annual aboveground productivity, plant heights and snail observations in control and fertilized plots in a Spartina alterniflora-dominated salt marsh, North Inlet, Georgetown, SC: 1984-2024",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0083",
       "agu:stableKey": "title:ltreb: aboveground biomass, plant density, annual aboveground productivity, plant heights and snail observations in control and fertilized plots in a spartina alterniflora-dominated salt marsh, north inlet, georgetown, sc: 1984-2024",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 5,
       "agu:reuseCount": 0,
@@ -7666,18 +7628,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0084"
         }
       ],
       "name": "Magellan Global Topography, Emissivity, Reflectivity, and Slope Data Record (GXDR)",
       "alternateName": "",
-      "keywords": [
-        "Space and Planetary Science"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+      },
       "agu:datasetId": "agu-0084",
       "agu:stableKey": "title:magellan global topography, emissivity, reflectivity, and slope data record (gxdr)",
-      "agu:themeKey": "space",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -7735,18 +7696,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0085"
         }
       ],
       "name": "Modern-Era Retrospective analysis for Research and Applications, Version 2 (MERRA-2)",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0085",
       "agu:stableKey": "title:modern-era retrospective analysis for research and applications, version 2 (merra-2)",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 0,
@@ -7809,18 +7769,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0086"
         }
       ],
       "name": "NASA Earth Exchange Global Daily Downscaled Projections (NEX-GDDP) CMIP5 & CMIP 6",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0086",
       "agu:stableKey": "title:nasa earth exchange global daily downscaled projections (nex-gddp) cmip5 & cmip 6",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -7872,18 +7831,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0087"
         }
       ],
       "name": "National Energy Water Treatment and Speciation (NEWTS) Database",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0087",
       "agu:stableKey": "title:national energy water treatment and speciation (newts) database",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 5,
@@ -7964,18 +7922,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0088"
         }
       ],
       "name": "National Land Cover Database (NLCD)",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0088",
       "agu:stableKey": "title:national land cover database (nlcd)",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 10,
@@ -8060,7 +8017,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0089"
         },
         {
@@ -8071,12 +8028,11 @@
       ],
       "name": "NCEP/CPC L3 Half Hourly 4km Global (60S - 60N) Merged IR",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0089",
       "agu:stableKey": "doi:10.5067/p4hzb9n27eku|ncep/cpc l3 half hourly 4km global (60s - 60n) merged ir",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 1,
@@ -8145,18 +8101,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0090"
         }
       ],
       "name": "Neotoma Paleoecology Database",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0090",
       "agu:stableKey": "title:neotoma paleoecology database",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -8226,18 +8181,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0091"
         }
       ],
       "name": "NOAA Climate Data Records",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0091",
       "agu:stableKey": "title:noaa climate data records",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 2,
@@ -8293,18 +8247,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0092"
         }
       ],
       "name": "NOAA Observation Package",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0092",
       "agu:stableKey": "title:noaa observation package",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -8356,18 +8309,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0093"
         }
       ],
       "name": "North American Multi-Model Ensemble (NMME) and Subseasonal Experiment (SubX)",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0093",
       "agu:stableKey": "title:north american multi-model ensemble (nmme) and subseasonal experiment (subx)",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 1,
@@ -8470,18 +8422,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0094"
         }
       ],
       "name": "OCO-2",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0094",
       "agu:stableKey": "title:oco-2",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -8534,7 +8485,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0095"
         },
         {
@@ -8545,12 +8496,11 @@
       ],
       "name": "OCO-2 & -3 XCO2 & SIF",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0095",
       "agu:stableKey": "doi:10.5067/70k2b2w8mngy|oco-2 & -3 xco2 & sif",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -8601,7 +8551,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0096"
         },
         {
@@ -8612,12 +8562,11 @@
       ],
       "name": "OCO-2 and OCO-3",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0096",
       "agu:stableKey": "doi:10.5067/70k2b2w8mngy|oco-2 and oco-3",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 0,
@@ -8685,7 +8634,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0097"
         },
         {
@@ -8696,12 +8645,11 @@
       ],
       "name": "OCO-2 Level 2 bias-corrected XCO2",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0097",
       "agu:stableKey": "doi:10.5067/70k2b2w8mngy|oco-2 level 2 bias-corrected xco2",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -8759,18 +8707,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0098"
         }
       ],
       "name": "OCTOPUS database",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0098",
       "agu:stableKey": "title:octopus database",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 6,
       "agu:reuseCount": 12,
@@ -8871,18 +8818,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0099"
         }
       ],
       "name": "OpenAQ",
       "alternateName": "",
-      "keywords": [
-        "Education, GeoHealth, Society"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+      },
       "agu:datasetId": "agu-0099",
       "agu:stableKey": "title:openaq",
-      "agu:themeKey": "society",
       "agu:nominatorCount": 1,
       "agu:citationCount": 6,
       "agu:reuseCount": 0,
@@ -8961,18 +8907,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0100"
         }
       ],
       "name": "OpenTopography",
       "alternateName": "",
-      "keywords": [
-        "Earth Surface, Natural Hazards, Geology"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+      },
       "agu:datasetId": "agu-0100",
       "agu:stableKey": "title:opentopography",
-      "agu:themeKey": "surface",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -9025,18 +8970,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0101"
         }
       ],
       "name": "OPERA Land Surface Disturbance Alert from Harmonized Landsat Sentinel-2 product (Version 1) OPERA_L3_DIST-ALERT-HLS_V1",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0101",
       "agu:stableKey": "title:opera land surface disturbance alert from harmonized landsat sentinel-2 product (version 1) opera_l3_dist-alert-hls_v1",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -9095,18 +9039,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0102"
         }
       ],
       "name": "PARMA/EXPACS",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0102",
       "agu:stableKey": "title:parma/expacs",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 4,
       "agu:reuseCount": 30,
@@ -9192,18 +9135,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0103"
         }
       ],
       "name": "PDS Archive of LRO LROC Derived Products",
       "alternateName": "",
-      "keywords": [
-        "Space and Planetary Science"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+      },
       "agu:datasetId": "agu-0103",
       "agu:stableKey": "title:pds archive of lro lroc derived products",
-      "agu:themeKey": "space",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -9256,18 +9198,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0104"
         }
       ],
       "name": "Porewater nutrient concentrations in control and fertilized plots in a Spartina alterniflora-dominated salt marsh, North Inlet, Georgetown, SC : 1993-2024",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0104",
       "agu:stableKey": "title:porewater nutrient concentrations in control and fertilized plots in a spartina alterniflora-dominated salt marsh, north inlet, georgetown, sc : 1993-2024",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -9343,18 +9284,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0105"
         }
       ],
       "name": "RELAB spectral library at Brown University",
       "alternateName": "",
-      "keywords": [
-        "Earth & Planetary Materials"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:materials"
+      },
       "agu:datasetId": "agu-0105",
       "agu:stableKey": "title:relab spectral library at brown university",
-      "agu:themeKey": "materials",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -9407,18 +9347,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0106"
         }
       ],
       "name": "SatPM2.5 (Satellite-derived PM2.5) with current versions: V6.GL.02.04 (global, 1998–2023, Convolutional Neural Network based calibration), V5.GL.05.02 (global, 1998–2023, Geographically Weighted Regression based calibration), and V5.NA.05/V5.NA.05.02 (North American, 2000–2023, compositional PM2.5)",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0106",
       "agu:stableKey": "title:satpm2.5 (satellite-derived pm2.5) with current versions: v6.gl.02.04 (global, 1998–2023, convolutional neural network based calibration), v5.gl.05.02 (global, 1998–2023, geographically weighted regression based calibration), and v5.na.05/v5.na.05.02 (north american, 2000–2023, compositional pm2.5)",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 12,
@@ -9525,7 +9464,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0107"
         },
         {
@@ -9536,12 +9475,11 @@
       ],
       "name": "Sea Ice Index",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0107",
       "agu:stableKey": "doi:10.7265/a98x-0f50|sea ice index",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 5,
@@ -9630,18 +9568,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0108"
         }
       ],
       "name": "Sofar Spotter Data Archive",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0108",
       "agu:stableKey": "title:sofar spotter data archive",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -9733,18 +9670,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0109"
         }
       ],
       "name": "Soil Respiration Database",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0109",
       "agu:stableKey": "title:soil respiration database",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -9802,7 +9738,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0110"
         },
         {
@@ -9813,12 +9749,11 @@
       ],
       "name": "Speleothem Isotope Synthesis and AnaLysis v1, v1b, v2, v3",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0110",
       "agu:stableKey": "doi:10.5287/ora-2nanwp4rk|speleothem isotope synthesis and analysis v1, v1b, v2, v3",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -9910,7 +9845,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0111"
         },
         {
@@ -9921,12 +9856,11 @@
       ],
       "name": "Stable isotope tempestology database",
       "alternateName": "",
-      "keywords": [
-        "Earth Surface, Natural Hazards, Geology"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+      },
       "agu:datasetId": "agu-0111",
       "agu:stableKey": "doi:10.4211/hs.92577b67675d4695b37f27a3b79ded85|stable isotope tempestology database",
-      "agu:themeKey": "surface",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 3,
@@ -10016,18 +9950,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0112"
         }
       ],
       "name": "Surface Biology and Geology (SBG) High Frequency Time Series",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0112",
       "agu:stableKey": "title:surface biology and geology (sbg) high frequency time series",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 4,
@@ -10097,7 +10030,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0113"
         },
         {
@@ -10108,12 +10041,11 @@
       ],
       "name": "SWOT Post-Launch Field Campaign Data",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0113",
       "agu:stableKey": "doi:10.5067/swtpo-spbd1|swot post-launch field campaign data",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -10185,18 +10117,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0114"
         }
       ],
       "name": "The Collaborative Carbon Column Observing Network (COCCON)",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0114",
       "agu:stableKey": "title:the collaborative carbon column observing network (coccon)",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -10258,18 +10189,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0115"
         }
       ],
       "name": "The GEOROC database",
       "alternateName": "",
-      "keywords": [
-        "Earth's Interior, Geodesy"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+      },
       "agu:datasetId": "agu-0115",
       "agu:stableKey": "title:the georoc database",
-      "agu:themeKey": "interior",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 16,
@@ -10359,18 +10289,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0116"
         }
       ],
       "name": "The Keeling Curve CO2 time series",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0116",
       "agu:stableKey": "title:the keeling curve co2 time series",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -10423,18 +10352,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0117"
         }
       ],
       "name": "The National Geologic Map Database (NGMDB)",
       "alternateName": "",
-      "keywords": [
-        "Earth's Interior, Geodesy"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+      },
       "agu:datasetId": "agu-0117",
       "agu:stableKey": "title:the national geologic map database (ngmdb)",
-      "agu:themeKey": "interior",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -10504,18 +10432,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0118"
         }
       ],
       "name": "The Statewide California Earthquake Center Community Fault Model (CFM)",
       "alternateName": "",
-      "keywords": [
-        "Earth Surface, Natural Hazards, Geology"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+      },
       "agu:datasetId": "agu-0118",
       "agu:stableKey": "title:the statewide california earthquake center community fault model (cfm)",
-      "agu:themeKey": "surface",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 26,
@@ -10600,18 +10527,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0119"
         }
       ],
       "name": "The Water Conflict Chronology Database",
       "alternateName": "",
-      "keywords": [
-        "Education, GeoHealth, Society"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+      },
       "agu:datasetId": "agu-0119",
       "agu:stableKey": "title:the water conflict chronology database",
-      "agu:themeKey": "society",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 3,
@@ -10688,7 +10614,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0120"
         },
         {
@@ -10699,12 +10625,11 @@
       ],
       "name": "TIARES Seafloor Data",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0120",
       "agu:stableKey": "doi:10.5047/eps.2011.11.002|tiares seafloor data",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -10763,18 +10688,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0121"
         }
       ],
       "name": "Total Solar Irradiance from Space",
       "alternateName": "",
-      "keywords": [
-        "Space and Planetary Science"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+      },
       "agu:datasetId": "agu-0121",
       "agu:stableKey": "title:total solar irradiance from space",
-      "agu:themeKey": "space",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -10839,18 +10763,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0122"
         }
       ],
       "name": "Tropical moist forest restoration type map",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0122",
       "agu:stableKey": "title:tropical moist forest restoration type map",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -10902,18 +10825,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0123"
         }
       ],
       "name": "United States Groundwater Well Database (USGWD)",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0123",
       "agu:stableKey": "title:united states groundwater well database (usgwd)",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -10993,7 +10915,7 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0124"
         },
         {
@@ -11004,12 +10926,11 @@
       ],
       "name": "USArray Transportable Array",
       "alternateName": "",
-      "keywords": [
-        "Earth Surface, Natural Hazards, Geology"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+      },
       "agu:datasetId": "agu-0124",
       "agu:stableKey": "doi:10.7914/sn/ta|usarray transportable array",
-      "agu:themeKey": "surface",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 4,
@@ -11094,18 +11015,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0125"
         }
       ],
       "name": "USGS Spectral Library",
       "alternateName": "",
-      "keywords": [
-        "Earth & Planetary Materials"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:materials"
+      },
       "agu:datasetId": "agu-0125",
       "agu:stableKey": "title:usgs spectral library",
-      "agu:themeKey": "materials",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -11158,18 +11078,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0126"
         }
       ],
       "name": "Vegetation Photosynthetic Phenology Metrics in Northern Terrestrial Ecosystems",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0126",
       "agu:stableKey": "title:vegetation photosynthetic phenology metrics in northern terrestrial ecosystems",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -11234,18 +11153,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0127"
         }
       ],
       "name": "Water Quality Portal",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0127",
       "agu:stableKey": "title:water quality portal",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 1,
@@ -11304,18 +11222,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0128"
         }
       ],
       "name": "World Ocean Database",
       "alternateName": "",
-      "keywords": [
-        "Ocean Science, Hydrology, Cryosphere"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+      },
       "agu:datasetId": "agu-0128",
       "agu:stableKey": "title:world ocean database",
-      "agu:themeKey": "ocean",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -11368,18 +11285,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0129"
         }
       ],
       "name": "World Wide Lightning Location Network (WWLLN) Dataset",
       "alternateName": "",
-      "keywords": [
-        "Atmospheric Science, Space Weather"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+      },
       "agu:datasetId": "agu-0129",
       "agu:stableKey": "title:world wide lightning location network (wwlln) dataset",
-      "agu:themeKey": "atmos",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -11438,18 +11354,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0130"
         }
       ],
       "name": "WorldCereal Harmonized Reference Datasets",
       "alternateName": "",
-      "keywords": [
-        "Education, GeoHealth, Society"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+      },
       "agu:datasetId": "agu-0130",
       "agu:stableKey": "title:worldcereal harmonized reference datasets",
-      "agu:themeKey": "society",
       "agu:nominatorCount": 1,
       "agu:citationCount": 4,
       "agu:reuseCount": 8,
@@ -11567,18 +11482,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0131"
         }
       ],
       "name": "Worldclim",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0131",
       "agu:stableKey": "title:worldclim",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 1,
@@ -11644,18 +11558,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0132"
         }
       ],
       "name": "XA (1969-1977): Apollo Passive Seismic Experiments",
       "alternateName": "",
-      "keywords": [
-        "Space and Planetary Science"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+      },
       "agu:datasetId": "agu-0132",
       "agu:stableKey": "title:xa (1969-1977): apollo passive seismic experiments",
-      "agu:themeKey": "space",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -11713,18 +11626,17 @@
       "identifier": [
         {
           "@type": "PropertyValue",
-          "propertyID": "AGU-ID",
+          "propertyID": "AGU-Impactufl-Datasets-ID",
           "value": "agu-0133"
         }
       ],
       "name": "Yax Chen diatom analysis (Supplementary Information)",
       "alternateName": "",
-      "keywords": [
-        "Global Environmental Change, Paleoclimatology, Biogeoscience"
-      ],
+      "keywords": {
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+      },
       "agu:datasetId": "agu-0133",
       "agu:stableKey": "title:yax chen diatom analysis (supplementary information)",
-      "agu:themeKey": "biosphere",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,

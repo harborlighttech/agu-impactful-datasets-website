@@ -138,6 +138,16 @@ lets a URL survive a title edit, a re-sort, or rows being added or withdrawn.
 Two rules follow: keep the data file in version control, and never renumber by
 hand. Unknown ids fall back to the collection rather than erroring.
 
+### Discipline vocabulary
+
+The eight discipline groups are published as a schema.org `DefinedTermSet` under
+`agu:themes`. Each `DefinedTerm` carries the short key as its `identifier` and the
+full label as its `name`. Datasets reference the term by `@id` through
+`keywords`, so the label is stated once and never repeated per dataset.
+
+Note: schema.org has no singular `keyword` property — `keywords` is the correct
+term, and it accepts a `DefinedTerm`, which is exactly this pattern.
+
 ### Namespaces
 
 ```

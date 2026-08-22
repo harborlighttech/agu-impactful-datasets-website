@@ -241,6 +241,12 @@ BASE = args.base_url if args.base_url.endswith("/") else args.base_url + "/"
 # identifiers stay valid if the site ever moves; the resolvable web address is
 # carried separately on mainEntityOfPage.
 NS_URN = "urn:org:agu:data:ns:"
+THEME_SET_ID = "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups"
+
+
+def theme_id(key):
+    return "urn:org:agu:data:impactful-datasets:id:theme:" + key
+
 
 
 def urn(kind, local):
@@ -258,7 +264,8 @@ def sd_dataset(rec):
         # where this record is actually readable on the web
         "mainEntityOfPage": BASE + "#/dataset/" + rec["id"],
         "identifier": [
-            {"@type": "PropertyValue", "propertyID": "AGU-ID", "value": rec["id"]},
+            {"@type": "PropertyValue", "propertyID": "AGU-Impactufl-Datasets-ID",
+             "value": rec["id"]},
         ],
         "name": rec["title"],
         # ------------------------------------------------------------------
@@ -271,10 +278,11 @@ def sd_dataset(rec):
         # this is empty, so nothing breaks until it is populated.
         # ------------------------------------------------------------------
         "alternateName": "",
-        "keywords": [THEME_LABELS.get(rec["theme"], rec["theme"])],
+        # schema.org's keywords accepts a DefinedTerm, so the discipline is a
+        # reference to the term rather than a repeated free-text label
+        "keywords": {"@id": theme_id(rec["theme"])},
         "agu:datasetId": rec["id"],
         "agu:stableKey": rec["stableKey"],
-        "agu:themeKey": rec["theme"],
         "agu:nominatorCount": rec["nomCount"],
         "agu:citationCount": rec["refsTotal"],
         "agu:reuseCount": rec["reuseTotal"],
@@ -344,7 +352,19 @@ data_doc = {
                   "url": "https://www.agu.org/"},
     "license": "https://creativecommons.org/licenses/by/4.0/",
     "dateModified": __import__("datetime").date.today().isoformat(),
-    "agu:themes": [{"agu:themeKey": k, "name": l} for _, l, k in THEME_ORDER],
+    "agu:themes": {
+        "@type": "DefinedTermSet",
+        "@id": THEME_SET_ID,
+        "name": "AGU discipline groups",
+        "hasDefinedTerm": [
+            {"@type": "DefinedTerm",
+             "@id": theme_id(k),
+             "identifier": k,
+             "name": l,
+             "inDefinedTermSet": {"@id": THEME_SET_ID}}
+            for _, l, k in THEME_ORDER
+        ],
+    },
     "dataset": [sd_dataset(r) for r in out],
 }
 DATA_PATH.write_text(json.dumps(data_doc, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -841,9 +861,20 @@ a{color:inherit}
 const DATA_URL = "__DATA_URL__";
 const DATA = __DATA__;
 
+/* Discipline comes through as a reference to a DefinedTerm; resolve it to the short
+   key the page groups and colours by. THEME_IDS is filled from the DefinedTermSet
+   when the published file loads, with the urn tail as a fallback. */
+const THEME_IDS = {};
+function themeKeyOf(kw){
+  const ref = Array.isArray(kw) ? kw[0] : kw;
+  const id = ref && (ref["@id"] || ref.identifier || ref);
+  if (typeof id !== "string") return null;
+  return THEME_IDS[id] || id.split(":").pop() || null;
+}
+
 /* Map a schema.org Dataset from the public file onto the shape the page renders. */
 function adopt(sd){
-  const idOf = v => (v || []).find(x => x && x.propertyID === "AGU-ID");
+  const idOf = v => (v || []).find(x => x && x.propertyID === "AGU-Impactufl-Datasets-ID");
   const doiOf = v => (v || []).find(x => x && x.propertyID === "DOI");
   const doi = doiOf(sd.identifier) ? doiOf(sd.identifier).value : null;
   const links = [];
@@ -853,7 +884,7 @@ function adopt(sd){
     id: sd["agu:datasetId"] || (idOf(sd.identifier) || {}).value,
     title: sd.name,
     shortName: (sd.alternateName || "").trim(),   // spine label; blank falls back to title
-    theme: sd["agu:themeKey"],
+    theme: themeKeyOf(sd.keywords),
     nomCount: sd["agu:nominatorCount"] || 0,
     doi, links: links.slice(0, 3),
     repo: (sd.includedInDataCatalog || {}).name || null,
@@ -1348,14 +1379,18 @@ function boot(){
 fetch(DATA_URL, {cache: "no-cache"})
   .then(r => r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status)))
   .then(doc => {
+    // resolve the discipline vocabulary first: adopt() needs it to read keywords
+    const terms = (doc["agu:themes"] || {}).hasDefinedTerm || [];
+    terms.forEach(x => { if (x["@id"]) THEME_IDS[x["@id"]] = x.identifier; });
+    if (terms.length)
+      DATA.themes = terms.map(x => ({key: x.identifier, label: x.name}));
+
     const rows = (doc.dataset || []).map(adopt).filter(d => d.id && d.title);
     if (!rows.length) throw new Error("no datasets in " + DATA_URL);
     const order = {};
     DATA.datasets.forEach((d, i) => { order[d.id] = i; });
     rows.sort((a, b) => (order[a.id] ?? 1e6) - (order[b.id] ?? 1e6));
     DATA.datasets = rows;
-    if (doc["agu:themes"] && doc["agu:themes"].length)
-      DATA.themes = doc["agu:themes"].map(x => ({key: x["agu:themeKey"], label: x.name}));
     rebuildBooks();
   })
   .catch(() => { /* embedded copy already loaded */ })
