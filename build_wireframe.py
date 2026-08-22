@@ -264,7 +264,7 @@ def sd_dataset(rec):
         # where this record is actually readable on the web
         "mainEntityOfPage": BASE + "#/dataset/" + rec["id"],
         "identifier": [
-            {"@type": "PropertyValue", "propertyID": "AGU-Impactufl-Datasets-ID",
+            {"@type": "PropertyValue", "propertyID": "AGU-Impactful-Datasets-ID",
              "value": rec["id"]},
         ],
         "name": rec["title"],
@@ -874,7 +874,7 @@ function themeKeyOf(kw){
 
 /* Map a schema.org Dataset from the public file onto the shape the page renders. */
 function adopt(sd){
-  const idOf = v => (v || []).find(x => x && x.propertyID === "AGU-Impactufl-Datasets-ID");
+  const idOf = v => (v || []).find(x => x && x.propertyID === "AGU-Impactful-Datasets-ID");
   const doiOf = v => (v || []).find(x => x && x.propertyID === "DOI");
   const doi = doiOf(sd.identifier) ? doiOf(sd.identifier).value : null;
   const links = [];

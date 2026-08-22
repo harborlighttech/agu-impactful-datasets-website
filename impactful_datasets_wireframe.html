@@ -492,7 +492,7 @@ function themeKeyOf(kw){
 
 /* Map a schema.org Dataset from the public file onto the shape the page renders. */
 function adopt(sd){
-  const idOf = v => (v || []).find(x => x && x.propertyID === "AGU-Impactufl-Datasets-ID");
+  const idOf = v => (v || []).find(x => x && x.propertyID === "AGU-Impactful-Datasets-ID");
   const doiOf = v => (v || []).find(x => x && x.propertyID === "DOI");
   const doi = doiOf(sd.identifier) ? doiOf(sd.identifier).value : null;
   const links = [];
