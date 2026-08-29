@@ -40,7 +40,7 @@
         "@type": "DefinedTerm",
         "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere",
         "identifier": "biosphere",
-        "name": "Global Environmental Change, Paleoclimatology, Biogeoscience",
+        "name": "Global Environmental Change, Paleoceanography and Paleoclimatology, Biogeoscience",
         "inDefinedTermSet": {
           "@id": "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups"
         }
@@ -49,7 +49,7 @@
         "@type": "DefinedTerm",
         "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior",
         "identifier": "interior",
-        "name": "Earth's Interior, Geodesy",
+        "name": "Earth’s Interior, Geodesy",
         "inDefinedTermSet": {
           "@id": "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups"
         }
@@ -58,7 +58,7 @@
         "@type": "DefinedTerm",
         "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface",
         "identifier": "surface",
-        "name": "Earth Surface, Natural Hazards, Geology",
+        "name": "Earth Surface, Natural Hazards, Geology, Near Surface Geophysics",
         "inDefinedTermSet": {
           "@id": "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups"
         }
@@ -67,7 +67,7 @@
         "@type": "DefinedTerm",
         "@id": "urn:org:agu:data:impactful-datasets:id:theme:society",
         "identifier": "society",
-        "name": "Education, GeoHealth, Society",
+        "name": "Education, Geohealth, Society, Education",
         "inDefinedTermSet": {
           "@id": "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups"
         }
@@ -89,6 +89,15 @@
         "inDefinedTermSet": {
           "@id": "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups"
         }
+      },
+      {
+        "@type": "DefinedTerm",
+        "@id": "urn:org:agu:data:impactful-datasets:id:theme:nonlinear",
+        "identifier": "nonlinear",
+        "name": "Nonlinear Geophysics, Machine Learning, Informatics",
+        "inDefinedTermSet": {
+          "@id": "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups"
+        }
       }
     ]
   },
@@ -106,9 +115,11 @@
       ],
       "name": "2020 TCCON Data Release",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0001",
       "agu:stableKey": "title:2020 tccon data release",
       "agu:nominatorCount": 9,
@@ -169,6 +180,22 @@
         {
           "@type": "CreativeWork",
           "text": "Nominator 8:\nKeppel-Aleks, G., Randerson, J. T., Lindsay, K., Stephens, B. B., Keith Moore, J., Doney, S. C., et al. (2013). Atmospheric Carbon Dioxide Variability in the Community Earth System Model: Evaluation and Transient Dynamics during the Twentieth and Twenty-First Centuries. J. Climate, 26(13), 4447–4475. https://doi.org/10.1175/JCLI-D-12-00589.1"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Keppel-Aleks, G., Wennberg, P. O., Washenfelder, R. A., Wunch, D., Schneider, T., Toon, G. C., et al. (2012). The imprint of surface fluxes and transport on variations in total column carbon dioxide. Biogeosciences, 9(3), 875–891. Retrieved from http://www.biogeosciences.net/9/875/2012/"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Wunch, D., Wennberg, P. O., Toon, G. C., Keppel-Aleks, G., & Yavin, Y. G. (2009). Emissions of greenhouse gases from a North American megacity. Geophys. Res. Lett., 36, L15810. https://doi.org/10.1029/2009GL039825"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Torres, A. D., Doney, S. C., Fendrock, M., Luis, K., & Keppel-Aleks, G. (n.d.). The imprint of mesoscale transport systems on X_(CO2) from OCO-2 satellite data. J. Geophys. Res.-Atmos."
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Guan, Y., Keppel-Aleks, G., Doney, S. C., Petri, C., Pollard, D., Wunch, D., et al. (2023). Characteristics of interannual variability in space-based XCO2 global observations. Acp, 23(9), 5355–5372. https://doi.org/10.5194/acp-23-5355-2023"
         }
       ],
       "agu:nominator": [
@@ -338,9 +365,11 @@
       ],
       "name": "Integrated Multi-satellitE Retrievals for the Global Precipitation Measurement (GPM) mission (IMERG)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0002",
       "agu:stableKey": "doi:10.5067/gpm/imerg/3b-hh-e/07|integrated multi-satellite retrievals for the global precipitation measurement (gpm) mission (imerg)",
       "agu:nominatorCount": 6,
@@ -537,9 +566,11 @@
       ],
       "name": "International Sunspot Number",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+        }
+      ],
       "agu:datasetId": "agu-0003",
       "agu:stableKey": "title:international sunspot number",
       "agu:nominatorCount": 5,
@@ -598,6 +629,18 @@
         {
           "@type": "CreativeWork",
           "text": "Vaquero, J. M., et al. (2016). A revised collection of sunspot group numbers. Solar Physics, 291(9–10), 3061–3074. https://doi.org/10.1007/s11207-016-0982-2"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Muñoz-Jaramillo, A., & Vaquero, J. M. (2018). Visualization of the challenges and limitations of the long-term sunspot number record. Nature Astronomy, 3(3), 205–211. https://doi.org/10.1038/s41550-018-0638-2"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Arlt, R., & Vaquero, J. M. (2020). Historical sunspot records. Living Reviews in Solar Physics, 17(1), 1. https://doi.org/10.1007/s41116-020-0023-y"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Clette, F., et al. (2023). Recalibration of the sunspot-number: Status report. Solar Physics, 298(3), 44. https://doi.org/10.1007/s11207-023-02136-3"
         }
       ],
       "agu:reuseExample": [
@@ -620,6 +663,18 @@
         {
           "@type": "CreativeWork",
           "text": "Nominator 5:\nThe Sunspot Number is one of the most widely used datasets in the geosciences and space sciences. It serves as a fundamental reference for studies on solar activity, heliophysics, space weather, and Sun–Earth interactions, as well as for research in climate science and long-term variability of the Earth’s atmosphere."
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Evidence of its extensive reuse can be found in the vast number of scientific papers that reference or rely on it. For example, a search on the SciX platform (https://scixplorer.org/search?n=10&p=1&q=abs%3A%22Sunspot+Number%22&sort=score+desc&sort=date+desc\n) for publications containing “Sunspot Number” in the abstract returns hundreds of records, revealing continuous scientific interest in this dataset for more than a century."
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Furthermore, the citation record of the main papers describing the dataset highlights its exceptional impact. The key reference, Clette et al. (2014, Space Science Reviews), currently has 542 citations in SciX and 822 in Google Scholar (as of 9 October 2025), confirming the dataset’s central role in solar and geophysical research."
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "The Sunspot Number has also inspired a number of derived products and complementary datasets, such as sunspot catalogs, group sunspot numbers, and reconstructed solar activity indices. These derivatives, together with the International Sunspot Number Version 2.0, form the backbone of solar activity reconstructions spanning the past four centuries and are essential for multidisciplinary studies linking solar variability with terrestrial and planetary processes."
         }
       ],
       "agu:nominator": [
@@ -725,9 +780,11 @@
       ],
       "name": "Argo",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0004",
       "agu:stableKey": "doi:10.17882/42182|argo",
       "agu:nominatorCount": 3,
@@ -855,9 +912,11 @@
       ],
       "name": "ARTMIP Database",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0005",
       "agu:stableKey": "title:artmip database",
       "agu:nominatorCount": 3,
@@ -995,9 +1054,11 @@
       ],
       "name": "ECOSTRESS Tiled Land Surface Temperature and Emissivity Instantaneous L2 Global 70 m V002",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+        }
+      ],
       "agu:datasetId": "agu-0006",
       "agu:stableKey": "doi:10.5067/ecostress/eco_l2t_lste.002|ecostress tiled land surface temperature and emissivity instantaneous l2 global 70 m v002",
       "agu:nominatorCount": 3,
@@ -1083,9 +1144,11 @@
       ],
       "name": "Fluxnet (or Ameriflux for N America)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0007",
       "agu:stableKey": "title:fluxnet (or ameriflux for n america)",
       "agu:nominatorCount": 3,
@@ -1202,6 +1265,14 @@
         {
           "@type": "CreativeWork",
           "text": "Exploring how topographic gradients in temperature and water availability impact ecosystem productivity and hydrologic cycling (e.g., Shveyster et al., 2024 https://doi.org/10.1029/2022WR033757)"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Understanding how spatial heterogeneity and land-atmosphere coupling impacts a wide range of boundary-layer processes (e.g. Butterworth et al 2021 https://doi.org/10.1175/BAMS-D-19-0346.1, Butterworth et al 2024 https://doi.org/10.3389/feart.2023.1251138; Wanner et al., 2024 https://doi.org/10.1007/s10546-024-00868-8)."
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Scaling to regions, including quantifying lateral fluxes, terrestrial-aquatic linkages, and other carbon transfers required for full carbon accounting and model-data and top down-bottom-up comparison (e.g., Metzger et al., 2021 https://doi.org/10.5194/amt-14-6929-2021, Zhang et a; 2023 https://doi.org/10.1111/2041-210X.14188)"
         }
       ],
       "agu:nominator": [
@@ -1287,9 +1358,11 @@
       ],
       "name": "OMNI",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+        }
+      ],
       "agu:datasetId": "agu-0008",
       "agu:stableKey": "title:omni",
       "agu:nominatorCount": 2,
@@ -1408,9 +1481,11 @@
       ],
       "name": "Ozone data collection at WOUDC",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0009",
       "agu:stableKey": "title:ozone data collection at woudc",
       "agu:nominatorCount": 2,
@@ -1519,9 +1594,11 @@
       ],
       "name": "PetDB",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+        }
+      ],
       "agu:datasetId": "agu-0010",
       "agu:stableKey": "title:petdb",
       "agu:nominatorCount": 2,
@@ -1617,9 +1694,14 @@
       ],
       "name": "A Comprehensive Northern Hemisphere Particle Microphysics Dataset from the Precipitation Imaging Package",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        },
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0011",
       "agu:stableKey": "title:a comprehensive northern hemisphere particle microphysics dataset from the precipitation imaging package",
       "agu:nominatorCount": 1,
@@ -1700,9 +1782,11 @@
       ],
       "name": "A global open-source dataset of monthly irrigated and rainfed cropped areas (MIRCA-OS) for the 21st century",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0012",
       "agu:stableKey": "title:a global open-source dataset of monthly irrigated and rainfed cropped areas (mirca-os) for the 21st century",
       "agu:nominatorCount": 1,
@@ -1755,6 +1839,14 @@
         {
           "@type": "CreativeWork",
           "text": "Rosa, L., & He, L. (2025). Global multi-model projections of green water scarcity risks in rainfed agriculture under 1.5 °C and 3 °C warming. Agricultural Water Management, 314, 109519. https://doi.org/10.1016/j.agwat.2025.109519"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Zhu, W., Yang, T., Wang, J., & Rezaei, E. E. (2025). Decoding cropland mask effects on the explanatory power of remote sensing and reanalyzed climate data on yield anomalies in africa. Earth’s Future, 13(6), e2024EF005443. https://doi.org/10.1029/2024EF005443"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Iizumi, T., Ono, Y., Takimoto, T., & Chaogejilatu. (2025). Crop phenology data extraction from research papers using a large language model. Journal of Agricultural Meteorology, 81(2), 112–116. https://doi.org/10.2480/agrmet.D-24-00042"
         }
       ],
       "agu:nominator": [
@@ -1813,9 +1905,11 @@
       ],
       "name": "ABCFlux v2: Arctic–Boreal CO2 and CH4 In-situ Flux and Environmental Data",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0013",
       "agu:stableKey": "doi:10.3334/ornldaac/2448|abcflux v2: arctic–boreal co2 and ch4 in-situ flux and environmental data",
       "agu:nominatorCount": 1,
@@ -1880,9 +1974,11 @@
       ],
       "name": "Agricultural nitrogen fertilizer uses in the continental U.S. during 1850-2015: a set of gridded time-series data",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0014",
       "agu:stableKey": "doi:10.1594/pangaea.883585|agricultural nitrogen fertilizer uses in the continental u.s. during 1850-2015: a set of gridded time-series data",
       "agu:nominatorCount": 1,
@@ -1976,9 +2072,11 @@
       ],
       "name": "Air NOW Fire and Smoke map",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+        }
+      ],
       "agu:datasetId": "agu-0015",
       "agu:stableKey": "title:air now fire and smoke map",
       "agu:nominatorCount": 1,
@@ -2039,9 +2137,11 @@
       ],
       "name": "Airborne and Satellite Investigation of Air Quality",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0016",
       "agu:stableKey": "title:airborne and satellite investigation of air quality",
       "agu:nominatorCount": 1,
@@ -2117,9 +2217,11 @@
       ],
       "name": "Annual crop-specific management history of phosphorus fertilizer input (CMH-P) in the croplands of United States from 1850 to 2022: Application rate, timing, and method",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0017",
       "agu:stableKey": "doi:10.5281/zenodo.13357690|annual crop-specific management history of phosphorus fertilizer input (cmh-p) in the croplands of united states from 1850 to 2022: application rate, timing, and method",
       "agu:nominatorCount": 1,
@@ -2228,9 +2330,11 @@
       ],
       "name": "ArcticDEM and the Reference Elevation Model of Antarctica (REMA)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0018",
       "agu:stableKey": "title:arcticdem and the reference elevation model of antarctica (rema)",
       "agu:nominatorCount": 1,
@@ -2310,9 +2414,11 @@
       ],
       "name": "Astromaterials Data Synthesis",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+        }
+      ],
       "agu:datasetId": "agu-0019",
       "agu:stableKey": "title:astromaterials data synthesis",
       "agu:nominatorCount": 1,
@@ -2393,9 +2499,11 @@
       ],
       "name": "Atmospheric Infrared Sounder (AIRS)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0020",
       "agu:stableKey": "title:atmospheric infrared sounder (airs)",
       "agu:nominatorCount": 1,
@@ -2454,9 +2562,11 @@
       ],
       "name": "Australian Thermochronology - 2002 and prior",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+        }
+      ],
       "agu:datasetId": "agu-0021",
       "agu:stableKey": "doi:10.58024/agum46bd292f|australian thermochronology - 2002 and prior",
       "agu:nominatorCount": 1,
@@ -2542,9 +2652,11 @@
       ],
       "name": "Australian Thermochronology - 2002 to 2022",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+        }
+      ],
       "agu:datasetId": "agu-0022",
       "agu:stableKey": "doi:10.58024/agumcad7b7cb|australian thermochronology - 2002 to 2022",
       "agu:nominatorCount": 1,
@@ -2605,9 +2717,11 @@
       ],
       "name": "AutoTerm",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0023",
       "agu:stableKey": "title:autoterm",
       "agu:nominatorCount": 1,
@@ -2661,9 +2775,11 @@
       ],
       "name": "CALCOFI fish larvae at 66 standard stations, 1966 - ongoing",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0024",
       "agu:stableKey": "title:calcofi fish larvae at 66 standard stations, 1966 - ongoing",
       "agu:nominatorCount": 1,
@@ -2734,9 +2850,11 @@
       ],
       "name": "CalCOFI SIO Hydrographic CTD Bottle/Cast Data",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0025",
       "agu:stableKey": "title:calcofi sio hydrographic ctd bottle/cast data",
       "agu:nominatorCount": 1,
@@ -2816,9 +2934,11 @@
       ],
       "name": "California Climate Projections",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0026",
       "agu:stableKey": "title:california climate projections",
       "agu:nominatorCount": 1,
@@ -2899,9 +3019,11 @@
       ],
       "name": "CAMELS-IND (Catchment Attributes and Meteorology for Large-sample Studies - India)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0027",
       "agu:stableKey": "title:camels-ind (catchment attributes and meteorology for large-sample studies - india)",
       "agu:nominatorCount": 1,
@@ -3008,9 +3130,11 @@
       ],
       "name": "Catchment Attributes and MEteorology for Large-sample Studies (CAMELS)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0028",
       "agu:stableKey": "title:catchment attributes and meteorology for large-sample studies (camels)",
       "agu:nominatorCount": 1,
@@ -3065,6 +3189,130 @@
         {
           "@type": "CreativeWork",
           "text": "Coxon, G., et al. (2020). CAMELS-GB: Hydrometeorological time series and landscape attributes for 671 catchments in Great Britain. Earth System Science Data, 12(4), 2459–2483. https://doi.org/10.5194/essd-12-2459-2020"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Fowler, K. J. A., Acharya, S. C., Addor, N., Chou, C., & Peel, M. C. (2021). CAMELS-AUS: Hydrometeorological time series and landscape attributes for 222 catchments in Australia. Earth System Science Data, 13(8), 3847–3867. https://doi.org/10.5194/essd-13-3847-2021"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Hao, Z., Jin, J., Xia, R., Tian, S., Yang, W., Liu, Q., Zhu, M., Ma, T., Jing, C., & Zhang, Y. (2021). Ccam: China catchment attributes and meteorology dataset. Earth System Science Data, 13(12), 5591–5616. https://doi.org/10.5194/essd-13-5591-2021"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Klingler, C., Schulz, K., & Herrnegger, M. (2021). Lamah-ce: Large-sample data for hydrology and environmental sciences for central europe. Earth System Science Data, 13(9), 4529–4565. https://doi.org/10.5194/essd-13-4529-2021"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Ebeling, P., et al. (2022). Quadica: Water quality, discharge and catchment attributes for large-sample studies in Germany. Earth System Science Data, 14(8), 3715–3741. https://doi.org/10.5194/essd-14-3715-2022"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Kratzert, F., et al. (2023). Caravan—A global community dataset for large-sample hydrology. Scientific Data, 10(1), 61. https://doi.org/10.1038/s41597-023-01975-w"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Höge, M., et al. (2023). CAMELS-CH: Hydro-meteorological time series and landscape attributes for 331 catchments in hydrologic Switzerland. Earth System Science Data, 15(12), 5755–5784. https://doi.org/10.5194/essd-15-5755-2023"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Teutschbein, C. (2024). CAMELS-SE: Long-term hydroclimatic observations (1961–2020) across 50 catchments in sweden as a resource for modelling, education, and collaboration. Geoscience Data Journal, gdj3.239. https://doi.org/10.1002/gdj3.239"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Helgason, H. B., & Nijssen, B. (2024). Lamah-ice: Large-sample data for hydrology and environmental sciences for iceland. Earth System Science Data, 16(6), 2741–2771. https://doi.org/10.5194/essd-16-2741-2024"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Loritz, R., et al. (2024). CAMELS-DE: Hydro-meteorological time series and attributes for 1582 catchments in Germany. Earth System Science Data, 16(12), 5625–5642. https://doi.org/10.5194/essd-16-5625-2024"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Sterle, G., et al. (2024). CAMELS-Chem: Augmenting CAMELS (Catchment attributes and meteorology for large-sample studies) with atmospheric and stream water chemistry data. Hydrology and Earth System Sciences, 28(3), 611–630. https://doi.org/10.5194/hess-28-611-2024"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Delaigue, O., Guimarães, G. M., Brigode, P., Génot, B., Perrin, C., Soubeyroux, J.-M., Janet, B., Addor, N., & Andréassian, V. (2025). CAMELS-FR dataset: A large-sample hydroclimatic dataset for France to explore hydrological diversity and support model benchmarking. Earth System Science Data, 17(4), 1461–1479. https://doi.org/10.5194/essd-17-1461-2025"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Fowler, K. J. A., Zhang, Z., & Hou, X. (2025). CAMELS-AUS v2: Updated hydrometeorological time series and landscape attributes for an enlarged set of catchments in Australia. Earth System Science Data, 17(8), 4079–4095. https://doi.org/10.5194/essd-17-4079-2025"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Liu, J., et al. (2025). CAMELS-DK: Hydrometeorological time series and landscape attributes for 3330 Danish catchments with streamflow observations from 304 gauged stations. Earth System Science Data, 17(4), 1551–1572. https://doi.org/10.5194/essd-17-1551-2025"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Mangukiya, N. K., Kumar, K. B., Dey, P., Sharma, S., Bejagam, V., Mujumdar, P. P., & Sharma, A. (2025). CAMELS-IND: Hydrometeorological time series and catchment attributes for 228 catchments in Peninsular India. Earth System Science Data, 17(2), 461–491. https://doi.org/10.5194/essd-17-461-2025"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Färber, C., Plessow, H., Mischel, S., Kratzert, F., Addor, N., Shalev, G., & Looser, U. (2024). GRDC-caravan: Extending caravan with data from the global runoff data centre. https://doi.org/10.5194/essd-2024-427"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Knoben, W. J. M.,et al. (2025). Catchment Attributes and MEteorology for Large-Sample SPATially distributed analysis (Camels-spat): Streamflow observations, forcing data and geospatial data for hydrologic studies across North America. EGUsphere [preprint; accepted] https://doi.org/10.5194/egusphere-2025-893"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": ">>> Use of the CAMELS data to introduce LSTMs for hydrologic prediction:"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Kratzert, F., Klotz, D., Brenner, C., Schulz, K., & Herrnegger, M. (2018). Rainfall–runoff modelling using Long Short-Term Memory (Lstm) networks. Hydrology and Earth System Sciences, 22(11), 6005–6022. https://doi.org/10.5194/hess-22-6005-2018"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Kratzert, F., Klotz, D., Shalev, G., Klambauer, G., Hochreiter, S., & Nearing, G. (2019). Towards learning universal, regional, and local hydrological behaviors via machine learning applied to large-sample datasets. Hydrology and Earth System Sciences, 23(12), 5089–5110. https://doi.org/10.5194/hess-23-5089-2019"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Kratzert, F., Klotz, D., Herrnegger, M., Sampson, A. K., Hochreiter, S., & Nearing, G. S. (2019). Toward improved predictions in ungauged basins: Exploiting the power of machine learning. Water Resources Research, 55(12), 11344–11354. https://doi.org/10.1029/2019WR026065"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Gauch, M., Kratzert, F., Klotz, D., Nearing, G., Lin, J., & Hochreiter, S. (2021). Rainfall–runoff prediction at multiple timescales with a single Long Short-Term Memory network. Hydrology and Earth System Sciences, 25(4), 2045–2062. https://doi.org/10.5194/hess-25-2045-2021"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Kratzert, F., Klotz, D., Hochreiter, S., & Nearing, G. S. (2021). A note on leveraging synergy in multiple meteorological data sets with deep learning for rainfall–runoff modeling. Hydrology and Earth System Sciences, 25(5), 2685–2703. https://doi.org/10.5194/hess-25-2685-2021"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Klotz, D., et al. (2022). Uncertainty estimation with deep learning for rainfall–runoff modeling. Hydrology and Earth System Sciences, 26(6), 1673–1693. https://doi.org/10.5194/hess-26-1673-2022"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": ">>> Further examples of the CAMELS data supporting research with a considerable number of citations:"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Addor, N., Nearing, G., Prieto, C., Newman, A. J., Le Vine, N., & Clark, M. P. (2018). A ranking of hydrological signatures based on their predictability in space. Water Resources Research, 54(11), 8792–8812. https://doi.org/10.1029/2018WR022606"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Mizukami, N., Rakovec, O., Newman, A. J., Clark, M. P., Wood, A. W., Gupta, H. V., & Kumar, R. (2019). On the choice of calibration metrics for “high-flow” estimation using hydrologic models. Hydrology and Earth System Sciences, 23(6), 2601–2614. https://doi.org/10.5194/hess-23-2601-2019"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Knoben, W. J. M., Freer, J. E., Peel, M. C., Fowler, K. J. A., & Woods, R. A. (2020). A brief analysis of conceptual model structure uncertainty using 36 models and 559 catchments. Water Resources Research, 56(9), e2019WR025975. https://doi.org/10.1029/2019WR025975"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Ma, K., Feng, D., Lawson, K., Tsai, W., Liang, C., Huang, X., Sharma, A., & Shen, C. (2021). Transferring hydrologic data across continents – leveraging data‐rich regions to improve hydrologic prediction in data‐sparse regions. Water Resources Research, 57(5), e2020WR028600. https://doi.org/10.1029/2020WR028600"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Clark, M. P., et al. (2021). The abuse of popular performance metrics in hydrologic modeling. Water Resources Research, 57(9), e2020WR029001. https://doi.org/10.1029/2020WR029001"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Feng, D., Liu, J., Lawson, K., & Shen, C. (2022). Differentiable, learnable, regionalized process‐based models with multiphysical outputs can approach state‐of‐the‐art hydrologic prediction accuracy. Water Resources Research, 58(10), e2022WR032404. https://doi.org/10.1029/2022WR032404"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Shen, H., Tolson, B. A., & Mai, J. (2022). Time to update the split‐sample approach in hydrological model calibration. Water Resources Research, 58(3), e2021WR031523. https://doi.org/10.1029/2021WR031523"
         }
       ],
       "agu:nominator": [
@@ -3101,9 +3349,11 @@
       ],
       "name": "Cenomanian-Turonian Eagle Ford Research: Core dataset",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0029",
       "agu:stableKey": "title:cenomanian-turonian eagle ford research: core dataset",
       "agu:nominatorCount": 1,
@@ -3195,6 +3445,82 @@
         {
           "@type": "CreativeWork",
           "text": "Eldrett JS, Minisini D, Bergman S. 2014. Decoupling of the carbon cycle during Ocean Anoxic Event 2. Geology 42(7):567–570. https://doi.org/10.1130/G35520.1"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Eldrett JS, Ma C, Bergman S, Lutz B, Gregory FJ, Dodsworth P, Phipps M, Hardas P, Minisini D, Ozkan A, Ramezani J, Bowring SA, Kamo SL, Ferguson K, Macaulay C, Kelly AE. 2015a. An astronomically calibrated stratigraphy of the Cenomanian, Turonian and earliest Coniacian from the Cretaceous Western Interior Seaway, USA: Implications for global chronostratigraphy. Cretaceaous Research 56:316–344. https://doi.org/10.1016/j.cre[1]tres.2015.04.010"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Eldrett JS, Ma C, Bergman S, Ozkan A, Minisini D, Lutz B, Jackett S-J, Macaulay C, Kelly AE. 2015b. Origin of limestone–marlstone cycles: Astronomic forcing of organic-rich sedimentary rocks from the Cenomanian to early Coniacian of the Cretaceous Western Interior Seaway, USA. Earth and Planetary Science Letters 423:98–113. https://doi.org/10.1016/j.epsl.2015.04.026"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Eldrett JS, Dodsworth P, Bergman S, Wright M, Minisini D. 2017. Water-mass evolution in the Cretaceous Western Interior Seaway of North America and equatorial Atlantic. Climate of the Past 13:855–878.https://doi.org/10.5194/cp-13-855-2017"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Eldrett, J.S., Bergman, S.C. and Minisini, D., 2024. Statistical approaches for improved definition of carbon isotope excursions. Earth-Science Reviews, 255, p.104851."
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Lee C-TA, Jiang H, Ronay E, Minisini D, Stiles J, Neal M. 2018. Volcanic ash as a driver of enhanced organic carbon burial in the Cretaceous. Scientific Reports 8:4197. https://doi.org/10.1038/s41598-018-22576-3"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Ma C, Hinnov L, Eldrett J, Meyers S, Bergman SC, Minisini D, Lutz B. 2021. Centennial to millennial variability of greenhouse climate across the mid-Cenomanian event. Geology 50(2):227–231. https://doi.org/10.1130/G48734.1"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Ma C, Meyers S, Hinnov LA, Eldrett J, Bergman SC, Minisini D. 2020. A method to decipher the time distribution in astronomically forced sedimentary couplets. Marine and Petroleum Geology 118:104399. https://doi.org/10.1016/j.marpetgeo.2020.104399"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Milliken KL, Ergene SM, Ozkan A. 2016. Quartz types, authigenic and detrital, in the Upper Cretaceous Eagle Ford Formation, south Texas, USA. Sedimentary Geology 339:273–288. https://doi.org/10.1016/j.sedgeo.2016.03.012"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Minisini D, Eldrett J, Bergman SC, Forkner R. 2018. Basin infill history of the organic-rich Eagle Ford Group, Texas, USA. Sedimentology 65:1520–1557. https://doi.org/10.1111/sed.12437"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Minisini, D; Eldrett, JS & Bergman, SC. 2025. The value of integrated high-resolution studies: The Eagle Ford example. https://doi.org/10.5724/gcs.38.177"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Nana Yobo L, Brandon AD, Holmden C, Lau KV, Eldrett J. 2021. Changing inputs of continental and submarine weathering sources of Sr to the oceans during OAE 2. Geochimica et Cosmochimica Acta 303:205–225. https://doi.org/10.1016/j.gca.2021.03.013"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Nana Yobo L, Holmden C, Brandon AD, Lau KV, Eldrett JS, Bergman S. 2022a. LIP volcanism (not anoxia) tracked by Cr isotopes during Ocean Anoxic Event 2 in the proto-North Atlantic region. Geochimica et Cosmochimica Acta\n332:138–155. https://doi.org/10.1016/j.gca.2022.06.016"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Nana Yobo L, Brandon A, Lauckner L, Eldrett J, Bergman S, Minisini D. 2022b. Enhanced continental weathering activity at the onset of the Mid-Cenomanian Event (MCE). Geochemical Perspectives Letters 23:17–22. https://doi.org/10.7185/geochemlet.2231"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Yobo, L.N., Williams, H.M., Brandon, A.D., Holmden, C., Lau, K.V., Bergman, S.C., Eldrett, J.S. and Minisini, D., 2025. Iron isotopes reveal volcanogenic input during oceanic anoxic event 2 (OAE 2_ 94 Ma). Geochimica et Cosmochimica Acta, 389, pp.157-167. https://doi.org/10.1029/2024GL114116"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Scaife JD, Ruhl M, Dickson AJ, Mather TA, Jenkyns HC, Percival LME, Hesselbo SP, Cartwright J, Eldrett JS, Bergman SC, Minisini D. 2017. Sedimentary mercury enrichments as a marker for submarine large igneous province volcanism? Evidence from the Mid-Cenomanian event and Oceanic Anoxic Event 2 (Late Cretaceous). Geochemistry, Geophysics, Geosystems 18(12):4253–4275. https://doi.org/10.1002/2017GC007153"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Sullivan DL, Brandon AD, Eldrett JS, Bergman SC, Wright S, Minisini D. 2020. High resolution osmium data record three distinct pulses of magmatic activity during Cretaceous Oceanic Anoxic Event 2 (OAE-2). Geochimica et Cosmochimica Acta 285:257–273. https://doi.org/10.1016/j.gca.2020.04.002"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Sun, X., Zhang, T., Sun, Y., Milliken, K.L. and Sun, D., 2016. Geochemical evidence of organic matter source input and depositional environments in the lower and upper Eagle Ford Formation, south Texas. Organic Geochemistry, 98, pp.66-81."
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Sweere TC, Dickson AJ, Jenkyns HC, Porcelli D, Ruhl M, Murphy MJ, Erdem I, Sander HJM, Eldrett JC, Henderson GM. 2020. Controls on the Cd-isotope composition of Upper Cretaceous (Cenomanian–Turonian) organic-rich mudrocks from south Texas (Eagle Ford Group). Geochimica et Cosmochimica Acta 287:251–262. https://doi.org/10.1016/j.gcs.2020.02.01"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "van Helmond, N.A., Sluijs, A., Papadomanolaki, N.M., Plint, A.G., Gröcke, D.R., Pearce, M.A., Eldrett, J.S., Trabucho-Alexandre, J., Walaszczyk, I., van de Schootbrugge, B. and Brinkhuis, H., 2016. Equatorward phytoplankton migration during a cold spell within the Late Cretaceous super-greenhouse. Biogeosciences, 13(9), pp.2859-2872."
         }
       ],
       "agu:nominator": [
@@ -3236,9 +3562,11 @@
       ],
       "name": "Cenozoic Global Reference benthic foraminifer carbon and oxygen Isotope Dataset (CENOGRID)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0030",
       "agu:stableKey": "doi:10.1594/pangaea.917503|cenozoic global reference benthic foraminifer carbon and oxygen isotope dataset (cenogrid)",
       "agu:nominatorCount": 1,
@@ -3287,6 +3615,10 @@
         {
           "@type": "CreativeWork",
           "text": "Intergovernmental Panel On Climate Change (Ipcc). (2023). Climate Change 2021 – The Physical Science Basis: Working Group I Contribution to the Sixth Assessment Report of the Intergovernmental Panel on Climate Change (1st ed.). Cambridge University Press. https://doi.org/10.1017/9781009157896"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Page 296 Cross-Chapter Box 2.1, Figure 1\nhttps://www.ipcc.ch/report/ar6/wg1/figures/chapter-2/ccbox-2-1-figure-1\nGlobal mean surface temperature (GMST) over the past 60 million years (60 Myr) relative to 1850–1900 shown on three time scales."
         }
       ],
       "agu:nominator": [
@@ -3328,9 +3660,11 @@
       ],
       "name": "ChemLotUS: A Benchmark Data Set of Lotic Chemistry Across US River Networks",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0031",
       "agu:stableKey": "doi:10.1029/2024wr039355|chemlotus: a benchmark data set of lotic chemistry across us river networks",
       "agu:nominatorCount": 1,
@@ -3403,9 +3737,11 @@
       ],
       "name": "China Meteorological Forcing Dataset",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0032",
       "agu:stableKey": "title:china meteorological forcing dataset",
       "agu:nominatorCount": 1,
@@ -3463,6 +3799,10 @@
         {
           "@type": "CreativeWork",
           "text": "Xu, F., Zhang, G., Woolway, R. I., Yang, K., Wada, Y., Wang, J., & Crétaux, J.-F. (2024). Widespread societal and ecological impacts from projected Tibetan Plateau lake expansion. Nature Geoscience, 17(6), 516–523. https://doi.org/10.1038/s41561-024-01446-w"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Li, X., Guo, H., Cheng, G., Song, X., Ran, Y., Feng, M., Che, T., Li, X., Wang, L., Duan, A., Shangguan, D., Chen, D., Jin, R., Deng, J., Su, J., & Cao, B. (2025). Polar regions are critical in achieving global sustainable development goals. Nature Communications, 16(1), 3879. https://doi.org/10.1038/s41467-025-59178-3"
         }
       ],
       "agu:nominator": [
@@ -3499,9 +3839,11 @@
       ],
       "name": "Climate Ready DC: What does it mean to be Climate Ready?",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+        }
+      ],
       "agu:datasetId": "agu-0033",
       "agu:stableKey": "title:climate ready dc: what does it mean to be climate ready?",
       "agu:nominatorCount": 1,
@@ -3555,9 +3897,11 @@
       ],
       "name": "Community Earth Models",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+        }
+      ],
       "agu:datasetId": "agu-0034",
       "agu:stableKey": "title:community earth models",
       "agu:nominatorCount": 1,
@@ -3628,9 +3972,11 @@
       ],
       "name": "Coupled Model Intercomparison Project 6 (CMIP6)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0035",
       "agu:stableKey": "title:coupled model intercomparison project 6 (cmip6)",
       "agu:nominatorCount": 1,
@@ -3690,9 +4036,11 @@
       ],
       "name": "Daily 4 km Gridded SWE and Snow Depth from Assimilated In-Situ and Observation-Based Data over the Conterminous US",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0036",
       "agu:stableKey": "title:daily 4 km gridded swe and snow depth from assimilated in-situ and observation-based data over the conterminous us",
       "agu:nominatorCount": 1,
@@ -3771,9 +4119,11 @@
       ],
       "name": "Data and code for Mapping greenhouse gas emissions from global cropland circa 2020",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0037",
       "agu:stableKey": "title:data and code for mapping greenhouse gas emissions from global cropland circa 2020",
       "agu:nominatorCount": 1,
@@ -3862,9 +4212,11 @@
       ],
       "name": "EnvClim Grids: Global Urban Environmental Vulnerability and Climate Risk, 500m Resolution (circa 2020–2050)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0038",
       "agu:stableKey": "doi:10.7910/dvn/33jjxt|envclim grids: global urban environmental vulnerability and climate risk, 500m resolution (circa 2020–2050)",
       "agu:nominatorCount": 1,
@@ -3947,9 +4299,11 @@
       ],
       "name": "ESA WorldCereal 10 m 2021 v100",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+        }
+      ],
       "agu:datasetId": "agu-0039",
       "agu:stableKey": "title:esa worldcereal 10 m 2021 v100",
       "agu:nominatorCount": 1,
@@ -4026,9 +4380,11 @@
       ],
       "name": "EStreams",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0040",
       "agu:stableKey": "title:estreams",
       "agu:nominatorCount": 1,
@@ -4116,6 +4472,10 @@
         {
           "@type": "CreativeWork",
           "text": "Klotz, D., Miersch, P., Do Nascimento, T. V. M., Fenicia, F., Gauch, M., & Zscheischler, J. (2025). EARLS: A runoff reconstruction dataset for Europe. https://doi.org/10.5194/essd-2024-450"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Hemshorn De Sánchez, A. L., Berghuijs, W. R., Van Loon, A. F., Hendriks, D., & Van Der Velde, Y. (2025). Sensitivities of mean and extreme streamflow to climate variability across Europe. https://doi.org/10.5194/egusphere-2025-5139"
         }
       ],
       "agu:nominator": [
@@ -4152,9 +4512,11 @@
       ],
       "name": "FDSN Databases",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+        }
+      ],
       "agu:datasetId": "agu-0041",
       "agu:stableKey": "title:fdsn databases",
       "agu:nominatorCount": 1,
@@ -4214,9 +4576,11 @@
       ],
       "name": "FLUXNET 2015",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0042",
       "agu:stableKey": "title:fluxnet 2015",
       "agu:nominatorCount": 1,
@@ -4274,6 +4638,10 @@
         {
           "@type": "CreativeWork",
           "text": "Collier, N., Hoffman, F. M., Lawrence, D. M., Keppel‐Aleks, G., Koven, C. D., Riley, W. J., Mu, M., & Randerson, J. T. (2018). The international land model benchmarking (Ilamb) system: Design, theory, and implementation. Journal of Advances in Modeling Earth Systems, 10(11), 2731–2754. https://doi.org/10.1029/2018MS001354"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "https://modelevaluation.org: a web application used for standardized model evaluation/benchmarking with curated datasets and shared scoring workflows."
         }
       ],
       "agu:nominator": [
@@ -4310,9 +4678,11 @@
       ],
       "name": "FORMOSAT-7/COSMIC-2 Global Ionospheric Specification",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0043",
       "agu:stableKey": "title:formosat-7/cosmic-2 global ionospheric specification",
       "agu:nominatorCount": 1,
@@ -4420,9 +4790,11 @@
       ],
       "name": "Frictional behavior of quartz and clay mixtures",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+        }
+      ],
       "agu:datasetId": "agu-0044",
       "agu:stableKey": "title:frictional behavior of quartz and clay mixtures",
       "agu:nominatorCount": 1,
@@ -4488,9 +4860,11 @@
       ],
       "name": "GEDI02_B GEDI L2B Footprint Level Canopy Cover and Vertical Profile Metrics",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0045",
       "agu:stableKey": "title:gedi02_b gedi l2b footprint level canopy cover and vertical profile metrics",
       "agu:nominatorCount": 1,
@@ -4561,9 +4935,11 @@
       ],
       "name": "GEONET",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+        }
+      ],
       "agu:datasetId": "agu-0046",
       "agu:stableKey": "title:geonet",
       "agu:nominatorCount": 1,
@@ -4634,9 +5010,11 @@
       ],
       "name": "GeoNet (NZ) Geohazard Monitoring Datasets",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+        }
+      ],
       "agu:datasetId": "agu-0047",
       "agu:stableKey": "title:geonet (nz) geohazard monitoring datasets",
       "agu:nominatorCount": 1,
@@ -4708,6 +5086,22 @@
         {
           "@type": "CreativeWork",
           "text": "Heidarzadeh M., Gusman A.R., Ishibe T., Sabeti R., Šepić J., Estimating the eruption-induced water displacement source of the 15 January 2022 Tonga volcanic tsunami from tsunami spectra and numerical modelling, Ocean Engineering, Volume 261, 2022, 112165, ISSN 0029-8018, https://doi.org/10.1016/j.oceaneng.2022.112165"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Gusman, A.R., Roger, J., Noble, C. et al. The 2022 Hunga Tonga-Hunga Ha’apai Volcano Air-Wave Generated Tsunami. Pure Appl. Geophys. 179, 3511–3525 (2022). https://doi.org/10.1007/s00024-022-03154-1"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Gusman, A. R., Roger, J., Power, W., Fry, B., & Kaneko, Y. (2022). The 2021 Loyalty Islands earthquake (Mw 7.7): Tsunami waveform inversion and implications for tsunami forecasting for New Zealand. Earth and Space Science, 9, e2022EA002346. https://doi.org/10.1029/2022EA002346"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Zhang, Q., Audet, P., Savage, M., Sutherland, R., & Stern, T. (2026). Mantle transition zone topography in New Zealand from teleseismic P-wave receiver functions. Journal of Geophysical Research: Solid Earth, 131, e2025JB033040. https://doi.org/10.1029/2025JB033040"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Mestel, E. R. H., Illsley-Kemp, F., Savage, M. K., Wilson, C. J. N., Smith, B., & Hreinsdóttir, S. (2025). Seismicity from modern magmatic activity beneath Taupō volcano, Aotearoa New Zealand. Journal of Geophysical Research: Solid Earth, 130, e2025JB031644. https://doi.org/10.1029/2025JB031644"
         }
       ],
       "agu:nominator": [
@@ -4744,9 +5138,11 @@
       ],
       "name": "GeoReM",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+        }
+      ],
       "agu:datasetId": "agu-0048",
       "agu:stableKey": "title:georem",
       "agu:nominatorCount": 1,
@@ -4829,6 +5225,10 @@
         {
           "@type": "CreativeWork",
           "text": "Bai, J.-H., Liu, F., Zhang, Z.-F., Ma, J.-L., Zhang, L., Liu, Y.-F., Zhong, S.-X., & Wei, G.-J. (2021). Simultaneous measurement stable and radiogenic Nd isotopic compositions by MC-ICP-MS with a single-step chromatographic extraction technique. Journal of Analytical Atomic Spectrometry, 36(12), 2695–2703. https://doi.org/10.1039/D1JA00302J"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Potts, P. J., & Webb, P. C. (2022). Simple test for the fitness for purpose of geological reference materials according to the uncertainties associated with their reference values. Geostandards and Geoanalytical Research, 46(3), 477–492. https://doi.org/10.1111/ggr.12439"
         }
       ],
       "agu:nominator": [
@@ -4865,9 +5265,11 @@
       ],
       "name": "Geoscope Network Seismic Data",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+        }
+      ],
       "agu:datasetId": "agu-0049",
       "agu:stableKey": "title:geoscope network seismic data",
       "agu:nominatorCount": 1,
@@ -4953,9 +5355,11 @@
       ],
       "name": "Geospace Regions and Magnetospheric Boundaries (GRMB) identification dataset",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+        }
+      ],
       "agu:datasetId": "agu-0050",
       "agu:stableKey": "doi:10.57780/esa-85c563c|geospace regions and magnetospheric boundaries (grmb) identification dataset",
       "agu:nominatorCount": 1,
@@ -5028,9 +5432,11 @@
       ],
       "name": "GLDAS Catchment Land Surface Model L4 daily 0.25 x 0.25 degree GRACE-DA1 V2.2",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0051",
       "agu:stableKey": "title:gldas catchment land surface model l4 daily 0.25 x 0.25 degree grace-da1 v2.2",
       "agu:nominatorCount": 1,
@@ -5112,9 +5518,11 @@
       ],
       "name": "Global 1-km Downscaled Urban Land Fraction Grids, SSP-Consistent Projections and Base Year, v1 (2000 - 2100)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+        }
+      ],
       "agu:datasetId": "agu-0052",
       "agu:stableKey": "doi:10.7910/dvn/0egdok|global 1-km downscaled urban land fraction grids, ssp-consistent projections and base year, v1 (2000 - 2100)",
       "agu:nominatorCount": 1,
@@ -5212,9 +5620,11 @@
       ],
       "name": "Global Extreme Sea Level Analysis (GESLA)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0053",
       "agu:stableKey": "doi:10.1002/gdj3.174|global extreme sea level analysis (gesla)",
       "agu:nominatorCount": 1,
@@ -5339,9 +5749,11 @@
       ],
       "name": "Global Lithological Map (GLIM) v1.0",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+        }
+      ],
       "agu:datasetId": "agu-0054",
       "agu:stableKey": "doi:10.1029/2012gc004370|global lithological map (glim) v1.0",
       "agu:nominatorCount": 1,
@@ -5387,6 +5799,18 @@
         {
           "@type": "CreativeWork",
           "text": "De Graaf, I. E. M., Van Beek, R. L. P. H., Gleeson, T., Moosdorf, N., Schmitz, O., Sutanudjaja, E. H., & Bierkens, M. F. P. (2017). A global-scale two-layer transient groundwater model: Development and application to groundwater depletion. Advances in Water Resources, 102, 53–67. https://doi.org/10.1016/j.advwatres.2017.01.011"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Goll, D. S., et al. (2017). A representation of the phosphorus cycle for ORCHIDEE (Revision 4520). Geoscientific Model Development, 10(10), 3745–3770. https://doi.org/10.5194/gmd-10-3745-2017"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Hengl, T., et al. (2017). SoilGrids250m: Global gridded soil information based on machine learning. PLOS ONE, 12(2), e0169748. https://doi.org/10.1371/journal.pone.0169748"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Gleeson, T., Moosdorf, N., Hartmann, J., & Van Beek, L. P. H. (2014). A glimpse beneath earth’s surface: GLobal HYdrogeology MaPS (Glhymps) of permeability and porosity. Geophysical Research Letters, 41(11), 3891–3898. https://doi.org/10.1002/2014GL059856"
         }
       ],
       "agu:nominator": [
@@ -5423,9 +5847,11 @@
       ],
       "name": "Global Network of Isotopes in Precipitation - The GNIP Database",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0055",
       "agu:stableKey": "title:global network of isotopes in precipitation - the gnip database",
       "agu:nominatorCount": 1,
@@ -5479,9 +5905,11 @@
       ],
       "name": "Global Ocean Data Analysis Project (GLODAP)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0056",
       "agu:stableKey": "title:global ocean data analysis project (glodap)",
       "agu:nominatorCount": 1,
@@ -5559,9 +5987,11 @@
       ],
       "name": "Global Reservoir Inventory of Lost Storage by Sedimentation (GRILSS)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0057",
       "agu:stableKey": "doi:10.17605/osf.io/w4ug8|global reservoir inventory of lost storage by sedimentation (grilss)",
       "agu:nominatorCount": 1,
@@ -5638,9 +6068,11 @@
       ],
       "name": "GNSS Radio Occultation data set atmPhs/ConPhs",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0058",
       "agu:stableKey": "title:gnss radio occultation data set atmphs/conphs",
       "agu:nominatorCount": 1,
@@ -5694,9 +6126,11 @@
       ],
       "name": "GOSIF and GOSIF GPP (two sister products)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0059",
       "agu:stableKey": "title:gosif and gosif gpp (two sister products)",
       "agu:nominatorCount": 1,
@@ -5782,9 +6216,11 @@
       ],
       "name": "GPCP Version 3.3 Satellite-Gauge (SG) Combined Precipitation Data Set",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0060",
       "agu:stableKey": "doi:10.5067/measures/gpcp/data306|gpcp version 3.3 satellite-gauge (sg) combined precipitation data set",
       "agu:nominatorCount": 1,
@@ -5869,9 +6305,11 @@
       ],
       "name": "GRAIN - Global Registry of Agricultural Irrigation Networks",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+        }
+      ],
       "agu:datasetId": "agu-0061",
       "agu:stableKey": "title:grain - global registry of agricultural irrigation networks",
       "agu:nominatorCount": 1,
@@ -5961,9 +6399,11 @@
       ],
       "name": "Greenland Ecosystem Monitoring (GEM) – MarineBasis",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0062",
       "agu:stableKey": "title:greenland ecosystem monitoring (gem) – marinebasis",
       "agu:nominatorCount": 1,
@@ -6029,9 +6469,11 @@
       ],
       "name": "Greenland liquid water discharge from 1958 through 2019",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0063",
       "agu:stableKey": "doi:10.22008/promice/freshwater|greenland liquid water discharge from 1958 through 2019",
       "agu:nominatorCount": 1,
@@ -6122,6 +6564,30 @@
         {
           "@type": "CreativeWork",
           "text": "Hansen, K., Karlsson, N. B., How, P., Poulsen, E., Mortensen, J., & Rysgaard, S. (2025). Winter subglacial meltwater detected in a Greenland fjord. Nature Geoscience, 18(3), 219–225. https://doi.org/10.1038/s41561-025-01652-0"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Wekerle, C., McPherson, R., Von Appen, W.-J., Wang, Q., Timmermann, R., Scholz, P., Danilov, S., Shu, Q., & Kanzow, T. (2024). Atlantic Water warming increases melt below Northeast Greenland’s last floating ice tongue. Nature Communications, 15(1), 1336. https://doi.org/10.1038/s41467-024-45650-z"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "McPherson, R. A., Wekerle, C., Kanzow, T., Ionita, M., Heukamp, F. O., Zeising, O., & Humbert, A. (2024). Atmospheric blocking slows ocean-driven melting of Greenland’s largest glacier tongue. Science, 385(6715), 1360–1366. https://doi.org/10.1126/science.ado5008"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Cowton, T. R., Slater, D. A., & Inall, M. E. (2023). Subglacial‐discharge plumes drive widespread subsurface warming in northwest greenland’s fjords. Geophysical Research Letters, 50(15), e2023GL103801. https://doi.org/10.1029/2023GL103801"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Kvorning, A. B., Heikkilä, M., Pearce, C., Seidenkrantz, M.-S., Simpson, G. L., Meire, L., Kuijpers, A., Larsen, N. K., & Ribeiro, S. (2025). A Holocene fjord record from Greenland reveals exceptional Atlantic water influence during minimum ice-sheet extent. Communications Earth & Environment, 6(1), 326. https://doi.org/10.1038/s43247-025-02282-5"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Oliver, H., Slater, D., Carroll, D., Wood, M., Morlighem, M., & Hopwood, M. J. (2023). Greenland subglacial discharge as a driver of hotspots of increasing coastal chlorophyll since the early 2000s. Geophysical Research Letters, 50(10), e2022GL102689. https://doi.org/10.1029/2022GL102689"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Andresen, C. S., Karlsson, N. B., Straneo, F., Schmidt, S., Andersen, T. J., Eidam, E. F., Bjørk, A. A., Dartiguemalle, N., Dyke, L. M., Vermassen, F., & Gundel, I. E. (2024). Sediment discharge from Greenland’s marine-terminating glaciers is linked with surface melt. Nature Communications, 15(1), 1332. https://doi.org/10.1038/s41467-024-45694-1"
         }
       ],
       "agu:nominator": [
@@ -6163,9 +6629,11 @@
       ],
       "name": "Gridded Population of the World (GPW)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+        }
+      ],
       "agu:datasetId": "agu-0064",
       "agu:stableKey": "doi:10.7927/h4np22dq|gridded population of the world (gpw)",
       "agu:nominatorCount": 1,
@@ -6293,9 +6761,11 @@
       ],
       "name": "Gridded U.S. Anthropogenic Methane Greenhouse Gas Inventory (gridded GHGI)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+        }
+      ],
       "agu:datasetId": "agu-0065",
       "agu:stableKey": "title:gridded u.s. anthropogenic methane greenhouse gas inventory (gridded ghgi)",
       "agu:nominatorCount": 1,
@@ -6416,9 +6886,11 @@
       ],
       "name": "Ground-Based Global Navigation Satellite System (GNSS) Hatanaka-compressed Observation Data (1-second sampling, sub-hourly files)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+        }
+      ],
       "agu:datasetId": "agu-0066",
       "agu:stableKey": "doi:10.5067/gnss/gnss_highrate_d_001|ground-based global navigation satellite system (gnss) hatanaka-compressed observation data (1-second sampling, sub-hourly files)",
       "agu:nominatorCount": 1,
@@ -6490,9 +6962,11 @@
       ],
       "name": "HarvestStat Africa",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0067",
       "agu:stableKey": "doi:10.5061/dryad.vq83bk42w|harveststat africa",
       "agu:nominatorCount": 1,
@@ -6586,9 +7060,11 @@
       ],
       "name": "Historical Bolide Infrasound Dataset (1960-1972)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+        }
+      ],
       "agu:datasetId": "agu-0068",
       "agu:stableKey": "doi:10.7910/dvn/vgsn7q|historical bolide infrasound dataset (1960-1972)",
       "agu:nominatorCount": 1,
@@ -6687,9 +7163,11 @@
       ],
       "name": "Historical daily discharge data of Italian rivers - SIREN project",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0069",
       "agu:stableKey": "doi:10.5281/zenodo.14996262|historical daily discharge data of italian rivers - siren project",
       "agu:nominatorCount": 1,
@@ -6756,9 +7234,11 @@
       ],
       "name": "Homogenized daily relative humidity series in China during 1960-2017",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0070",
       "agu:stableKey": "title:homogenized daily relative humidity series in china during 1960-2017",
       "agu:nominatorCount": 1,
@@ -6843,9 +7323,11 @@
       ],
       "name": "Hourly location, current velocity, and temperature collected from Global Drifter Program drifters world-wide",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0071",
       "agu:stableKey": "doi:10.25921/x46c-3620|hourly location, current velocity, and temperature collected from global drifter program drifters world-wide",
       "agu:nominatorCount": 1,
@@ -6951,9 +7433,11 @@
       ],
       "name": "Hurricanes, mold & respiratory health issues",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+        }
+      ],
       "agu:datasetId": "agu-0072",
       "agu:stableKey": "doi:10.17603/ds2-yje5-g692|hurricanes, mold & respiratory health issues",
       "agu:nominatorCount": 1,
@@ -7069,9 +7553,11 @@
       ],
       "name": "Improved Italian - Rainfall Extreme Dataset (I2-RED)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0073",
       "agu:stableKey": "doi:10.5281/zenodo.4065266|improved italian - rainfall extreme dataset (i2-red)",
       "agu:nominatorCount": 1,
@@ -7124,6 +7610,14 @@
         {
           "@type": "CreativeWork",
           "text": "Infrastructure safety\n- Evangelista et al. (2023). Flood attenuation potential of Italian Dams: sensitivity on geomorphic and climatological factors. Water Resources Management. https://doi.org/10.1007/s11269-023-03649-z."
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Validation of convection-permitting models\n- Mazzoglio et al (2025). Orographic and land-sea contrast effects in convection-permitting simulations of extreme sub-daily precipitation. Weather and Climate Extremes, 100798. https://doi.org/10.1016/j.wace.2025.100798."
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Creation of other datasets\n- Evangelista et al. (2025). Features of Italian large dams and their upstream catchments. Earth System Science Data, 17, 1407–1426. https://doi.org/10.5194/essd-17-1407-2025.\n- Claps et al. (2024). FOCA: a new quality-controlled database of floods and catchment descriptors in Italy. Earth System Science Data, 16, 1503–1522. https://doi.org/10.5194/essd-16-1503-2024.\n- Mazzoglio et al. (2024). Rainfall data augmentation in Northern Italy through daily extremes and the Hershfield factor. Proceedings of IAHS, 385, 147–153, https://doi.org/10.5194/piahs-385-147-2024."
         }
       ],
       "agu:nominator": [
@@ -7160,9 +7654,11 @@
       ],
       "name": "INCOIS_TA",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0074",
       "agu:stableKey": "title:incois_ta",
       "agu:nominatorCount": 1,
@@ -7237,9 +7733,11 @@
       ],
       "name": "Increased mineral-associated organic carbon and persistent molecules in allochthonous blue carbon ecosystems",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0075",
       "agu:stableKey": "title:increased mineral-associated organic carbon and persistent molecules in allochthonous blue carbon ecosystems",
       "agu:nominatorCount": 1,
@@ -7285,6 +7783,10 @@
         {
           "@type": "CreativeWork",
           "text": "Li, Y., Fu, C., Hu, J., Zeng, L., Tu, C., & Luo, Y. (2023). Soil carbon, nitrogen, and phosphorus stoichiometry and fractions in blue carbon ecosystems: Implications for carbon accumulation in allochthonous-dominated habitats. Environmental Science & Technology, 57(14), 5913–5923. https://doi.org/10.1021/acs.est.3c00012"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Ni, L., Fu, C., Li, G., Feng, K., Deng, Y., Wu, J., Duarte, C. M., Li, Y., & Zhang, D. (2025). Microbial abundance shapes latitudinal pattern of the greenhouse gas production potential in blue carbon ecosystems. Water Research, 287, 124357. https://doi.org/10.1016/j.watres.2025.124357"
         }
       ],
       "agu:nominator": [
@@ -7321,9 +7823,11 @@
       ],
       "name": "Indian Landslide Susceptibility Map (ILSM)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+        }
+      ],
       "agu:datasetId": "agu-0076",
       "agu:stableKey": "title:indian landslide susceptibility map (ilsm)",
       "agu:nominatorCount": 1,
@@ -7369,6 +7873,30 @@
         {
           "@type": "CreativeWork",
           "text": "ILSM has been shown in many news articles and blogs"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "https://scroll.in/article/1069886/landslide-susceptibility-map-finds-eastern-ghats-as-risk-prone"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "https://india.mongabay.com/2024/06/eastern-ghats-debuts-in-new-landslide-susceptibility-map/"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "https://eos.org/thelandslideblog/india-landslide-susceptibility"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "https://www.insightsonindia.com/2024/01/10/indias-first-high-resolution-landslide-susceptibility-map/"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "https://shaastramag.iitm.ac.in/special-feature/coming-landslide-map-india"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "https://www.thehindu.com/sci-tech/science/iit-delhi-team-first-hi-res-landslide-risk-map-india/article67701918.ece"
         }
       ],
       "agu:nominator": [
@@ -7405,9 +7933,11 @@
       ],
       "name": "Indian Subcontinent 2m Temperature Field",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0077",
       "agu:stableKey": "title:indian subcontinent 2m temperature field",
       "agu:nominatorCount": 1,
@@ -7461,9 +7991,11 @@
       ],
       "name": "International GNSS Service (IGS) Data and Products",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+        }
+      ],
       "agu:datasetId": "agu-0078",
       "agu:stableKey": "title:international gnss service (igs) data and products",
       "agu:nominatorCount": 1,
@@ -7536,9 +8068,11 @@
       ],
       "name": "International Soil Carbon Network (ISCN)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0079",
       "agu:stableKey": "title:international soil carbon network (iscn)",
       "agu:nominatorCount": 1,
@@ -7622,9 +8156,11 @@
       ],
       "name": "ITS_LIVE Global Ice Velocity",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0080",
       "agu:stableKey": "title:its_live global ice velocity",
       "agu:nominatorCount": 1,
@@ -7685,6 +8221,14 @@
         {
           "@type": "CreativeWork",
           "text": "Ma, Y., Wang, Z., Zhang, B., An, J., Geng, H., & Li, F. (2024). The spatiotemporal surface velocity variations and analysis of the amery ice shelf from 2000 to 2022, east antarctica. Remote Sensing, 16(17), 3255. https://doi.org/10.3390/rs16173255"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Alley, K. E., Wild, C. T., Luckman, A., Scambos, T. A., Truffer, M., Pettit, E. C., Muto, A., Wallin, B., Klinger, M., Sutterley, T., Child, S. F., Hulen, C., Lenaerts, J. T. M., Maclennan, M., Keenan, E., & Dunmire, D. (2021). Two decades of dynamic change and progressive destabilization on the Thwaites Eastern Ice Shelf. The Cryosphere, 15(11), 5187–5203. https://doi.org/10.5194/tc-15-5187-2021"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Grinsted, A., Hvidberg, C. S., Lilien, D. A., Rathmann, N. M., Karlsson, N. B., Gerber, T., Kjær, H. A., Vallelonga, P., & Dahl-Jensen, D. (2022). Accelerating ice flow at the onset of the northeast greenland ice stream. Nature Communications, 13(1), 5589. https://doi.org/10.1038/s41467-022-32999-2"
         }
       ],
       "agu:nominator": [
@@ -7726,9 +8270,11 @@
       ],
       "name": "Livneh Hydrometeorological dataset",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0081",
       "agu:stableKey": "doi:10.7289/v5x34vf6|livneh hydrometeorological dataset",
       "agu:nominatorCount": 1,
@@ -7804,9 +8350,11 @@
       ],
       "name": "Long-term chemistry from streams at La Selva Biological Station, Costa Rica",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0082",
       "agu:stableKey": "title:long-term chemistry from streams at la selva biological station, costa rica",
       "agu:nominatorCount": 1,
@@ -7877,9 +8425,11 @@
       ],
       "name": "LTREB: Aboveground biomass, plant density, annual aboveground productivity, plant heights and snail observations in control and fertilized plots in a Spartina alterniflora-dominated salt marsh, North Inlet, Georgetown, SC: 1984-2024",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0083",
       "agu:stableKey": "title:ltreb: aboveground biomass, plant density, annual aboveground productivity, plant heights and snail observations in control and fertilized plots in a spartina alterniflora-dominated salt marsh, north inlet, georgetown, sc: 1984-2024",
       "agu:nominatorCount": 1,
@@ -7979,9 +8529,11 @@
       ],
       "name": "Magellan Global Topography, Emissivity, Reflectivity, and Slope Data Record (GXDR)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+        }
+      ],
       "agu:datasetId": "agu-0084",
       "agu:stableKey": "title:magellan global topography, emissivity, reflectivity, and slope data record (gxdr)",
       "agu:nominatorCount": 1,
@@ -8047,9 +8599,11 @@
       ],
       "name": "Modern-Era Retrospective analysis for Research and Applications, Version 2 (MERRA-2)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0085",
       "agu:stableKey": "title:modern-era retrospective analysis for research and applications, version 2 (merra-2)",
       "agu:nominatorCount": 1,
@@ -8120,9 +8674,11 @@
       ],
       "name": "NASA Earth Exchange Global Daily Downscaled Projections (NEX-GDDP) CMIP5 & CMIP 6",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0086",
       "agu:stableKey": "title:nasa earth exchange global daily downscaled projections (nex-gddp) cmip5 & cmip 6",
       "agu:nominatorCount": 1,
@@ -8182,9 +8738,11 @@
       ],
       "name": "National Energy Water Treatment and Speciation (NEWTS) Database",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0087",
       "agu:stableKey": "title:national energy water treatment and speciation (newts) database",
       "agu:nominatorCount": 1,
@@ -8273,9 +8831,11 @@
       ],
       "name": "National Land Cover Database (NLCD)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0088",
       "agu:stableKey": "title:national land cover database (nlcd)",
       "agu:nominatorCount": 1,
@@ -8332,6 +8892,26 @@
         {
           "@type": "CreativeWork",
           "text": "Natural Hazards\nFlooding vulnerability (inland) Qiang et al. 2017; Tate et al. 2021; Banjara et al. 2024\nCoastal storm surge Bunya et al. 2010; Haddad et al. 2015; Yarveysi et al. 2025\nLandslide vulnerability He et al. 2014; Dahigamuwa et al. 2016; Meng et al. 2024\nFire management and risk Alexandre et al. 2015; Radeloff et al. 2018; Gould et al. 2023"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Biodiversity and Ecosystem Health\nRegional and national species richness Pidgeon et al. 2007; Culbert et al. 2013; Dertien et al. 2020\nMigratory corridors and behavior Bonter et al. 2009; Guo et al. 2022; Mendgen et al. 2023\nPollinator health and abundance Gallant et al. 2014; Ballare et al. 2019; Pardee et al. 2023\nSpecies distribution models Ferreira et al. 2011; Kreakie et al. 2012; Sohl 2014"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Atmosphere and Land Interactions (Weather)\nConvective precipitation amounts Carrio et al. 2010; Houser et al. 2019; Singh et al. 2020\nSevere storm severity Stueve et al. 2011; Liu and Li 2016; Frazier et al. 2019\nSnow characteristics Anderson et al. 2014; Foster et al. 2017; Linares and Ni-Meister 2024\nUrban heat island Conlon et al. 2020; Xian et al. 2021; Hasan et al. 2022"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Hydrology\nPollutant modeling McMahon et al. 2019; Saby et al. 2021; Woznicki et al. 2023\nSuspended sediment modeling Renwick et al. 2005; Schwarz 2008; Dow et al. 2024\nHarmful algal blooms Iiames et al. 2021; Pelletier et al. 2024\nUrban runoff Chen et al. 2017; Kandel et al. 2022; Patton et al. 2022\nStreamflow modeling Eddy et al. 2017; Debbage and Shepherd 2018; Chordia et al. 2022"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Economics and Policy\nNational flood policy Patterson and Doyle 2009; FEMA 2022\nClean Water Act analysis Taylor and Druckenmiller 2022; Tomczyk et al. 2023\nNational land accounts Sutton et al. 2019; Warnell et al. 2020; Wentland et al. 2020\nTourism economics, availability Beeco et al. 2014; Browning et al. 2022\nConservation Reserve Program Nielson et al. 2008; Riffell et al. 2010; Fleming 2013"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Land Management\nLand use planning Kovacs et al. 2013; Pennington et al. 2017; Bai et al. 2021\nSoil erosion potential Duan et al. 2008; Woznicki et al. 2020; Stribling 2024\nAgricultural water use Singh et al. 2014; LaHaye et al. 2021; Gedefaw et al. 2022\nWatershed management Ale et al. 2012; Vittorio and Ahiablame 2015; Yang and Best 2015\nEcosystem services valuation Pickard et al. 2015; Narducci et al. 2019; Cochran et al. 2020"
         }
       ],
       "agu:nominator": [
@@ -8373,9 +8953,11 @@
       ],
       "name": "NCEP/CPC L3 Half Hourly 4km Global (60S - 60N) Merged IR",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0089",
       "agu:stableKey": "doi:10.5067/p4hzb9n27eku|ncep/cpc l3 half hourly 4km global (60s - 60n) merged ir",
       "agu:nominatorCount": 1,
@@ -8452,9 +9034,11 @@
       ],
       "name": "Neotoma Paleoecology Database",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0090",
       "agu:stableKey": "title:neotoma paleoecology database",
       "agu:nominatorCount": 1,
@@ -8532,9 +9116,11 @@
       ],
       "name": "NOAA Climate Data Records",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0091",
       "agu:stableKey": "title:noaa climate data records",
       "agu:nominatorCount": 1,
@@ -8598,9 +9184,11 @@
       ],
       "name": "NOAA Observation Package",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0092",
       "agu:stableKey": "title:noaa observation package",
       "agu:nominatorCount": 1,
@@ -8660,9 +9248,11 @@
       ],
       "name": "North American Multi-Model Ensemble (NMME) and Subseasonal Experiment (SubX)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0093",
       "agu:stableKey": "title:north american multi-model ensemble (nmme) and subseasonal experiment (subx)",
       "agu:nominatorCount": 1,
@@ -8773,9 +9363,11 @@
       ],
       "name": "OCO-2",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0094",
       "agu:stableKey": "title:oco-2",
       "agu:nominatorCount": 1,
@@ -8841,9 +9433,11 @@
       ],
       "name": "OCO-2 & -3 XCO2 & SIF",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0095",
       "agu:stableKey": "doi:10.5067/70k2b2w8mngy|oco-2 & -3 xco2 & sif",
       "agu:nominatorCount": 1,
@@ -8907,9 +9501,11 @@
       ],
       "name": "OCO-2 and OCO-3",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0096",
       "agu:stableKey": "doi:10.5067/70k2b2w8mngy|oco-2 and oco-3",
       "agu:nominatorCount": 1,
@@ -8990,9 +9586,11 @@
       ],
       "name": "OCO-2 Level 2 bias-corrected XCO2",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0097",
       "agu:stableKey": "doi:10.5067/70k2b2w8mngy|oco-2 level 2 bias-corrected xco2",
       "agu:nominatorCount": 1,
@@ -9058,9 +9656,11 @@
       ],
       "name": "OCTOPUS database",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0098",
       "agu:stableKey": "title:octopus database",
       "agu:nominatorCount": 1,
@@ -9133,6 +9733,34 @@
         {
           "@type": "CreativeWork",
           "text": "Zondervan, J. R., Hilton, R. G., Dellinger, M., Clubb, F. J., Roylands, T., & Ogrič, M. (2023). Rock organic carbon oxidation CO2 release offsets silicate weathering sink. Nature, 623(7986), 329–333. https://doi.org/10.1038/s41586-023-06581-9"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Godard, V., & Tucker, G. E. (2021). Influence of climate‐forcing frequency on hillslope response. Geophysical Research Letters, 48(18), e2021GL094305. https://doi.org/10.1029/2021GL094305"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Delunel, R., Schlunegger, F., Valla, P. G., Dixon, J., Glotzbach, C., Hippe, K., Kober, F., Molliex, S., Norton, K. P., Salcher, B., Wittmann, H., Akçar, N., & Christl, M. (2020). Late-Pleistocene catchment-wide denudation patterns across the European Alps. Earth-Science Reviews, 211, 103407. https://doi.org/10.1016/j.earscirev.2020.103407"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Whipple, K., Adams, B., Forte, A., & Hodges, K. (2023). Eroding the himalaya: Topographic and climatic control of erosion rates and implications for tectonics. The Journal of Geology, 131(4), 265–288. https://doi.org/10.1086/731260"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Crabtree, S. A., White, D. A., Bradshaw, C. J. A., Saltré, F., Williams, A. N., Beaman, R. J., Bird, M. I., & Ulm, S. (2021). Landscape rules predict optimal superhighways for the first peopling of Sahul. Nature Human Behaviour, 5(10), 1303–1313. https://doi.org/10.1038/s41562-021-01106-8"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Bradshaw, et al. (2021). Stochastic models support rapid peopling of Late Pleistocene Sahul. Nature Communications, 12(1), 2440. https://doi.org/10.1038/s41467-021-21551-3"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Codilean, A. T., Fülöp, R.-H., Munack, H., Wilcken, K. M., Cohen, T. J., Rood, D. H., Fink, D., Bartley, R., Croke, J., & Fifield, L. K. (2021). Controls on denudation along the East Australian continental margin. Earth-Science Reviews, 214, 103543. https://doi.org/10.1016/j.earscirev.2021.103543"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Fülöp, R.-H., et al. (2020). Million-year lag times in a post-orogenic sediment conveyor. Science Advances, 6(25), eaaz8845. https://doi.org/10.1126/sciadv.aaz8845"
         }
       ],
       "agu:nominator": [
@@ -9169,9 +9797,11 @@
       ],
       "name": "OpenAQ",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+        }
+      ],
       "agu:datasetId": "agu-0099",
       "agu:stableKey": "title:openaq",
       "agu:nominatorCount": 1,
@@ -9258,9 +9888,11 @@
       ],
       "name": "OpenTopography",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+        }
+      ],
       "agu:datasetId": "agu-0100",
       "agu:stableKey": "title:opentopography",
       "agu:nominatorCount": 1,
@@ -9321,9 +9953,11 @@
       ],
       "name": "OPERA Land Surface Disturbance Alert from Harmonized Landsat Sentinel-2 product (Version 1) OPERA_L3_DIST-ALERT-HLS_V1",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0101",
       "agu:stableKey": "title:opera land surface disturbance alert from harmonized landsat sentinel-2 product (version 1) opera_l3_dist-alert-hls_v1",
       "agu:nominatorCount": 1,
@@ -9390,9 +10024,11 @@
       ],
       "name": "PARMA/EXPACS",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0102",
       "agu:stableKey": "title:parma/expacs",
       "agu:nominatorCount": 1,
@@ -9450,6 +10086,106 @@
         {
           "@type": "CreativeWork",
           "text": "5. Kataoka, R., Sato, T., Miyake, S., Shiota, D., & Kubo, Y. (2018). Radiation dose nowcast for the ground level enhancement on 10–11 september 2017. Space Weather, 16(7), 917–923. https://doi.org/10.1029/2018SW001874"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "6. Fujita, M., Sato, T., Saito, S., & Yamashiki, Y. (2021). Probabilistic risk assessment of solar particle events considering the cost of countermeasures to reduce the aviation radiation dose. Scientific Reports, 11(1), 17091. https://doi.org/10.1038/s41598-021-95235-9"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "7. Almeida Filho, D., Federico, C. A., Da Silva, F. C. A., & Souza-Santos, D. (2023). Evaluation of neutron doses in Brazilian aircrew by the Monte Carlo method. Radiation Measurements, 166, 106959. https://doi.org/10.1016/j.radmeas.2023.106959"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "8. Didier, T. S. S., Joel, G. S. C., Saïdou, Samuel, B. G., & Maurice, N. M. (2024). Cosmic-ray exposure assessment using particle and heavy ion transport code system: Case study Douala-Cameroon. Radiation Protection Dosimetry, 200(7), 640–647. https://doi.org/10.1093/rpd/ncae087"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "9. Sato, T. (2016). Evaluation of world population-weighted effective dose due to cosmic ray exposure. Scientific Reports, 6(1), 33932. https://doi.org/10.1038/srep33932"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "10. Chen, J., Timmins, R., Verdecchia, K., & Sato, T. (2009). An estimation of Canadian population exposure to cosmic rays. Radiation and Environmental Biophysics, 48(3), 317–322. https://doi.org/10.1007/s00411-009-0226-z"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "11. Cinelli, G., Gruber, V., De Felice, L., Bossew, P., Hernandez-Ceballos, M. A., Tollefsen, T., Mundigl, S., & De Cort, M. (2017). European annual cosmic-ray dose: Estimation of population exposure. Journal of Maps, 13(2), 812–821. https://doi.org/10.1080/17445647.2017.1384934"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "12. Cabianca, T. (2024, November 8). UNSCEAR evaluation of public exposure to ionizing radiation. In MEREIA Workshop 2024 (Hybrid), Vienna, Austria."
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "13. Ulanowski, A., Sato, T., Petoussi-Henss, N., & Balonov, M. (2025). Relationships between protection and operational dosimetric quantities for external exposure to natural background radiation. Radiation and Environmental Biophysics, 64(1), 105–115. https://doi.org/10.1007/s00411-025-01109-3"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "14. Lifton, N., Sato, T., & Dunai, T. J. (2014). Scaling in situ cosmogenic nuclide production rates using analytical approximations to atmospheric cosmic-ray fluxes. Earth and Planetary Science Letters, 386, 149–160. https://doi.org/10.1016/j.epsl.2013.10.052"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "15. Kataoka, R., Ebisuzaki, T., Miyahara, H., Nimura, T., Tomida, T., Sato, T., & Maruyama, S. (2014). The Nebula Winter: The united view of the snowball Earth, mass extinctions, and explosive evolution in the late Neoproterozoic and Cambrian periods. Gondwana Research, 25(3), 1153–1163. https://doi.org/10.1016/j.gr.2013.05.003"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "16. Ebisuzaki, T., Miyahara, H., Kataoka, R., Sato, T., & Ishimine, Y. (2011). Explosive volcanic eruptions triggered by cosmic rays: Volcano as a bubble chamber. Gondwana Research, 19(4), 1054–1061. https://doi.org/10.1016/j.gr.2010.11.004"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "17. Karapetyan, G. G. (2014). Variations of muon flux in the atmosphere during thunderstorms. Physical Review D, 89(9), 093005. https://doi.org/10.1103/PhysRevD.89.093005"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "18. Schaar, K., Spiegl, T., Sato, T., & Langematz, U. (2025). The impact of ENSO on near-surface Beryllium-7. Journal of Environmental Radioactivity, 282, 107592. https://doi.org/10.1016/j.jenvrad.2024.107592"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "19. Sierawski, B. D., et al. (2011). Effects of scaling on muon-induced soft errors. In 2011 International Reliability Physics Symposium (pp. 3C.3.1–3C.3.6). Monterey, CA, USA. https://doi.org/10.1109/IRPS.2011.5784484"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "20. Abe, S., & Sato, T. (2016). Shielding effect on secondary cosmic-ray neutron- and muon-induced soft errors. 2016 16th European Conference on Radiation and Its Effects on Components and Systems (RADECS), 1–5. https://doi.org/10.1109/RADECS.2016.8093141"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "21. Autran, J.-L., Semikh, S., Munteanu, D., Serre, S., Gasiot, G., & Roche, P. (2012). Soft-error rate of advanced sram memories: Modeling and monte carlo simulation. In M. Andriychuk (Ed.), Numerical Simulation—From Theory to Industry. InTech. https://doi.org/10.5772/50111"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "22. Köhli, M., Weimar, J., Schrön, M., Baatz, R., & Schmidt, U. (2021). Soil moisture and air humidity dependence of the above-ground cosmic-ray neutron intensity. Frontiers in Water, 2, 544847. https://doi.org/10.3389/frwa.2020.544847"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "23. Köhli, M., Schrön, M., Zacharias, S., & Schmidt, U. (2023). Uranos v1. 0 – the ultra rapid adaptable neutron-only simulation for environmental research. Geoscientific Model Development, 16(2), 449–477. https://doi.org/10.5194/gmd-16-449-2023"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "24. Köhli, M., Schrön, M., Zreda, M., Schmidt, U., Dietrich, P., & Zacharias, S. (2015). Footprint characteristics revised for field‐scale soil moisture monitoring with cosmic‐ray neutrons. Water Resources Research, 51(7), 5772–5790. https://doi.org/10.1002/2015WR017169"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "25. Weimar, J., Köhli, M., Budach, C., & Schmidt, U. (2020). Large-scale boron-lined neutron detection systems as a 3he alternative for cosmic ray neutron sensing. Frontiers in Water, 2, 16. https://doi.org/10.3389/frwa.2020.00016"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "26. Heistermann, M., Francke, T., Schrön, M., & Oswald, S. E. (2024). Technical Note: Revisiting the general calibration of cosmic-ray neutron sensors to estimate soil water content. Hydrology and Earth System Sciences, 28(4), 989–1000. https://doi.org/10.5194/hess-28-989-2024"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "27. Hertle, L., Zacharias, S., Larsen, N., Rasche, D., McJannet, D., & Schrön, M. (2025). Neutron monitor based incoming flux correction for cosmic‐ray neutron sensing of environmental water. Water Resources Research, 61(9), e2025WR040527. https://doi.org/10.1029/2025WR040527"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "28. Liu, G., Yao, K., Niu, F., Li, Z., Tian, H., Li, J., Luo, X., Jin, L., Gao, J., Rong, J., Fu, Z., Kang, Y., Zhang, W., Ding, S., Wang, Y., Zeng, J., Luo, X., Tian, X., Shi, W., … Liu, Z. (2024). Deep investigation of muography in discovering geological structures in mineral exploration: A case study of Zaozigou gold mine. Geophysical Journal International, 237(1), 588–603. https://doi.org/10.1093/gji/ggae057"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "29. Nakai, Y. (2020). Development of a muography system to survey large scale structures (Doctoral dissertation, Kyushu University)."
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "30. Tripathy, S., et al. (2018). GEANT4 simulation for imaging of high Z materials using cosmic ray muons. In Advanced detectors for nuclear, high energy and astroparticle physics (p. 175)."
         }
       ],
       "agu:nominator": [
@@ -9486,9 +10222,11 @@
       ],
       "name": "PDS Archive of LRO LROC Derived Products",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+        }
+      ],
       "agu:datasetId": "agu-0103",
       "agu:stableKey": "title:pds archive of lro lroc derived products",
       "agu:nominatorCount": 1,
@@ -9549,9 +10287,11 @@
       ],
       "name": "Porewater nutrient concentrations in control and fertilized plots in a Spartina alterniflora-dominated salt marsh, North Inlet, Georgetown, SC : 1993-2024",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0104",
       "agu:stableKey": "title:porewater nutrient concentrations in control and fertilized plots in a spartina alterniflora-dominated salt marsh, north inlet, georgetown, sc : 1993-2024",
       "agu:nominatorCount": 1,
@@ -9635,9 +10375,11 @@
       ],
       "name": "RELAB spectral library at Brown University",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:materials"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:materials"
+        }
+      ],
       "agu:datasetId": "agu-0105",
       "agu:stableKey": "title:relab spectral library at brown university",
       "agu:nominatorCount": 1,
@@ -9698,9 +10440,11 @@
       ],
       "name": "SatPM2.5 (Satellite-derived PM2.5) with current versions: V6.GL.02.04 (global, 1998–2023, Convolutional Neural Network based calibration), V5.GL.05.02 (global, 1998–2023, Geographically Weighted Regression based calibration), and V5.NA.05/V5.NA.05.02 (North American, 2000–2023, compositional PM2.5)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0106",
       "agu:stableKey": "title:satpm2.5 (satellite-derived pm2.5) with current versions: v6.gl.02.04 (global, 1998–2023, convolutional neural network based calibration), v5.gl.05.02 (global, 1998–2023, geographically weighted regression based calibration), and v5.na.05/v5.na.05.02 (north american, 2000–2023, compositional pm2.5)",
       "agu:nominatorCount": 1,
@@ -9779,6 +10523,34 @@
         {
           "@type": "CreativeWork",
           "text": "EPA, U. S. (2022). Supplement to the 2019 Integrated Science Assessment for Particulate Matter (Final Report, 2022): U.S. Environmental Protection Agency, Washington, DC, EPA/635/R-622/028, 2022."
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Other examples of reuse include\nBrauer, M., et al. (2024), Global burden and strength of evidence for 88 risk factors in 204 countries and 811 subnational locations, 1990&#x2013;2021: a systematic analysis for the Global Burden of Disease Study 2021, The Lancet, 403(10440), 2162-2203, doi:10.1016/S0140-6736(24)00933-4."
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Center For International Earth Science Information Network-CIESIN-Columbia University. (2022). Global Annual PM2.5 Grids from MODIS, MISR and SeaWiFS Aerosol Optical Depth (AOD), 1998-2019, V4.GL.03 (Version 4.03) [Data set]. Palisades, NY: NASA Socioeconomic Data and Applications Center (SEDAC). https://doi.org/10.7927/FX80-4N39"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Gallagher, C. L., Holloway, T., Tessum, C. W., Jackson, C. M., & Heck, C. (2023). Combining Satellite-Derived PM2.5 Data and a Reduced-Form Air Quality Model to Support Air Quality Analysis in US Cities. GeoHealth, 7(5), e2023GH000788. https://doi.org/10.1029/2023GH000788"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Shi, L., et al. (2023). \"Incident dementia and long-term exposure to constituents of fine particle air pollution: A national cohort study in the United States.\" Proceedings of the National Academy of Sciences 120(1): e2211282119."
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Southerland, V. A., Brauer, M., Mohegh, A., Hammer, M. S., van Donkelaar, A., Martin, R. V., Apte, J. S., and Anenberg, S. C.: Global urban temporal trends in fine particulate matter (PM2.5) and attributable health burdens: estimates from global datasets, The Lancet Planetary Health, 6, e139-e146, 10.1016/S2542-5196(21)00350-8, 2022."
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Weichenthal, S., Pinault, L., Christidis, T., Burnett, R. T., Brook, J. R., Chu, Y., Crouse, D. L., Erickson, A. C., Hystad, P., Li, C., Martin, R. V., Meng, J., Pappin, A. J., Tjepkema, M., van Donkelaar, A., Weagle, C. L., & Brauer, M. (2022). How low can you go? air pollution affects mortality at very low levels. Science Advances, 8(39). https://doi.org/10.1126/sciadv.abo3381."
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Wu, X., R. C. Nethery, B. M. Sabath, D. Braun, and F. Dominici (2020), Exposure to air pollution and COVID-19 mortality in the United States, medRxiv, 2020.2004.2005.20054502, doi:10.1101/2020.04.05.20054502."
         }
       ],
       "agu:nominator": [
@@ -9820,9 +10592,11 @@
       ],
       "name": "Sea Ice Index",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0107",
       "agu:stableKey": "doi:10.7265/a98x-0f50|sea ice index",
       "agu:nominatorCount": 1,
@@ -9919,9 +10693,11 @@
       ],
       "name": "Sofar Spotter Data Archive",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0108",
       "agu:stableKey": "title:sofar spotter data archive",
       "agu:nominatorCount": 1,
@@ -10021,9 +10797,11 @@
       ],
       "name": "Soil Respiration Database",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0109",
       "agu:stableKey": "title:soil respiration database",
       "agu:nominatorCount": 1,
@@ -10094,9 +10872,11 @@
       ],
       "name": "Speleothem Isotope Synthesis and AnaLysis v1, v1b, v2, v3",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0110",
       "agu:stableKey": "doi:10.5287/ora-2nanwp4rk|speleothem isotope synthesis and analysis v1, v1b, v2, v3",
       "agu:nominatorCount": 1,
@@ -10211,9 +10991,11 @@
       ],
       "name": "Stable isotope tempestology database",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+        }
+      ],
       "agu:datasetId": "agu-0111",
       "agu:stableKey": "doi:10.4211/hs.92577b67675d4695b37f27a3b79ded85|stable isotope tempestology database",
       "agu:nominatorCount": 1,
@@ -10311,9 +11093,11 @@
       ],
       "name": "Surface Biology and Geology (SBG) High Frequency Time Series",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0112",
       "agu:stableKey": "title:surface biology and geology (sbg) high frequency time series",
       "agu:nominatorCount": 1,
@@ -10396,9 +11180,11 @@
       ],
       "name": "SWOT Post-Launch Field Campaign Data",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0113",
       "agu:stableKey": "doi:10.5067/swtpo-spbd1|swot post-launch field campaign data",
       "agu:nominatorCount": 1,
@@ -10409,7 +11195,8 @@
       "sameAs": [
         "https://doi.org/10.5067/SWTPO-MOOR1",
         "https://doi.org/10.5067/SWTPO-MOOR2",
-        "https://doi.org/10.5067/SWTPO-MOOR3"
+        "https://doi.org/10.5067/SWTPO-MOOR3",
+        "https://doi.org/10.5067/SWTPO-GLDR1"
       ],
       "creator": [
         {
@@ -10498,9 +11285,11 @@
       ],
       "name": "The Collaborative Carbon Column Observing Network (COCCON)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0114",
       "agu:stableKey": "title:the collaborative carbon column observing network (coccon)",
       "agu:nominatorCount": 1,
@@ -10570,9 +11359,11 @@
       ],
       "name": "The GEOROC database",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+        }
+      ],
       "agu:datasetId": "agu-0115",
       "agu:stableKey": "title:the georoc database",
       "agu:nominatorCount": 1,
@@ -10634,6 +11425,50 @@
         {
           "@type": "CreativeWork",
           "text": "Cooper, J. N., Cooper, A. M., Clausen, B. L., & Nick, K. E. (2018). Regional bedrock geochemistry associated with podoconiosis evaluated by multivariate analysis. Environmental Geochemistry and Health, 41(2), 649-665. https://doi.org/10.1007/s10653-018-0158-0 (People: geohealth)"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Nakano, T., Yamashita, K., Ando, A., Kusaka, S., & Saitoh, Y. (2020). Geographic variation of Sr and S isotope ratios in bottled waters in Japan and sources of Sr and S. Science of The Total Environment, 704, 135449. https://doi.org/10.1016/j.scitotenv.2019.135449 (People: water quality)"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Tapia-Gatica, J., Selles, I., Bravo, M. A., Tessini, C., Barros-Parada, W., Novoselov, A., & Neaman, A. (2022). Global issues in setting legal limits on soil metal contamination: A case study of Chile. Chemosphere, 290, 133404. https://doi.org/10.1016/j.chemosphere.2021.133404 (Planet: environmental remediation)"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Hartmann, J., West, A. J., Renforth, P., Köhler, P., De La Rocha, C. L., Wolf-Gladrow, D. A., Dürr, H. H., & Scheffran, J. (2013). Enhanced chemical weathering as a geoengineering strategy to reduce atmospheric carbon dioxide, supply nutrients, and mitigate ocean acidification. Reviews of Geophysics, 51(2), 113-149. https://doi.org/10.1002/rog.20004 (Planet: climate)"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Chiaradia, M. (2013). Copper enrichment in arc magmas controlled by overriding plate thickness. Nature Geoscience, 7(1), 43-46. https://doi.org/10.1038/ngeo2028 (Prosperity: economic good)"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Audétat, A., & Li, W. (2017). The genesis of Climax-type porphyry Mo deposits: Insights from fluid inclusions and melt inclusions. Ore Geology Reviews, 88, 436-460. https://doi.org/10.1016/j.oregeorev.2017.05.018 (Prosperity: economic good)"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Impactful publications that have significantly advanced knowledge of the composition and evolution of the Earth:"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Gale, A., Dalton, C. A., Langmuir, C. H., Su, Y., & Schilling, J. (2013). The mean composition of ocean ridge basalts. Geochemistry, Geophysics, Geosystems, 14(3), 489-518. https://doi.org/10.1029/2012gc004334"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Hawkesworth, C. J., Dhuime, B., Pietranik, A. B., Cawood, P. A., Kemp, A. I. S., & Storey, C. D. (2010). The generation and evolution of the continental crust. Journal of the Geological Society, 167(2), 229-248. https://doi.org/10.1144/0016-76492009-072"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Herzberg, C., Asimow, P. D., Arndt, N., Niu, Y., Lesher, C. M., Fitton, J. G., Cheadle, M. J., & Saunders, A. D. (2007). Temperatures in ambient mantle and plumes: Constraints from basalts, picrites, and komatiites. Geochemistry, Geophysics, Geosystems, 8(2). https://doi.org/10.1029/2006gc001390"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Stracke, A., Hofmann, A. W., & Hart, S. R. (2005). FOZO, HIMU, and the rest of the mantle zoo. Geochemistry, Geophysics, Geosystems, 6(5). https://doi.org/10.1029/2004GC000824"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Turner, S. J., & Langmuir, C. H. (2015). The global chemical systematics of arc front stratovolcanoes: Evaluating the role of crustal processes. Earth and Planetary Science Letters, 422, 182–193. https://doi.org/10.1016/j.epsl.2015.03.056"
         }
       ],
       "agu:nominator": [
@@ -10670,9 +11505,11 @@
       ],
       "name": "The Keeling Curve CO2 time series",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0116",
       "agu:stableKey": "title:the keeling curve co2 time series",
       "agu:nominatorCount": 1,
@@ -10733,9 +11570,11 @@
       ],
       "name": "The National Geologic Map Database (NGMDB)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:interior"
+        }
+      ],
       "agu:datasetId": "agu-0117",
       "agu:stableKey": "title:the national geologic map database (ngmdb)",
       "agu:nominatorCount": 1,
@@ -10813,9 +11652,11 @@
       ],
       "name": "The Statewide California Earthquake Center Community Fault Model (CFM)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+        }
+      ],
       "agu:datasetId": "agu-0118",
       "agu:stableKey": "title:the statewide california earthquake center community fault model (cfm)",
       "agu:nominatorCount": 1,
@@ -10872,6 +11713,90 @@
         {
           "@type": "CreativeWork",
           "text": "Cooke, M. L., & Marshall, S. T. (2006). Fault slip rates from three‐dimensional models of the Los Angeles metropolitan area, California. Geophysical Research Letters, 33(21), 2006GL027850. https://doi.org/10.1029/2006GL027850"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Marshall, S. T., Cooke, M. L., & Owen, S. E. (2008). Effects of nonplanar fault topology and mechanical interaction on fault-slip distributions in the ventura basin, california. Bulletin of the Seismological Society of America, 98(3), 1113–1127. https://doi.org/10.1785/0120070159"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Meigs, A. J., Cooke, M. L., & Marshall, S. T. (2008). Using vertical rock uplift patterns to constrain the three-dimensional fault configuration in the los angeles basin. Bulletin of the Seismological Society of America, 98(1), 106–123. https://doi.org/10.1785/0120060254"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Dair, L., & Cooke, M. L. (2009). San Andreas Fault Geometry through the San Gorgonio Pass, California. Geology, 37(2), 119-122. https://doi.org/10.1130/G25101A.1"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Marshall, S. T., Cooke, M. L., & Owen, S. E. (2009). Interseismic deformation associated with three‐dimensional faults in the greater Los Angeles region, California. Journal of Geophysical Research: Solid Earth, 114(B12), 2009JB006439. https://doi.org/10.1029/2009JB006439"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Cooke, M. L., & Dair, L. C. (2011). Simulating the recent evolution of the southern big bend of the San Andreas fault, Southern California. Journal of Geophysical Research, 116(B4), B04405. https://doi.org/10.1029/2010JB007835"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Herbert, J. W., & Cooke, M. L. (2012). Sensitivity of the Southern San Andreas Fault System to Tectonic Boundary Conditions and Fault Configurations. Bulletin of the Seismological Society of America, 102(5), 1-17. https://doi.org/10.1785/0120110316"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Madden, E. H., & Pollard, D. D. (2012). Integration of surface slip and aftershocks to constrain the 3d structure of faults involved in the m 7. 3 landers earthquake, southern california. Bulletin of the Seismological Society of America, 102(1), 321–342. https://doi.org/10.1785/0120110073"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Marshall, S. T., Funning, G. J., & Owen, S. E. (2013). Fault slip rates and interseismic deformation in the western Transverse Ranges, California. Journal of Geophysical Research: Solid Earth, 118(8), 4511–4534. https://doi.org/10.1002/jgrb.50312"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Fattaruso, L. A., Cooke, M. L., & Dorsey, R. J. (2014). Sensitivity of uplift patterns to dip of the san andreas fault in the coachella valley, california. Geosphere, 10(6), 1235–1246. https://doi.org/10.1130/GES01050.1"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Herbert, J. W., Cooke, M. L., & Marshall, S. T. (2014). Influence of fault connectivity on slip rates in southern California: Potential impact on discrepancies between geodetic derived and geologic slip rates. Journal of Geophysical Research: Solid Earth, 119(3), 2342–2361. https://doi.org/10.1002/2013JB010472"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Herbert, J. W., Cooke, M. L., Oskin, M., & Difo, O. (2014). How much can off-fault deformation contribute to the slip rate discrepancy within the eastern California shear zone? Geology, 42(1), 71–75. https://doi.org/10.1130/G34738.1"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Fattaruso, L. A., Cooke, M. L., Dorsey, R. J., & Housen, B. A. (2016). Response of deformation patterns to reorganization of the southern San Andreas fault system since ca. 1.5 Ma. Tectonophysics, 693, 474–488. https://doi.org/10.1016/j.tecto.2016.05.035"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Marshall, S. T., Funning, G. J., Krueger, H. E., Owen, S. E., & Loveless, J. P. (2017). Mechanical models favor a ramp geometry for the Ventura‐pitas point fault, California. Geophysical Research Letters, 44(3), 1311–1319. https://doi.org/10.1002/2016GL072289"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Resor, P. G., Cooke, M. L., Marshall, S. T., & Madden, E. H. (2018). Influence of fault geometry on the spatial distribution of long‐term slip with implications for determining representative fault‐slip rates. Bulletin of the Seismological Society of America, 108(4), 1837–1852. https://doi.org/10.1785/0120170332"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Beyer, J., Cooke, M. L., & Marshall, S. T. (2018). Sensitivity of deformation to activity along the Mill Creek and Mission Creek strands of the southern San Andreas fault. Geosphere, 14(6), 2296–2310. https://doi.org/10.1130/GES01666.1"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Dorsett, J. H., Madden, E. H., Marshall, S. T., & Cooke, M. L. (2019). Mechanical models suggest fault linkage through the imperial valley, california, u. S. A. Bulletin of the Seismological Society of America, 109(4), 1217–1234. https://doi.org/10.1785/0120180303"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Rollins, C., Avouac, J., Landry, W., Argus, D. F., & Barbot, S. (2018). Interseismic strain accumulation on faults beneath los angeles, california. Journal of Geophysical Research: Solid Earth, 123(8), 7126–7150. https://doi.org/10.1029/2017JB015387"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Johnson, K. M., Hammond, W. C., Burgette, R. J., Marshall, S. T., & Sorlien, C. C. (2020). Present‐day and long‐term uplift across the western transverse ranges of southern california. Journal of Geophysical Research: Solid Earth, 125(8), e2020JB019672. https://doi.org/10.1029/2020JB019672"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Hughes, A., Bell, R. E., Mildon, Z. K., Rood, D. H., Whittaker, A. C., Rockwell, T. K., Levy, Y., DeVecchio, D. E., Marshall, S. T., & Nicholson, C. (2020). Three‐dimensional structure, ground rupture hazards, and static stress models for complex nonplanar thrust faults in the ventura basin, southern california. Journal of Geophysical Research: Solid Earth, 125(7), e2020JB019539. https://doi.org/10.1029/2020JB019539"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Elston, H., Cooke, M., Loveless, J., & Marshall, S. (2024). A new method to invert for interseismic deep slip along closely spaced faults using surface velocities and subsurface stressing‐rate tensors. Earth and Space Science, 11(1), e2023EA003069. https://doi.org/10.1029/2023EA003069"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Devine, S., Harper, H., & Marshall, S. T. (2022). Mechanical models of fault-slip rates in the transverse and peninsular ranges, california. Seismological Research Letters, 93(6), 3135–3150. https://doi.org/10.1785/0220220182"
         }
       ],
       "agu:nominator": [
@@ -10908,9 +11833,11 @@
       ],
       "name": "The Water Conflict Chronology Database",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+        }
+      ],
       "agu:datasetId": "agu-0119",
       "agu:stableKey": "title:the water conflict chronology database",
       "agu:nominatorCount": 1,
@@ -11000,9 +11927,11 @@
       ],
       "name": "TIARES Seafloor Data",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0120",
       "agu:stableKey": "doi:10.5047/eps.2011.11.002|tiares seafloor data",
       "agu:nominatorCount": 1,
@@ -11069,9 +11998,11 @@
       ],
       "name": "Total Solar Irradiance from Space",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+        }
+      ],
       "agu:datasetId": "agu-0121",
       "agu:stableKey": "title:total solar irradiance from space",
       "agu:nominatorCount": 1,
@@ -11144,9 +12075,11 @@
       ],
       "name": "Tropical moist forest restoration type map",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0122",
       "agu:stableKey": "title:tropical moist forest restoration type map",
       "agu:nominatorCount": 1,
@@ -11206,9 +12139,11 @@
       ],
       "name": "United States Groundwater Well Database (USGWD)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0123",
       "agu:stableKey": "title:united states groundwater well database (usgwd)",
       "agu:nominatorCount": 1,
@@ -11301,9 +12236,11 @@
       ],
       "name": "USArray Transportable Array",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:surface"
+        }
+      ],
       "agu:datasetId": "agu-0124",
       "agu:stableKey": "doi:10.7914/sn/ta|usarray transportable array",
       "agu:nominatorCount": 1,
@@ -11396,9 +12333,11 @@
       ],
       "name": "USGS Spectral Library",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:materials"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:materials"
+        }
+      ],
       "agu:datasetId": "agu-0125",
       "agu:stableKey": "title:usgs spectral library",
       "agu:nominatorCount": 1,
@@ -11459,9 +12398,11 @@
       ],
       "name": "Vegetation Photosynthetic Phenology Metrics in Northern Terrestrial Ecosystems",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0126",
       "agu:stableKey": "title:vegetation photosynthetic phenology metrics in northern terrestrial ecosystems",
       "agu:nominatorCount": 1,
@@ -11534,9 +12475,11 @@
       ],
       "name": "Water Quality Portal",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0127",
       "agu:stableKey": "title:water quality portal",
       "agu:nominatorCount": 1,
@@ -11603,9 +12546,11 @@
       ],
       "name": "World Ocean Database",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:ocean"
+        }
+      ],
       "agu:datasetId": "agu-0128",
       "agu:stableKey": "title:world ocean database",
       "agu:nominatorCount": 1,
@@ -11666,9 +12611,11 @@
       ],
       "name": "World Wide Lightning Location Network (WWLLN) Dataset",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:atmos"
+        }
+      ],
       "agu:datasetId": "agu-0129",
       "agu:stableKey": "title:world wide lightning location network (wwlln) dataset",
       "agu:nominatorCount": 1,
@@ -11735,9 +12682,11 @@
       ],
       "name": "WorldCereal Harmonized Reference Datasets",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:society"
+        }
+      ],
       "agu:datasetId": "agu-0130",
       "agu:stableKey": "title:worldcereal harmonized reference datasets",
       "agu:nominatorCount": 1,
@@ -11852,6 +12801,18 @@
         {
           "@type": "CreativeWork",
           "text": "The dataset is also used as a basis for the production of European-wide, high-resolution crop maps on a yearly basis, as part of the operational Copernicus High Resolution Cropland Layers:"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "https://blog.vito.be/remotesensing/new-copernicus-high-resolution-layer-on-croplands-launched-for-europe, published through the Copernicus Land Monitoring Service (https://land.copernicus.eu/en/products/high-resolution-layer-croplands?tab=crop_types)"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "The dataset is featured in a recent review on the use of Earth Observation for crop mapping:"
+        },
+        {
+          "@type": "CreativeWork",
+          "text": "Zhang, C., et al. (2025). Remote sensing for crop mapping: A perspective on current and future crop-specific land cover data products. Remote Sensing of Environment, 330, 114995. https://doi.org/10.1016/j.rse.2025.114995"
         }
       ],
       "agu:nominator": [
@@ -11888,9 +12849,11 @@
       ],
       "name": "Worldclim",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0131",
       "agu:stableKey": "title:worldclim",
       "agu:nominatorCount": 1,
@@ -11964,9 +12927,11 @@
       ],
       "name": "XA (1969-1977): Apollo Passive Seismic Experiments",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:space"
+        }
+      ],
       "agu:datasetId": "agu-0132",
       "agu:stableKey": "title:xa (1969-1977): apollo passive seismic experiments",
       "agu:nominatorCount": 1,
@@ -12032,9 +12997,11 @@
       ],
       "name": "Yax Chen diatom analysis (Supplementary Information)",
       "alternateName": "",
-      "keywords": {
-        "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
-      },
+      "keywords": [
+        {
+          "@id": "urn:org:agu:data:impactful-datasets:id:theme:biosphere"
+        }
+      ],
       "agu:datasetId": "agu-0133",
       "agu:stableKey": "title:yax chen diatom analysis (supplementary information)",
       "agu:nominatorCount": 1,

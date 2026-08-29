@@ -16,11 +16,13 @@ const DATA = {
    key the page groups and colours by. THEME_IDS is filled from the DefinedTermSet
    when the published file loads, with the urn tail as a fallback. */
 const THEME_IDS = {};
-function themeKeyOf(kw){
-  const ref = Array.isArray(kw) ? kw[0] : kw;
-  const id = ref && (ref["@id"] || ref.identifier || ref);
-  if (typeof id !== "string") return null;
-  return THEME_IDS[id] || id.split(":").pop() || null;
+function themeKeysOf(kw){
+  const refs = Array.isArray(kw) ? kw : (kw ? [kw] : []);
+  return refs.map(ref => {
+    const id = ref && (ref["@id"] || ref.identifier || ref);
+    if (typeof id !== "string") return null;
+    return THEME_IDS[id] || id.split(":").pop() || null;
+  }).filter(Boolean);
 }
 
 /* Map a schema.org Dataset from the public file onto the shape the page renders. */
@@ -35,7 +37,7 @@ function adopt(sd){
     id: sd["agu:datasetId"] || (idOf(sd.identifier) || {}).value,
     title: sd.name,
     shortName: (sd.alternateName || "").trim(),   // spine label; blank falls back to title
-    theme: themeKeyOf(sd.keywords),
+    themes: themeKeysOf(sd.keywords),
     nomCount: sd["agu:nominatorCount"] || 0,
     doi, links: links.slice(0, 3),
     repo: (sd.includedInDataCatalog || {}).name || null,
@@ -56,7 +58,8 @@ function adopt(sd){
   };
 }
 const THEME_VAR = {atmos:'--atmos',ocean:'--ocean',biosphere:'--biosphere',
-  interior:'--interior',surface:'--surface-c',society:'--society',space:'--space',materials:'--materials'};
+  interior:'--interior',surface:'--surface-c',society:'--society',space:'--space',
+  materials:'--materials',nonlinear:'--nonlinear'};
 const css = k => getComputedStyle(document.documentElement).getPropertyValue(THEME_VAR[k]).trim();
 const esc = s => (s==null?'':String(s)).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 /* Source prose keeps its paragraph breaks; render them as paragraphs rather than one
@@ -114,8 +117,7 @@ function rebuildBooks(){
 
 function buildGroups(){
 DATA.themes.forEach(t => {
-  const items = DATA.datasets.filter(d => d.theme === t.key);
-  if (!items.length) return;
+  const items = DATA.datasets.filter(d => (d.themes || []).includes(t.key));
   const c = css(t.key);
   const sec = document.createElement('section');
   sec.className = 'group';
@@ -131,17 +133,23 @@ DATA.themes.forEach(t => {
       b.setAttribute('aria-label', `${d.title} — open dataset`);
       b.innerHTML = `<span>${esc(d.shortName || d.title)}</span>`;
       b.addEventListener('click', () => openDataset(d.id));
-      b.addEventListener('mouseenter', () => showTip(b, d, t.label));
-      b.addEventListener('focus', () => showTip(b, d, t.label));
+      b.addEventListener('mouseenter', () => showTip(b, d));
+      b.addEventListener('focus', () => showTip(b, d));
       b.addEventListener('mouseleave', hideTip);
       b.addEventListener('blur', hideTip);
       const hay = norm([
-        d.title, t.label, d.repo,
+        d.title, labelsFor(d), d.repo,
         (d.nominators||[]).map(p => p.name).join(' '),
         (d.creators||[]).join(' '), (d.curators||[]).join(' ')
       ].filter(Boolean).join(' \u00b7 '));
       entry.books.push({el:b, hay});
     });
+  }
+  if (!entry.books.length){
+    const note = document.createElement('p');
+    note.className = 'group-empty';
+    note.textContent = 'No datasets have been nominated in this group yet.';
+    sec.appendChild(note);
   }
   groups.appendChild(sec);
   INDEX.push(entry);
@@ -178,8 +186,7 @@ window.addEventListener('resize', () => {
 const legend = document.getElementById('legend');
 function buildLegend(){
 DATA.themes.forEach(t => {
-  const n = DATA.datasets.filter(d => d.theme === t.key).length;
-  if (!n) return;
+  const n = DATA.datasets.filter(d => (d.themes || []).includes(t.key)).length;
   const b = document.createElement('button');
   b.style.background = css(t.key);
   b.innerHTML = `${esc(t.label)}<span class="c">${n}</span>`;
@@ -215,10 +222,12 @@ function applyFilter(){
     const hits = active
       ? entry.books.filter(bk => terms.every(term => bk.hay.includes(term)))
       : entry.books;
-    buildRows(entry, hits, n);         // re-packed: results always start a new row
-    entry.sec.hidden = hits.length === 0;
+    if (entry.books.length) buildRows(entry, hits, n);  // re-packed: results start a new row
+    // during a search an empty group drops out; with no search a group with no
+    // nominations yet stays visible, so the taxonomy reads as complete
+    entry.sec.hidden = active && hits.length === 0;
     if (entry.chip){
-      entry.chip.hidden = hits.length === 0;
+      entry.chip.hidden = active && hits.length === 0;
       entry.chip.querySelector('.c').textContent = hits.length;
     }
     shown += hits.length;
@@ -240,13 +249,13 @@ qClear.addEventListener('click', () => { qEl.value=''; applyFilter(); qEl.focus(
 /* ---- hover bubble ---- */
 const tip = document.getElementById('tip');
 const tipTitle = tip.querySelector('h4'), tipList = tip.querySelector('dl'), tipTail = tip.querySelector('.tail');
-function showTip(el, d, themeLabel){
+function showTip(el, d){
   const names = (d.nominators||[]).map(p => p.name).filter(Boolean);
   const repo = !d.repo ? 'Not recorded'
     : (/^https?:\/\//.test(d.repo) ? d.repo.replace(/^https?:\/\/(www\.)?/,'').replace(/\/$/,'') : d.repo);
   tipTitle.textContent = d.title;
   tipList.innerHTML =
-    `<dt>Discipline</dt><dd>${esc(themeLabel)}</dd>` +
+    `<dt>Discipline</dt><dd>${esc(labelsFor(d))}</dd>` +
     `<dt>Repository</dt><dd>${esc(repo)}</dd>` +
     `<dt>Nominated by</dt><dd>${names.length ? esc(names.join(', ')) : 'Not recorded'}</dd>`;
   tip.classList.add('on');
@@ -368,6 +377,13 @@ function openDataset(id, opts){
   loadDataCite(d);
   show('detail');
   window.scrollTo({top:0});
+}
+
+/* Full labels for every group a dataset was nominated under. */
+function labelsFor(d){
+  const by = {};
+  DATA.themes.forEach(t => { by[t.key] = t.label; });
+  return (d.themes || []).map(k => by[k] || k).join(' · ') || 'Not recorded';
 }
 
 /* ---- scroll to a linked element and flash it ---- */

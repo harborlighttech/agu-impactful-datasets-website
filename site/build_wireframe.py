@@ -112,16 +112,44 @@ def _logo_png():
 d = json.load(open(JSONLD))
 g = d['@graph']; by = {n['@id']: n for n in g}
 
-THEME_ORDER = [
- ("id:theme:atmospheric-science-space-weather", "Atmospheric Science, Space Weather", "atmos"),
- ("id:theme:ocean-science-hydrology-cryosphere", "Ocean Science, Hydrology, Cryosphere", "ocean"),
- ("id:theme:global-environmental-change-paleoceanography-and-paleoclimatology-biogeoscience", "Global Environmental Change, Paleoclimatology, Biogeoscience", "biosphere"),
- ("id:theme:earth-s-interior-geodesy", "Earth's Interior, Geodesy", "interior"),
- ("id:theme:earth-surface-natural-hazards-geology-near-surface-geophysics", "Earth Surface, Natural Hazards, Geology", "surface"),
- ("id:theme:education-geohealth-society-education", "Education, GeoHealth, Society", "society"),
- ("id:theme:space-and-planetary-science", "Space and Planetary Science", "space"),
- ("id:theme:earth-planetary-materials", "Earth & Planetary Materials", "materials"),
+# Discipline groups. Labels are NEVER retyped here -- they are read from the graph,
+# which carries them verbatim from the source spreadsheet, so an abbreviation can
+# never creep in. This map only assigns each group a short key, used to pick its
+# colour in CSS.
+THEME_KEYS = {
+    "id:theme:atmospheric-science-space-weather": "atmos",
+    "id:theme:ocean-science-hydrology-cryosphere": "ocean",
+    "id:theme:global-environmental-change-paleoceanography-and-paleoclimatology-biogeoscience": "biosphere",
+    "id:theme:earth-s-interior-geodesy": "interior",
+    "id:theme:earth-surface-natural-hazards-geology-near-surface-geophysics": "surface",
+    "id:theme:education-geohealth-society-education": "society",
+    "id:theme:space-and-planetary-science": "space",
+    "id:theme:earth-planetary-materials": "materials",
+    "id:theme:nonlinear-geophysics-machine-learning-informatics": "nonlinear",
+}
+
+# Groups that are part of the AGU vocabulary but that no nomination has used yet.
+# They belong in the published DefinedTermSet so the taxonomy is complete; the page
+# simply has no shelf to draw for them until a dataset arrives.
+EXTRA_THEMES = [
+    ("id:theme:nonlinear-geophysics-machine-learning-informatics",
+     "Nonlinear Geophysics, Machine Learning, Informatics", "nonlinear"),
 ]
+
+# display order: the sequence the groups appear in on the page
+THEME_SEQUENCE = ["atmos", "ocean", "biosphere", "interior", "surface",
+                  "society", "space", "materials", "nonlinear"]
+
+_theme_nodes = {n["@id"]: n.get("prefLabel") for n in g if n.get("@type") == "skos:Concept"}
+unmapped = set(_theme_nodes) - set(THEME_KEYS)
+if unmapped:
+    raise SystemExit("discipline group(s) in the graph with no colour key assigned:\n  "
+                     + "\n  ".join(sorted(unmapped)))
+
+THEME_ORDER = [(tid, label, THEME_KEYS[tid]) for tid, label in _theme_nodes.items()]
+THEME_ORDER += [(tid, label, key) for tid, label, key in EXTRA_THEMES
+                if tid not in _theme_nodes]
+THEME_ORDER.sort(key=lambda r: THEME_SEQUENCE.index(r[2]))
 tkey = {t[0]: t[2] for t in THEME_ORDER}
 # verify every theme id resolves
 real = {n['@id'] for n in g if n.get('@type')=='skos:Concept'}
@@ -166,17 +194,16 @@ for x in g:
     lp = x.get('landingPage') or []
     doi = next((u for u in lp if 'doi.org/' in u), None)
     repos = [by[r] for r in (x.get('inCatalog') or []) if r in by]
-    # item counts stay capped -- the page shows "+N more in the record" for those --
-    # but no individual citation or example is cut mid-sentence
-    refs = [txt(r.get('schema:citation')) for r in (x.get('isReferencedBy') or [])][:8]
-    reuse = [txt(r.get('schema:text')) for r in (x.get('reuseExample') or [])][:5]
+    refs = [txt(r.get('schema:citation')) for r in (x.get('isReferencedBy') or [])]
+    reuse = [txt(r.get('schema:text')) for r in (x.get('reuseExample') or [])]
     out.append({
         "title": x.get('title'),
-        "theme": tkey[(x.get('theme') or [None])[0]] if x.get('theme') else "society",
+        # a nomination can name more than one group; keep all of them
+        "themes": [tkey[tid] for tid in (x.get('theme') or []) if tid in tkey],
         "nomCount": len(people),
         "nominators": people,
         "doi": doi,
-        "links": [u for u in lp if u != doi][:3],
+        "links": [u for u in lp if u != doi],
         "repo": repos[0].get('name') if repos else None,
         "repoIds": (repos[0].get('identifier') if repos else None) or [],
         "creators": [c.get('name') for c in (x.get('creator') or [])],
@@ -293,9 +320,10 @@ def sd_dataset(rec):
         # this is empty, so nothing breaks until it is populated.
         # ------------------------------------------------------------------
         "alternateName": "",
-        # schema.org's keywords accepts a DefinedTerm, so the discipline is a
-        # reference to the term rather than a repeated free-text label
-        "keywords": {"@id": theme_id(rec["theme"])},
+        # schema.org's keywords accepts a DefinedTerm, so each discipline is a
+        # reference to a term rather than a repeated free-text label. A nomination
+        # can name more than one group, so this is always a list.
+        "keywords": [{"@id": theme_id(k)} for k in rec["themes"]],
         "agu:datasetId": rec["id"],
         "agu:stableKey": rec["stableKey"],
         "agu:nominatorCount": rec["nomCount"],
@@ -415,6 +443,7 @@ HTML = r"""<!DOCTYPE html>
   /* discipline ramp, anchored on the two brand colours; all >=4.5:1 vs white */
   --atmos:#007DBA; --ocean:#00778A; --biosphere:#2F7D5C; --interior:#A24B2E;
   --surface-c:#8C6410; --society:#6B4C93; --space:#244C5A; --materials:#6B5B4B;
+  --nonlinear:#8E3B63;
   --f-display:'Montserrat','Helvetica Neue',Arial,sans-serif;
   --f-body:'Lora',Georgia,'Times New Roman',serif;
   --f-label:'Montserrat','Helvetica Neue',Arial,sans-serif;
@@ -506,6 +535,8 @@ a{color:inherit}
 .group-head{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
 .group-swatch{width:11px;height:11px;border-radius:2px;flex:none;transform:translateY(1px)}
 .group-head h3{font-size:15px;font-weight:600;letter-spacing:-.012em}
+.group-empty{margin:0;padding:20px 2px 22px;border-bottom:5px solid var(--rule);
+  border-radius:2px;color:var(--ink-3);font-size:14px}
 
 .books{display:grid;grid-template-columns:repeat(20,1fr);gap:5px;align-items:end;
   padding:18px 7px 0;background:linear-gradient(180deg,transparent 0 58%,var(--surface-2) 58%);
@@ -884,11 +915,13 @@ const DATA = {
    key the page groups and colours by. THEME_IDS is filled from the DefinedTermSet
    when the published file loads, with the urn tail as a fallback. */
 const THEME_IDS = {};
-function themeKeyOf(kw){
-  const ref = Array.isArray(kw) ? kw[0] : kw;
-  const id = ref && (ref["@id"] || ref.identifier || ref);
-  if (typeof id !== "string") return null;
-  return THEME_IDS[id] || id.split(":").pop() || null;
+function themeKeysOf(kw){
+  const refs = Array.isArray(kw) ? kw : (kw ? [kw] : []);
+  return refs.map(ref => {
+    const id = ref && (ref["@id"] || ref.identifier || ref);
+    if (typeof id !== "string") return null;
+    return THEME_IDS[id] || id.split(":").pop() || null;
+  }).filter(Boolean);
 }
 
 /* Map a schema.org Dataset from the public file onto the shape the page renders. */
@@ -903,7 +936,7 @@ function adopt(sd){
     id: sd["agu:datasetId"] || (idOf(sd.identifier) || {}).value,
     title: sd.name,
     shortName: (sd.alternateName || "").trim(),   // spine label; blank falls back to title
-    theme: themeKeyOf(sd.keywords),
+    themes: themeKeysOf(sd.keywords),
     nomCount: sd["agu:nominatorCount"] || 0,
     doi, links: links.slice(0, 3),
     repo: (sd.includedInDataCatalog || {}).name || null,
@@ -924,7 +957,8 @@ function adopt(sd){
   };
 }
 const THEME_VAR = {atmos:'--atmos',ocean:'--ocean',biosphere:'--biosphere',
-  interior:'--interior',surface:'--surface-c',society:'--society',space:'--space',materials:'--materials'};
+  interior:'--interior',surface:'--surface-c',society:'--society',space:'--space',
+  materials:'--materials',nonlinear:'--nonlinear'};
 const css = k => getComputedStyle(document.documentElement).getPropertyValue(THEME_VAR[k]).trim();
 const esc = s => (s==null?'':String(s)).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 /* Source prose keeps its paragraph breaks; render them as paragraphs rather than one
@@ -982,8 +1016,7 @@ function rebuildBooks(){
 
 function buildGroups(){
 DATA.themes.forEach(t => {
-  const items = DATA.datasets.filter(d => d.theme === t.key);
-  if (!items.length) return;
+  const items = DATA.datasets.filter(d => (d.themes || []).includes(t.key));
   const c = css(t.key);
   const sec = document.createElement('section');
   sec.className = 'group';
@@ -999,17 +1032,23 @@ DATA.themes.forEach(t => {
       b.setAttribute('aria-label', `${d.title} — open dataset`);
       b.innerHTML = `<span>${esc(d.shortName || d.title)}</span>`;
       b.addEventListener('click', () => openDataset(d.id));
-      b.addEventListener('mouseenter', () => showTip(b, d, t.label));
-      b.addEventListener('focus', () => showTip(b, d, t.label));
+      b.addEventListener('mouseenter', () => showTip(b, d));
+      b.addEventListener('focus', () => showTip(b, d));
       b.addEventListener('mouseleave', hideTip);
       b.addEventListener('blur', hideTip);
       const hay = norm([
-        d.title, t.label, d.repo,
+        d.title, labelsFor(d), d.repo,
         (d.nominators||[]).map(p => p.name).join(' '),
         (d.creators||[]).join(' '), (d.curators||[]).join(' ')
       ].filter(Boolean).join(' \u00b7 '));
       entry.books.push({el:b, hay});
     });
+  }
+  if (!entry.books.length){
+    const note = document.createElement('p');
+    note.className = 'group-empty';
+    note.textContent = 'No datasets have been nominated in this group yet.';
+    sec.appendChild(note);
   }
   groups.appendChild(sec);
   INDEX.push(entry);
@@ -1046,8 +1085,7 @@ window.addEventListener('resize', () => {
 const legend = document.getElementById('legend');
 function buildLegend(){
 DATA.themes.forEach(t => {
-  const n = DATA.datasets.filter(d => d.theme === t.key).length;
-  if (!n) return;
+  const n = DATA.datasets.filter(d => (d.themes || []).includes(t.key)).length;
   const b = document.createElement('button');
   b.style.background = css(t.key);
   b.innerHTML = `${esc(t.label)}<span class="c">${n}</span>`;
@@ -1083,10 +1121,12 @@ function applyFilter(){
     const hits = active
       ? entry.books.filter(bk => terms.every(term => bk.hay.includes(term)))
       : entry.books;
-    buildRows(entry, hits, n);         // re-packed: results always start a new row
-    entry.sec.hidden = hits.length === 0;
+    if (entry.books.length) buildRows(entry, hits, n);  // re-packed: results start a new row
+    // during a search an empty group drops out; with no search a group with no
+    // nominations yet stays visible, so the taxonomy reads as complete
+    entry.sec.hidden = active && hits.length === 0;
     if (entry.chip){
-      entry.chip.hidden = hits.length === 0;
+      entry.chip.hidden = active && hits.length === 0;
       entry.chip.querySelector('.c').textContent = hits.length;
     }
     shown += hits.length;
@@ -1108,13 +1148,13 @@ qClear.addEventListener('click', () => { qEl.value=''; applyFilter(); qEl.focus(
 /* ---- hover bubble ---- */
 const tip = document.getElementById('tip');
 const tipTitle = tip.querySelector('h4'), tipList = tip.querySelector('dl'), tipTail = tip.querySelector('.tail');
-function showTip(el, d, themeLabel){
+function showTip(el, d){
   const names = (d.nominators||[]).map(p => p.name).filter(Boolean);
   const repo = !d.repo ? 'Not recorded'
     : (/^https?:\/\//.test(d.repo) ? d.repo.replace(/^https?:\/\/(www\.)?/,'').replace(/\/$/,'') : d.repo);
   tipTitle.textContent = d.title;
   tipList.innerHTML =
-    `<dt>Discipline</dt><dd>${esc(themeLabel)}</dd>` +
+    `<dt>Discipline</dt><dd>${esc(labelsFor(d))}</dd>` +
     `<dt>Repository</dt><dd>${esc(repo)}</dd>` +
     `<dt>Nominated by</dt><dd>${names.length ? esc(names.join(', ')) : 'Not recorded'}</dd>`;
   tip.classList.add('on');
@@ -1236,6 +1276,13 @@ function openDataset(id, opts){
   loadDataCite(d);
   show('detail');
   window.scrollTo({top:0});
+}
+
+/* Full labels for every group a dataset was nominated under. */
+function labelsFor(d){
+  const by = {};
+  DATA.themes.forEach(t => { by[t.key] = t.label; });
+  return (d.themes || []).map(k => by[k] || k).join(' · ') || 'Not recorded';
 }
 
 /* ---- scroll to a linked element and flash it ---- */
