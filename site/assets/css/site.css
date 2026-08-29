@@ -9,7 +9,7 @@ p{margin:0 0 .9em}
 a{color:inherit}
 .shell{max-width:var(--shell);margin:0 auto;padding:0 32px}
 .mono{font-family:var(--f-label);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
-[class*="label"],.pagemark,.chip,.dl dt,.tip dt,.sec>h2,.card>h2,.dc-bar h2,.legend button,
+[class*="label"],.pagemark,.dl dt,.tip dt,.sec>h2,.card>h2,.dc-bar h2,.legend button,
 .searchbar .count,.searchbar .clear,.linklist .k,.dim,.just .who,.more,.dc-status,
 .group-head .n,.tally span,.readlink,.back{
   font-weight:600}
@@ -151,9 +151,6 @@ a{color:inherit}
   color:var(--ink-2);padding:0;margin-bottom:24px}
 .back:hover{color:var(--mark)}
 .d-head{padding-bottom:24px;border-bottom:3px solid var(--primary)}
-.chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-label);font-size:10px;
-  letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin-bottom:14px}
-.chip i{width:10px;height:10px;border-radius:2px}
 .d-head h1{font-size:clamp(32px,4.4vw,50px);letter-spacing:-.03em;max-width:20ch}
 .d-meta{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:16px;font-family:var(--f-label);
   font-size:11px;color:var(--ink-2)}

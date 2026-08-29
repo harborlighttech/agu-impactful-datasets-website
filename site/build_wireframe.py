@@ -427,7 +427,7 @@ p{margin:0 0 .9em}
 a{color:inherit}
 .shell{max-width:var(--shell);margin:0 auto;padding:0 32px}
 .mono{font-family:var(--f-label);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
-[class*="label"],.pagemark,.chip,.dl dt,.tip dt,.sec>h2,.card>h2,.dc-bar h2,.legend button,
+[class*="label"],.pagemark,.dl dt,.tip dt,.sec>h2,.card>h2,.dc-bar h2,.legend button,
 .searchbar .count,.searchbar .clear,.linklist .k,.dim,.just .who,.more,.dc-status,
 .group-head .n,.tally span,.readlink,.back{
   font-weight:600}
@@ -569,9 +569,6 @@ a{color:inherit}
   color:var(--ink-2);padding:0;margin-bottom:24px}
 .back:hover{color:var(--mark)}
 .d-head{padding-bottom:24px;border-bottom:3px solid var(--primary)}
-.chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-label);font-size:10px;
-  letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin-bottom:14px}
-.chip i{width:10px;height:10px;border-radius:2px}
 .d-head h1{font-size:clamp(32px,4.4vw,50px);letter-spacing:-.03em;max-width:20ch}
 .d-meta{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:16px;font-family:var(--f-label);
   font-size:11px;color:var(--ink-2)}
@@ -708,7 +705,7 @@ a{color:inherit}
     <nav class="site-nav">
       <a href="#" id="nav-collection" data-go="collection" aria-current="page"
          onclick="return false">The Collection</a>
-      <a href="https://agupubs.onlinelibrary.wiley.com/hub/journal/23335084/call-for-papers/si-2026-000577"
+      <a href="https://data.agu.org/2026/08/19/Impactful-Datasets.html"
          target="_blank" rel="noopener">About the project</a>
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSf0Tlb1a29C2I-lNyl8qf_1oG1tFBosYW5qGBBj70D42Nhn_w/viewform" target="_blank" rel="noopener">Nominate</a>
     </nav>
@@ -745,9 +742,10 @@ a{color:inherit}
     <div class="act callout">
       <div class="thumb">FEATURE<br>IMAGE</div>
       <div>
-        <h3>How this collection was built</h3>
-        <p>The story behind the nominations — what the community chose, what surprised
-        the editors, and what it says about how research data earns its keep.</p>
+        <h3>The Story Behind the Nominations</h3>
+        <p>How a community took a simple idea and manifested a global effort recognizing
+        Earth, space, and environmental science datasets that are impactful for research,
+        decision makers, and everyday life.</p>
         <a class="readlink" href="https://agupubs.onlinelibrary.wiley.com/hub/journal/23335084/call-for-papers/si-2026-000577"
            target="_blank" rel="noopener">Read the article →</a>
       </div>
@@ -778,7 +776,6 @@ a{color:inherit}
   <button class="back" data-go="collection">← Back to the collection</button>
 
   <header class="d-head">
-    <span class="chip"><i id="d-swatch"></i><span id="d-theme"></span></span>
     <h1 id="d-title"></h1>
     <div class="d-meta" id="d-meta"></div>
   </header>
@@ -802,7 +799,7 @@ a{color:inherit}
       </section>
 
       <section class="sec" id="d-refs-sec">
-        <h2>Referenced in</h2>
+        <h2>Where It Is Described (Data Paper)</h2>
         <ul class="refs" id="d-refs"></ul>
         <div class="more" id="d-refs-more"></div>
       </section>
@@ -920,9 +917,8 @@ function adopt(sd){
       dims: (j["agu:impactDimension"] || []).map(x => ({label: x.name, text: x.description})) })),
   };
 }
-const THEME_LABEL = {}, THEME_VAR = {atmos:'--atmos',ocean:'--ocean',biosphere:'--biosphere',
+const THEME_VAR = {atmos:'--atmos',ocean:'--ocean',biosphere:'--biosphere',
   interior:'--interior',surface:'--surface-c',society:'--society',space:'--space',materials:'--materials'};
-DATA.themes.forEach(t => THEME_LABEL[t.key] = t.label);
 const css = k => getComputedStyle(document.documentElement).getPropertyValue(THEME_VAR[k]).trim();
 const esc = s => (s==null?'':String(s)).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 // Turn URLs inside already-escaped citation text into links. Safe because esc()
@@ -1140,9 +1136,6 @@ function openDataset(id, opts){
     if (opts && opts.fromHash) history.replaceState(null, '', want);
     else history.pushState(null, '', want);
   }
-  const c = css(d.theme);
-  document.getElementById('d-swatch').style.background = c;
-  document.getElementById('d-theme').textContent = THEME_LABEL[d.theme];
   document.getElementById('d-title').textContent = d.title;
 
   const meta = [];

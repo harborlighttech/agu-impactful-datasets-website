@@ -55,9 +55,8 @@ function adopt(sd){
       dims: (j["agu:impactDimension"] || []).map(x => ({label: x.name, text: x.description})) })),
   };
 }
-const THEME_LABEL = {}, THEME_VAR = {atmos:'--atmos',ocean:'--ocean',biosphere:'--biosphere',
+const THEME_VAR = {atmos:'--atmos',ocean:'--ocean',biosphere:'--biosphere',
   interior:'--interior',surface:'--surface-c',society:'--society',space:'--space',materials:'--materials'};
-DATA.themes.forEach(t => THEME_LABEL[t.key] = t.label);
 const css = k => getComputedStyle(document.documentElement).getPropertyValue(THEME_VAR[k]).trim();
 const esc = s => (s==null?'':String(s)).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 // Turn URLs inside already-escaped citation text into links. Safe because esc()
@@ -275,9 +274,6 @@ function openDataset(id, opts){
     if (opts && opts.fromHash) history.replaceState(null, '', want);
     else history.pushState(null, '', want);
   }
-  const c = css(d.theme);
-  document.getElementById('d-swatch').style.background = c;
-  document.getElementById('d-theme').textContent = THEME_LABEL[d.theme];
   document.getElementById('d-title').textContent = d.title;
 
   const meta = [];
