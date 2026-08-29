@@ -72,8 +72,20 @@ RE_DOI   = re.compile(r'\b10\.\d{4,9}/[^\s,;)\]"<>]+', re.I)
 RE_ORCID = re.compile(r'\b\d{4}-\d{4}-\d{4}-\d{3}[\dX]\b')
 RE_MAIL  = re.compile(r'\b[\w.+-]+@[\w-]+\.[\w.-]+\b')
 RE_RRID  = re.compile(r'\bRRID:\s*\S+', re.I)
-RE_NOM   = re.compile(r'^[ \t]*Nominator\s*(\d+)\s*:?[ \t]*$', re.M)
-RE_NOM_INLINE = re.compile(r'Nominator\s*(\d+)\s*:', re.I)
+# Some rows sub-label a nominator slot with a letter -- "Nominator 1a:", "1b:",
+# "1c:" -- to list several people under one number. Those are separate nominators
+# and must not be merged, so the suffix is part of the key.
+RE_NOM   = re.compile(r'^[ \t]*Nominator\s*(\d+)([a-z])?\s*:?[ \t]*$', re.M | re.I)
+RE_NOM_INLINE = re.compile(r'Nominator\s*(\d+)([a-z])?\s*:', re.I)
+
+
+def nom_key(m):
+    return "%s%s" % (m.group(1), (m.group(2) or "").lower())
+
+
+def nom_sort(k):
+    m = re.match(r'(\d+)([a-z]*)', str(k))
+    return (int(m.group(1)), m.group(2)) if m else (0, str(k))
 RE_DIM   = re.compile(r'^[ \t]*(People|Planet|Prosperity)(\s+Dimension)?\s*:', re.I | re.M)
 
 def clean(s):
@@ -157,18 +169,18 @@ def split_identifiers(s):
     return split_generic(s)
 
 def split_nominator_blocks(s):
-    """Parse 'Nominator N:' labelled blocks -> {n: text}. Falls back to {1: whole}."""
+    """Parse 'Nominator N:' / 'Nominator Na:' blocks -> {key: text}."""
     if not s: return {}, "empty"
     if not RE_NOM_INLINE.search(s):
-        return {1: s}, "single"
-    idx = [(m.start(), int(m.group(1)), m.end()) for m in RE_NOM_INLINE.finditer(s)]
+        return {"1": s}, "single"
+    idx = [(m.start(), nom_key(m), m.end()) for m in RE_NOM_INLINE.finditer(s)]
     out = {}
     for i, (st, n, en) in enumerate(idx):
         nxt = idx[i + 1][0] if i + 1 < len(idx) else len(s)
         body = s[en:nxt].strip(" \n:")
         if body:
             out[n] = out.get(n, "") + ("\n\n" if n in out else "") + body
-    return (out or {1: s}), "labelled:Nominator N"
+    return (out or {"1": s}), "labelled:Nominator N"
 
 def split_dimensions(s):
     """People:/Planet:/Prosperity: sub-headers inside a justification block."""
@@ -231,7 +243,7 @@ for i, row in df.iterrows():
     emls,  m2 = split_nominator_blocks(r["email"]);      stat_hits["email"][m2] += 1
     orcs,  m3 = split_nominator_blocks(r["orcid"]);      stat_hits["orcid"][m3] += 1
     affs,  m4 = split_nominator_blocks(r["affiliation"]);stat_hits["affiliation"][m4] += 1
-    keys = sorted(set(names) | set(emls) | set(orcs) | set(affs))
+    keys = sorted(set(names) | set(emls) | set(orcs) | set(affs), key=nom_sort)
     people = []
     for k in keys:
         nm = (names.get(k) or "").strip()
@@ -247,15 +259,15 @@ for i, row in df.iterrows():
     # --- narrative fields, per nominator, with impact dimensions ---------------
     just, mj = split_nominator_blocks(r["justification"]); stat_hits["justification"][mj] += 1
     rec["justifications"] = []
-    for k, body in sorted(just.items()):
+    for k, body in sorted(just.items(), key=lambda kv: nom_sort(kv[0])):
         dims, md = split_dimensions(body)
         rec["justifications"].append({"seq": k, "text": body, "dimensions": dims or None,
                                       "dimension_parse": md})
         if md: stat_hits["justification"]["+" + md] += 1
     inter, mi = split_nominator_blocks(r["interaction"]);  stat_hits["interaction"][mi] += 1
-    rec["interactions"] = [{"seq": k, "text": v} for k, v in sorted(inter.items())]
+    rec["interactions"] = [{"seq": k, "text": v} for k, v in sorted(inter.items(), key=lambda kv: nom_sort(kv[0]))]
     desc, mdz = split_nominator_blocks(r["description"]);  stat_hits["description"][mdz] += 1
-    rec["descriptions"] = [{"seq": k, "text": v} for k, v in sorted(desc.items())]
+    rec["descriptions"] = [{"seq": k, "text": v} for k, v in sorted(desc.items(), key=lambda kv: nom_sort(kv[0]))]
     records.append(rec)
 
 # ---------- 4. JSON-LD ---------------------------------------------------------
