@@ -288,7 +288,12 @@ function openDataset(id, opts){
     if (opts && opts.fromHash) history.replaceState(null, '', want);
     else history.pushState(null, '', want);
   }
-  document.getElementById('d-title').textContent = d.title;
+  // long titles step down a size tier so they stay scannable instead of filling
+  // the viewport; the tiers roughly track the distribution of titles in the data
+  const h1 = document.getElementById('d-title');
+  h1.textContent = d.title;
+  const n = (d.title || '').length;
+  h1.dataset.len = n <= 40 ? 'short' : n <= 90 ? 'medium' : n <= 160 ? 'long' : 'xlong';
 
   const meta = [];
   if (d.doi) meta.push(`<span>DOI &nbsp;<b>${esc(d.doi.replace('https://doi.org/',''))}</b></span>`);

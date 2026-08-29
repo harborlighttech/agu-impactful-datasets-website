@@ -605,7 +605,12 @@ a{color:inherit}
   color:var(--ink-2);padding:0;margin-bottom:24px}
 .back:hover{color:var(--mark)}
 .d-head{padding-bottom:24px;border-bottom:3px solid var(--primary)}
-.d-head h1{font-size:clamp(32px,4.4vw,50px);letter-spacing:-.03em;max-width:20ch}
+.d-head h1{font-size:clamp(32px,4.4vw,50px);letter-spacing:-.03em}
+.d-head h1[data-len="medium"]{font-size:clamp(28px,3.4vw,38px);letter-spacing:-.026em}
+.d-head h1[data-len="long"]{font-size:clamp(24px,2.6vw,30px);letter-spacing:-.02em;
+  line-height:1.22;max-width:62ch}
+.d-head h1[data-len="xlong"]{font-size:clamp(21px,2vw,25px);letter-spacing:-.014em;
+  line-height:1.3;max-width:74ch}
 .d-meta{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:16px;font-family:var(--f-label);
   font-size:11px;color:var(--ink-2)}
 .d-meta b{color:var(--ink);font-weight:500}
@@ -1187,7 +1192,12 @@ function openDataset(id, opts){
     if (opts && opts.fromHash) history.replaceState(null, '', want);
     else history.pushState(null, '', want);
   }
-  document.getElementById('d-title').textContent = d.title;
+  // long titles step down a size tier so they stay scannable instead of filling
+  // the viewport; the tiers roughly track the distribution of titles in the data
+  const h1 = document.getElementById('d-title');
+  h1.textContent = d.title;
+  const n = (d.title || '').length;
+  h1.dataset.len = n <= 40 ? 'short' : n <= 90 ? 'medium' : n <= 160 ? 'long' : 'xlong';
 
   const meta = [];
   if (d.doi) meta.push(`<span>DOI &nbsp;<b>${esc(d.doi.replace('https://doi.org/',''))}</b></span>`);

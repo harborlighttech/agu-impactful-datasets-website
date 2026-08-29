@@ -83,6 +83,8 @@ a{color:inherit}
 .group-head{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
 .group-swatch{width:11px;height:11px;border-radius:2px;flex:none;transform:translateY(1px)}
 .group-head h3{font-size:15px;font-weight:600;letter-spacing:-.012em}
+.group-empty{margin:0;padding:20px 2px 22px;border-bottom:5px solid var(--rule);
+  border-radius:2px;color:var(--ink-3);font-size:14px}
 
 .books{display:grid;grid-template-columns:repeat(20,1fr);gap:5px;align-items:end;
   padding:18px 7px 0;background:linear-gradient(180deg,transparent 0 58%,var(--surface-2) 58%);
@@ -151,7 +153,12 @@ a{color:inherit}
   color:var(--ink-2);padding:0;margin-bottom:24px}
 .back:hover{color:var(--mark)}
 .d-head{padding-bottom:24px;border-bottom:3px solid var(--primary)}
-.d-head h1{font-size:clamp(32px,4.4vw,50px);letter-spacing:-.03em;max-width:20ch}
+.d-head h1{font-size:clamp(32px,4.4vw,50px);letter-spacing:-.03em}
+.d-head h1[data-len="medium"]{font-size:clamp(28px,3.4vw,38px);letter-spacing:-.026em}
+.d-head h1[data-len="long"]{font-size:clamp(24px,2.6vw,30px);letter-spacing:-.02em;
+  line-height:1.22;max-width:62ch}
+.d-head h1[data-len="xlong"]{font-size:clamp(21px,2vw,25px);letter-spacing:-.014em;
+  line-height:1.3;max-width:74ch}
 .d-meta{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:16px;font-family:var(--f-label);
   font-size:11px;color:var(--ink-2)}
 .d-meta b{color:var(--ink);font-weight:500}
@@ -161,7 +168,8 @@ a{color:inherit}
 .sec > h2{font-size:12px;font-family:var(--f-label);font-weight:500;letter-spacing:.12em;
   text-transform:uppercase;color:var(--ink-3);padding-bottom:9px;margin-bottom:16px;
   border-bottom:1px solid var(--rule)}
-.sec p{font-size:15.5px;color:#31505C}
+.sec p{font-size:15.5px;color:#31505C;max-width:74ch}
+.sec p+p,.just p+p{margin-top:.2em}
 .card{position:relative;background:var(--surface);border:1px solid var(--rule);border-radius:6px;
   padding:20px;margin-bottom:20px}
 .card > h2{font-size:11px;font-family:var(--f-label);font-weight:500;letter-spacing:.12em;
