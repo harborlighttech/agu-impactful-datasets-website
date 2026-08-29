@@ -9,7 +9,6 @@ const DATA = {
   themes: [],
   datasets: [],
   featured: (window.SITE_CONFIG || {}).featured || null,
-  nominatorCount: (window.SITE_CONFIG || {}).nominatorCount || 0,
 };
 
 /* Discipline comes through as a reference to a DefinedTerm; resolve it to the short
@@ -79,7 +78,7 @@ const linkify = s => s.replace(/https?:\/\/[^\s,;)\]]+/g, u => {
 function paintTally(){
   document.getElementById('t-ds').textContent = DATA.datasets.length;
   document.getElementById('t-th').textContent = DATA.themes.length;
-  document.getElementById('t-nm').textContent = DATA.nominatorCount || countNominators();
+  document.getElementById('t-nm').textContent = countNominators();
 }
 function countNominators(){
   const seen = new Set();
