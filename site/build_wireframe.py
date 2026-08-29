@@ -727,7 +727,7 @@ a{color:inherit}
 .people li{transition:background .3s ease,box-shadow .3s ease;border-radius:5px;
   scroll-margin-top:20px}
 .people li.lit{background:var(--mark-bg);box-shadow:0 0 0 6px var(--mark-bg)}
-.people .jump{display:inline-block;margin-top:5px;font-family:var(--f-label);font-size:9.5px;
+.people .jump{display:inline-block;margin-top:6px;font-family:var(--f-label);font-size:10px;
   font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--secondary);
   background:none;border:none;padding:0;cursor:pointer}
 .people .jump:hover{text-decoration:underline}
@@ -937,7 +937,8 @@ a{color:inherit}
 <footer class="site-foot">
   <div class="shell">
     <span class="logo foot" aria-hidden="true"></span>
-    <p>Impactful Datasets &middot; concept wireframe &middot; not for distribution</p>
+    <p>Impactful Datasets &middot; %(datasets)d datasets &middot; %(nominators)d nominators
+       &middot; build %(build)s</p>
   </div>
 </footer>
 
@@ -1362,7 +1363,7 @@ function openDataset(id, opts){
     return `<li id="nominator-${p.seq}">${head}
       ${p.affil ? `<span class="aff">${esc(p.affil)}</span>` : ''}
       ${p.orcid ? `<span class="oid">${esc(p.orcid)}</span>` : ''}
-      ${hasJust[p.seq] ? `<button class="jump" data-jump="${p.seq}">Read their justification ↑</button>` : ''}
+      ${hasJust[p.seq] ? `<button class="jump" data-jump="${p.seq}">Read their Nomination →</button>` : ''}
       ${p.interaction ? `<div class="interaction" id="interaction-${i}" hidden>${paras(p.interaction)}</div>` : ''}
     </li>`;
   }).join('')
@@ -1399,12 +1400,13 @@ function openDataset(id, opts){
   document.querySelectorAll('#d-just .just-more').forEach(b =>
     b.addEventListener('click', () => setJustOpen(b.dataset.more, !isJustOpen(b.dataset.more), false)));
 
-  // "Read their justification" is a toggle, not a jump: it opens the matching block
-  // and scrolls to it, and closes it again on a second click.
+  // "Read their Nomination" is a one-way link to that nominator's entry in
+  // "Why it was nominated". It expands the block first if the reader had collapsed
+  // it, so the link never lands on a closed section, then scrolls and highlights.
+  // A plain <a href="#just-1"> is deliberately not used: the page routes on the URL
+  // fragment, so writing a bare anchor there would knock it back to the collection.
   document.querySelectorAll('#d-people .jump').forEach(b =>
-    b.addEventListener('click', () => setJustOpen(b.dataset.jump, !isJustOpen(b.dataset.jump), true)));
-
-  document.querySelectorAll('#d-people .jump').forEach(b => syncJumpLabel(b.dataset.jump));
+    b.addEventListener('click', () => setJustOpen(b.dataset.jump, true, true)));
 
   citeDoi = d.doi ? d.doi.replace('https://doi.org/','') : null;
   citeBtn.hidden = !citeDoi;
@@ -1437,15 +1439,8 @@ function setJustOpen(seq, open, scroll){
     more.textContent = open ? 'Hide ↑' : 'Show ↓';
     more.setAttribute('aria-expanded', String(open));
   }
-  syncJumpLabel(seq);
   if (open && scroll) spotlight(sec);
   else if (!open && scroll) sec.scrollIntoView({behavior:'smooth', block:'center'});
-}
-function syncJumpLabel(seq){
-  const jump = document.querySelector(`#d-people .jump[data-jump="${seq}"]`);
-  if (!jump) return;
-  jump.textContent = isJustOpen(seq) ? 'Hide their justification ↑' : 'Read their justification ↑';
-  jump.setAttribute('aria-expanded', String(isJustOpen(seq)));
 }
 
 /* Full labels for every group a dataset was nominated under. */
@@ -1732,6 +1727,9 @@ head = '''<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- index.html carries no fingerprint of its own, so ask for revalidation:
+     a stale copy would keep pointing at superseded assets. -->
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
 <title>Impactful Datasets in the Earth, Space, and Environmental Sciences — AGU</title>
 <meta name="description" content="A community-nominated collection of the Earth, space and
 environmental science datasets that researchers say reshaped their field. Browse %(datasets)d
@@ -1754,7 +1752,12 @@ tail = '''
 </html>
 '''
 
+BUILD = hashlib.sha1(
+    (fingerprint("assets/js/app.js") + fingerprint("assets/css/site.css")
+     + DATA_PATH.read_text(encoding="utf-8")).encode()).hexdigest()[:8]
+
 index = (head + body + tail) % {
+    "build": BUILD,
     "datasets": len(out),
     "themes": len(payload["themes"]),
     "nominators": NOMINATORS,

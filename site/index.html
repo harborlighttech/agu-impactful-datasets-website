@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- index.html carries no fingerprint of its own, so ask for revalidation:
+     a stale copy would keep pointing at superseded assets. -->
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
 <title>Impactful Datasets in the Earth, Space, and Environmental Sciences — AGU</title>
 <meta name="description" content="A community-nominated collection of the Earth, space and
 environmental science datasets that researchers say reshaped their field. Browse 133
@@ -14,7 +17,7 @@ datasets across 9 discipline groups, nominated by 161 researchers.">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/tokens.css?v=605d35ce">
-<link rel="stylesheet" href="assets/css/site.css?v=2139cb1a">
+<link rel="stylesheet" href="assets/css/site.css?v=f598fec1">
 <link rel="alternate" type="application/ld+json" href="data/impactful_datasets.data.jsonld" title="Collection metadata (schema.org)">
 </head>
 <body>
@@ -161,7 +164,8 @@ datasets across 9 discipline groups, nominated by 161 researchers.">
 <footer class="site-foot">
   <div class="shell">
     <span class="logo foot" aria-hidden="true"></span>
-    <p>Impactful Datasets &middot; concept wireframe &middot; not for distribution</p>
+    <p>Impactful Datasets &middot; 133 datasets &middot; 161 nominators
+       &middot; build 9fa1d926</p>
   </div>
 </footer>
 
@@ -189,6 +193,6 @@ datasets across 9 discipline groups, nominated by 161 researchers.">
 
 
 <script src="assets/js/config.js?v=2acd3b05"></script>
-<script src="assets/js/app.js?v=cf2b6273" defer></script>
+<script src="assets/js/app.js?v=2ea6050b" defer></script>
 </body>
 </html>

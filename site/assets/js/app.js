@@ -400,7 +400,7 @@ function openDataset(id, opts){
     return `<li id="nominator-${p.seq}">${head}
       ${p.affil ? `<span class="aff">${esc(p.affil)}</span>` : ''}
       ${p.orcid ? `<span class="oid">${esc(p.orcid)}</span>` : ''}
-      ${hasJust[p.seq] ? `<button class="jump" data-jump="${p.seq}">Read their justification ↑</button>` : ''}
+      ${hasJust[p.seq] ? `<button class="jump" data-jump="${p.seq}">Read their Nomination →</button>` : ''}
       ${p.interaction ? `<div class="interaction" id="interaction-${i}" hidden>${paras(p.interaction)}</div>` : ''}
     </li>`;
   }).join('')
@@ -437,12 +437,13 @@ function openDataset(id, opts){
   document.querySelectorAll('#d-just .just-more').forEach(b =>
     b.addEventListener('click', () => setJustOpen(b.dataset.more, !isJustOpen(b.dataset.more), false)));
 
-  // "Read their justification" is a toggle, not a jump: it opens the matching block
-  // and scrolls to it, and closes it again on a second click.
+  // "Read their Nomination" is a one-way link to that nominator's entry in
+  // "Why it was nominated". It expands the block first if the reader had collapsed
+  // it, so the link never lands on a closed section, then scrolls and highlights.
+  // A plain <a href="#just-1"> is deliberately not used: the page routes on the URL
+  // fragment, so writing a bare anchor there would knock it back to the collection.
   document.querySelectorAll('#d-people .jump').forEach(b =>
-    b.addEventListener('click', () => setJustOpen(b.dataset.jump, !isJustOpen(b.dataset.jump), true)));
-
-  document.querySelectorAll('#d-people .jump').forEach(b => syncJumpLabel(b.dataset.jump));
+    b.addEventListener('click', () => setJustOpen(b.dataset.jump, true, true)));
 
   citeDoi = d.doi ? d.doi.replace('https://doi.org/','') : null;
   citeBtn.hidden = !citeDoi;
@@ -475,15 +476,8 @@ function setJustOpen(seq, open, scroll){
     more.textContent = open ? 'Hide ↑' : 'Show ↓';
     more.setAttribute('aria-expanded', String(open));
   }
-  syncJumpLabel(seq);
   if (open && scroll) spotlight(sec);
   else if (!open && scroll) sec.scrollIntoView({behavior:'smooth', block:'center'});
-}
-function syncJumpLabel(seq){
-  const jump = document.querySelector(`#d-people .jump[data-jump="${seq}"]`);
-  if (!jump) return;
-  jump.textContent = isJustOpen(seq) ? 'Hide their justification ↑' : 'Read their justification ↑';
-  jump.setAttribute('aria-expanded', String(isJustOpen(seq)));
 }
 
 /* Full labels for every group a dataset was nominated under. */
