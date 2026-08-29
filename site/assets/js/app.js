@@ -59,6 +59,11 @@ const THEME_VAR = {atmos:'--atmos',ocean:'--ocean',biosphere:'--biosphere',
   interior:'--interior',surface:'--surface-c',society:'--society',space:'--space',materials:'--materials'};
 const css = k => getComputedStyle(document.documentElement).getPropertyValue(THEME_VAR[k]).trim();
 const esc = s => (s==null?'':String(s)).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* Source prose keeps its paragraph breaks; render them as paragraphs rather than one
+   wall of text, linkifying bare URLs on the way through. */
+const paras = s => (s == null ? '' : String(s)).split(/\n\s*\n|\n/)
+  .map(x => x.trim()).filter(Boolean)
+  .map(x => `<p>${linkify(esc(x))}</p>`).join('');
 // Turn URLs inside already-escaped citation text into links. Safe because esc()
 // has removed every angle bracket and quote before this runs.
 const linkify = s => s.replace(/https?:\/\/[^\s,;)\]]+/g, u => {
@@ -282,7 +287,8 @@ function openDataset(id, opts){
   if (d.refsTotal) meta.push(`<span>Cited in &nbsp;<b>${d.refsTotal}</b>&nbsp; publications</span>`);
   if (d.reuseTotal) meta.push(`<span>Reuse examples &nbsp;<b>${d.reuseTotal}</b></span>`);
   document.getElementById('d-meta').innerHTML = meta.join('');
-  document.getElementById('d-desc').textContent = d.desc || 'No description supplied in the nomination.';
+  document.getElementById('d-desc').innerHTML =
+    d.desc ? paras(d.desc) : '<p>No description supplied in the nomination.</p>';
 
   // Match each justification block to the nominator who wrote it, so the reader
   // sees a name rather than "Nominator 2".
@@ -299,7 +305,7 @@ function openDataset(id, opts){
          </button>`
       : `<div class="who"><span class="nm">Nominator ${seq}</span></div>`;
     return `<div class="just">${head}
-      <p>${esc(j.text)}</p>${dims?`<div class="dims">${dims}</div>`:''}</div>`;
+      ${paras(j.text)}${dims?`<div class="dims">${dims}</div>`:''}</div>`;
   }).join('') || '<p>No justification recorded.</p>';
 
   const rs = document.getElementById('d-reuse-sec');

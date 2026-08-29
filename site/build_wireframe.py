@@ -139,7 +139,10 @@ def txt(v, cap=None):
         v = " ".join(txt(x) or "" for x in v)
     elif isinstance(v, dict):
         v = v.get('schema:text') or v.get('name') or ""
-    v = re.sub(r'\s+', ' ', str(v)).strip()
+    v = str(v).replace('\r\n', '\n').replace('\r', '\n')
+    v = re.sub(r'[ \t]+', ' ', v)          # collapse runs of spaces
+    v = re.sub(r' *\n *', '\n', v)         # trim around line breaks
+    v = re.sub(r'\n{3,}', '\n\n', v).strip()
     return (v[:cap].rsplit(' ', 1)[0] + '…') if cap and len(v) > cap else v
 
 out = []
@@ -157,14 +160,16 @@ for x in g:
                        "affil": affs[0] if affs else None})
     just = []
     for j in (nm.get('justification') or []):
-        dims = [{"label": dd.get('prefLabel'), "text": txt(dd.get('schema:text'), 420)}
+        dims = [{"label": dd.get('prefLabel'), "text": txt(dd.get('schema:text'))}
                 for dd in (j.get('impactDimension') or [])]
-        just.append({"seq": j.get('sequence'), "text": txt(j.get('schema:text'), 900), "dims": dims})
+        just.append({"seq": j.get('sequence'), "text": txt(j.get('schema:text')), "dims": dims})
     lp = x.get('landingPage') or []
     doi = next((u for u in lp if 'doi.org/' in u), None)
     repos = [by[r] for r in (x.get('inCatalog') or []) if r in by]
-    refs = [txt(r.get('schema:citation'), 300) for r in (x.get('isReferencedBy') or [])][:8]
-    reuse = [txt(r.get('schema:text'), 200) for r in (x.get('reuseExample') or [])][:5]
+    # item counts stay capped -- the page shows "+N more in the record" for those --
+    # but no individual citation or example is cut mid-sentence
+    refs = [txt(r.get('schema:citation')) for r in (x.get('isReferencedBy') or [])][:8]
+    reuse = [txt(r.get('schema:text')) for r in (x.get('reuseExample') or [])][:5]
     out.append({
         "title": x.get('title'),
         "theme": tkey[(x.get('theme') or [None])[0]] if x.get('theme') else "society",
@@ -174,10 +179,10 @@ for x in g:
         "links": [u for u in lp if u != doi][:3],
         "repo": repos[0].get('name') if repos else None,
         "repoIds": (repos[0].get('identifier') if repos else None) or [],
-        "creators": [c.get('name') for c in (x.get('creator') or [])][:4],
-        "curators": [c.get('name') for c in (x.get('curator') or [])][:3],
-        "desc": txt(x.get('description'), 1100),
-        "just": just[:4],
+        "creators": [c.get('name') for c in (x.get('creator') or [])],
+        "curators": [c.get('name') for c in (x.get('curator') or [])],
+        "desc": txt(x.get('description')),
+        "just": just,
         "refs": refs,
         "reuse": reuse,
         "reuseTotal": len(x.get('reuseExample') or []),
@@ -579,7 +584,8 @@ a{color:inherit}
 .sec > h2{font-size:12px;font-family:var(--f-label);font-weight:500;letter-spacing:.12em;
   text-transform:uppercase;color:var(--ink-3);padding-bottom:9px;margin-bottom:16px;
   border-bottom:1px solid var(--rule)}
-.sec p{font-size:15.5px;color:#31505C}
+.sec p{font-size:15.5px;color:#31505C;max-width:74ch}
+.sec p+p,.just p+p{margin-top:.2em}
 .card{position:relative;background:var(--surface);border:1px solid var(--rule);border-radius:6px;
   padding:20px;margin-bottom:20px}
 .card > h2{font-size:11px;font-family:var(--f-label);font-weight:500;letter-spacing:.12em;
@@ -704,7 +710,7 @@ a{color:inherit}
     </a>
     <nav class="site-nav">
       <a href="#" id="nav-collection" data-go="collection" aria-current="page"
-         onclick="return false">The Collection</a>
+         onclick="return false">Impactful Datasets</a>
       <a href="https://data.agu.org/2026/08/19/Impactful-Datasets.html"
          target="_blank" rel="noopener">About the project</a>
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSf0Tlb1a29C2I-lNyl8qf_1oG1tFBosYW5qGBBj70D42Nhn_w/viewform" target="_blank" rel="noopener">Nominate</a>
@@ -784,7 +790,7 @@ a{color:inherit}
     <div>
       <section class="sec">
         <h2>What it is</h2>
-        <p id="d-desc"></p>
+        <div id="d-desc"></div>
       </section>
 
       <section class="sec">
@@ -921,6 +927,11 @@ const THEME_VAR = {atmos:'--atmos',ocean:'--ocean',biosphere:'--biosphere',
   interior:'--interior',surface:'--surface-c',society:'--society',space:'--space',materials:'--materials'};
 const css = k => getComputedStyle(document.documentElement).getPropertyValue(THEME_VAR[k]).trim();
 const esc = s => (s==null?'':String(s)).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* Source prose keeps its paragraph breaks; render them as paragraphs rather than one
+   wall of text, linkifying bare URLs on the way through. */
+const paras = s => (s == null ? '' : String(s)).split(/\n\s*\n|\n/)
+  .map(x => x.trim()).filter(Boolean)
+  .map(x => `<p>${linkify(esc(x))}</p>`).join('');
 // Turn URLs inside already-escaped citation text into links. Safe because esc()
 // has removed every angle bracket and quote before this runs.
 const linkify = s => s.replace(/https?:\/\/[^\s,;)\]]+/g, u => {
@@ -1144,7 +1155,8 @@ function openDataset(id, opts){
   if (d.refsTotal) meta.push(`<span>Cited in &nbsp;<b>${d.refsTotal}</b>&nbsp; publications</span>`);
   if (d.reuseTotal) meta.push(`<span>Reuse examples &nbsp;<b>${d.reuseTotal}</b></span>`);
   document.getElementById('d-meta').innerHTML = meta.join('');
-  document.getElementById('d-desc').textContent = d.desc || 'No description supplied in the nomination.';
+  document.getElementById('d-desc').innerHTML =
+    d.desc ? paras(d.desc) : '<p>No description supplied in the nomination.</p>';
 
   // Match each justification block to the nominator who wrote it, so the reader
   // sees a name rather than "Nominator 2".
@@ -1161,7 +1173,7 @@ function openDataset(id, opts){
          </button>`
       : `<div class="who"><span class="nm">Nominator ${seq}</span></div>`;
     return `<div class="just">${head}
-      <p>${esc(j.text)}</p>${dims?`<div class="dims">${dims}</div>`:''}</div>`;
+      ${paras(j.text)}${dims?`<div class="dims">${dims}</div>`:''}</div>`;
   }).join('') || '<p>No justification recorded.</p>';
 
   const rs = document.getElementById('d-reuse-sec');
