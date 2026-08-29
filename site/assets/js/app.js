@@ -50,7 +50,8 @@ function adopt(sd){
     nominators: (sd["agu:nominator"] || []).map(p => ({
       seq: p["agu:sequence"], name: p.name,
       orcid: (p["@id"] || "").startsWith("http") ? p["@id"] : null,
-      affil: (p.affiliation || {}).name || null })),
+      affil: (p.affiliation || {}).name || null,
+      interaction: p["agu:interactionStatement"] || null })),
     just: (sd["agu:justification"] || []).map(j => ({
       seq: j["agu:sequence"], text: j.text,
       dims: (j["agu:impactDimension"] || []).map(x => ({label: x.name, text: x.description})) })),
@@ -257,6 +258,10 @@ function showTip(el, d){
     `<dt>Discipline</dt><dd>${esc(labelsFor(d))}</dd>` +
     `<dt>Repository</dt><dd>${esc(repo)}</dd>` +
     `<dt>Nominated by</dt><dd>${names.length ? esc(names.join(', ')) : 'Not recorded'}</dd>`;
+  placeTip(el);
+}
+
+function placeTip(el){
   tip.classList.add('on');
   tip.setAttribute('aria-hidden','false');
   const r = el.getBoundingClientRect(), t = tip.getBoundingClientRect();
@@ -273,7 +278,19 @@ function showTip(el, d){
   tipTail.style.top = placeBelow ? '-5px' : 'auto';
   tipTail.style.bottom = placeBelow ? 'auto' : '-5px';
 }
-function hideTip(){ tip.classList.remove('on'); tip.setAttribute('aria-hidden','true'); }
+/* Same bubble, prose layout: used for "how I interact with this dataset". */
+function showProseTip(el, p){
+  tipTitle.textContent = p.name || 'Nominator';
+  tipList.innerHTML = `<dt>Uses it for</dt><dd>${esc(p.interaction)}</dd>`
+    + `<dd class="hint" style="grid-column:1/-1">Click the name to keep this open</dd>`;
+  tip.classList.add('prose');
+  placeTip(el);
+}
+function hideTip(){
+  tip.classList.remove('on');
+  tip.classList.remove('prose');
+  tip.setAttribute('aria-hidden','true');
+}
 window.addEventListener('scroll', hideTip, {passive:true});
 
 /* ---- page 2 ---- */
@@ -357,13 +374,38 @@ function openDataset(id, opts){
 
   const hasJust = {};
   (d.just||[]).forEach((j,i) => { hasJust[j.seq || i+1] = true; });
-  document.getElementById('d-people').innerHTML = (d.nominators||[]).map(p =>
-    `<li id="nominator-${p.seq}"><b>${esc(p.name || 'Name withheld')}</b>
+  // A nominator who told us how they use the dataset gets their name turned into a
+  // control: hover or focus previews the statement, click pins it open underneath.
+  // Hover alone would hide it from keyboard and touch users entirely.
+  document.getElementById('d-people').innerHTML = (d.nominators||[]).map((p, i) => {
+    const nameHtml = `<b>${esc(p.name || 'Name withheld')}</b>`;
+    const head = p.interaction
+      ? `<button class="who-name" data-interaction="${i}" aria-expanded="false"
+                 aria-controls="interaction-${i}">${nameHtml}</button>`
+      : nameHtml;
+    return `<li id="nominator-${p.seq}">${head}
       ${p.affil ? `<span class="aff">${esc(p.affil)}</span>` : ''}
       ${p.orcid ? `<span class="oid">${esc(p.orcid)}</span>` : ''}
       ${hasJust[p.seq] ? `<button class="jump" data-jump="${p.seq}">Read their justification ↑</button>` : ''}
-    </li>`).join('')
+      ${p.interaction ? `<div class="interaction" id="interaction-${i}" hidden>${paras(p.interaction)}</div>` : ''}
+    </li>`;
+  }).join('')
     || '<li style="color:var(--ink-3);font-size:13px">No nominator recorded</li>';
+
+  document.querySelectorAll('#d-people .who-name').forEach(btn => {
+    const person = (d.nominators || [])[Number(btn.dataset.interaction)];
+    const panel = document.getElementById('interaction-' + btn.dataset.interaction);
+    btn.addEventListener('mouseenter', () => { if (panel.hidden) showProseTip(btn, person); });
+    btn.addEventListener('focus', () => { if (panel.hidden) showProseTip(btn, person); });
+    btn.addEventListener('mouseleave', hideTip);
+    btn.addEventListener('blur', hideTip);
+    btn.addEventListener('click', () => {
+      const open = panel.hidden;
+      panel.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+      hideTip();
+    });
+  });
 
   // wire both directions of the link
   document.querySelectorAll('#d-just .who[data-seq]').forEach(b =>

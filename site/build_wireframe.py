@@ -177,15 +177,38 @@ out = []
 for x in g:
     if 'dcat:Dataset' not in (x.get('@type') or []): continue
     nm = nom_of.get(x['@id'], {})
+    # "Short description of how you interact with this dataset", one statement per
+    # nominator, carrying the same Nominator N: key as the justification blocks.
+    inter = {}
+    for s in (nm.get('interactionStatement') or []):
+        v = txt(s.get('schema:text'))
+        if v:
+            inter[str(s.get('sequence') or '')] = v
+
+    # The nominator list is ordered by those same keys, so recover the key for each
+    # person from the statements rather than assuming a plain 1..n numbering -- some
+    # rows label their nominators 1a, 1b, 1c.
+    stmt_keys = {str(s.get('sequence')) for s in (nm.get('justification') or [])
+                 if s.get('sequence') is not None}
+    stmt_keys |= {k for k in inter}
+    ordered = sorted(stmt_keys, key=lambda k: (int(re.match(r'\d+', k).group()) if re.match(r'\d+', k) else 0,
+                                               re.sub(r'^\d+', '', k)))
+
+    # Only attribute a statement to an individual when the labels line up exactly.
+    # Four rows write one combined statement for a group of nominators; guessing by
+    # position there would put words in the wrong person's mouth.
+    roster = nm.get('nominator') or []
+    aligned = len(ordered) == len(roster)
+
     people = []
-    # Nominator order in the graph follows the "Nominator N:" blocks in the source
-    # spreadsheet, so position maps to the sequence used by the justification blocks.
-    for seq, pid in enumerate((nm.get('nominator') or []), start=1):
+    for i, pid in enumerate(roster):
         p = by.get(pid, {})
         affs = [by[a]['name'] for a in (p.get('affiliation') or []) if a in by]
-        people.append({"seq": seq, "name": p.get('name'),
+        key = ordered[i] if aligned else str(i + 1)
+        people.append({"seq": key, "name": p.get('name'),
                        "orcid": pid if pid.startswith('http') else None,
-                       "affil": affs[0] if affs else None})
+                       "affil": affs[0] if affs else None,
+                       "interaction": inter.get(key) if aligned else None})
     just = []
     for j in (nm.get('justification') or []):
         dims = [{"label": dd.get('prefLabel'), "text": txt(dd.get('schema:text'))}
@@ -367,6 +390,7 @@ def sd_dataset(rec):
                                  "name": p["affil"]}
                                 if p.get("affil") else None),
                 "agu:sequence": p.get("seq"),
+                "agu:interactionStatement": p.get("interaction"),
             }.items() if v is not None}
             for p in rec["nominators"]]
     if rec.get("just"):
@@ -588,6 +612,19 @@ a{color:inherit}
 [hidden]{display:none!important}
 
 /* ---------- hover bubble ---------- */
+.tip.prose{width:360px}
+.tip.prose dd{font-size:13px;line-height:1.55;max-height:15em;overflow:hidden}
+.tip .hint{display:block;margin-top:10px;font-family:var(--f-label);font-size:9px;
+  font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#9CC3D4}
+.people .who-name{background:none;border:none;padding:0;cursor:pointer;text-align:left;
+  font:inherit;color:inherit;display:inline-flex;align-items:baseline;gap:7px}
+.people .who-name b{border-bottom:1px dashed var(--ink-3)}
+.people .who-name:hover b,.people .who-name[aria-expanded="true"] b{border-bottom-color:var(--secondary);color:var(--secondary)}
+.people .who-name:focus-visible{outline:2px solid var(--secondary);outline-offset:3px;border-radius:3px}
+.people .interaction{margin:9px 0 0;padding:10px 12px;background:var(--surface-2);
+  border-left:2px solid var(--secondary);border-radius:0 4px 4px 0;font-family:var(--f-body);
+  font-size:13px;line-height:1.55;color:#31505C}
+.people .interaction[hidden]{display:none}
 .tip{position:fixed;z-index:80;width:310px;background:var(--primary);color:#fff;border-radius:7px;
   padding:14px 16px;box-shadow:0 12px 34px rgba(22,32,42,.32);pointer-events:none;
   opacity:0;transform:translateY(5px);transition:opacity .12s ease,transform .12s ease}
@@ -954,7 +991,8 @@ function adopt(sd){
     nominators: (sd["agu:nominator"] || []).map(p => ({
       seq: p["agu:sequence"], name: p.name,
       orcid: (p["@id"] || "").startsWith("http") ? p["@id"] : null,
-      affil: (p.affiliation || {}).name || null })),
+      affil: (p.affiliation || {}).name || null,
+      interaction: p["agu:interactionStatement"] || null })),
     just: (sd["agu:justification"] || []).map(j => ({
       seq: j["agu:sequence"], text: j.text,
       dims: (j["agu:impactDimension"] || []).map(x => ({label: x.name, text: x.description})) })),
@@ -1161,6 +1199,10 @@ function showTip(el, d){
     `<dt>Discipline</dt><dd>${esc(labelsFor(d))}</dd>` +
     `<dt>Repository</dt><dd>${esc(repo)}</dd>` +
     `<dt>Nominated by</dt><dd>${names.length ? esc(names.join(', ')) : 'Not recorded'}</dd>`;
+  placeTip(el);
+}
+
+function placeTip(el){
   tip.classList.add('on');
   tip.setAttribute('aria-hidden','false');
   const r = el.getBoundingClientRect(), t = tip.getBoundingClientRect();
@@ -1177,7 +1219,19 @@ function showTip(el, d){
   tipTail.style.top = placeBelow ? '-5px' : 'auto';
   tipTail.style.bottom = placeBelow ? 'auto' : '-5px';
 }
-function hideTip(){ tip.classList.remove('on'); tip.setAttribute('aria-hidden','true'); }
+/* Same bubble, prose layout: used for "how I interact with this dataset". */
+function showProseTip(el, p){
+  tipTitle.textContent = p.name || 'Nominator';
+  tipList.innerHTML = `<dt>Uses it for</dt><dd>${esc(p.interaction)}</dd>`
+    + `<dd class="hint" style="grid-column:1/-1">Click the name to keep this open</dd>`;
+  tip.classList.add('prose');
+  placeTip(el);
+}
+function hideTip(){
+  tip.classList.remove('on');
+  tip.classList.remove('prose');
+  tip.setAttribute('aria-hidden','true');
+}
 window.addEventListener('scroll', hideTip, {passive:true});
 
 /* ---- page 2 ---- */
@@ -1261,13 +1315,38 @@ function openDataset(id, opts){
 
   const hasJust = {};
   (d.just||[]).forEach((j,i) => { hasJust[j.seq || i+1] = true; });
-  document.getElementById('d-people').innerHTML = (d.nominators||[]).map(p =>
-    `<li id="nominator-${p.seq}"><b>${esc(p.name || 'Name withheld')}</b>
+  // A nominator who told us how they use the dataset gets their name turned into a
+  // control: hover or focus previews the statement, click pins it open underneath.
+  // Hover alone would hide it from keyboard and touch users entirely.
+  document.getElementById('d-people').innerHTML = (d.nominators||[]).map((p, i) => {
+    const nameHtml = `<b>${esc(p.name || 'Name withheld')}</b>`;
+    const head = p.interaction
+      ? `<button class="who-name" data-interaction="${i}" aria-expanded="false"
+                 aria-controls="interaction-${i}">${nameHtml}</button>`
+      : nameHtml;
+    return `<li id="nominator-${p.seq}">${head}
       ${p.affil ? `<span class="aff">${esc(p.affil)}</span>` : ''}
       ${p.orcid ? `<span class="oid">${esc(p.orcid)}</span>` : ''}
       ${hasJust[p.seq] ? `<button class="jump" data-jump="${p.seq}">Read their justification ↑</button>` : ''}
-    </li>`).join('')
+      ${p.interaction ? `<div class="interaction" id="interaction-${i}" hidden>${paras(p.interaction)}</div>` : ''}
+    </li>`;
+  }).join('')
     || '<li style="color:var(--ink-3);font-size:13px">No nominator recorded</li>';
+
+  document.querySelectorAll('#d-people .who-name').forEach(btn => {
+    const person = (d.nominators || [])[Number(btn.dataset.interaction)];
+    const panel = document.getElementById('interaction-' + btn.dataset.interaction);
+    btn.addEventListener('mouseenter', () => { if (panel.hidden) showProseTip(btn, person); });
+    btn.addEventListener('focus', () => { if (panel.hidden) showProseTip(btn, person); });
+    btn.addEventListener('mouseleave', hideTip);
+    btn.addEventListener('blur', hideTip);
+    btn.addEventListener('click', () => {
+      const open = panel.hidden;
+      panel.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+      hideTip();
+    });
+  });
 
   // wire both directions of the link
   document.querySelectorAll('#d-just .who[data-seq]').forEach(b =>
