@@ -663,7 +663,18 @@ a{color:inherit}
   padding:20px;margin-bottom:20px}
 .card > h2{font-size:11px;font-family:var(--f-label);font-weight:500;letter-spacing:.12em;
   text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
-.just{border-left:2px solid var(--rule);padding:2px 0 2px 18px;margin-bottom:20px}
+.just{border-left:2px solid var(--rule);padding:2px 0 2px 18px;margin-bottom:20px;
+  scroll-margin-top:20px;transition:border-color .3s ease}
+.just.lit{border-left-color:var(--secondary)}
+.just-body{position:relative}
+.just-body.clamped{max-height:11.5em;overflow:hidden}
+.just-body.clamped::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3.2em;
+  background:linear-gradient(180deg,rgba(255,255,255,0),var(--paper))}
+.just-more{margin:2px 0 0;padding:0;background:none;border:none;cursor:pointer;
+  font-family:var(--f-label);font-size:10px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--secondary)}
+.just-more:hover{text-decoration:underline}
+.just-more:focus-visible{outline:2px solid var(--secondary);outline-offset:3px;border-radius:3px}
 .just .who{font-family:var(--f-label);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
   color:var(--mark);margin-bottom:7px}
 .just p{font-size:14.5px;color:#31505C;margin-bottom:.7em}
@@ -1275,8 +1286,14 @@ function openDataset(id, opts){
            <span class="nm">${esc(who.name)}</span>${multi?`<span class="seq">Nominator ${seq}</span>`:''}
          </button>`
       : `<div class="who"><span class="nm">Nominator ${seq}</span></div>`;
-    return `<div class="just">${head}
-      ${paras(j.text)}${dims?`<div class="dims">${dims}</div>`:''}</div>`;
+    // Most justifications run well over a screenful (median ~2,000 characters), so
+    // long ones start clamped with an explicit control rather than dominating the page.
+    const longform = (j.text || '').length > 800;
+    return `<div class="just" id="just-${seq}" data-seq="${seq}">${head}
+      <div class="just-body${longform ? ' clamped' : ''}">${paras(j.text)}</div>
+      ${longform ? `<button class="just-more" data-more="${seq}"
+          aria-expanded="false" aria-controls="just-${seq}">Read more ↓</button>` : ''}
+      ${dims?`<div class="dims">${dims}</div>`:''}</div>`;
   }).join('') || '<p>No justification recorded.</p>';
 
   const rs = document.getElementById('d-reuse-sec');
@@ -1351,11 +1368,16 @@ function openDataset(id, opts){
   // wire both directions of the link
   document.querySelectorAll('#d-just .who[data-seq]').forEach(b =>
     b.addEventListener('click', () => spotlight(document.getElementById('nominator-' + b.dataset.seq))));
+
+  document.querySelectorAll('#d-just .just-more').forEach(b =>
+    b.addEventListener('click', () => setJustOpen(b.dataset.more, isJustOpen(b.dataset.more) ? false : true, false)));
+
+  // "Read their justification" is a toggle, not a jump: it opens the matching block
+  // and scrolls to it, and closes it again on a second click.
   document.querySelectorAll('#d-people .jump').forEach(b =>
-    b.addEventListener('click', () => {
-      const head = document.querySelector(`#d-just .who[data-seq="${b.dataset.jump}"]`);
-      if (head) spotlight(head.closest('.just'), head);
-    }));
+    b.addEventListener('click', () => setJustOpen(b.dataset.jump, !isJustOpen(b.dataset.jump), true)));
+
+  document.querySelectorAll('#d-people .jump').forEach(b => syncJumpLabel(b.dataset.jump));
 
   citeDoi = d.doi ? d.doi.replace('https://doi.org/','') : null;
   citeBtn.hidden = !citeDoi;
@@ -1364,6 +1386,42 @@ function openDataset(id, opts){
   loadDataCite(d);
   show('detail');
   window.scrollTo({top:0});
+}
+
+/* One open/close state per justification, shared by the control inside the block and
+   the "Read their justification" button in the nominator list, so the two can never
+   disagree about whether it is open. A block short enough not to be clamped counts as
+   permanently open. */
+function justBody(seq){
+  const sec = document.getElementById('just-' + seq);
+  return sec ? sec.querySelector('.just-body') : null;
+}
+function isJustOpen(seq){
+  const body = justBody(seq);
+  return body ? !body.classList.contains('clamped') : false;
+}
+function setJustOpen(seq, open, scroll){
+  const sec = document.getElementById('just-' + seq);
+  const body = justBody(seq);
+  if (!sec || !body) return;
+  const more = sec.querySelector('.just-more');
+  if (more){
+    body.classList.toggle('clamped', !open);
+    more.textContent = open ? 'Show less ↑' : 'Read more ↓';
+    more.setAttribute('aria-expanded', String(open));
+  }
+  syncJumpLabel(seq);
+  if (open && scroll) spotlight(sec);
+  else if (!open && scroll) sec.scrollIntoView({behavior:'smooth', block:'center'});
+}
+function syncJumpLabel(seq){
+  const jump = document.querySelector(`#d-people .jump[data-jump="${seq}"]`);
+  if (!jump) return;
+  const sec = document.getElementById('just-' + seq);
+  const collapsible = sec && sec.querySelector('.just-more');
+  if (!collapsible){ jump.textContent = 'Read their justification ↑'; return; }
+  jump.textContent = isJustOpen(seq) ? 'Hide their justification ↑' : 'Read their justification ↑';
+  jump.setAttribute('aria-expanded', String(isJustOpen(seq)));
 }
 
 /* Full labels for every group a dataset was nominated under. */
