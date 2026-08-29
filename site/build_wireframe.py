@@ -629,6 +629,16 @@ a{color:inherit}
   padding:14px 16px;box-shadow:0 12px 34px rgba(22,32,42,.32);pointer-events:none;
   opacity:0;transform:translateY(5px);transition:opacity .12s ease,transform .12s ease}
 .tip.on{opacity:1;transform:none}
+.tip.note{width:360px}
+.tip-body{display:none}
+.tip.note .tip-body{display:block;max-height:52vh;overflow:hidden;
+  -webkit-mask-image:linear-gradient(180deg,#000 86%,transparent);
+  mask-image:linear-gradient(180deg,#000 86%,transparent)}
+.tip.note dl{display:none}
+.tip-body p{margin:0 0 .65em;font-family:var(--f-body);font-size:13px;line-height:1.55;color:#E4EBF0}
+.tip-body p:last-child{margin-bottom:0}
+.tip-more{margin-top:10px;font-family:var(--f-label);font-size:9.5px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:#9CC3D4}
 .tip h4{font-size:14.5px;font-weight:600;letter-spacing:-.012em;line-height:1.32;margin:0 0 11px}
 .tip dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 13px}
 .tip dt{font-family:var(--f-label);font-size:9px;font-weight:600;letter-spacing:.09em;
@@ -666,13 +676,11 @@ a{color:inherit}
 .just{border-left:2px solid var(--rule);padding:2px 0 2px 18px;margin-bottom:20px;
   scroll-margin-top:20px;transition:border-color .3s ease}
 .just.lit{border-left-color:var(--secondary)}
-.just-body{position:relative}
-.just-body.clamped{max-height:11.5em;overflow:hidden}
-.just-body.clamped::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3.2em;
-  background:linear-gradient(180deg,rgba(255,255,255,0),var(--paper))}
-.just-more{margin:2px 0 0;padding:0;background:none;border:none;cursor:pointer;
+.just-body[hidden]{display:none}
+.just-head{display:flex;align-items:baseline;gap:12px;margin-bottom:7px}
+.just-more{margin-left:auto;padding:0;background:none;border:none;cursor:pointer;flex:none;
   font-family:var(--f-label);font-size:10px;font-weight:600;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--secondary)}
+  text-transform:uppercase;color:var(--secondary);white-space:nowrap}
 .just-more:hover{text-decoration:underline}
 .just-more:focus-visible{outline:2px solid var(--secondary);outline-offset:3px;border-radius:3px}
 .just .who{font-family:var(--f-label);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
@@ -711,7 +719,7 @@ a{color:inherit}
 /* ---------- nominator cross-links ---------- */
 .just .who{display:inline-flex;align-items:center;gap:7px;background:none;border:none;padding:0;
   cursor:pointer;text-align:left}
-.just .who .nm{color:var(--secondary);border-bottom:1px solid transparent}
+.just .who .nm{color:var(--secondary);border-bottom:1px dotted var(--secondary)}
 .just .who:hover .nm,.just .who:focus-visible .nm{border-bottom-color:currentColor}
 .just .who:focus-visible{outline:2px solid var(--secondary);outline-offset:3px;border-radius:3px}
 .just .who .seq{font-size:9.5px;background:var(--surface-2);border:1px solid var(--rule);
@@ -775,6 +783,7 @@ a{color:inherit}
   .books{gap:4px;padding:16px 5px 0}
   .book{height:158px;font-size:11px}
   .tip{width:min(310px,calc(100vw - 32px))}
+  .tip.note{width:min(360px,calc(100vw - 32px))}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 @media print{
@@ -949,6 +958,7 @@ a{color:inherit}
   <span class="tail"></span>
   <h4></h4>
   <dl></dl>
+  <div class="tip-body"></div>
 </div>
 
 <script>
@@ -1200,8 +1210,10 @@ qClear.addEventListener('click', () => { qEl.value=''; applyFilter(); qEl.focus(
 
 /* ---- hover bubble ---- */
 const tip = document.getElementById('tip');
-const tipTitle = tip.querySelector('h4'), tipList = tip.querySelector('dl'), tipTail = tip.querySelector('.tail');
+const tipTitle = tip.querySelector('h4'), tipList = tip.querySelector('dl'),
+      tipBody = tip.querySelector('.tip-body'), tipTail = tip.querySelector('.tail');
 function showTip(el, d){
+  tip.classList.remove('note');
   const names = (d.nominators||[]).map(p => p.name).filter(Boolean);
   const repo = !d.repo ? 'Not recorded'
     : (/^https?:\/\//.test(d.repo) ? d.repo.replace(/^https?:\/\/(www\.)?/,'').replace(/\/$/,'') : d.repo);
@@ -1230,17 +1242,21 @@ function placeTip(el){
   tipTail.style.top = placeBelow ? '-5px' : 'auto';
   tipTail.style.bottom = placeBelow ? 'auto' : '-5px';
 }
-/* Same bubble, prose layout: used for "how I interact with this dataset". */
+/* Same bubble, prose layout: the nominator's own "short description of how you
+   interact with this dataset". Distinct from their justification, which stays
+   in full beneath their name in the left column. */
 function showProseTip(el, p){
-  tipTitle.textContent = p.name || 'Nominator';
-  tipList.innerHTML = `<dt>Uses it for</dt><dd>${esc(p.interaction)}</dd>`
-    + `<dd class="hint" style="grid-column:1/-1">Click the name to keep this open</dd>`;
-  tip.classList.add('prose');
+  if (!p || !p.interaction) return;
+  tip.classList.add('note');
+  tipTitle.textContent = p.name ? `${p.name} — how they use it` : 'How they use it';
+  tipBody.innerHTML = paras(p.interaction)
+    + (p.interaction.length > 700
+        ? '<div class="tip-more">Click the name to read it all</div>' : '');
   placeTip(el);
 }
 function hideTip(){
   tip.classList.remove('on');
-  tip.classList.remove('prose');
+  tip.classList.remove('note');
   tip.setAttribute('aria-hidden','true');
 }
 window.addEventListener('scroll', hideTip, {passive:true});
@@ -1286,13 +1302,15 @@ function openDataset(id, opts){
            <span class="nm">${esc(who.name)}</span>${multi?`<span class="seq">Nominator ${seq}</span>`:''}
          </button>`
       : `<div class="who"><span class="nm">Nominator ${seq}</span></div>`;
-    // Most justifications run well over a screenful (median ~2,000 characters), so
-    // long ones start clamped with an explicit control rather than dominating the page.
-    const longform = (j.text || '').length > 800;
-    return `<div class="just" id="just-${seq}" data-seq="${seq}">${head}
-      <div class="just-body${longform ? ' clamped' : ''}">${paras(j.text)}</div>
-      ${longform ? `<button class="just-more" data-more="${seq}"
-          aria-expanded="false" aria-controls="just-${seq}">Read more ↓</button>` : ''}
+    // Every block gets the same control. An earlier version only made long ones
+    // collapsible, which meant two identical-looking buttons behaved differently
+    // depending on a character count the reader could not see.
+    return `<div class="just" id="just-${seq}" data-seq="${seq}">
+      <div class="just-head">${head}
+        <button class="just-more" data-more="${seq}" aria-expanded="true"
+                aria-controls="just-body-${seq}">Hide ↑</button>
+      </div>
+      <div class="just-body" id="just-body-${seq}">${paras(j.text)}</div>
       ${dims?`<div class="dims">${dims}</div>`:''}</div>`;
   }).join('') || '<p>No justification recorded.</p>';
 
@@ -1366,11 +1384,20 @@ function openDataset(id, opts){
   });
 
   // wire both directions of the link
-  document.querySelectorAll('#d-just .who[data-seq]').forEach(b =>
-    b.addEventListener('click', () => spotlight(document.getElementById('nominator-' + b.dataset.seq))));
+  document.querySelectorAll('#d-just .who[data-seq]').forEach(b => {
+    b.addEventListener('click', () => spotlight(document.getElementById('nominator-' + b.dataset.seq)));
+    // the same name in the justification header carries the same hover note
+    const person = (d.nominators || []).find(x => String(x.seq) === String(b.dataset.seq));
+    if (person && person.interaction){
+      b.addEventListener('mouseenter', () => showProseTip(b, person));
+      b.addEventListener('focus', () => showProseTip(b, person));
+      b.addEventListener('mouseleave', hideTip);
+      b.addEventListener('blur', hideTip);
+    }
+  });
 
   document.querySelectorAll('#d-just .just-more').forEach(b =>
-    b.addEventListener('click', () => setJustOpen(b.dataset.more, isJustOpen(b.dataset.more) ? false : true, false)));
+    b.addEventListener('click', () => setJustOpen(b.dataset.more, !isJustOpen(b.dataset.more), false)));
 
   // "Read their justification" is a toggle, not a jump: it opens the matching block
   // and scrolls to it, and closes it again on a second click.
@@ -1398,16 +1425,16 @@ function justBody(seq){
 }
 function isJustOpen(seq){
   const body = justBody(seq);
-  return body ? !body.classList.contains('clamped') : false;
+  return body ? !body.hidden : false;
 }
 function setJustOpen(seq, open, scroll){
   const sec = document.getElementById('just-' + seq);
   const body = justBody(seq);
   if (!sec || !body) return;
+  body.hidden = !open;
   const more = sec.querySelector('.just-more');
   if (more){
-    body.classList.toggle('clamped', !open);
-    more.textContent = open ? 'Show less ↑' : 'Read more ↓';
+    more.textContent = open ? 'Hide ↑' : 'Show ↓';
     more.setAttribute('aria-expanded', String(open));
   }
   syncJumpLabel(seq);
@@ -1417,9 +1444,6 @@ function setJustOpen(seq, open, scroll){
 function syncJumpLabel(seq){
   const jump = document.querySelector(`#d-people .jump[data-jump="${seq}"]`);
   if (!jump) return;
-  const sec = document.getElementById('just-' + seq);
-  const collapsible = sec && sec.querySelector('.just-more');
-  if (!collapsible){ jump.textContent = 'Read their justification ↑'; return; }
   jump.textContent = isJustOpen(seq) ? 'Hide their justification ↑' : 'Read their justification ↑';
   jump.setAttribute('aria-expanded', String(isJustOpen(seq)));
 }

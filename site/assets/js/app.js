@@ -248,8 +248,10 @@ qClear.addEventListener('click', () => { qEl.value=''; applyFilter(); qEl.focus(
 
 /* ---- hover bubble ---- */
 const tip = document.getElementById('tip');
-const tipTitle = tip.querySelector('h4'), tipList = tip.querySelector('dl'), tipTail = tip.querySelector('.tail');
+const tipTitle = tip.querySelector('h4'), tipList = tip.querySelector('dl'),
+      tipBody = tip.querySelector('.tip-body'), tipTail = tip.querySelector('.tail');
 function showTip(el, d){
+  tip.classList.remove('note');
   const names = (d.nominators||[]).map(p => p.name).filter(Boolean);
   const repo = !d.repo ? 'Not recorded'
     : (/^https?:\/\//.test(d.repo) ? d.repo.replace(/^https?:\/\/(www\.)?/,'').replace(/\/$/,'') : d.repo);
@@ -278,17 +280,21 @@ function placeTip(el){
   tipTail.style.top = placeBelow ? '-5px' : 'auto';
   tipTail.style.bottom = placeBelow ? 'auto' : '-5px';
 }
-/* Same bubble, prose layout: used for "how I interact with this dataset". */
+/* Same bubble, prose layout: the nominator's own "short description of how you
+   interact with this dataset". Distinct from their justification, which stays
+   in full beneath their name in the left column. */
 function showProseTip(el, p){
-  tipTitle.textContent = p.name || 'Nominator';
-  tipList.innerHTML = `<dt>Uses it for</dt><dd>${esc(p.interaction)}</dd>`
-    + `<dd class="hint" style="grid-column:1/-1">Click the name to keep this open</dd>`;
-  tip.classList.add('prose');
+  if (!p || !p.interaction) return;
+  tip.classList.add('note');
+  tipTitle.textContent = p.name ? `${p.name} — how they use it` : 'How they use it';
+  tipBody.innerHTML = paras(p.interaction)
+    + (p.interaction.length > 700
+        ? '<div class="tip-more">Click the name to read it all</div>' : '');
   placeTip(el);
 }
 function hideTip(){
   tip.classList.remove('on');
-  tip.classList.remove('prose');
+  tip.classList.remove('note');
   tip.setAttribute('aria-hidden','true');
 }
 window.addEventListener('scroll', hideTip, {passive:true});
@@ -334,13 +340,15 @@ function openDataset(id, opts){
            <span class="nm">${esc(who.name)}</span>${multi?`<span class="seq">Nominator ${seq}</span>`:''}
          </button>`
       : `<div class="who"><span class="nm">Nominator ${seq}</span></div>`;
-    // Most justifications run well over a screenful (median ~2,000 characters), so
-    // long ones start clamped with an explicit control rather than dominating the page.
-    const longform = (j.text || '').length > 800;
-    return `<div class="just" id="just-${seq}" data-seq="${seq}">${head}
-      <div class="just-body${longform ? ' clamped' : ''}">${paras(j.text)}</div>
-      ${longform ? `<button class="just-more" data-more="${seq}"
-          aria-expanded="false" aria-controls="just-${seq}">Read more ↓</button>` : ''}
+    // Every block gets the same control. An earlier version only made long ones
+    // collapsible, which meant two identical-looking buttons behaved differently
+    // depending on a character count the reader could not see.
+    return `<div class="just" id="just-${seq}" data-seq="${seq}">
+      <div class="just-head">${head}
+        <button class="just-more" data-more="${seq}" aria-expanded="true"
+                aria-controls="just-body-${seq}">Hide ↑</button>
+      </div>
+      <div class="just-body" id="just-body-${seq}">${paras(j.text)}</div>
       ${dims?`<div class="dims">${dims}</div>`:''}</div>`;
   }).join('') || '<p>No justification recorded.</p>';
 
@@ -414,11 +422,20 @@ function openDataset(id, opts){
   });
 
   // wire both directions of the link
-  document.querySelectorAll('#d-just .who[data-seq]').forEach(b =>
-    b.addEventListener('click', () => spotlight(document.getElementById('nominator-' + b.dataset.seq))));
+  document.querySelectorAll('#d-just .who[data-seq]').forEach(b => {
+    b.addEventListener('click', () => spotlight(document.getElementById('nominator-' + b.dataset.seq)));
+    // the same name in the justification header carries the same hover note
+    const person = (d.nominators || []).find(x => String(x.seq) === String(b.dataset.seq));
+    if (person && person.interaction){
+      b.addEventListener('mouseenter', () => showProseTip(b, person));
+      b.addEventListener('focus', () => showProseTip(b, person));
+      b.addEventListener('mouseleave', hideTip);
+      b.addEventListener('blur', hideTip);
+    }
+  });
 
   document.querySelectorAll('#d-just .just-more').forEach(b =>
-    b.addEventListener('click', () => setJustOpen(b.dataset.more, isJustOpen(b.dataset.more) ? false : true, false)));
+    b.addEventListener('click', () => setJustOpen(b.dataset.more, !isJustOpen(b.dataset.more), false)));
 
   // "Read their justification" is a toggle, not a jump: it opens the matching block
   // and scrolls to it, and closes it again on a second click.
@@ -446,16 +463,16 @@ function justBody(seq){
 }
 function isJustOpen(seq){
   const body = justBody(seq);
-  return body ? !body.classList.contains('clamped') : false;
+  return body ? !body.hidden : false;
 }
 function setJustOpen(seq, open, scroll){
   const sec = document.getElementById('just-' + seq);
   const body = justBody(seq);
   if (!sec || !body) return;
+  body.hidden = !open;
   const more = sec.querySelector('.just-more');
   if (more){
-    body.classList.toggle('clamped', !open);
-    more.textContent = open ? 'Show less ↑' : 'Read more ↓';
+    more.textContent = open ? 'Hide ↑' : 'Show ↓';
     more.setAttribute('aria-expanded', String(open));
   }
   syncJumpLabel(seq);
@@ -465,9 +482,6 @@ function setJustOpen(seq, open, scroll){
 function syncJumpLabel(seq){
   const jump = document.querySelector(`#d-people .jump[data-jump="${seq}"]`);
   if (!jump) return;
-  const sec = document.getElementById('just-' + seq);
-  const collapsible = sec && sec.querySelector('.just-more');
-  if (!collapsible){ jump.textContent = 'Read their justification ↑'; return; }
   jump.textContent = isJustOpen(seq) ? 'Hide their justification ↑' : 'Read their justification ↑';
   jump.setAttribute('aria-expanded', String(isJustOpen(seq)));
 }
