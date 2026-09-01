@@ -411,40 +411,75 @@ def sd_dataset(rec):
         d["citation"] = [{"@type": "CreativeWork", "text": c} for c in rec["refs"]]
     if rec.get("reuse"):
         d["agu:reuseExample"] = [{"@type": "CreativeWork", "text": c} for c in rec["reuse"]]
-    if rec.get("nominators"):
-        d["agu:nominator"] = [
-            {k: v for k, v in {
-                "@type": "Person",
-                # a real ORCID beats a minted id; fall back to a name-derived urn
-                "@id": p.get("orcid") or urn("person", p.get("name")),
-                "name": p.get("name"),
-                "affiliation": ({"@type": "Organization",
-                                 "@id": urn("organization", p["affil"]),
-                                 "name": p["affil"]}
-                                if p.get("affil") else None),
-                "agu:sequence": p.get("seq"),
-                "agu:interactionStatement": p.get("interaction"),
-            }.items() if v is not None}
-            for p in rec["nominators"]]
-    if rec.get("just"):
-        d["agu:justification"] = [
-            {k: v for k, v in {
-                "@type": "CreativeWork",
-                "agu:sequence": j.get("seq"),
-                "text": j.get("text"),
-                "agu:impactDimension": ([{"@type": "DefinedTerm", "name": x["label"],
-                                          "description": x["text"]}
-                                         for x in j["dims"]] if j.get("dims") else None),
-            }.items() if v is not None}
-            for j in rec["just"]]
     return d
 
 
-data_doc = {
-    "@context": {
-        "@vocab": "https://schema.org/",
-        "agu": NS_URN,
-    },
+def sd_endorsements(rec):
+    """One EndorseAction per nominator, wrapped in an ordered ItemList.
+
+    A nomination is an endorsement: a person vouching for a dataset. Modelling it
+    as schema.org/EndorseAction collapses three things that used to be separate
+    custom properties -- the nominator, their justification and their description
+    of how they use the data -- into the single event they actually describe.
+
+    schema.org has no property linking a Thing to actions already performed on it
+    (potentialAction means the opposite), so the actions live as siblings in the
+    graph and point back with `object`. Order is carried by an ItemList whose
+    itemListElement is an @list, since a plain graph is unordered.
+    """
+    if not rec.get("nominators"):
+        return None
+    just = {str(j.get("seq")): j for j in (rec.get("just") or [])}
+    ds_id = ID_URN + "dataset:" + rec["id"]
+    actions = []
+    for n, p in enumerate(rec["nominators"], start=1):
+        j = just.get(str(p.get("seq")))
+        agent = {k: v for k, v in {
+            "@type": "Person",
+            # a real ORCID beats a minted id; fall back to a name-derived urn
+            "@id": p.get("orcid") or urn("person", p.get("name")),
+            "name": p.get("name"),
+            "affiliation": ({"@type": "Organization",
+                             "@id": urn("organization", p["affil"]),
+                             "name": p["affil"]}
+                            if p.get("affil") else None),
+        }.items() if v is not None}
+        # The justification is what this endorsement produced, so it hangs off the
+        # action as `result`; its People/Planet/Prosperity tags become `about`,
+        # which retires agu:impactDimension.
+        result = None
+        if j and j.get("text"):
+            result = {"@type": "CreativeWork", "text": j["text"]}
+            if j.get("dims"):
+                result["about"] = [{"@type": "DefinedTerm", "name": x["label"],
+                                    "description": x["text"]} for x in j["dims"]]
+        action = {k: v for k, v in {
+            "@type": "EndorseAction",
+            "@id": "%sendorsement:%s-%d" % (ID_URN, rec["id"], n),
+            # The form's own slot label ("1", "1a"): an identifier, not a ranking.
+            "identifier": ({"@type": "PropertyValue", "propertyID": "AGU-Nominator-Slot",
+                            "value": str(p["seq"])} if p.get("seq") is not None else None),
+            "agent": agent,
+            "object": {"@id": ds_id},
+            # This nominator's account of how they work with this dataset. It belongs
+            # on the action, not the agent: the same person can nominate several
+            # datasets, and agent nodes share an ORCID @id, so a description there
+            # would merge across datasets and become ambiguous.
+            "description": p.get("interaction"),
+            "result": result,
+        }.items() if v is not None}
+        actions.append(action)
+    return {
+        "@type": "ItemList",
+        "@id": ID_URN + "endorsements:" + rec["id"],
+        "name": "Nominations for " + (rec.get("title") or rec["id"]),
+        "itemListOrder": "https://schema.org/ItemListOrderAscending",
+        "numberOfItems": len(actions),
+        "itemListElement": actions,
+    }
+
+
+catalog = {
     "@type": "DataCatalog",
     "@id": ID_URN + "collection:impactful-datasets",
     "name": "Impactful Datasets in the Earth, Space, and Environmental Sciences",
@@ -452,20 +487,44 @@ data_doc = {
                   "url": "https://www.agu.org/"},
     "license": "https://creativecommons.org/licenses/by/4.0/",
     "dateModified": __import__("datetime").date.today().isoformat(),
-    "agu:themes": {
-        "@type": "DefinedTermSet",
-        "@id": THEME_SET_ID,
-        "name": "AGU discipline groups",
-        "hasDefinedTerm": [
-            {"@type": "DefinedTerm",
-             "@id": theme_id(k),
-             "identifier": k,
-             "name": l,
-             "inDefinedTermSet": {"@id": THEME_SET_ID}}
-            for _, l, k in THEME_ORDER
-        ],
+    # display order of the collection, preserved as an @list (see @context)
+    "dataset": [{"@id": ID_URN + "dataset:" + r["id"]} for r in out],
+}
+
+theme_set = {
+    "@type": "DefinedTermSet",
+    "@id": THEME_SET_ID,
+    "name": "AGU discipline groups",
+    "hasDefinedTerm": [
+        {"@type": "DefinedTerm",
+         "@id": theme_id(k),
+         "identifier": k,
+         "name": l,
+         "inDefinedTermSet": {"@id": THEME_SET_ID}}
+        for _, l, k in THEME_ORDER
+    ],
+}
+
+# A flat graph: catalog, discipline vocabulary, datasets, and the endorsement lists
+# as siblings. Endorsements point back at their dataset with `object`, which is how
+# schema.org expects a performed action to relate to the thing acted on -- there is
+# no property for hanging one off the Thing itself.
+nodes = [catalog, theme_set]
+nodes += [sd_dataset(r) for r in out]
+nodes += [e for e in (sd_endorsements(r) for r in out) if e]
+
+data_doc = {
+    "@context": {
+        "@vocab": "https://schema.org/",
+        "agu": NS_URN,
+        # ordering is not implied by a graph, so the sequences that matter are
+        # declared as lists: the collection's display order, and the order of
+        # nominators within each dataset's endorsement list
+        "dataset": {"@id": "https://schema.org/dataset", "@container": "@list"},
+        "itemListElement": {"@id": "https://schema.org/itemListElement",
+                            "@container": "@list"},
     },
-    "dataset": [sd_dataset(r) for r in out],
+    "@graph": nodes,
 }
 DATA_PATH.write_text(json.dumps(data_doc, indent=2, ensure_ascii=False), encoding="utf-8")
 print("data file: %s  (%d datasets, %d new id%s minted)"
@@ -1020,6 +1079,53 @@ function themeKeysOf(kw){
   }).filter(Boolean);
 }
 
+/* The published file is a flat JSON-LD graph: the catalog, the discipline
+   vocabulary, the datasets, and one ItemList of EndorseActions per dataset, all as
+   siblings. Nominations are endorsements, so each action carries its nominator as
+   `agent`, their justification as `result`, and their account of how they use the
+   data as `description`; the action points back at the dataset with `object`.
+   This walks the graph and rebuilds the per-dataset shape the page renders. */
+function attachEndorsements(nodes, rows){
+  const byId = {};
+  rows.forEach(r => { byId[r.urn] = r; });
+  const lists = nodes.filter(n => typeOf(n) === "ItemList");
+  const loose = nodes.filter(n => typeOf(n) === "EndorseAction");
+  const ordered = [];
+  lists.forEach(l => {
+    const items = l.itemListElement;
+    (Array.isArray(items) ? items : (items && items["@list"]) || []).forEach(a => ordered.push(a));
+  });
+  (ordered.length ? ordered : loose).forEach(a => {
+    const target = a.object && (a.object["@id"] || a.object);
+    const row = byId[target];
+    if (!row) return;
+    const agent = a.agent || {};
+    const slot = (a.identifier || {}).value || String(row.nominators.length + 1);
+    row.nominators.push({
+      seq: slot,
+      name: agent.name || null,
+      orcid: (agent["@id"] || "").startsWith("http") ? agent["@id"] : null,
+      affil: (agent.affiliation || {}).name || null,
+      interaction: a.description || null,
+    });
+    const res = a.result;
+    if (res && res.text){
+      row.just.push({
+        seq: slot,
+        text: res.text,
+        dims: (Array.isArray(res.about) ? res.about : (res.about ? [res.about] : []))
+          .map(x => ({label: x.name, text: x.description})),
+      });
+    }
+  });
+  rows.forEach(r => { if (!r.nomCount) r.nomCount = r.nominators.length; });
+}
+
+function typeOf(n){
+  const t = n && n["@type"];
+  return Array.isArray(t) ? t[0] : t;
+}
+
 /* Map a schema.org Dataset from the public file onto the shape the page renders. */
 function adopt(sd){
   const idOf = v => (v || []).find(x => x && x.propertyID === "AGU-Impactful-Datasets-ID");
@@ -1030,6 +1136,7 @@ function adopt(sd){
   (sd.sameAs || []).forEach(u => { if (u !== doi) links.push(u); });
   return {
     id: sd["agu:datasetId"] || (idOf(sd.identifier) || {}).value,
+    urn: sd["@id"],
     title: sd.name,
     shortName: (sd.alternateName || "").trim(),   // spine label; blank falls back to title
     themes: themeKeysOf(sd.keywords),
@@ -1043,14 +1150,9 @@ function adopt(sd){
     reuse: (sd["agu:reuseExample"] || []).map(c => c.text).filter(Boolean),
     refsTotal: sd["agu:citationCount"] || 0,
     reuseTotal: sd["agu:reuseCount"] || 0,
-    nominators: (sd["agu:nominator"] || []).map(p => ({
-      seq: p["agu:sequence"], name: p.name,
-      orcid: (p["@id"] || "").startsWith("http") ? p["@id"] : null,
-      affil: (p.affiliation || {}).name || null,
-      interaction: p["agu:interactionStatement"] || null })),
-    just: (sd["agu:justification"] || []).map(j => ({
-      seq: j["agu:sequence"], text: j.text,
-      dims: (j["agu:impactDimension"] || []).map(x => ({label: x.name, text: x.description})) })),
+    // filled in from the endorsement actions once the whole graph is indexed
+    nominators: [],
+    just: [],
   };
 }
 const THEME_VAR = {atmos:'--atmos',ocean:'--ocean',biosphere:'--biosphere',
@@ -1654,17 +1756,30 @@ function boot(){
 fetch(DATA_URL, {cache: "no-cache"})
   .then(r => r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status)))
   .then(doc => {
-    // resolve the discipline vocabulary first: adopt() needs it to read keywords
-    const terms = (doc["agu:themes"] || {}).hasDefinedTerm || [];
+    // a flat graph, so gather the nodes by type before doing anything with them
+    const nodes = doc["@graph"] || (doc.dataset ? [doc] : []);
+
+    // discipline vocabulary first: adopt() needs it to resolve keywords
+    const termSet = nodes.find(n => typeOf(n) === "DefinedTermSet")
+                 || (doc["agu:themes"] || {});
+    const terms = termSet.hasDefinedTerm || [];
     terms.forEach(x => { if (x["@id"]) THEME_IDS[x["@id"]] = x.identifier; });
     if (terms.length)
       DATA.themes = terms.map(x => ({key: x.identifier, label: x.name}));
 
-    const rows = (doc.dataset || []).map(adopt).filter(d => d.id && d.title);
+    const rows = nodes.filter(n => typeOf(n) === "Dataset").map(adopt)
+                      .filter(d => d.id && d.title);
     if (!rows.length) throw new Error("no datasets in " + DATA_URL);
-    const order = {};
-    DATA.datasets.forEach((d, i) => { order[d.id] = i; });
-    rows.sort((a, b) => (order[a.id] ?? 1e6) - (order[b.id] ?? 1e6));
+    attachEndorsements(nodes, rows);
+
+    // the catalog carries the intended display order as an @list
+    const catalog = nodes.find(n => typeOf(n) === "DataCatalog" && n.dataset);
+    const listed = catalog ? (catalog.dataset["@list"] || catalog.dataset) : null;
+    if (Array.isArray(listed) && listed.length){
+      const rank = {};
+      listed.forEach((ref, i) => { rank[ref["@id"] || ref] = i; });
+      rows.sort((a, b) => (rank[a.urn] ?? 1e6) - (rank[b.urn] ?? 1e6));
+    }
     DATA.datasets = rows;
     rebuildBooks();
     paintTally();

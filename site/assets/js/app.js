@@ -24,6 +24,53 @@ function themeKeysOf(kw){
   }).filter(Boolean);
 }
 
+/* The published file is a flat JSON-LD graph: the catalog, the discipline
+   vocabulary, the datasets, and one ItemList of EndorseActions per dataset, all as
+   siblings. Nominations are endorsements, so each action carries its nominator as
+   `agent`, their justification as `result`, and their account of how they use the
+   data as `description`; the action points back at the dataset with `object`.
+   This walks the graph and rebuilds the per-dataset shape the page renders. */
+function attachEndorsements(nodes, rows){
+  const byId = {};
+  rows.forEach(r => { byId[r.urn] = r; });
+  const lists = nodes.filter(n => typeOf(n) === "ItemList");
+  const loose = nodes.filter(n => typeOf(n) === "EndorseAction");
+  const ordered = [];
+  lists.forEach(l => {
+    const items = l.itemListElement;
+    (Array.isArray(items) ? items : (items && items["@list"]) || []).forEach(a => ordered.push(a));
+  });
+  (ordered.length ? ordered : loose).forEach(a => {
+    const target = a.object && (a.object["@id"] || a.object);
+    const row = byId[target];
+    if (!row) return;
+    const agent = a.agent || {};
+    const slot = (a.identifier || {}).value || String(row.nominators.length + 1);
+    row.nominators.push({
+      seq: slot,
+      name: agent.name || null,
+      orcid: (agent["@id"] || "").startsWith("http") ? agent["@id"] : null,
+      affil: (agent.affiliation || {}).name || null,
+      interaction: a.description || null,
+    });
+    const res = a.result;
+    if (res && res.text){
+      row.just.push({
+        seq: slot,
+        text: res.text,
+        dims: (Array.isArray(res.about) ? res.about : (res.about ? [res.about] : []))
+          .map(x => ({label: x.name, text: x.description})),
+      });
+    }
+  });
+  rows.forEach(r => { if (!r.nomCount) r.nomCount = r.nominators.length; });
+}
+
+function typeOf(n){
+  const t = n && n["@type"];
+  return Array.isArray(t) ? t[0] : t;
+}
+
 /* Map a schema.org Dataset from the public file onto the shape the page renders. */
 function adopt(sd){
   const idOf = v => (v || []).find(x => x && x.propertyID === "AGU-Impactful-Datasets-ID");
@@ -34,6 +81,7 @@ function adopt(sd){
   (sd.sameAs || []).forEach(u => { if (u !== doi) links.push(u); });
   return {
     id: sd["agu:datasetId"] || (idOf(sd.identifier) || {}).value,
+    urn: sd["@id"],
     title: sd.name,
     shortName: (sd.alternateName || "").trim(),   // spine label; blank falls back to title
     themes: themeKeysOf(sd.keywords),
@@ -47,14 +95,9 @@ function adopt(sd){
     reuse: (sd["agu:reuseExample"] || []).map(c => c.text).filter(Boolean),
     refsTotal: sd["agu:citationCount"] || 0,
     reuseTotal: sd["agu:reuseCount"] || 0,
-    nominators: (sd["agu:nominator"] || []).map(p => ({
-      seq: p["agu:sequence"], name: p.name,
-      orcid: (p["@id"] || "").startsWith("http") ? p["@id"] : null,
-      affil: (p.affiliation || {}).name || null,
-      interaction: p["agu:interactionStatement"] || null })),
-    just: (sd["agu:justification"] || []).map(j => ({
-      seq: j["agu:sequence"], text: j.text,
-      dims: (j["agu:impactDimension"] || []).map(x => ({label: x.name, text: x.description})) })),
+    // filled in from the endorsement actions once the whole graph is indexed
+    nominators: [],
+    just: [],
   };
 }
 const THEME_VAR = {atmos:'--atmos',ocean:'--ocean',biosphere:'--biosphere',
@@ -658,17 +701,30 @@ function boot(){
 fetch(DATA_URL, {cache: "no-cache"})
   .then(r => r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status)))
   .then(doc => {
-    // resolve the discipline vocabulary first: adopt() needs it to read keywords
-    const terms = (doc["agu:themes"] || {}).hasDefinedTerm || [];
+    // a flat graph, so gather the nodes by type before doing anything with them
+    const nodes = doc["@graph"] || (doc.dataset ? [doc] : []);
+
+    // discipline vocabulary first: adopt() needs it to resolve keywords
+    const termSet = nodes.find(n => typeOf(n) === "DefinedTermSet")
+                 || (doc["agu:themes"] || {});
+    const terms = termSet.hasDefinedTerm || [];
     terms.forEach(x => { if (x["@id"]) THEME_IDS[x["@id"]] = x.identifier; });
     if (terms.length)
       DATA.themes = terms.map(x => ({key: x.identifier, label: x.name}));
 
-    const rows = (doc.dataset || []).map(adopt).filter(d => d.id && d.title);
+    const rows = nodes.filter(n => typeOf(n) === "Dataset").map(adopt)
+                      .filter(d => d.id && d.title);
     if (!rows.length) throw new Error("no datasets in " + DATA_URL);
-    const order = {};
-    DATA.datasets.forEach((d, i) => { order[d.id] = i; });
-    rows.sort((a, b) => (order[a.id] ?? 1e6) - (order[b.id] ?? 1e6));
+    attachEndorsements(nodes, rows);
+
+    // the catalog carries the intended display order as an @list
+    const catalog = nodes.find(n => typeOf(n) === "DataCatalog" && n.dataset);
+    const listed = catalog ? (catalog.dataset["@list"] || catalog.dataset) : null;
+    if (Array.isArray(listed) && listed.length){
+      const rank = {};
+      listed.forEach((ref, i) => { rank[ref["@id"] || ref] = i; });
+      rows.sort((a, b) => (rank[a.urn] ?? 1e6) - (rank[b.urn] ?? 1e6));
+    }
     DATA.datasets = rows;
     rebuildBooks();
     paintTally();
