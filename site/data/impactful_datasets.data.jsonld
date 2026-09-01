@@ -111,6 +111,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0001"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:2020 tccon data release"
         }
       ],
       "name": "2020 TCCON Data Release",
@@ -121,7 +126,6 @@
         }
       ],
       "agu:datasetId": "agu-0001",
-      "agu:stableKey": "title:2020 tccon data release",
       "agu:nominatorCount": 9,
       "agu:citationCount": 3,
       "agu:reuseCount": 9,
@@ -368,6 +372,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.5067/gpm/imerg/3b-hh-e/07|integrated multi-satellite retrievals for the global precipitation measurement (gpm) mission (imerg)"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.5067/GPM/IMERG/3B-HH-E/07"
         }
@@ -380,7 +389,6 @@
         }
       ],
       "agu:datasetId": "agu-0002",
-      "agu:stableKey": "doi:10.5067/gpm/imerg/3b-hh-e/07|integrated multi-satellite retrievals for the global precipitation measurement (gpm) mission (imerg)",
       "agu:nominatorCount": 6,
       "agu:citationCount": 3,
       "agu:reuseCount": 5,
@@ -577,6 +585,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0003"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:international sunspot number"
         }
       ],
       "name": "International Sunspot Number",
@@ -587,7 +600,6 @@
         }
       ],
       "agu:datasetId": "agu-0003",
-      "agu:stableKey": "title:international sunspot number",
       "agu:nominatorCount": 5,
       "agu:citationCount": 11,
       "agu:reuseCount": 8,
@@ -791,6 +803,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0117"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:the national geologic map database (ngmdb)"
         }
       ],
       "name": "The National Geologic Map Database (NGMDB)",
@@ -801,7 +818,6 @@
         }
       ],
       "agu:datasetId": "agu-0117",
-      "agu:stableKey": "title:the national geologic map database (ngmdb)",
       "agu:nominatorCount": 5,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -920,6 +936,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.7265/a98x-0f50|sea ice index"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.7265/a98x-0f50"
         }
@@ -932,7 +953,6 @@
         }
       ],
       "agu:datasetId": "agu-0107",
-      "agu:stableKey": "doi:10.7265/a98x-0f50|sea ice index",
       "agu:nominatorCount": 4,
       "agu:citationCount": 3,
       "agu:reuseCount": 5,
@@ -1045,6 +1065,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0115"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:the georoc database"
         }
       ],
       "name": "The GEOROC database",
@@ -1055,7 +1080,6 @@
         }
       ],
       "agu:datasetId": "agu-0115",
-      "agu:stableKey": "title:the georoc database",
       "agu:nominatorCount": 4,
       "agu:citationCount": 1,
       "agu:reuseCount": 16,
@@ -1227,6 +1251,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.17882/42182|argo"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.17882/42182"
         }
@@ -1239,7 +1268,6 @@
         }
       ],
       "agu:datasetId": "agu-0004",
-      "agu:stableKey": "doi:10.17882/42182|argo",
       "agu:nominatorCount": 3,
       "agu:citationCount": 5,
       "agu:reuseCount": 2,
@@ -1364,6 +1392,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0005"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:artmip database"
         }
       ],
       "name": "ARTMIP Database",
@@ -1374,7 +1407,6 @@
         }
       ],
       "agu:datasetId": "agu-0005",
-      "agu:stableKey": "title:artmip database",
       "agu:nominatorCount": 3,
       "agu:citationCount": 7,
       "agu:reuseCount": 2,
@@ -1504,6 +1536,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0026"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:california climate projections"
         }
       ],
       "name": "California Climate Projections",
@@ -1514,7 +1551,6 @@
         }
       ],
       "agu:datasetId": "agu-0026",
-      "agu:stableKey": "title:california climate projections",
       "agu:nominatorCount": 3,
       "agu:citationCount": 3,
       "agu:reuseCount": 1,
@@ -1614,6 +1650,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.5067/ecostress/eco_l2t_lste.002|ecostress tiled land surface temperature and emissivity instantaneous l2 global 70 m v002"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.5067/ECOSTRESS/ECO_L2T_LSTE.002"
         }
@@ -1626,7 +1667,6 @@
         }
       ],
       "agu:datasetId": "agu-0006",
-      "agu:stableKey": "doi:10.5067/ecostress/eco_l2t_lste.002|ecostress tiled land surface temperature and emissivity instantaneous l2 global 70 m v002",
       "agu:nominatorCount": 3,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -1709,6 +1749,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0007"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:fluxnet (or ameriflux for n america)"
         }
       ],
       "name": "Fluxnet (or Ameriflux for N America)",
@@ -1719,7 +1764,6 @@
         }
       ],
       "agu:datasetId": "agu-0007",
-      "agu:stableKey": "title:fluxnet (or ameriflux for n america)",
       "agu:nominatorCount": 3,
       "agu:citationCount": 1,
       "agu:reuseCount": 7,
@@ -1926,6 +1970,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0012"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:a global open-source dataset of monthly irrigated and rainfed cropped areas (mirca-os) for the 21st century"
         }
       ],
       "name": "A global open-source dataset of monthly irrigated and rainfed cropped areas (MIRCA-OS) for the 21st century",
@@ -1936,7 +1985,6 @@
         }
       ],
       "agu:datasetId": "agu-0012",
-      "agu:stableKey": "title:a global open-source dataset of monthly irrigated and rainfed cropped areas (mirca-os) for the 21st century",
       "agu:nominatorCount": 2,
       "agu:citationCount": 1,
       "agu:reuseCount": 7,
@@ -2050,6 +2098,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0008"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:omni"
         }
       ],
       "name": "OMNI",
@@ -2060,7 +2113,6 @@
         }
       ],
       "agu:datasetId": "agu-0008",
-      "agu:stableKey": "title:omni",
       "agu:nominatorCount": 2,
       "agu:citationCount": 3,
       "agu:reuseCount": 1,
@@ -2175,6 +2227,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0009"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:ozone data collection at woudc"
         }
       ],
       "name": "Ozone data collection at WOUDC",
@@ -2185,7 +2242,6 @@
         }
       ],
       "agu:datasetId": "agu-0009",
-      "agu:stableKey": "title:ozone data collection at woudc",
       "agu:nominatorCount": 2,
       "agu:citationCount": 2,
       "agu:reuseCount": 0,
@@ -2290,6 +2346,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0010"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:petdb"
         }
       ],
       "name": "PetDB",
@@ -2300,7 +2361,6 @@
         }
       ],
       "agu:datasetId": "agu-0010",
-      "agu:stableKey": "title:petdb",
       "agu:nominatorCount": 2,
       "agu:citationCount": 2,
       "agu:reuseCount": 1,
@@ -2392,6 +2452,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0011"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:a comprehensive northern hemisphere particle microphysics dataset from the precipitation imaging package"
         }
       ],
       "name": "A Comprehensive Northern Hemisphere Particle Microphysics Dataset from the Precipitation Imaging Package",
@@ -2405,7 +2470,6 @@
         }
       ],
       "agu:datasetId": "agu-0011",
-      "agu:stableKey": "title:a comprehensive northern hemisphere particle microphysics dataset from the precipitation imaging package",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 3,
@@ -2484,6 +2548,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.3334/ornldaac/2448|abcflux v2: arctic–boreal co2 and ch4 in-situ flux and environmental data"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.3334/ORNLDAAC/2448"
         }
@@ -2496,7 +2565,6 @@
         }
       ],
       "agu:datasetId": "agu-0013",
-      "agu:stableKey": "doi:10.3334/ornldaac/2448|abcflux v2: arctic–boreal co2 and ch4 in-situ flux and environmental data",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -2554,6 +2622,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.1594/pangaea.883585|agricultural nitrogen fertilizer uses in the continental u.s. during 1850-2015: a set of gridded time-series data"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.1594/PANGAEA.883585"
         }
@@ -2566,7 +2639,6 @@
         }
       ],
       "agu:datasetId": "agu-0014",
-      "agu:stableKey": "doi:10.1594/pangaea.883585|agricultural nitrogen fertilizer uses in the continental u.s. during 1850-2015: a set of gridded time-series data",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -2655,6 +2727,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0015"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:air now fire and smoke map"
         }
       ],
       "name": "Air NOW Fire and Smoke map",
@@ -2665,7 +2742,6 @@
         }
       ],
       "agu:datasetId": "agu-0015",
-      "agu:stableKey": "title:air now fire and smoke map",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -2721,6 +2797,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0016"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:airborne and satellite investigation of air quality"
         }
       ],
       "name": "Airborne and Satellite Investigation of Air Quality",
@@ -2731,7 +2812,6 @@
         }
       ],
       "agu:datasetId": "agu-0016",
-      "agu:stableKey": "title:airborne and satellite investigation of air quality",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 2,
@@ -2800,6 +2880,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.5281/zenodo.13357690|annual crop-specific management history of phosphorus fertilizer input (cmh-p) in the croplands of united states from 1850 to 2022: application rate, timing, and method"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.5281/zenodo.13357690"
         }
@@ -2812,7 +2897,6 @@
         }
       ],
       "agu:datasetId": "agu-0017",
-      "agu:stableKey": "doi:10.5281/zenodo.13357690|annual crop-specific management history of phosphorus fertilizer input (cmh-p) in the croplands of united states from 1850 to 2022: application rate, timing, and method",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -2916,6 +3000,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0018"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:arcticdem and the reference elevation model of antarctica (rema)"
         }
       ],
       "name": "ArcticDEM and the Reference Elevation Model of Antarctica (REMA)",
@@ -2926,7 +3015,6 @@
         }
       ],
       "agu:datasetId": "agu-0018",
-      "agu:stableKey": "title:arcticdem and the reference elevation model of antarctica (rema)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 1,
@@ -3001,6 +3089,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0019"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:astromaterials data synthesis"
         }
       ],
       "name": "Astromaterials Data Synthesis",
@@ -3011,7 +3104,6 @@
         }
       ],
       "agu:datasetId": "agu-0019",
-      "agu:stableKey": "title:astromaterials data synthesis",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 1,
@@ -3087,6 +3179,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0020"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:atmospheric infrared sounder (airs)"
         }
       ],
       "name": "Atmospheric Infrared Sounder (AIRS)",
@@ -3097,7 +3194,6 @@
         }
       ],
       "agu:datasetId": "agu-0020",
-      "agu:stableKey": "title:atmospheric infrared sounder (airs)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -3149,6 +3245,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.58024/agum46bd292f|australian thermochronology - 2002 and prior"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.58024/agum46bd292f"
         }
@@ -3161,7 +3262,6 @@
         }
       ],
       "agu:datasetId": "agu-0021",
-      "agu:stableKey": "doi:10.58024/agum46bd292f|australian thermochronology - 2002 and prior",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 1,
@@ -3240,6 +3340,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.58024/agumcad7b7cb|australian thermochronology - 2002 to 2022"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.58024/agumcad7b7cb"
         }
@@ -3252,7 +3357,6 @@
         }
       ],
       "agu:datasetId": "agu-0022",
-      "agu:stableKey": "doi:10.58024/agumcad7b7cb|australian thermochronology - 2002 to 2022",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -3308,6 +3412,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0023"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:autoterm"
         }
       ],
       "name": "AutoTerm",
@@ -3318,7 +3427,6 @@
         }
       ],
       "agu:datasetId": "agu-0023",
-      "agu:stableKey": "title:autoterm",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -3367,6 +3475,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0024"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:calcofi fish larvae at 66 standard stations, 1966 - ongoing"
         }
       ],
       "name": "CALCOFI fish larvae at 66 standard stations, 1966 - ongoing",
@@ -3377,7 +3490,6 @@
         }
       ],
       "agu:datasetId": "agu-0024",
-      "agu:stableKey": "title:calcofi fish larvae at 66 standard stations, 1966 - ongoing",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 1,
@@ -3443,6 +3555,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0025"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:calcofi sio hydrographic ctd bottle/cast data"
         }
       ],
       "name": "CalCOFI SIO Hydrographic CTD Bottle/Cast Data",
@@ -3453,7 +3570,6 @@
         }
       ],
       "agu:datasetId": "agu-0025",
-      "agu:stableKey": "title:calcofi sio hydrographic ctd bottle/cast data",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 1,
@@ -3528,6 +3644,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0027"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:camels-ind (catchment attributes and meteorology for large-sample studies - india)"
         }
       ],
       "name": "CAMELS-IND (Catchment Attributes and Meteorology for Large-sample Studies - India)",
@@ -3538,7 +3659,6 @@
         }
       ],
       "agu:datasetId": "agu-0027",
-      "agu:stableKey": "title:camels-ind (catchment attributes and meteorology for large-sample studies - india)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 2,
@@ -3640,6 +3760,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0028"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:catchment attributes and meteorology for large-sample studies (camels)"
         }
       ],
       "name": "Catchment Attributes and MEteorology for Large-sample Studies (CAMELS)",
@@ -3650,7 +3775,6 @@
         }
       ],
       "agu:datasetId": "agu-0028",
-      "agu:stableKey": "title:catchment attributes and meteorology for large-sample studies (camels)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 36,
@@ -3860,6 +3984,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0029"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:cenomanian-turonian eagle ford research: core dataset"
         }
       ],
       "name": "Cenomanian-Turonian Eagle Ford Research: Core dataset",
@@ -3870,7 +3999,6 @@
         }
       ],
       "agu:datasetId": "agu-0029",
-      "agu:stableKey": "title:cenomanian-turonian eagle ford research: core dataset",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 24,
@@ -4072,6 +4200,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.1594/pangaea.917503|cenozoic global reference benthic foraminifer carbon and oxygen isotope dataset (cenogrid)"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.1594/PANGAEA.917503"
         }
@@ -4084,7 +4217,6 @@
         }
       ],
       "agu:datasetId": "agu-0030",
-      "agu:stableKey": "doi:10.1594/pangaea.917503|cenozoic global reference benthic foraminifer carbon and oxygen isotope dataset (cenogrid)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 6,
@@ -4171,6 +4303,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.1029/2024wr039355|chemlotus: a benchmark data set of lotic chemistry across us river networks"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.1029/2024WR039355"
         }
@@ -4183,7 +4320,6 @@
         }
       ],
       "agu:datasetId": "agu-0031",
-      "agu:stableKey": "doi:10.1029/2024wr039355|chemlotus: a benchmark data set of lotic chemistry across us river networks",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -4251,6 +4387,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0032"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:china meteorological forcing dataset"
         }
       ],
       "name": "China Meteorological Forcing Dataset",
@@ -4261,7 +4402,6 @@
         }
       ],
       "agu:datasetId": "agu-0032",
-      "agu:stableKey": "title:china meteorological forcing dataset",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 6,
@@ -4354,6 +4494,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0033"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:climate ready dc: what does it mean to be climate ready?"
         }
       ],
       "name": "Climate Ready DC: What does it mean to be Climate Ready?",
@@ -4364,7 +4509,6 @@
         }
       ],
       "agu:datasetId": "agu-0033",
-      "agu:stableKey": "title:climate ready dc: what does it mean to be climate ready?",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -4413,6 +4557,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0034"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:community earth models"
         }
       ],
       "name": "Community Earth Models",
@@ -4423,7 +4572,6 @@
         }
       ],
       "agu:datasetId": "agu-0034",
-      "agu:stableKey": "title:community earth models",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -4489,6 +4637,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0035"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:coupled model intercomparison project 6 (cmip6)"
         }
       ],
       "name": "Coupled Model Intercomparison Project 6 (CMIP6)",
@@ -4499,7 +4652,6 @@
         }
       ],
       "agu:datasetId": "agu-0035",
-      "agu:stableKey": "title:coupled model intercomparison project 6 (cmip6)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -4554,6 +4706,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0036"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:daily 4 km gridded swe and snow depth from assimilated in-situ and observation-based data over the conterminous us"
         }
       ],
       "name": "Daily 4 km Gridded SWE and Snow Depth from Assimilated In-Situ and Observation-Based Data over the Conterminous US",
@@ -4564,7 +4721,6 @@
         }
       ],
       "agu:datasetId": "agu-0036",
-      "agu:stableKey": "title:daily 4 km gridded swe and snow depth from assimilated in-situ and observation-based data over the conterminous us",
       "agu:nominatorCount": 1,
       "agu:citationCount": 4,
       "agu:reuseCount": 0,
@@ -4638,6 +4794,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0037"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:data and code for mapping greenhouse gas emissions from global cropland circa 2020"
         }
       ],
       "name": "Data and code for Mapping greenhouse gas emissions from global cropland circa 2020",
@@ -4648,7 +4809,6 @@
         }
       ],
       "agu:datasetId": "agu-0037",
-      "agu:stableKey": "title:data and code for mapping greenhouse gas emissions from global cropland circa 2020",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -4730,6 +4890,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.7910/dvn/33jjxt|envclim grids: global urban environmental vulnerability and climate risk, 500m resolution (circa 2020–2050)"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.7910/DVN/33JJXT"
         }
@@ -4742,7 +4907,6 @@
         }
       ],
       "agu:datasetId": "agu-0038",
-      "agu:stableKey": "doi:10.7910/dvn/33jjxt|envclim grids: global urban environmental vulnerability and climate risk, 500m resolution (circa 2020–2050)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -4820,6 +4984,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0039"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:esa worldcereal 10 m 2021 v100"
         }
       ],
       "name": "ESA WorldCereal 10 m 2021 v100",
@@ -4830,7 +4999,6 @@
         }
       ],
       "agu:datasetId": "agu-0039",
-      "agu:stableKey": "title:esa worldcereal 10 m 2021 v100",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 1,
@@ -4902,6 +5070,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0040"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:estreams"
         }
       ],
       "name": "EStreams",
@@ -4912,7 +5085,6 @@
         }
       ],
       "agu:datasetId": "agu-0040",
-      "agu:stableKey": "title:estreams",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 6,
@@ -5035,6 +5207,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0041"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:fdsn databases"
         }
       ],
       "name": "FDSN Databases",
@@ -5045,7 +5222,6 @@
         }
       ],
       "agu:datasetId": "agu-0041",
-      "agu:stableKey": "title:fdsn databases",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -5100,6 +5276,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0042"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:fluxnet 2015"
         }
       ],
       "name": "FLUXNET 2015",
@@ -5110,7 +5291,6 @@
         }
       ],
       "agu:datasetId": "agu-0042",
-      "agu:stableKey": "title:fluxnet 2015",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 6,
@@ -5203,6 +5383,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0043"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:formosat-7/cosmic-2 global ionospheric specification"
         }
       ],
       "name": "FORMOSAT-7/COSMIC-2 Global Ionospheric Specification",
@@ -5213,7 +5398,6 @@
         }
       ],
       "agu:datasetId": "agu-0043",
-      "agu:stableKey": "title:formosat-7/cosmic-2 global ionospheric specification",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -5316,6 +5500,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0044"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:frictional behavior of quartz and clay mixtures"
         }
       ],
       "name": "Frictional behavior of quartz and clay mixtures",
@@ -5326,7 +5515,6 @@
         }
       ],
       "agu:datasetId": "agu-0044",
-      "agu:stableKey": "title:frictional behavior of quartz and clay mixtures",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -5387,6 +5575,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0045"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:gedi02_b gedi l2b footprint level canopy cover and vertical profile metrics"
         }
       ],
       "name": "GEDI02_B GEDI L2B Footprint Level Canopy Cover and Vertical Profile Metrics",
@@ -5397,7 +5590,6 @@
         }
       ],
       "agu:datasetId": "agu-0045",
-      "agu:stableKey": "title:gedi02_b gedi l2b footprint level canopy cover and vertical profile metrics",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -5463,6 +5655,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0046"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:geonet"
         }
       ],
       "name": "GEONET",
@@ -5473,7 +5670,6 @@
         }
       ],
       "agu:datasetId": "agu-0046",
-      "agu:stableKey": "title:geonet",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 0,
@@ -5539,6 +5735,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0047"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:geonet (nz) geohazard monitoring datasets"
         }
       ],
       "name": "GeoNet (NZ) Geohazard Monitoring Datasets",
@@ -5549,7 +5750,6 @@
         }
       ],
       "agu:datasetId": "agu-0047",
-      "agu:stableKey": "title:geonet (nz) geohazard monitoring datasets",
       "agu:nominatorCount": 1,
       "agu:citationCount": 6,
       "agu:reuseCount": 9,
@@ -5668,6 +5868,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0048"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:georem"
         }
       ],
       "name": "GeoReM",
@@ -5678,7 +5883,6 @@
         }
       ],
       "agu:datasetId": "agu-0048",
-      "agu:stableKey": "title:georem",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 6,
@@ -5796,6 +6000,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0049"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:geoscope network seismic data"
         }
       ],
       "name": "Geoscope Network Seismic Data",
@@ -5806,7 +6015,6 @@
         }
       ],
       "agu:datasetId": "agu-0049",
-      "agu:stableKey": "title:geoscope network seismic data",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 2,
@@ -5885,6 +6093,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.57780/esa-85c563c|geospace regions and magnetospheric boundaries (grmb) identification dataset"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.57780/esa-85c563c"
         }
@@ -5897,7 +6110,6 @@
         }
       ],
       "agu:datasetId": "agu-0050",
-      "agu:stableKey": "doi:10.57780/esa-85c563c|geospace regions and magnetospheric boundaries (grmb) identification dataset",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -5965,6 +6177,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0051"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:gldas catchment land surface model l4 daily 0.25 x 0.25 degree grace-da1 v2.2"
         }
       ],
       "name": "GLDAS Catchment Land Surface Model L4 daily 0.25 x 0.25 degree GRACE-DA1 V2.2",
@@ -5975,7 +6192,6 @@
         }
       ],
       "agu:datasetId": "agu-0051",
-      "agu:stableKey": "title:gldas catchment land surface model l4 daily 0.25 x 0.25 degree grace-da1 v2.2",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 1,
@@ -6050,6 +6266,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.7910/dvn/0egdok|global 1-km downscaled urban land fraction grids, ssp-consistent projections and base year, v1 (2000 - 2100)"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.7910/DVN/0EGDOK"
         }
@@ -6062,7 +6283,6 @@
         }
       ],
       "agu:datasetId": "agu-0052",
-      "agu:stableKey": "doi:10.7910/dvn/0egdok|global 1-km downscaled urban land fraction grids, ssp-consistent projections and base year, v1 (2000 - 2100)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 5,
@@ -6153,6 +6373,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.1002/gdj3.174|global extreme sea level analysis (gesla)"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.1002/gdj3.174"
         }
@@ -6165,7 +6390,6 @@
         }
       ],
       "agu:datasetId": "agu-0053",
-      "agu:stableKey": "doi:10.1002/gdj3.174|global extreme sea level analysis (gesla)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 2,
@@ -6283,6 +6507,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.1029/2012gc004370|global lithological map (glim) v1.0"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.1029/2012GC004370"
         }
@@ -6295,7 +6524,6 @@
         }
       ],
       "agu:datasetId": "agu-0054",
-      "agu:stableKey": "doi:10.1029/2012gc004370|global lithological map (glim) v1.0",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 8,
@@ -6384,6 +6612,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0055"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:global network of isotopes in precipitation - the gnip database"
         }
       ],
       "name": "Global Network of Isotopes in Precipitation - The GNIP Database",
@@ -6394,7 +6627,6 @@
         }
       ],
       "agu:datasetId": "agu-0055",
-      "agu:stableKey": "title:global network of isotopes in precipitation - the gnip database",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -6443,6 +6675,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0056"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:global ocean data analysis project (glodap)"
         }
       ],
       "name": "Global Ocean Data Analysis Project (GLODAP)",
@@ -6453,7 +6690,6 @@
         }
       ],
       "agu:datasetId": "agu-0056",
-      "agu:stableKey": "title:global ocean data analysis project (glodap)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -6524,6 +6760,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.17605/osf.io/w4ug8|global reservoir inventory of lost storage by sedimentation (grilss)"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.17605/OSF.IO/W4UG8"
         }
@@ -6536,7 +6777,6 @@
         }
       ],
       "agu:datasetId": "agu-0057",
-      "agu:stableKey": "doi:10.17605/osf.io/w4ug8|global reservoir inventory of lost storage by sedimentation (grilss)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 2,
@@ -6608,6 +6848,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0058"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:gnss radio occultation data set atmphs/conphs"
         }
       ],
       "name": "GNSS Radio Occultation data set atmPhs/ConPhs",
@@ -6618,7 +6863,6 @@
         }
       ],
       "agu:datasetId": "agu-0058",
-      "agu:stableKey": "title:gnss radio occultation data set atmphs/conphs",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -6667,6 +6911,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0059"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:gosif and gosif gpp (two sister products)"
         }
       ],
       "name": "GOSIF and GOSIF GPP (two sister products)",
@@ -6677,7 +6926,6 @@
         }
       ],
       "agu:datasetId": "agu-0059",
-      "agu:stableKey": "title:gosif and gosif gpp (two sister products)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 2,
@@ -6756,6 +7004,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.5067/measures/gpcp/data306|gpcp version 3.3 satellite-gauge (sg) combined precipitation data set"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.5067/MEASURES/GPCP/DATA306"
         }
@@ -6768,7 +7021,6 @@
         }
       ],
       "agu:datasetId": "agu-0060",
-      "agu:stableKey": "doi:10.5067/measures/gpcp/data306|gpcp version 3.3 satellite-gauge (sg) combined precipitation data set",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 2,
@@ -6848,6 +7100,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0061"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:grain - global registry of agricultural irrigation networks"
         }
       ],
       "name": "GRAIN - Global Registry of Agricultural Irrigation Networks",
@@ -6858,7 +7115,6 @@
         }
       ],
       "agu:datasetId": "agu-0061",
-      "agu:stableKey": "title:grain - global registry of agricultural irrigation networks",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -6943,6 +7199,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0062"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:greenland ecosystem monitoring (gem) – marinebasis"
         }
       ],
       "name": "Greenland Ecosystem Monitoring (GEM) – MarineBasis",
@@ -6953,7 +7214,6 @@
         }
       ],
       "agu:datasetId": "agu-0062",
-      "agu:stableKey": "title:greenland ecosystem monitoring (gem) – marinebasis",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -7012,6 +7272,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.22008/promice/freshwater|greenland liquid water discharge from 1958 through 2019"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.22008/promice/freshwater"
         }
@@ -7024,7 +7289,6 @@
         }
       ],
       "agu:datasetId": "agu-0063",
-      "agu:stableKey": "doi:10.22008/promice/freshwater|greenland liquid water discharge from 1958 through 2019",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 11,
@@ -7173,6 +7437,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.7927/h4np22dq|gridded population of the world (gpw)"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.7927/H4NP22DQ"
         }
@@ -7185,7 +7454,6 @@
         }
       ],
       "agu:datasetId": "agu-0064",
-      "agu:stableKey": "doi:10.7927/h4np22dq|gridded population of the world (gpw)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -7308,6 +7576,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0065"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:gridded u.s. anthropogenic methane greenhouse gas inventory (gridded ghgi)"
         }
       ],
       "name": "Gridded U.S. Anthropogenic Methane Greenhouse Gas Inventory (gridded GHGI)",
@@ -7318,7 +7591,6 @@
         }
       ],
       "agu:datasetId": "agu-0065",
-      "agu:stableKey": "title:gridded u.s. anthropogenic methane greenhouse gas inventory (gridded ghgi)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 0,
@@ -7432,6 +7704,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.5067/gnss/gnss_highrate_d_001|ground-based global navigation satellite system (gnss) hatanaka-compressed observation data (1-second sampling, sub-hourly files)"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.5067/GNSS/GNSS_HIGHRATE_D_001"
         }
@@ -7444,7 +7721,6 @@
         }
       ],
       "agu:datasetId": "agu-0066",
-      "agu:stableKey": "doi:10.5067/gnss/gnss_highrate_d_001|ground-based global navigation satellite system (gnss) hatanaka-compressed observation data (1-second sampling, sub-hourly files)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -7509,6 +7785,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.5061/dryad.vq83bk42w|harveststat africa"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.5061/dryad.vq83bk42w"
         }
@@ -7521,7 +7802,6 @@
         }
       ],
       "agu:datasetId": "agu-0067",
-      "agu:stableKey": "doi:10.5061/dryad.vq83bk42w|harveststat africa",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 3,
@@ -7608,6 +7888,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.7910/dvn/vgsn7q|historical bolide infrasound dataset (1960-1972)"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.7910/DVN/VGSN7Q"
         }
@@ -7620,7 +7905,6 @@
         }
       ],
       "agu:datasetId": "agu-0068",
-      "agu:stableKey": "doi:10.7910/dvn/vgsn7q|historical bolide infrasound dataset (1960-1972)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 2,
@@ -7712,6 +7996,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.5281/zenodo.14996262|historical daily discharge data of italian rivers - siren project"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.5281/zenodo.14996262"
         }
@@ -7724,7 +8013,6 @@
         }
       ],
       "agu:datasetId": "agu-0069",
-      "agu:stableKey": "doi:10.5281/zenodo.14996262|historical daily discharge data of italian rivers - siren project",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -7786,6 +8074,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0070"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:homogenized daily relative humidity series in china during 1960-2017"
         }
       ],
       "name": "Homogenized daily relative humidity series in China during 1960-2017",
@@ -7796,7 +8089,6 @@
         }
       ],
       "agu:datasetId": "agu-0070",
-      "agu:stableKey": "title:homogenized daily relative humidity series in china during 1960-2017",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -7874,6 +8166,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.25921/x46c-3620|hourly location, current velocity, and temperature collected from global drifter program drifters world-wide"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.25921/x46c-3620"
         }
@@ -7886,7 +8183,6 @@
         }
       ],
       "agu:datasetId": "agu-0071",
-      "agu:stableKey": "doi:10.25921/x46c-3620|hourly location, current velocity, and temperature collected from global drifter program drifters world-wide",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 2,
@@ -7985,6 +8281,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.17603/ds2-yje5-g692|hurricanes, mold & respiratory health issues"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.17603/ds2-yje5-g692"
         }
@@ -7997,7 +8298,6 @@
         }
       ],
       "agu:datasetId": "agu-0072",
-      "agu:stableKey": "doi:10.17603/ds2-yje5-g692|hurricanes, mold & respiratory health issues",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 3,
@@ -8106,6 +8406,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.5281/zenodo.4065266|improved italian - rainfall extreme dataset (i2-red)"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.5281/zenodo.4065266"
         }
@@ -8118,7 +8423,6 @@
         }
       ],
       "agu:datasetId": "agu-0073",
-      "agu:stableKey": "doi:10.5281/zenodo.4065266|improved italian - rainfall extreme dataset (i2-red)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 7,
@@ -8210,6 +8514,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0074"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:incois_ta"
         }
       ],
       "name": "INCOIS_TA",
@@ -8220,7 +8529,6 @@
         }
       ],
       "agu:datasetId": "agu-0074",
-      "agu:stableKey": "title:incois_ta",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -8290,6 +8598,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0075"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:increased mineral-associated organic carbon and persistent molecules in allochthonous blue carbon ecosystems"
         }
       ],
       "name": "Increased mineral-associated organic carbon and persistent molecules in allochthonous blue carbon ecosystems",
@@ -8300,7 +8613,6 @@
         }
       ],
       "agu:datasetId": "agu-0075",
-      "agu:stableKey": "title:increased mineral-associated organic carbon and persistent molecules in allochthonous blue carbon ecosystems",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 6,
@@ -8381,6 +8693,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0076"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:indian landslide susceptibility map (ilsm)"
         }
       ],
       "name": "Indian Landslide Susceptibility Map (ILSM)",
@@ -8391,7 +8708,6 @@
         }
       ],
       "agu:datasetId": "agu-0076",
-      "agu:stableKey": "title:indian landslide susceptibility map (ilsm)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 11,
@@ -8492,6 +8808,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0077"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:indian subcontinent 2m temperature field"
         }
       ],
       "name": "Indian Subcontinent 2m Temperature Field",
@@ -8502,7 +8823,6 @@
         }
       ],
       "agu:datasetId": "agu-0077",
-      "agu:stableKey": "title:indian subcontinent 2m temperature field",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -8551,6 +8871,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0078"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:international gnss service (igs) data and products"
         }
       ],
       "name": "International GNSS Service (IGS) Data and Products",
@@ -8561,7 +8886,6 @@
         }
       ],
       "agu:datasetId": "agu-0078",
-      "agu:stableKey": "title:international gnss service (igs) data and products",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -8629,6 +8953,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0079"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:international soil carbon network (iscn)"
         }
       ],
       "name": "International Soil Carbon Network (ISCN)",
@@ -8639,7 +8968,6 @@
         }
       ],
       "agu:datasetId": "agu-0079",
-      "agu:stableKey": "title:international soil carbon network (iscn)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -8718,6 +9046,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0080"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:its_live global ice velocity"
         }
       ],
       "name": "ITS_LIVE Global Ice Velocity",
@@ -8728,7 +9061,6 @@
         }
       ],
       "agu:datasetId": "agu-0080",
-      "agu:stableKey": "title:its_live global ice velocity",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 7,
@@ -8831,6 +9163,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.7289/v5x34vf6|livneh hydrometeorological dataset"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.7289/v5x34vf6"
         }
@@ -8843,7 +9180,6 @@
         }
       ],
       "agu:datasetId": "agu-0081",
-      "agu:stableKey": "doi:10.7289/v5x34vf6|livneh hydrometeorological dataset",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -8914,6 +9250,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0082"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:long-term chemistry from streams at la selva biological station, costa rica"
         }
       ],
       "name": "Long-term chemistry from streams at La Selva Biological Station, Costa Rica",
@@ -8924,7 +9265,6 @@
         }
       ],
       "agu:datasetId": "agu-0082",
-      "agu:stableKey": "title:long-term chemistry from streams at la selva biological station, costa rica",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 2,
@@ -8990,6 +9330,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0083"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:ltreb: aboveground biomass, plant density, annual aboveground productivity, plant heights and snail observations in control and fertilized plots in a spartina alterniflora-dominated salt marsh, north inlet, georgetown, sc: 1984-2024"
         }
       ],
       "name": "LTREB: Aboveground biomass, plant density, annual aboveground productivity, plant heights and snail observations in control and fertilized plots in a Spartina alterniflora-dominated salt marsh, North Inlet, Georgetown, SC: 1984-2024",
@@ -9000,7 +9345,6 @@
         }
       ],
       "agu:datasetId": "agu-0083",
-      "agu:stableKey": "title:ltreb: aboveground biomass, plant density, annual aboveground productivity, plant heights and snail observations in control and fertilized plots in a spartina alterniflora-dominated salt marsh, north inlet, georgetown, sc: 1984-2024",
       "agu:nominatorCount": 1,
       "agu:citationCount": 5,
       "agu:reuseCount": 0,
@@ -9095,6 +9439,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0084"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:magellan global topography, emissivity, reflectivity, and slope data record (gxdr)"
         }
       ],
       "name": "Magellan Global Topography, Emissivity, Reflectivity, and Slope Data Record (GXDR)",
@@ -9105,7 +9454,6 @@
         }
       ],
       "agu:datasetId": "agu-0084",
-      "agu:stableKey": "title:magellan global topography, emissivity, reflectivity, and slope data record (gxdr)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -9166,6 +9514,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0085"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:modern-era retrospective analysis for research and applications, version 2 (merra-2)"
         }
       ],
       "name": "Modern-Era Retrospective analysis for Research and Applications, Version 2 (MERRA-2)",
@@ -9176,7 +9529,6 @@
         }
       ],
       "agu:datasetId": "agu-0085",
-      "agu:stableKey": "title:modern-era retrospective analysis for research and applications, version 2 (merra-2)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 0,
@@ -9242,6 +9594,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0086"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:nasa earth exchange global daily downscaled projections (nex-gddp) cmip5 & cmip 6"
         }
       ],
       "name": "NASA Earth Exchange Global Daily Downscaled Projections (NEX-GDDP) CMIP5 & CMIP 6",
@@ -9252,7 +9609,6 @@
         }
       ],
       "agu:datasetId": "agu-0086",
-      "agu:stableKey": "title:nasa earth exchange global daily downscaled projections (nex-gddp) cmip5 & cmip 6",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -9307,6 +9663,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0087"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:national energy water treatment and speciation (newts) database"
         }
       ],
       "name": "National Energy Water Treatment and Speciation (NEWTS) Database",
@@ -9317,7 +9678,6 @@
         }
       ],
       "agu:datasetId": "agu-0087",
-      "agu:stableKey": "title:national energy water treatment and speciation (newts) database",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 5,
@@ -9401,6 +9761,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0088"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:national land cover database (nlcd)"
         }
       ],
       "name": "National Land Cover Database (NLCD)",
@@ -9411,7 +9776,6 @@
         }
       ],
       "agu:datasetId": "agu-0088",
-      "agu:stableKey": "title:national land cover database (nlcd)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 10,
@@ -9522,6 +9886,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.5067/p4hzb9n27eku|ncep/cpc l3 half hourly 4km global (60s - 60n) merged ir"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.5067/P4HZB9N27EKU"
         }
@@ -9534,7 +9903,6 @@
         }
       ],
       "agu:datasetId": "agu-0089",
-      "agu:stableKey": "doi:10.5067/p4hzb9n27eku|ncep/cpc l3 half hourly 4km global (60s - 60n) merged ir",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 1,
@@ -9606,6 +9974,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0090"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:neotoma paleoecology database"
         }
       ],
       "name": "Neotoma Paleoecology Database",
@@ -9616,7 +9989,6 @@
         }
       ],
       "agu:datasetId": "agu-0090",
-      "agu:stableKey": "title:neotoma paleoecology database",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -9689,6 +10061,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0091"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:noaa climate data records"
         }
       ],
       "name": "NOAA Climate Data Records",
@@ -9699,7 +10076,6 @@
         }
       ],
       "agu:datasetId": "agu-0091",
-      "agu:stableKey": "title:noaa climate data records",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 2,
@@ -9758,6 +10134,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0092"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:noaa observation package"
         }
       ],
       "name": "NOAA Observation Package",
@@ -9768,7 +10149,6 @@
         }
       ],
       "agu:datasetId": "agu-0092",
-      "agu:stableKey": "title:noaa observation package",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -9823,6 +10203,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0093"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:north american multi-model ensemble (nmme) and subseasonal experiment (subx)"
         }
       ],
       "name": "North American Multi-Model Ensemble (NMME) and Subseasonal Experiment (SubX)",
@@ -9833,7 +10218,6 @@
         }
       ],
       "agu:datasetId": "agu-0093",
-      "agu:stableKey": "title:north american multi-model ensemble (nmme) and subseasonal experiment (subx)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 1,
@@ -9939,6 +10323,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0094"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:oco-2"
         }
       ],
       "name": "OCO-2",
@@ -9949,7 +10338,6 @@
         }
       ],
       "agu:datasetId": "agu-0094",
-      "agu:stableKey": "title:oco-2",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -10008,6 +10396,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.5067/70k2b2w8mngy|oco-2 & -3 xco2 & sif"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.5067/70K2B2W8MNGY"
         }
@@ -10020,7 +10413,6 @@
         }
       ],
       "agu:datasetId": "agu-0095",
-      "agu:stableKey": "doi:10.5067/70k2b2w8mngy|oco-2 & -3 xco2 & sif",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -10077,6 +10469,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.5067/70k2b2w8mngy|oco-2 and oco-3"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.5067/70K2B2W8MNGY"
         }
@@ -10089,7 +10486,6 @@
         }
       ],
       "agu:datasetId": "agu-0096",
-      "agu:stableKey": "doi:10.5067/70k2b2w8mngy|oco-2 and oco-3",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 0,
@@ -10163,6 +10559,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.5067/70k2b2w8mngy|oco-2 level 2 bias-corrected xco2"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.5067/70K2B2W8MNGY"
         }
@@ -10175,7 +10576,6 @@
         }
       ],
       "agu:datasetId": "agu-0097",
-      "agu:stableKey": "doi:10.5067/70k2b2w8mngy|oco-2 level 2 bias-corrected xco2",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -10236,6 +10636,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0098"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:octopus database"
         }
       ],
       "name": "OCTOPUS database",
@@ -10246,7 +10651,6 @@
         }
       ],
       "agu:datasetId": "agu-0098",
-      "agu:stableKey": "title:octopus database",
       "agu:nominatorCount": 1,
       "agu:citationCount": 6,
       "agu:reuseCount": 12,
@@ -10378,6 +10782,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0099"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:openaq"
         }
       ],
       "name": "OpenAQ",
@@ -10388,7 +10797,6 @@
         }
       ],
       "agu:datasetId": "agu-0099",
-      "agu:stableKey": "title:openaq",
       "agu:nominatorCount": 1,
       "agu:citationCount": 6,
       "agu:reuseCount": 0,
@@ -10470,6 +10878,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0100"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:opentopography"
         }
       ],
       "name": "OpenTopography",
@@ -10480,7 +10893,6 @@
         }
       ],
       "agu:datasetId": "agu-0100",
-      "agu:stableKey": "title:opentopography",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -10536,6 +10948,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0101"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:opera land surface disturbance alert from harmonized landsat sentinel-2 product (version 1) opera_l3_dist-alert-hls_v1"
         }
       ],
       "name": "OPERA Land Surface Disturbance Alert from Harmonized Landsat Sentinel-2 product (Version 1) OPERA_L3_DIST-ALERT-HLS_V1",
@@ -10546,7 +10963,6 @@
         }
       ],
       "agu:datasetId": "agu-0101",
-      "agu:stableKey": "title:opera land surface disturbance alert from harmonized landsat sentinel-2 product (version 1) opera_l3_dist-alert-hls_v1",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -10608,6 +11024,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0102"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:parma/expacs"
         }
       ],
       "name": "PARMA/EXPACS",
@@ -10618,7 +11039,6 @@
         }
       ],
       "agu:datasetId": "agu-0102",
-      "agu:stableKey": "title:parma/expacs",
       "agu:nominatorCount": 1,
       "agu:citationCount": 4,
       "agu:reuseCount": 30,
@@ -10807,6 +11227,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0103"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:pds archive of lro lroc derived products"
         }
       ],
       "name": "PDS Archive of LRO LROC Derived Products",
@@ -10817,7 +11242,6 @@
         }
       ],
       "agu:datasetId": "agu-0103",
-      "agu:stableKey": "title:pds archive of lro lroc derived products",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -10873,6 +11297,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0104"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:porewater nutrient concentrations in control and fertilized plots in a spartina alterniflora-dominated salt marsh, north inlet, georgetown, sc : 1993-2024"
         }
       ],
       "name": "Porewater nutrient concentrations in control and fertilized plots in a Spartina alterniflora-dominated salt marsh, North Inlet, Georgetown, SC : 1993-2024",
@@ -10883,7 +11312,6 @@
         }
       ],
       "agu:datasetId": "agu-0104",
-      "agu:stableKey": "title:porewater nutrient concentrations in control and fertilized plots in a spartina alterniflora-dominated salt marsh, north inlet, georgetown, sc : 1993-2024",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -10962,6 +11390,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0105"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:relab spectral library at brown university"
         }
       ],
       "name": "RELAB spectral library at Brown University",
@@ -10972,7 +11405,6 @@
         }
       ],
       "agu:datasetId": "agu-0105",
-      "agu:stableKey": "title:relab spectral library at brown university",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -11028,6 +11460,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0106"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:satpm2.5 (satellite-derived pm2.5) with current versions: v6.gl.02.04 (global, 1998–2023, convolutional neural network based calibration), v5.gl.05.02 (global, 1998–2023, geographically weighted regression based calibration), and v5.na.05/v5.na.05.02 (north american, 2000–2023, compositional pm2.5)"
         }
       ],
       "name": "SatPM2.5 (Satellite-derived PM2.5) with current versions: V6.GL.02.04 (global, 1998–2023, Convolutional Neural Network based calibration), V5.GL.05.02 (global, 1998–2023, Geographically Weighted Regression based calibration), and V5.NA.05/V5.NA.05.02 (North American, 2000–2023, compositional PM2.5)",
@@ -11038,7 +11475,6 @@
         }
       ],
       "agu:datasetId": "agu-0106",
-      "agu:stableKey": "title:satpm2.5 (satellite-derived pm2.5) with current versions: v6.gl.02.04 (global, 1998–2023, convolutional neural network based calibration), v5.gl.05.02 (global, 1998–2023, geographically weighted regression based calibration), and v5.na.05/v5.na.05.02 (north american, 2000–2023, compositional pm2.5)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 12,
@@ -11176,6 +11612,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0108"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:sofar spotter data archive"
         }
       ],
       "name": "Sofar Spotter Data Archive",
@@ -11186,7 +11627,6 @@
         }
       ],
       "agu:datasetId": "agu-0108",
-      "agu:stableKey": "title:sofar spotter data archive",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -11281,6 +11721,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0109"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:soil respiration database"
         }
       ],
       "name": "Soil Respiration Database",
@@ -11291,7 +11736,6 @@
         }
       ],
       "agu:datasetId": "agu-0109",
-      "agu:stableKey": "title:soil respiration database",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -11355,6 +11799,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.5287/ora-2nanwp4rk|speleothem isotope synthesis and analysis v1, v1b, v2, v3"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.5287/ora-2nanwp4rk"
         }
@@ -11367,7 +11816,6 @@
         }
       ],
       "agu:datasetId": "agu-0110",
-      "agu:stableKey": "doi:10.5287/ora-2nanwp4rk|speleothem isotope synthesis and analysis v1, v1b, v2, v3",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -11475,6 +11923,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.4211/hs.92577b67675d4695b37f27a3b79ded85|stable isotope tempestology database"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.4211/hs.92577b67675d4695b37f27a3b79ded85"
         }
@@ -11487,7 +11940,6 @@
         }
       ],
       "agu:datasetId": "agu-0111",
-      "agu:stableKey": "doi:10.4211/hs.92577b67675d4695b37f27a3b79ded85|stable isotope tempestology database",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 3,
@@ -11580,6 +12032,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0112"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:surface biology and geology (sbg) high frequency time series"
         }
       ],
       "name": "Surface Biology and Geology (SBG) High Frequency Time Series",
@@ -11590,7 +12047,6 @@
         }
       ],
       "agu:datasetId": "agu-0112",
-      "agu:stableKey": "title:surface biology and geology (sbg) high frequency time series",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 4,
@@ -11666,6 +12122,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.5067/swtpo-spbd1|swot post-launch field campaign data"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.5067/SWTPO-SPBD1"
         }
@@ -11678,7 +12139,6 @@
         }
       ],
       "agu:datasetId": "agu-0113",
-      "agu:stableKey": "doi:10.5067/swtpo-spbd1|swot post-launch field campaign data",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -11774,6 +12234,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0114"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:the collaborative carbon column observing network (coccon)"
         }
       ],
       "name": "The Collaborative Carbon Column Observing Network (COCCON)",
@@ -11784,7 +12249,6 @@
         }
       ],
       "agu:datasetId": "agu-0114",
-      "agu:stableKey": "title:the collaborative carbon column observing network (coccon)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -11849,6 +12313,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0116"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:the keeling curve co2 time series"
         }
       ],
       "name": "The Keeling Curve CO2 time series",
@@ -11859,7 +12328,6 @@
         }
       ],
       "agu:datasetId": "agu-0116",
-      "agu:stableKey": "title:the keeling curve co2 time series",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -11915,6 +12383,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0118"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:the statewide california earthquake center community fault model (cfm)"
         }
       ],
       "name": "The Statewide California Earthquake Center Community Fault Model (CFM)",
@@ -11925,7 +12398,6 @@
         }
       ],
       "agu:datasetId": "agu-0118",
-      "agu:stableKey": "title:the statewide california earthquake center community fault model (cfm)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 26,
@@ -12097,6 +12569,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0119"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:the water conflict chronology database"
         }
       ],
       "name": "The Water Conflict Chronology Database",
@@ -12107,7 +12584,6 @@
         }
       ],
       "agu:datasetId": "agu-0119",
-      "agu:stableKey": "title:the water conflict chronology database",
       "agu:nominatorCount": 1,
       "agu:citationCount": 2,
       "agu:reuseCount": 3,
@@ -12190,6 +12666,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.5047/eps.2011.11.002|tiares seafloor data"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.5047/eps.2011.11.002"
         }
@@ -12202,7 +12683,6 @@
         }
       ],
       "agu:datasetId": "agu-0120",
-      "agu:stableKey": "doi:10.5047/eps.2011.11.002|tiares seafloor data",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -12264,6 +12744,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0121"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:total solar irradiance from space"
         }
       ],
       "name": "Total Solar Irradiance from Space",
@@ -12274,7 +12759,6 @@
         }
       ],
       "agu:datasetId": "agu-0121",
-      "agu:stableKey": "title:total solar irradiance from space",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -12342,6 +12826,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0122"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:tropical moist forest restoration type map"
         }
       ],
       "name": "Tropical moist forest restoration type map",
@@ -12352,7 +12841,6 @@
         }
       ],
       "agu:datasetId": "agu-0122",
-      "agu:stableKey": "title:tropical moist forest restoration type map",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -12407,6 +12895,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0123"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:united states groundwater well database (usgwd)"
         }
       ],
       "name": "United States Groundwater Well Database (USGWD)",
@@ -12417,7 +12910,6 @@
         }
       ],
       "agu:datasetId": "agu-0123",
-      "agu:stableKey": "title:united states groundwater well database (usgwd)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -12503,6 +12995,11 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "doi:10.7914/sn/ta|usarray transportable array"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "DOI",
           "value": "https://doi.org/10.7914/SN/TA"
         }
@@ -12515,7 +13012,6 @@
         }
       ],
       "agu:datasetId": "agu-0124",
-      "agu:stableKey": "doi:10.7914/sn/ta|usarray transportable array",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 4,
@@ -12603,6 +13099,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0125"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:usgs spectral library"
         }
       ],
       "name": "USGS Spectral Library",
@@ -12613,7 +13114,6 @@
         }
       ],
       "agu:datasetId": "agu-0125",
-      "agu:stableKey": "title:usgs spectral library",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -12669,6 +13169,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0126"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:vegetation photosynthetic phenology metrics in northern terrestrial ecosystems"
         }
       ],
       "name": "Vegetation Photosynthetic Phenology Metrics in Northern Terrestrial Ecosystems",
@@ -12679,7 +13184,6 @@
         }
       ],
       "agu:datasetId": "agu-0126",
-      "agu:stableKey": "title:vegetation photosynthetic phenology metrics in northern terrestrial ecosystems",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -12747,6 +13251,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0127"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:water quality portal"
         }
       ],
       "name": "Water Quality Portal",
@@ -12757,7 +13266,6 @@
         }
       ],
       "agu:datasetId": "agu-0127",
-      "agu:stableKey": "title:water quality portal",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 1,
@@ -12819,6 +13327,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0128"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:world ocean database"
         }
       ],
       "name": "World Ocean Database",
@@ -12829,7 +13342,6 @@
         }
       ],
       "agu:datasetId": "agu-0128",
-      "agu:stableKey": "title:world ocean database",
       "agu:nominatorCount": 1,
       "agu:citationCount": 0,
       "agu:reuseCount": 0,
@@ -12885,6 +13397,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0129"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:world wide lightning location network (wwlln) dataset"
         }
       ],
       "name": "World Wide Lightning Location Network (WWLLN) Dataset",
@@ -12895,7 +13412,6 @@
         }
       ],
       "agu:datasetId": "agu-0129",
-      "agu:stableKey": "title:world wide lightning location network (wwlln) dataset",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
@@ -12957,6 +13473,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0130"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:worldcereal harmonized reference datasets"
         }
       ],
       "name": "WorldCereal Harmonized Reference Datasets",
@@ -12967,7 +13488,6 @@
         }
       ],
       "agu:datasetId": "agu-0130",
-      "agu:stableKey": "title:worldcereal harmonized reference datasets",
       "agu:nominatorCount": 1,
       "agu:citationCount": 4,
       "agu:reuseCount": 8,
@@ -13125,6 +13645,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0131"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:worldclim"
         }
       ],
       "name": "Worldclim",
@@ -13135,7 +13660,6 @@
         }
       ],
       "agu:datasetId": "agu-0131",
-      "agu:stableKey": "title:worldclim",
       "agu:nominatorCount": 1,
       "agu:citationCount": 3,
       "agu:reuseCount": 1,
@@ -13204,6 +13728,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0132"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:xa (1969-1977): apollo passive seismic experiments"
         }
       ],
       "name": "XA (1969-1977): Apollo Passive Seismic Experiments",
@@ -13214,7 +13743,6 @@
         }
       ],
       "agu:datasetId": "agu-0132",
-      "agu:stableKey": "title:xa (1969-1977): apollo passive seismic experiments",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 1,
@@ -13275,6 +13803,11 @@
           "@type": "PropertyValue",
           "propertyID": "AGU-Impactful-Datasets-ID",
           "value": "agu-0133"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "AGU-Impactful-Datasets-ID-StableKey",
+          "value": "title:yax chen diatom analysis (supplementary information)"
         }
       ],
       "name": "Yax Chen diatom analysis (Supplementary Information)",
@@ -13285,7 +13818,6 @@
         }
       ],
       "agu:datasetId": "agu-0133",
-      "agu:stableKey": "title:yax chen diatom analysis (supplementary information)",
       "agu:nominatorCount": 1,
       "agu:citationCount": 1,
       "agu:reuseCount": 0,
