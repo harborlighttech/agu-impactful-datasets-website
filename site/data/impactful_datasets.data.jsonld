@@ -12,7 +12,7 @@
     "url": "https://www.agu.org/"
   },
   "license": "https://creativecommons.org/licenses/by/4.0/",
-  "dateModified": "2026-08-29",
+  "dateModified": "2026-09-01",
   "agu:themes": {
     "@type": "DefinedTermSet",
     "@id": "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups",
@@ -67,7 +67,7 @@
         "@type": "DefinedTerm",
         "@id": "urn:org:agu:data:impactful-datasets:id:theme:society",
         "identifier": "society",
-        "name": "Education, Geohealth, Society, Education",
+        "name": "Geohealth, Society, Education",
         "inDefinedTermSet": {
           "@id": "urn:org:agu:data:impactful-datasets:id:scheme:discipline-groups"
         }
