@@ -77,7 +77,7 @@ Outputs:
 
 | File | What it is |
 |---|---|
-| `impactful_datasets.jsonld` | the full graph — 133 datasets, 149 nominators, 17,310 triples across 23 classes |
+| `impactful_datasets.jsonld` | the full graph — 133 datasets, 161 nominators, 17,310 triples across 23 classes |
 | `column_report.md` | per-column analysis: fill rate, cardinality histograms, which delimiter was guessed and why, and where the guesses are weakest |
 | `column_statistics.json` | the same figures, for diffing against a future export |
 | `_clean.csv` | the encoding-repaired intermediate, kept so you can see what changed |
@@ -159,15 +159,131 @@ lets a URL survive a title edit, a re-sort, or rows being added or withdrawn.
 Two rules follow: keep the data file in version control, and never renumber by
 hand. Unknown ids fall back to the collection rather than erroring.
 
+If a build ever reports `133 new ids minted` when the registry file exists, stop:
+something has changed the shape the registry is read from, and publishing would
+break every URL. The build now refuses to continue when a registry file exists but
+yields no readable ids — that guard was added after exactly this happened during a
+format change.
+
+### The shape of the published data
+
+`data/impactful_datasets.data.jsonld` is a flat JSON-LD graph — a `DataCatalog`,
+a `DefinedTermSet` of discipline groups, two property definitions, 133 `Dataset`
+nodes, and 133 `ItemList`s holding 174 `EndorseAction`s, all as siblings under
+`@graph`.
+
+**Nominations are endorsements.** A nomination is not authorship, so each one is
+a `schema.org/EndorseAction` rather than a `creator` or `contributor` link:
+
+```json
+{ "@type": "EndorseAction",
+  "identifier": { "@type": "PropertyValue", "propertyID": "AGU-Nominator-Slot", "value": "1" },
+  "agent":  { "@type": "Person", "@id": "https://orcid.org/0000-...", "name": "..." },
+  "object": { "@id": "urn:org:agu:data:impactful-datasets:id:dataset:agu-0004" },
+  "description": "how this nominator works with the dataset",
+  "result": { "@type": "CreativeWork", "text": "their justification",
+              "about": [ { "@type": "DefinedTerm", "name": "People" } ] } }
+```
+
+The action points at its dataset with `object`; schema.org has no property for
+hanging a *performed* action off the thing acted on, which is why the graph is
+flat rather than nested. The interaction statement sits on the action, not the
+agent: the same person can nominate several datasets and agent nodes share an
+ORCID `@id`, so a description there would merge across datasets.
+
+**Ordering is explicit.** A graph is unordered, so the two sequences that matter
+are declared `"@container": "@list"` in the context — `dataset` on the catalog
+(collection display order) and `itemListElement` (nominator order within a
+dataset). Both parse as genuine `rdf:List`s.
+
+**Counts are never stored.** Nominator, citation and reuse totals are derived by
+measuring the lists at load time. A stored count drifts from the list it
+describes; this pipeline has already shipped that bug once.
+
 ### Discipline vocabulary
 
-The eight discipline groups are published as a schema.org `DefinedTermSet` under
+The nine discipline groups are published as a schema.org `DefinedTermSet` under
 `agu:themes`. Each `DefinedTerm` carries the short key as its `identifier` and the
-full label as its `name`. Datasets reference the term by `@id` through
-`keywords`, so the label is stated once and never repeated per dataset.
+full label as its `name`. Datasets reference the term by `@id` through `keywords`,
+so the label is stated once and never repeated per dataset. A group can hold more
+than one keyword: one dataset was nominated under two disciplines and appears
+under both.
+
+Labels are never retyped in the site builder — they are read from the RDF graph,
+which carries them verbatim from the spreadsheet. Corrections to the source
+wording live in `DISCIPLINE_FIXES` in `restructure_impactful_datasets.py`, and the
+verbatim original survives on the `agu:SourceRow` node.
 
 Note: schema.org has no singular `keyword` property — `keywords` is the correct
 term, and it accepts a `DefinedTerm`, which is exactly this pattern.
+
+### agu:ResponsibleParty
+
+One class is declared: `agu:ResponsibleParty`, a subclass of `prov:Agent`. It
+covers whoever answers for a dataset — an individual, an institution, a standing
+team or a service desk — and exists mainly for parties that cannot honestly be
+resolved to either `schema:Person` or `schema:Organization`. Typing a science
+working group as `ResponsibleParty` records what is known; typing it `Person`
+guesses wrong.
+
+Subsumption is asserted only in the direction that is AGU's to assert. The file
+does **not** say `schema:Person rdfs:subClassOf agu:ResponsibleParty`: that is a
+global claim, and once graphs are merged it makes every `schema:Person` anywhere
+an AGU responsible party. Tested with an RDFS reasoner — an unrelated novelist and
+bakery in a merged graph get pulled in under that assertion, and are untouched
+without it. `prov:Agent` supplies the shared supertype instead, since it already
+means a party that bears responsibility.
+
+Two `skos:narrowMatch` pointers to `schema:Person` and `schema:Organization`
+record which classes a responsible party will usually turn out to be. The
+relation runs that way because this concept is the broader one: it also covers
+the teams, working groups and service desks that are neither. They are
+documentation, not logic — SKOS mapping relations carry no entailment, so the
+pointers describe the relationship without asserting anything about anybody
+else's data. Verified: a foreign `schema:Person` is untouched after reasoning,
+while `ResponsibleParty` instances still infer as `prov:Agent`.
+
+Nothing is typed `ResponsibleParty` yet. See `person_review.csv` and
+`review_person_types.py`: 191 entities currently typed `Person` are flagged, of
+which 82 look like organisations, 62 hold several entities in one string, and 43
+are parse artifacts rather than entities at all. That review is unresolved.
+
+### The two AGU properties, and why they are not aliased
+
+Two keys stay in the AGU namespace: `agu:curator` and `agu:reuseExample`. Both are
+declared as `rdf:Property` nodes in the graph, each carrying an `rdfs:comment`
+that states precisely what AGU means by it, and an `owl:equivalentProperty` link
+to its schema.org counterpart — `maintainer` and `subjectOf` respectively.
+
+It is tempting to skip that and alias the keys directly in the context:
+
+```json
+"agu:curator": { "@id": "https://schema.org/maintainer" }     // DO NOT DO THIS
+```
+
+**That is invalid JSON-LD 1.1 and a conforming processor rejects the entire
+document**, not just the term. The spec requires a term whose name is in
+compact-IRI form to expand to the same IRI its prefix would give. `rdflib` accepts
+it silently, which makes the mistake easy to ship; `pyld` refuses it with
+`invalid IRI mapping`. Validate with a conforming processor before trusting a
+context change:
+
+```bash
+python -c "from pyld import jsonld, json; jsonld.expand(json.load(open('out/data/impactful_datasets.data.jsonld')))"
+```
+
+The same rule blocks putting an `rdfs:comment` *inside* a term definition — only
+JSON-LD keywords are allowed there. Hence the property nodes, where the
+documentation is an ordinary triple any consumer can read.
+
+Consumers wanting pure schema.org can apply the equivalence in three lines; it
+yields 126 `maintainer` and 397 `subjectOf` triples:
+
+```python
+for p, q in g.subject_objects(OWL.equivalentProperty):
+    for s, _, o in g.triples((None, p, None)):
+        g.add((s, q, o))
+```
 
 ### Namespaces
 

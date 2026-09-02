@@ -80,6 +80,9 @@ ap.add_argument("--featured", default="Argo",
                 help="title of the dataset shown on page 2 (default: Argo)")
 ap.add_argument("--nominators", type=int, default=0,
                 help="distinct nominator count for the tally; 0 = count from the data")
+ap.add_argument("--person-review", type=Path, default=Path("person_review.csv"),
+                help="reviewed classification of Person-typed names "
+                     "(from review_person_types.py); absent = rule 1 only")
 ap.add_argument("--logo-width", type=int, default=620,
                 help="px width the logo is downscaled to before embedding")
 ap.add_argument("--data-file", default="impactful_datasets.data.jsonld",
@@ -356,6 +359,70 @@ def theme_id(key):
 
 
 
+# ---------------------------------------------------------- party typing ----
+# Whether a credited party is a Person, an Organization or an agu:ResponsibleParty
+# is decided here, from the reviewed worksheet. The rules, in order:
+#   * an ORCID means a person, full stop
+#   * otherwise the worksheet decides: a high-confidence organisation becomes an
+#     Organization; a medium-confidence one becomes a ResponsibleParty, because
+#     the evidence does not justify the stronger claim; a low-confidence one stays
+#     a Person; everything else -- uncertain, unparsed, or several entities in one
+#     string -- becomes a ResponsibleParty
+#   * a name absent from the worksheet and lacking an ORCID becomes a
+#     ResponsibleParty: without an identifier there is nothing to support the
+#     stronger claim that it names an individual
+# A filled-in DECISION cell overrides all of it, so the worksheet stays the place
+# where a human ruling is recorded.
+KEEP_AS_PERSON = {"Jing Gao ( jinggao@udel.edu )"}
+REVIEW = {}
+if args.person_review and args.person_review.exists():
+    import csv as _csv
+    with open(args.person_review, encoding="utf-8-sig") as fh:
+        for row in _csv.DictReader(fh):
+            REVIEW[row["name"]] = row
+    print("party types: read %d reviewed names from %s" % (len(REVIEW), args.person_review))
+else:
+    print("party types: no review file at %s; names without an ORCID default to "
+          "agu:ResponsibleParty" % args.person_review)
+
+PARTY_KIND = {"Person": "person", "Organization": "organization",
+              "agu:ResponsibleParty": "party"}
+party_tally = collections.Counter()
+
+
+def party(name, orcid=None, is_nominator=False):
+    """A credited party as a typed node, classified by the rules above.
+
+    `is_nominator` marks the agent of an EndorseAction. The nomination form asks
+    for one person's name, email, ORCID and affiliation, so that agent is a
+    person by construction; a missing ORCID means only that they did not supply
+    one. Without this, six named researchers who left the field blank would be
+    demoted to ResponsibleParty. The classifier still gets a veto, in case a
+    future export puts an institution in that field -- it flags none of the
+    current 161.
+    """
+    if orcid:
+        kind = "Person"
+    elif is_nominator and not REVIEW.get(name):
+        kind = "Person"
+    elif name in KEEP_AS_PERSON:
+        kind = "Person"
+    else:
+        row = REVIEW.get(name)
+        decided = (row or {}).get("DECISION", "").strip()
+        if decided:
+            kind = {"person": "Person", "organization": "Organization",
+                    "responsibleparty": "agu:ResponsibleParty"}.get(
+                        decided.lower().replace(" ", ""), "agu:ResponsibleParty")
+        elif row and row.get("suggested_action") == "Organization":
+            kind = {"high": "Organization", "medium": "agu:ResponsibleParty",
+                    "low": "Person"}.get(row.get("confidence", ""), "agu:ResponsibleParty")
+        else:
+            kind = "agu:ResponsibleParty"
+    party_tally[kind] += 1
+    return {"@type": kind, "@id": orcid or urn(PARTY_KIND[kind], name), "name": name}
+
+
 def urn(kind, local):
     """urn:org:agu:data:impactful-datasets:id:{type}:{local}"""
     s = re.sub(r"[^a-z0-9]+", "-", (local or "").lower()).strip("-")[:70].strip("-")
@@ -406,13 +473,18 @@ def sd_dataset(rec):
     extra = [u for u in (rec.get("links") or []) if u != d.get("url")]
     if extra:
         d["sameAs"] = extra
+    # A nominator often also produced or stewards the dataset they put forward.
+    # Where the credited name matches a nominator of this same dataset who gave an
+    # ORCID, reuse that ORCID: it is one human, and should be one node. The match
+    # is deliberately confined to the same record -- an exact name match across
+    # the collection would be far weaker evidence, and names like "Yuan Li" recur.
+    orcid_here = {p["name"]: p["orcid"] for p in rec["nominators"]
+                  if p.get("name") and p.get("orcid")}
     if rec.get("creators"):
-        d["creator"] = [{"@type": "Person", "@id": urn("person", n), "name": n}
-                        for n in rec["creators"] if n]
+        d["creator"] = [party(n, orcid_here.get(n)) for n in rec["creators"] if n]
     if rec.get("curators"):
         # key stays agu:curator; the @context maps it to schema.org/maintainer
-        d["agu:curator"] = [{"@type": "Person", "@id": urn("person", n), "name": n}
-                            for n in rec["curators"] if n]
+        d["agu:curator"] = [party(n, orcid_here.get(n)) for n in rec["curators"] if n]
     if rec.get("repo"):
         d["includedInDataCatalog"] = {"@type": "DataCatalog",
                                       "@id": urn("organization", rec["repo"]),
@@ -445,16 +517,12 @@ def sd_endorsements(rec):
     actions = []
     for n, p in enumerate(rec["nominators"], start=1):
         j = just.get(str(p.get("seq")))
-        agent = {k: v for k, v in {
-            "@type": "Person",
-            # a real ORCID beats a minted id; fall back to a name-derived urn
-            "@id": p.get("orcid") or urn("person", p.get("name")),
-            "name": p.get("name"),
-            "affiliation": ({"@type": "Organization",
-                             "@id": urn("organization", p["affil"]),
-                             "name": p["affil"]}
-                            if p.get("affil") else None),
-        }.items() if v is not None}
+        # a real ORCID beats a minted id, and is what marks the agent a Person
+        agent = party(p.get("name"), p.get("orcid"), is_nominator=True)
+        if p.get("affil"):
+            agent["affiliation"] = {"@type": "Organization",
+                                    "@id": urn("organization", p["affil"]),
+                                    "name": p["affil"]}
         # The justification is what this endorsement produced, so it hangs off the
         # action as `result`; its People/Planet/Prosperity tags become `about`,
         # which retires agu:impactDimension.
@@ -522,6 +590,40 @@ theme_set = {
 # document if one appears. Declared here, the definitions are ordinary triples that
 # any consumer can read, and they state the schema.org term each one resolves to.
 vocab = [
+    # A single type for whoever answers for a dataset, whether that is an
+    # individual, an institution, a standing team or a service desk. Declared a
+    # subclass of prov:Agent, which already means "something that bears
+    # responsibility for an activity", so consumers reasoning over PROV pick it
+    # up without AGU having to redefine anything.
+    #
+    # Note what is deliberately NOT asserted here: schema:Person and
+    # schema:Organization are left alone. Declaring them subclasses of this class
+    # would be a global claim -- every Person in every graph, anywhere, would
+    # become an AGU responsible party once the graphs were merged. Subsumption is
+    # stated only in the direction that is ours to state.
+    {"@id": NS_URN + "ResponsibleParty",
+     "@type": "owl:Class",
+     "rdfs:label": "Responsible Party",
+     "rdfs:comment": (
+         "A person or organization that has responsibility for a resource. Used "
+         "for the parties credited on a nomination \u2014 those who produced a "
+         "dataset and those who steward it \u2014 and, in particular, for parties "
+         "that cannot be resolved to either a person or an organization: standing "
+         "teams, science working groups, service desks and similar collective "
+         "bodies named in the nomination form. Typing such a party as "
+         "ResponsibleParty records what is actually known instead of guessing "
+         "between schema.org/Person and schema.org/Organization."),
+     "rdfs:isDefinedBy": {"@id": NS_URN[:-1]},
+     "rdfs:subClassOf": {"@id": "http://www.w3.org/ns/prov#Agent"},
+     # Pointers to the two schema.org classes a responsible party will usually
+     # turn out to be. narrowMatch, not closeMatch: this concept is the broader
+     # one -- it also covers the teams, working groups and service desks that are
+     # neither a person nor an organization. SKOS mapping relations are
+     # documentation, not logic: they carry no entailment, so unlike
+     # rdfs:subClassOf this says nothing about anybody else's data. A
+     # schema:Person in an unrelated graph is untouched by it.
+     "skos:narrowMatch": [{"@id": "https://schema.org/Person"},
+                          {"@id": "https://schema.org/Organization"}]},
     {"@id": NS_URN + "curator",
      "@type": "rdf:Property",
      "rdfs:label": "curator",
@@ -567,6 +669,8 @@ data_doc = {
         "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
         "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
         "owl": "http://www.w3.org/2002/07/owl#",
+        "prov": "http://www.w3.org/ns/prov#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
         # agu:curator and agu:reuseExample are deliberately NOT aliased here.
         # JSON-LD 1.1 requires a term whose name is in compact-IRI form to expand
         # to the same IRI its prefix would give, so mapping "agu:curator" to
@@ -583,6 +687,8 @@ data_doc = {
     "@graph": nodes,
 }
 DATA_PATH.write_text(json.dumps(data_doc, indent=2, ensure_ascii=False), encoding="utf-8")
+for _k, _n in party_tally.most_common():
+    print("party types: %-22s %4d" % (_k, _n))
 print("data file: %s  (%d datasets, %d new id%s minted)"
       % (DATA_PATH, len(out), minted, "" if minted == 1 else "s"))
 

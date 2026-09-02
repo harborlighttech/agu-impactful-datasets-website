@@ -5,6 +5,8 @@
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "owl": "http://www.w3.org/2002/07/owl#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
     "dataset": {
       "@id": "https://schema.org/dataset",
       "@container": "@list"
@@ -517,6 +519,26 @@
       ]
     },
     {
+      "@id": "urn:org:agu:data:ns:ResponsibleParty",
+      "@type": "owl:Class",
+      "rdfs:label": "Responsible Party",
+      "rdfs:comment": "A person or organization that has responsibility for a resource. Used for the parties credited on a nomination — those who produced a dataset and those who steward it — and, in particular, for parties that cannot be resolved to either a person or an organization: standing teams, science working groups, service desks and similar collective bodies named in the nomination form. Typing such a party as ResponsibleParty records what is actually known instead of guessing between schema.org/Person and schema.org/Organization.",
+      "rdfs:isDefinedBy": {
+        "@id": "urn:org:agu:data:ns"
+      },
+      "rdfs:subClassOf": {
+        "@id": "http://www.w3.org/ns/prov#Agent"
+      },
+      "skos:narrowMatch": [
+        {
+          "@id": "https://schema.org/Person"
+        },
+        {
+          "@id": "https://schema.org/Organization"
+        }
+      ]
+    },
+    {
       "@id": "urn:org:agu:data:ns:curator",
       "@type": "rdf:Property",
       "rdfs:label": "curator",
@@ -567,15 +589,15 @@
       "url": "https://tccondata.org/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:total-carbon-column-observing-network-tccon-team",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:total-carbon-column-observing-network-tccon-team",
           "name": "Total Carbon Column Observing Network (TCCON) Team"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:tom-morrell-coleen-roehl-josh-laughner",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:tom-morrell-coleen-roehl-josh-laughner",
           "name": "Tom Morrell, Coleen Roehl, Josh Laughner"
         }
       ],
@@ -674,30 +696,30 @@
       ],
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:george-j-huffman-david-t-bolvin-robert-joyce-eric-j-nelkin-erich-f-sto",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:george-j-huffman-david-t-bolvin-robert-joyce-eric-j-nelkin-erich-f-sto",
           "name": "George J. Huffman, David T. Bolvin, Robert Joyce, Eric J. Nelkin, Erich F. Stocker, Jackson Tan"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:andrey-k-savtchenko-andrey-k-savtchenko-nasa-gov",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:andrey-k-savtchenko-andrey-k-savtchenko-nasa-gov",
           "name": "Andrey K. Savtchenko (andrey.k.savtchenko@nasa.gov)"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:zhong-liu-zhong-liu-1-nasa-gov",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:zhong-liu-zhong-liu-1-nasa-gov",
           "name": "Zhong Liu (zhong.liu-1@nasa.gov)"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:jacob-r-schaperow-jacob-r-schaperow-nasa-gov",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:jacob-r-schaperow-jacob-r-schaperow-nasa-gov",
           "name": "Jacob R. Schaperow <jacob.r.schaperow@nasa.gov>"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:brandon-o-mitchell-brandon-o-mitchell-nasa-gov",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:brandon-o-mitchell-brandon-o-mitchell-nasa-gov",
           "name": "Brandon O. Mitchell <brandon.o.mitchell@nasa.gov>"
         }
       ],
@@ -770,15 +792,15 @@
       "url": "https://sidc.be/SILSO/home",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:clette-fr-d-ric-lef-vre-laure",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:clette-fr-d-ric-lef-vre-laure",
           "name": "Clette Frédéric, Lefèvre Laure"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:wdc-silso-royal-observatory-of-belgium",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:wdc-silso-royal-observatory-of-belgium",
           "name": "WDC-SILSO - Royal Observatory of Belgium"
         }
       ],
@@ -895,20 +917,20 @@
       "url": "https://ngmdb.usgs.gov/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:david-soller-senior-program-scientist-for-the-national-geologic-map-da",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:david-soller-senior-program-scientist-for-the-national-geologic-map-da",
           "name": "David Soller, Senior Program Scientist for the National Geologic Map Database,"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:national-cooperative-geologic-mapping-program",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:national-cooperative-geologic-mapping-program",
           "name": "National Cooperative Geologic Mapping Program"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:u-s-geological-survey-usgs-in-partnership-with-the-association-of-amer",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:u-s-geological-survey-usgs-in-partnership-with-the-association-of-amer",
           "name": "U.S. Geological Survey (USGS) in partnership with the Association of American State Geologists"
         }
       ],
@@ -962,15 +984,15 @@
       "url": "https://doi.org/10.7265/a98x-0f50",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:fetterer-f-knowles-k-meier-w-n-savoie-m-windnagel-a-k-stafford-t",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:fetterer-f-knowles-k-meier-w-n-savoie-m-windnagel-a-k-stafford-t",
           "name": "Fetterer, F., Knowles, K., Meier, W. N., Savoie, M., Windnagel, A. K. & Stafford, T."
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:fetterer-f-meier-w-n-windnagel-a-k-stafford-t",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:fetterer-f-meier-w-n-windnagel-a-k-stafford-t",
           "name": "Fetterer, F., Meier, W. N., Windnagel, A. K. & Stafford, T."
         }
       ],
@@ -1042,25 +1064,25 @@
       "description": "The GEOROC Database (Geochemistry of Rocks of the Oceans and Continents) is a comprehensive collection of published datasets with analyses of igneous and metamorphic rocks and minerals. It contains 40.8 million values of major and trace element concentrations, radiogenic and nonradiogenic isotope ratios as well as analytical ages for whole rocks, glasses, minerals and inclusions. Metadata include geospatial and other sample information, analytical method details and source references, which are all fully searchable for downloading custom datasets.\nThe construction of the GEOROC database under the direction of Bärbel Sarbas and Albrecht Hofmann began in January 1998 at the Max Planck Institute for Chemistry, Mainz. GEOROC has been available online since the end of 1999. Since 2006, GEOROC datasets are also available through the EarthChem Portal. The content of the GEOROC database was initially limited to geochemical analyses of ocean island basalts, but was soon expanded to include samples of volcanic rocks from other tectonic environments and the mantle xenoliths they contain as well as associated minerals and a selection of metamorphic rocks. In August 2021, the GEOROC database was formally transferred to the Georg-August-Universität Göttingen, where the new GEOROC group, including Bärbel Sarbas, is continuing to maintain and grow the database. At Göttingen, the database IT-infrastructure is being updated as part of the DIGIS-project to improve the searchability and better adhere to FAIR data principles.",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:b-rbel-sarbas",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:b-rbel-sarbas",
           "name": "Bärbel Sarbas"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:albrecht-hofmann",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:albrecht-hofmann",
           "name": "Albrecht Hofmann"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:digis-team",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:digis-team",
           "name": "DIGIS team"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:digital-geochemical-infrastructure-digis-team",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:digital-geochemical-infrastructure-digis-team",
           "name": "Digital Geochemical Infrastructure (DIGIS) team"
         }
       ],
@@ -1177,15 +1199,15 @@
       ],
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:noaa-oar-aoml",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:noaa-oar-aoml",
           "name": "NOAA-OAR-AOML"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:atlantic-oceanographic-meteorological-laboratory-aoml",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:atlantic-oceanographic-meteorological-laboratory-aoml",
           "name": "Atlantic Oceanographic & Meteorological Laboratory (AOML)"
         }
       ],
@@ -1254,15 +1276,15 @@
       "url": "https://gdex.ucar.edu/datasets/d651012/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:committee-and-co-chairs-christine-shields-travis-o-brien-jonathan-rutz",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:committee-and-co-chairs-christine-shields-travis-o-brien-jonathan-rutz",
           "name": "(Committee and Co-Chairs): Christine Shields, Travis O’Brien, Jonathan Rutz, Allison Collow, Juan Lora,, Paul Ullrich, L. Ruby Leung, F. Martin Ralph, Michael Wehner, Ashley Payne"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:christine-a-shields-artmip",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:christine-a-shields-artmip",
           "name": "Christine A. Shields, ARTMIP"
         }
       ],
@@ -1339,15 +1361,15 @@
       "url": "https://analytics.cal-adapt.org/data/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:dan-cayan-david-pierce-stefan-rahimi-benjamin-bass-lu-su-dennis-letten",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:dan-cayan-david-pierce-stefan-rahimi-benjamin-bass-lu-su-dennis-letten",
           "name": "Dan Cayan, David Pierce, Stefan Rahimi, Benjamin Bass, Lu Su, Dennis Lettenmaier, Alex Hall"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:cal-adapt-analytics-engine",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:cal-adapt-analytics-engine",
           "name": "Cal-Adapt Analytics Engine"
         }
       ],
@@ -1409,8 +1431,8 @@
       "url": "https://doi.org/10.5067/ECOSTRESS/ECO_L2T_LSTE.002",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:hook-s-hulley-g-2022",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:hook-s-hulley-g-2022",
           "name": "Hook, S., & Hulley, G. (2022)"
         }
       ],
@@ -1451,75 +1473,75 @@
       ],
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:1000s-globally-curated-in-us-by-dept-of-energy-lbl-in-us-by-multiple-g",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:1000s-globally-curated-in-us-by-dept-of-energy-lbl-in-us-by-multiple-g",
           "name": "1000s globally, curated in US by Dept of Energy LBL in US, by multiple groups globally"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:margaret-torn-mstorn-lbl-gov",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:margaret-torn-mstorn-lbl-gov",
           "name": "Margaret Torn mstorn@lbl.gov"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:s-bastien-biraud-scbiraud-lbl-gov",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:s-bastien-biraud-scbiraud-lbl-gov",
           "name": "Sébastien Biraud scbiraud@lbl.gov"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:you-wei-cheah-ycheah-lbl-gov",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:you-wei-cheah-ycheah-lbl-gov",
           "name": "You-Wei Cheah ycheah@lbl.gov"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:trevor-keenan-trevorkeenan-berkeley-edu",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:trevor-keenan-trevorkeenan-berkeley-edu",
           "name": "Trevor Keenan trevorkeenan@berkeley.edu"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:christin-buechner-cbuechner-lbl-gov",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:christin-buechner-cbuechner-lbl-gov",
           "name": "Christin Buechner cbuechner@lbl.gov"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:stephen-chan-swchan-lbl-gov",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:stephen-chan-swchan-lbl-gov",
           "name": "Stephen Chan SWChan@lbl.gov"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:danielle-christianson-dschristianson-lbl-gov",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:danielle-christianson-dschristianson-lbl-gov",
           "name": "Danielle Christianson, DSChristianson@lbl.gov"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:housen-chu-hchu-lbl-gov",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:housen-chu-hchu-lbl-gov",
           "name": "Housen Chu, hchu@lbl.gov"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:sigrid-dengel-sdengel-lbl-gov",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:sigrid-dengel-sdengel-lbl-gov",
           "name": "Sigrid Dengel, sdengel@lbl.gov"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:sy-toan-ngo-sytoanngo-lbl-gov",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:sy-toan-ngo-sytoanngo-lbl-gov",
           "name": "Sy-Toan Ngo, SyToanNgo@lbl.gov"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:fianna-o-brien-flobrien-lbl-gov",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:fianna-o-brien-flobrien-lbl-gov",
           "name": "Fianna O’Brien, flobrien@lbl.gov"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:gilberto-pastorello-gzpastorello-lbl-gov",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:gilberto-pastorello-gzpastorello-lbl-gov",
           "name": "Gilberto Pastorello, GZPastorello@lbl.gov"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:brian-wang-brianwang-lbl-gov",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:brian-wang-brianwang-lbl-gov",
           "name": "Brian Wang, BrianWang@lbl.gov"
         }
       ],
@@ -1592,15 +1614,15 @@
       "url": "https://www.hydroshare.org/resource/60a890eb841c460192c03bb590687145/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:endalkachew-kebede-kevin-ong-are-oluoch-stefan-siebert-piyush-mehta-sa",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:endalkachew-kebede-kevin-ong-are-oluoch-stefan-siebert-piyush-mehta-sa",
           "name": "Endalkachew Kebede, Kevin Ong’are Oluoch, Stefan Siebert,Piyush Mehta, Sarah Hartman,Jonas Jägermeyr, Deepak Ray, Tariq Ali, Kate A. Brauman, Qinyu Deng, Wei Xie, Kyle Frankel Davis"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:endalkachew-abebe-kebede-and-kyle-frankel-davis",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:endalkachew-abebe-kebede-and-kyle-frankel-davis",
           "name": "Endalkachew Abebe Kebede and Kyle Frankel Davis"
         }
       ],
@@ -1673,20 +1695,20 @@
       "url": "https://omniweb.gsfc.nasa.gov/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:multiple-sources",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:multiple-sources",
           "name": "Multiple sources"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:joseph-h-king-natalia-e-papitashvili",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:joseph-h-king-natalia-e-papitashvili",
           "name": "Joseph H. King & Natalia E. Papitashvili"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:natalia-e-papitashvili-spdf",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:natalia-e-papitashvili-spdf",
           "name": "Natalia E. Papitashvili & SPDF"
         }
       ],
@@ -1743,20 +1765,20 @@
       "url": "https://woudc.org/en/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:many-site-pis-from-more-than-500-sites",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:many-site-pis-from-more-than-500-sites",
           "name": "Many site PIs (from more than 500 sites"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:over-150-contributors",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:over-150-contributors",
           "name": "over 150 contributors)"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:tom-kralidis",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:tom-kralidis",
           "name": "Tom Kralidis"
         }
       ],
@@ -1806,15 +1828,15 @@
       ],
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:kerstin-lehnert-charlie-langmuir-earthchem-team",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:kerstin-lehnert-charlie-langmuir-earthchem-team",
           "name": "Kerstin Lehnert, Charlie Langmuir, EarthChem team"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:earthchem-team",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:earthchem-team",
           "name": "EarthChem Team"
         }
       ],
@@ -1870,15 +1892,15 @@
       "url": "https://deepblue.lib.umich.edu/data/concern/data_sets/kk91fm40r",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:fraser-king-claire-pettersen",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:fraser-king-claire-pettersen",
           "name": "Fraser King, Claire Pettersen"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:university-of-michigan",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:university-of-michigan",
           "name": "University of Michigan"
         }
       ],
@@ -1940,8 +1962,8 @@
       "url": "https://doi.org/10.3334/ORNLDAAC/2448",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:virkkala-wargowsky-vogt-kuhn-et-al-over-250-coauthors",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:virkkala-wargowsky-vogt-kuhn-et-al-over-250-coauthors",
           "name": "Virkkala, Wargowsky, Vogt & Kuhn et al. (+ over 250 coauthors)"
         }
       ],
@@ -1990,24 +2012,24 @@
       "creator": [
         {
           "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:peiyu-cao",
+          "@id": "https://orcid.org/0000-0002-5032-1991",
           "name": "Peiyu Cao"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:chaoqun-lu",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:chaoqun-lu",
           "name": "Chaoqun Lu"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:zhen-yu",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:zhen-yu",
           "name": "Zhen Yu"
         }
       ],
       "agu:curator": [
         {
           "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:peiyu-cao",
+          "@id": "https://orcid.org/0000-0002-5032-1991",
           "name": "Peiyu Cao"
         }
       ],
@@ -2050,15 +2072,15 @@
       "url": "https://fire.airnow.gov/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:us-epa-usfs-team",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:us-epa-usfs-team",
           "name": "US EPA/USFS team"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:us-epa-usfs-team",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:us-epa-usfs-team",
           "name": "US EPA/USFS team"
         }
       ],
@@ -2095,15 +2117,15 @@
       "url": "https://www-air.larc.nasa.gov/missions/asia-aq/index.html",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:asia-aq-science-team",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:asia-aq-science-team",
           "name": "ASIA-AQ Science Team"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:nasa-asdc",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:nasa-asdc",
           "name": "NASA ASDC"
         }
       ],
@@ -2155,40 +2177,40 @@
       "url": "https://doi.org/10.5281/zenodo.13357690",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:cao-peiyu",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:cao-peiyu",
           "name": "Cao, Peiyu"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:yi-bo",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:yi-bo",
           "name": "Yi, Bo"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:bilotto-franco",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:bilotto-franco",
           "name": "Bilotto, Franco"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:gonzalez-fischer-carlos",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:gonzalez-fischer-carlos",
           "name": "Gonzalez Fischer, Carlos"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:herrero-mario",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:herrero-mario",
           "name": "Herrero, Mario"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:lu-chaoqun",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:lu-chaoqun",
           "name": "Lu, Chaoqun"
         }
       ],
       "agu:curator": [
         {
           "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:peiyu-cao",
+          "@id": "https://orcid.org/0000-0002-5032-1991",
           "name": "Peiyu Cao"
         }
       ],
@@ -2234,15 +2256,15 @@
       ],
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:polar-geospatial-center-university-of-minnesota",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:polar-geospatial-center-university-of-minnesota",
           "name": "Polar Geospatial Center, University of Minnesota"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:polar-geospatial-center",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:polar-geospatial-center",
           "name": "Polar Geospatial Center"
         }
       ],
@@ -2296,14 +2318,14 @@
       "creator": [
         {
           "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:kerstin-lehnert",
+          "@id": "https://orcid.org/0000-0001-7036-1977",
           "name": "Kerstin Lehnert"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:geoinformatics-research-group-lamont-doherty-earth-observatory",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:geoinformatics-research-group-lamont-doherty-earth-observatory",
           "name": "Geoinformatics Research Group, Lamont-Doherty Earth Observatory"
         }
       ],
@@ -2360,8 +2382,8 @@
       "url": "https://airs.jpl.nasa.gov/data/get-data/standard-data/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:airs-science-team",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:airs-science-team",
           "name": "AIRS Science Team"
         }
       ],
@@ -2403,15 +2425,15 @@
       "url": "https://doi.org/10.58024/agum46bd292f",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:barry-kohn-andrew-gleadow-roderick-brown-kerry-gallagher-paul-o-sulliv",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:barry-kohn-andrew-gleadow-roderick-brown-kerry-gallagher-paul-o-sulliv",
           "name": "Barry Kohn, Andrew Gleadow, Roderick Brown, Kerry Gallagher, Paul O'Sullivan, David Foster, Samuel Boone, Malcolm McMillan"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:auscope-geochemistry-network",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:auscope-geochemistry-network",
           "name": "AuScope Geochemistry Network"
         }
       ],
@@ -2473,15 +2495,15 @@
       "url": "https://doi.org/10.58024/agumcad7b7cb",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:samuel-boone-malcolm-mcmillan-angus-nixon-ling-chung-christian-seiler",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:samuel-boone-malcolm-mcmillan-angus-nixon-ling-chung-christian-seiler",
           "name": "Samuel Boone, Malcolm McMillan, Angus Nixon, Ling Chung, Christian Seiler, Stijn Glorie, Barry Kohn, Andrew Gleadow"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:auscope-geochemistry-network",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:auscope-geochemistry-network",
           "name": "AuScope Geochemistry Network"
         }
       ],
@@ -2518,8 +2540,8 @@
       "url": "https://cmr.earthdata.nasa.gov/search/concepts/C2849438379-NSIDCV0.html",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:enze-zhang-ginny-catania-daniel-trugman",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:enze-zhang-ginny-catania-daniel-trugman",
           "name": "Enze Zhang, Ginny Catania, Daniel Trugman"
         }
       ],
@@ -2560,15 +2582,15 @@
       ],
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:noaa-swfsc",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:noaa-swfsc",
           "name": "NOAA SWFSC"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:lynn-dewitt-noaa-margaret-o-brien",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:lynn-dewitt-noaa-margaret-o-brien",
           "name": "Lynn deWitt, NOAA & Margaret O'Brien"
         }
       ],
@@ -2614,25 +2636,25 @@
       ],
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ucsd-sio",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ucsd-sio",
           "name": "UCSD SIO"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:lynn-dewitt",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:lynn-dewitt",
           "name": "Lynn DeWitt"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:noaa-erd",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:noaa-erd",
           "name": "NOAA ERD"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:rasmus-swalethorp",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:rasmus-swalethorp",
           "name": "Rasmus Swalethorp"
         }
       ],
@@ -2675,45 +2697,45 @@
       "url": "https://zenodo.org/records/11118408",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:nikunj-k-mangukiya",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:nikunj-k-mangukiya",
           "name": "Nikunj K. Mangukiya"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:kanneganti-bhargav-kumar",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:kanneganti-bhargav-kumar",
           "name": "Kanneganti Bhargav Kumar"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:pankaj-dey",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:pankaj-dey",
           "name": "Pankaj Dey"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:shailza-sharma",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:shailza-sharma",
           "name": "Shailza Sharma"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:vijaykumar-bejagam",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:vijaykumar-bejagam",
           "name": "Vijaykumar Bejagam"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:pradeep-p-mujumdar",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:pradeep-p-mujumdar",
           "name": "Pradeep P. Mujumdar"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:and-ashutosh-sharma",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:and-ashutosh-sharma",
           "name": "and Ashutosh Sharma"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ecohydro-lab-department-of-hydrology-indian-institute-of-technology-ro",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ecohydro-lab-department-of-hydrology-indian-institute-of-technology-ro",
           "name": "EcoHydro Lab, Department of Hydrology, Indian Institute of Technology Roorkee"
         }
       ],
@@ -2766,13 +2788,13 @@
       "url": "https://ral.ucar.edu/solutions/products/camels",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:part-1-a-j-newman-m-p-clark-k-sampson-a-wood-l-e-hay-a-bock-r-j-viger",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:part-1-a-j-newman-m-p-clark-k-sampson-a-wood-l-e-hay-a-bock-r-j-viger",
           "name": "Part 1: A. J. Newman, M. P. Clark, K. Sampson, A. Wood, L. E. Hay, A. Bock, R. J. Viger, D. Blodgett, L. Brekke, J. R. Arnold, T. Hopson, and Q. Duan"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:part-2-n-addor-a-newman-m-mizukami-and-m-p-clark",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:part-2-n-addor-a-newman-m-mizukami-and-m-p-clark",
           "name": "Part 2: N. Addor, A. Newman, M. Mizukami, and M. P. Clark"
         }
       ],
@@ -2965,50 +2987,50 @@
       "url": "https://data.mendeley.com/preview/g9pmt7vbx3?a=51b32305-c994-4b54-9574-714b967821f6",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:james-s-eldrett",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:james-s-eldrett",
           "name": "James. S. Eldrett"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:daniel-minisini",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:daniel-minisini",
           "name": "Daniel Minisini"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:steven-c-bergman",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:steven-c-bergman",
           "name": "Steven C. Bergman"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:paul-dodsworth",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:paul-dodsworth",
           "name": "Paul Dodsworth"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:lucien-nana-yobo",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:lucien-nana-yobo",
           "name": "Lucien Nana Yobo"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:alexander-dickson",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:alexander-dickson",
           "name": "Alexander Dickson"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:tim-sweere",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:tim-sweere",
           "name": "Tim Sweere"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:xun-sun",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:xun-sun",
           "name": "Xun Sun"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:james-s-eldrett",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:james-s-eldrett",
           "name": "James S. Eldrett"
         }
       ],
@@ -3161,8 +3183,8 @@
       ],
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:thomas-westerhold-norbert-marwan-anna-joy-drury-diederik-liebrand-clau",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:thomas-westerhold-norbert-marwan-anna-joy-drury-diederik-liebrand-clau",
           "name": "Thomas Westerhold, Norbert Marwan, Anna Joy Drury, Diederik Liebrand, Claudia Agnini, Eleni Anagnostou, James S. K. Barnet, Steven M. Bohaty, David De Vleeschouwer, Fabio Florindo, Thomas Frederichs, David A. Hodell, Ann E. Holbourn, Dick Kroon, Vittoria Lauretano, Kate Littler, Lucas J. Lourens, Mitchell Lyle, Heiko Pälike, Ursula Röhl, Jun Tian, Roy H. Wilkens, Paul A. Wilson, James C. Zachos"
         }
       ],
@@ -3236,15 +3258,15 @@
       "url": "https://doi.org/10.1029/2024WR039355",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:nicolas-fernandez-matthew-j-cohen-james-w-jawitz",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:nicolas-fernandez-matthew-j-cohen-james-w-jawitz",
           "name": "Nicolas Fernandez, Matthew J. Cohen, James W. Jawitz"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:cuahsi",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:cuahsi",
           "name": "CUAHSI"
         }
       ],
@@ -3293,15 +3315,15 @@
       "url": "https://data.tpdc.ac.cn/en/data/e60dfd96-5fd8-493f-beae-e8e5d24dece4",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:jie-he-kun-yang-xin-li-wenjun-tang-changkun-shao-yaozhi-jiang-baohong",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:jie-he-kun-yang-xin-li-wenjun-tang-changkun-shao-yaozhi-jiang-baohong",
           "name": "Jie He, Kun Yang, Xin Li, Wenjun Tang, Changkun Shao, Yaozhi Jiang, Baohong Ding"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:repository-data-managers-xiaoduo-pan-panxd-itpcas-ac-cn",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:repository-data-managers-xiaoduo-pan-panxd-itpcas-ac-cn",
           "name": "Repository data managers Xiaoduo Pan (panxd@itpcas.ac.cn)"
         },
         {
@@ -3375,8 +3397,8 @@
       "url": "https://storymaps.arcgis.com/stories/fa9a73fc799249ffb206cbcd90231e8e",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:erin-garnaas-holmes-at-the-dc-department-of-energy-and-environment",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:erin-garnaas-holmes-at-the-dc-department-of-energy-and-environment",
           "name": "Erin Garnaas-Holmes at the DC Department of Energy and Environment"
         }
       ],
@@ -3413,25 +3435,25 @@
       "url": "https://www.scec.org/science/community-earth-models/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:becker-t-behr-w-bekaert-d-bird-p-chapman-d-cooke-m-fielding-e-j-floyd",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:becker-t-behr-w-bekaert-d-bird-p-chapman-d-cooke-m-fielding-e-j-floyd",
           "name": "Becker, T., Behr, W. Bekaert, D., Bird, P., Chapman, D., Cooke, M., Fielding, E., J. Floyd, Funning, G., González Ortega, A., Govorcin, M., Guns, K., Hardebeck, J., Hauksson, E., Hearn, E., Herring, T., Hirth, G., Houston, H., Johnson, K., Kreemer, C., Liu, Z., Loveless, J., Luttrell, K., Maechling, P. J., Marshall, S., Materna, K., Meade, B., Montesi, L., Oskin, M.,Plesch, A., Prejean, S., Sangha, S., Shaw, M., Shen, Z.-K., Shen, Z., Shinevar, W., Skoumal, R., Small, P. E. Smith-Konter, B., Su, M.-H Thatcher, W., Tymofyeyeva, E., Wang, K., & Xu, X., Yang, W., & Zeng, Y"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:cem-leaders",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:cem-leaders",
           "name": "CEM Leaders"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:software-developers",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:software-developers",
           "name": "Software Developers"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:statewide-california-earthquake-center",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:statewide-california-earthquake-center",
           "name": "Statewide California Earthquake Center"
         }
       ],
@@ -3468,8 +3490,8 @@
       "url": "https://aims2.llnl.gov/search",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:various-across-modelling-centres",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:various-across-modelling-centres",
           "name": "Various across modelling centres"
         }
       ],
@@ -3512,15 +3534,15 @@
       "url": "https://nsidc.org/data/nsidc-0719/versions/1",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:patrick-broxton-and-xubin-zeng",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:patrick-broxton-and-xubin-zeng",
           "name": "Patrick Broxton and Xubin Zeng"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:patrick-broxton-and-xubin-zeng",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:patrick-broxton-and-xubin-zeng",
           "name": "Patrick Broxton and Xubin Zeng"
         }
       ],
@@ -3575,15 +3597,15 @@
       "url": "https://figshare.com/articles/dataset/Data_and_code_for_Mapping_greenhouse_gas_emissions_from_global_cropland_circa_2020/29089973",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:peiyu-cao-franco-bilotto-carlos-gonzalez-fischer-nathaniel-d-mueller-k",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:peiyu-cao-franco-bilotto-carlos-gonzalez-fischer-nathaniel-d-mueller-k",
           "name": "Peiyu Cao, Franco Bilotto, Carlos Gonzalez Fischer, Nathaniel D. Mueller, Kimberly M. Carlson, James S. Gerber, Pete Smith, Francesco N. Tubiello, Paul C. West, Liangzhi You, Mario Herrero"
         }
       ],
       "agu:curator": [
         {
           "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:peiyu-cao",
+          "@id": "https://orcid.org/0000-0002-5032-1991",
           "name": "Peiyu Cao"
         }
       ],
@@ -3634,28 +3656,28 @@
       ],
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:thomson-browne-dana",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:thomson-browne-dana",
           "name": "Thomson-Browne, Dana"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:martinez-juan-f",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:martinez-juan-f",
           "name": "Martinez, Juan F."
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:liu-e-jen",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:liu-e-jen",
           "name": "Liu, E Jen"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:alden-kyle",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:alden-kyle",
           "name": "Alden, Kyle"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:de-sherbinin-alex",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:de-sherbinin-alex",
           "name": "de Sherbinin, Alex"
         }
       ],
@@ -3698,15 +3720,15 @@
       "url": "https://zenodo.org/records/7875105",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:van-tricht-et-al",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:van-tricht-et-al",
           "name": "Van Tricht et al."
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:vito-belgium",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:vito-belgium",
           "name": "VITO Belgium"
         }
       ],
@@ -3759,50 +3781,50 @@
       "url": "https://zenodo.org/records/10733142",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:thiago-v-m-do-nascimento",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:thiago-v-m-do-nascimento",
           "name": "Thiago V. M. do Nascimento"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:julia-rudlang",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:julia-rudlang",
           "name": "Julia Rudlang"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:marvin-h-ge",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:marvin-h-ge",
           "name": "Marvin Höge"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ruud-van-der-ent",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ruud-van-der-ent",
           "name": "Ruud van der Ent"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:m-t-chappon",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:m-t-chappon",
           "name": "Máté Chappon"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:jan-seibert",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:jan-seibert",
           "name": "Jan Seibert"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:markus-hrachowitz",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:markus-hrachowitz",
           "name": "Markus Hrachowitz"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:fabrizio-fenicia",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:fabrizio-fenicia",
           "name": "Fabrizio Fenicia"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:hydrological-modelling-group-eawag",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:hydrological-modelling-group-eawag",
           "name": "Hydrological Modelling Group (Eawag)"
         }
       ],
@@ -3871,8 +3893,8 @@
       "url": "https://fdsn.org/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:the-international-federation-of-digital-seismograph-networks-fdsn",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:the-international-federation-of-digital-seismograph-networks-fdsn",
           "name": "The International Federation of Digital Seismograph Networks (FDSN)"
         }
       ],
@@ -3915,20 +3937,20 @@
       "url": "https://fluxnet.org/data/fluxnet2015-dataset/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:the-fluxnet-community",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:the-fluxnet-community",
           "name": "The FLUXNET Community"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:pastorello-et-al-https-www-nature-com-articles-s41597-020-0534-3",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:pastorello-et-al-https-www-nature-com-articles-s41597-020-0534-3",
           "name": "Pastorello et al. https://www.nature.com/articles/s41597-020-0534-3"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:fluxnet-coordination-project-ameriflux-management-project-icos",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:fluxnet-coordination-project-ameriflux-management-project-icos",
           "name": "FLUXNET Coordination Project / AmeriFlux Management Project / ICOS"
         }
       ],
@@ -3997,50 +4019,50 @@
       "url": "https://tacc.cwa.gov.tw/data-service/fs7rt_trops/daily_tar/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:chi-yen-lin",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:chi-yen-lin",
           "name": "Chi-Yen Lin"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:charles-chien-hung-lin",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:charles-chien-hung-lin",
           "name": "Charles Chien-Hung Lin"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:jann-yenq-liu",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:jann-yenq-liu",
           "name": "Jann-Yenq Liu"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:p-k-rajesh",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:p-k-rajesh",
           "name": "P. K. Rajesh"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:tomoko-matsuo",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:tomoko-matsuo",
           "name": "Tomoko Matsuo"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:min-yang-chou",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:min-yang-chou",
           "name": "Min-Yang Chou"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ho-fang-tsai",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ho-fang-tsai",
           "name": "Ho-Fang Tsai"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:wen-hao-yeh",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:wen-hao-yeh",
           "name": "Wen-Hao Yeh"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:taiwan-space-agency",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:taiwan-space-agency",
           "name": "Taiwan Space Agency"
         }
       ],
@@ -4089,8 +4111,8 @@
       "url": "https://webapps.bgs.ac.uk/services/ngdc/accessions/index.html#item164865",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:john-bedford-daniel-faulkner-nadia-lapusta",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:john-bedford-daniel-faulkner-nadia-lapusta",
           "name": "John Bedford, Daniel Faulkner, Nadia Lapusta"
         }
       ],
@@ -4139,8 +4161,8 @@
       "url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-gedi02-b-002",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:dubayah-et-al-2022",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:dubayah-et-al-2022",
           "name": "Dubayah et al. (2022)"
         }
       ],
@@ -4177,15 +4199,15 @@
       "url": "https://www.gsi.go.jp/ENGLISH/geonet_english.html",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:the-geospatial-information-authority-of-japan",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:the-geospatial-information-authority-of-japan",
           "name": "The Geospatial Information Authority of Japan"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:geodetic-observation-center-geospatial-information-authority-of-japan",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:geodetic-observation-center-geospatial-information-authority-of-japan",
           "name": "Geodetic Observation Center, Geospatial Information Authority of Japan"
         }
       ],
@@ -4231,15 +4253,15 @@
       "description": "Aotearoa New Zealand is one of the most geologically active countries in the world, and since 2001 GeoNet has been New Zealand’s national land and geohazards monitoring system delivering free and open data and information for geohazard monitoring and research across earthquakes, tsunami, landslides, volcanoes and deformation.\n\nGeoNet operates a multiparametric network of monitoring stations and a data collection, processing and dissemination infrastructure. The GeoNet programme is a conduit for science advice related to geohazard monitoring. “GeoNet data” encompasses a diverse data repository that include raw, processed and highly derived data products, that span from the New Zealand National Earthquake Catalogue and associated raw waveform data, to highly derived science products (e.g. Volcano Alert Levels).\n\nGeoNet datasets overlap in their utility and are truly multi-disciplinary and this range of hazard monitoring data and information are available through the website www.geonet.org.nz, a diverse array of access mechanisms and the GeoNet mobile phone application.\n\nA list of datasets (see https://www.geonet.org.nz/policy for a more comprehensive list and related DOIs) considered under the GeoNet umbrella are:\n- 4 GNSS related datasets\n- 8 seismic related datasets\n- 2 landslide specific datasets\n- 8 volcano specific datasets\n- 2 tsunami specific datasets\n- 2 site and instrument metadata datasets\n\nGeoNet is hosted and led by Earth Sciences New Zealand, and sponsored by the New Zealand Government through its agencies: Natural Hazards Commission Toka Tū Ake (NHC), GNS Science Te Pū Ao, Toitū Te Whenua Land Information New Zealand (LINZ), the National Emergency Management Agency (NEMA) and the Ministry of Business, Innovation and Employment (MBIE).",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:new-zealand-institute-for-earth-sciences-esnz",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:new-zealand-institute-for-earth-sciences-esnz",
           "name": "New Zealand Institute for Earth Sciences (ESNZ)"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:earth-sciences-new-zealand-geonet-project-team-data-manager-jonathan-h",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:earth-sciences-new-zealand-geonet-project-team-data-manager-jonathan-h",
           "name": "Earth Sciences New Zealand, GeoNet project team, Data Manager: Jonathan Hanson, contact: info@geonet.org.nz"
         }
       ],
@@ -4340,45 +4362,45 @@
       "url": "https://georem.mpch-mainz.gwdg.de/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:jochum-klaus-peter",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:jochum-klaus-peter",
           "name": "Jochum, Klaus Peter"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:nohl-uwe",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:nohl-uwe",
           "name": "Nohl, Uwe"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:herwig-kirstin",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:herwig-kirstin",
           "name": "Herwig, Kirstin"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:lammel-esin",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:lammel-esin",
           "name": "Lammel, Esin"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:stoll-brigitte",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:stoll-brigitte",
           "name": "Stoll, Brigitte"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:hofmann-albrecht-w",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:hofmann-albrecht-w",
           "name": "Hofmann, Albrecht W."
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ulrike-weis",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ulrike-weis",
           "name": "Ulrike Weis"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:brigitte-stoll",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:brigitte-stoll",
           "name": "Brigitte Stoll"
         }
       ],
@@ -4447,15 +4469,15 @@
       "url": "http://geoscope.ipgp.fr/networks/detail/G/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:institut-de-physique-du-globe-de-paris-ipgp-and-ecole-et-observatoire",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:institut-de-physique-du-globe-de-paris-ipgp-and-ecole-et-observatoire",
           "name": "Institut de Physique du Globe de Paris (IPGP) and Ecole et Observatoire des Sciences de la Terre de Strabourg (EOST)"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ipgp",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ipgp",
           "name": "IPGP"
         }
       ],
@@ -4517,15 +4539,15 @@
       "url": "https://doi.org/10.57780/esa-85c563c",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:benjamin-grison-institute-of-atmospheric-physics-czech-academy-of-scie",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:benjamin-grison-institute-of-atmospheric-physics-czech-academy-of-scie",
           "name": "Benjamin Grison, Institute of Atmospheric Physics, Czech Academy of Science, Czechia, grison@ufa.cas.cz"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:arnaud-masson",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:arnaud-masson",
           "name": "Arnaud Masson"
         }
       ],
@@ -4574,15 +4596,15 @@
       "url": "https://disc.gsfc.nasa.gov/datasets/GLDAS_CLSM025_DA1_D_2.2/summary?keywords=GLDAS%202.2",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:bailing-li-matthew-rodell-sujay-kumar-hiroko-kato-beaudoing-augusto-ge",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:bailing-li-matthew-rodell-sujay-kumar-hiroko-kato-beaudoing-augusto-ge",
           "name": "Bailing Li, Matthew Rodell, Sujay Kumar, Hiroko Kato Beaudoing, Augusto Getirana, Benjamin F. Zaitchik, Luis Gustavo de Goncalves, Camila Cossetin, Soumendra Bhanja, Abhijit Mukherjee, Siyuan Tian, Natthachet Tangdamrongsub, Di Long, Jamiat Nanteza, Jejung Lee, Frederick Policelli, Ibrahim B. Goni, Djoret Daira, Mohammed Bila, Gabriëlle de Lannoy, David Mocko, Susan C. Steele-Dunne, Himanshu Save, Srinivas Bettadpur"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:andrew-fisher-and-ariana-l-mcdermott-ges-disc",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:andrew-fisher-and-ariana-l-mcdermott-ges-disc",
           "name": "Andrew Fisher and Ariana L. McDermott (GES DISC)"
         }
       ],
@@ -4640,8 +4662,8 @@
       "url": "https://doi.org/10.7910/DVN/0EGDOK",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:jing-gao-brian-o-neill-martino-pesaresi",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:jing-gao-brian-o-neill-martino-pesaresi",
           "name": "Jing Gao, Brian O'Neill, Martino Pesaresi"
         }
       ],
@@ -4725,55 +4747,55 @@
       ],
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ivan-haigh",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ivan-haigh",
           "name": "Ivan Haigh"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:marta-marcos",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:marta-marcos",
           "name": "Marta Marcos"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:stefan-talke",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:stefan-talke",
           "name": "Stefan Talke"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:phil-woodworth",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:phil-woodworth",
           "name": "Phil Woodworth"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ben-hague",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ben-hague",
           "name": "Ben Hague"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:john-hunter",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:john-hunter",
           "name": "John Hunter"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:phil-thompson",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:phil-thompson",
           "name": "Phil Thompson"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:arne-arns",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:arne-arns",
           "name": "Arne Arns"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:elizabeth-bradshaw",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:elizabeth-bradshaw",
           "name": "Elizabeth Bradshaw"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ivan-haigh-and-elizabeth-bradshaw",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ivan-haigh-and-elizabeth-bradshaw",
           "name": "Ivan Haigh and Elizabeth Bradshaw."
         }
       ],
@@ -4831,8 +4853,8 @@
       "url": "https://doi.org/10.1029/2012GC004370",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:jens-hartmann-nils-moosdorf",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:jens-hartmann-nils-moosdorf",
           "name": "Jens Hartmann & Nils Moosdorf"
         }
       ],
@@ -4909,8 +4931,8 @@
       "url": "https://nucleus.iaea.org/wiser",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:iaea-many",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:iaea-many",
           "name": "IAEA - many"
         }
       ],
@@ -4947,15 +4969,15 @@
       "url": "https://glodap.info",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:glodap-reference-group-https-glodap-info-index-php-group",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:glodap-reference-group-https-glodap-info-index-php-group",
           "name": "GLODAP reference group (https://glodap.info/index.php/group/)"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:glodap-reference-group",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:glodap-reference-group",
           "name": "GLODAP reference group"
         }
       ],
@@ -5009,15 +5031,15 @@
       "url": "https://doi.org/10.17605/OSF.IO/W4UG8",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:sanchit-minocha-and-faisal-hossain",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:sanchit-minocha-and-faisal-hossain",
           "name": "Sanchit Minocha and Faisal Hossain"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:sanchit-minocha-and-faisal-hossain",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:sanchit-minocha-and-faisal-hossain",
           "name": "Sanchit Minocha and Faisal Hossain"
         }
       ],
@@ -5070,8 +5092,8 @@
       "url": "https://data.cosmic.ucar.edu/gnss-ro/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ucar",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:ucar",
           "name": "UCAR"
         }
       ],
@@ -5108,15 +5130,15 @@
       "url": "https://data.globalecology.unh.edu/data/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:xing-li-jingfeng-xiao",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:xing-li-jingfeng-xiao",
           "name": "Xing Li, Jingfeng Xiao"
         }
       ],
       "agu:curator": [
         {
           "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:jingfeng-xiao",
+          "@id": "https://orcid.org/0000-0002-0622-6903",
           "name": "Jingfeng Xiao"
         }
       ],
@@ -5178,15 +5200,15 @@
       "url": "https://doi.org/10.5067/MEASURES/GPCP/DATA306",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:huffman-g-j-a-behrangi-d-t-bolvin-and-e-j-nelkin",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:huffman-g-j-a-behrangi-d-t-bolvin-and-e-j-nelkin",
           "name": "Huffman, G.J., A. Behrangi, D.T. Bolvin, and E.J. Nelkin"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:mahabal-hegde-ges-disc-manager-zhong-liu-the-curator-or-ges-disc-help",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:mahabal-hegde-ges-disc-manager-zhong-liu-the-curator-or-ges-disc-help",
           "name": "Mahabal Hegde (GES DISC Manager), Zhong Liu (the curator), or GES DISC Help Desk (gsfc-dl-help-disc@mail.nasa.gov)"
         }
       ],
@@ -5247,15 +5269,15 @@
       "url": "https://github.com/UW-SASWE/GRAIN",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:sarath-suresh-faisal-hossain-vimal-mishra-nehan-hossain",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:sarath-suresh-faisal-hossain-vimal-mishra-nehan-hossain",
           "name": "Sarath Suresh, Faisal Hossain, Vimal Mishra, Nehan Hossain"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:sarath-suresh-faisal-hossain",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:sarath-suresh-faisal-hossain",
           "name": "Sarath Suresh, Faisal Hossain"
         }
       ],
@@ -5304,15 +5326,15 @@
       "url": "https://data.g-e-m.dk/datasets?theme=marine",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:aarhus-university-greenland-institute-of-natural-resources",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:aarhus-university-greenland-institute-of-natural-resources",
           "name": "Aarhus University & Greenland Institute of Natural Resources"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:greenland-ecosystem-monitoring",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:greenland-ecosystem-monitoring",
           "name": "Greenland Ecosystem Monitoring"
         }
       ],
@@ -5354,53 +5376,53 @@
       "url": "https://doi.org/10.22008/promice/freshwater",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:kenneth-d-mankoff",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:kenneth-d-mankoff",
           "name": "Kenneth D. Mankoff"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:brice-no-l",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:brice-no-l",
           "name": "Brice Noël"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:xavier-fettweis",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:xavier-fettweis",
           "name": "Xavier Fettweis"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:andreas-p-ahlstr-m",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:andreas-p-ahlstr-m",
           "name": "Andreas P. Ahlstrøm"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:william-colgan",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:william-colgan",
           "name": "William Colgan"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ken-kondo",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ken-kondo",
           "name": "Ken Kondo"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:kirsty-langley",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:kirsty-langley",
           "name": "Kirsty Langley"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:shin-sugiyama",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:shin-sugiyama",
           "name": "Shin Sugiyama"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:dirk-van-as",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:dirk-van-as",
           "name": "Dirk van As"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:robert-s-fausto",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:robert-s-fausto",
           "name": "Robert S. Fausto"
         }
       ],
@@ -5494,70 +5516,70 @@
       "url": "https://doi.org/10.7927/H4NP22DQ",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ciesin-is-the-organizational-author",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ciesin-is-the-organizational-author",
           "name": "CIESIN is the organizational author"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:but-there-have-been-many-contributors-to-gpw-over-the-years",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:but-there-have-been-many-contributors-to-gpw-over-the-years",
           "name": "but there have been many contributors to GPW over the years"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:starting-with-waldo-tobler",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:starting-with-waldo-tobler",
           "name": "starting with Waldo Tobler"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:uwe-deichmann-at-uc-santa-barbara",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:uwe-deichmann-at-uc-santa-barbara",
           "name": "Uwe Deichmann at UC-Santa Barbara"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:including-greg-yetman",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:including-greg-yetman",
           "name": "including Greg Yetman"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:kytt-macmanus",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:kytt-macmanus",
           "name": "Kytt MacManus"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:susana-adamo",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:susana-adamo",
           "name": "Susana Adamo"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:linda-pistolesi",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:linda-pistolesi",
           "name": "Linda Pistolesi"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:erin-doxsey-whitfield",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:erin-doxsey-whitfield",
           "name": "Erin Doxsey-Whitfield"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:camilla-green-over-the-years",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:camilla-green-over-the-years",
           "name": "Camilla Green. Over the years"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:with-each-successive-release-we-are-now-working-on-version-5-there-has",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:with-each-successive-release-we-are-now-working-on-version-5-there-has",
           "name": "with each successive release (we are now working on version 5) there has been a small army of research staff assistants"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:interns-who-have-contributed",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:interns-who-have-contributed",
           "name": "interns who have contributed"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ciesin-alex-de-sherbinin-and-formerly-robert-chen",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ciesin-alex-de-sherbinin-and-formerly-robert-chen",
           "name": "CIESIN (Alex de Sherbinin and formerly Robert Chen)"
         }
       ],
@@ -5606,60 +5628,60 @@
       "url": "https://zenodo.org/records/16782735",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:kruskamp-nicholas",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:kruskamp-nicholas",
           "name": "Kruskamp, Nicholas"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:lohman-hannah",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:lohman-hannah",
           "name": "Lohman, Hannah"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:burnette-andrew",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:burnette-andrew",
           "name": "Burnette, Andrew"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:coxen-christopher",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:coxen-christopher",
           "name": "Coxen, Christopher"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ellermeier-nathan",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ellermeier-nathan",
           "name": "Ellermeier, Nathan"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:bollenbacher-john",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:bollenbacher-john",
           "name": "Bollenbacher, John"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:powers-julie",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:powers-julie",
           "name": "Powers, Julie"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:coffield-shane",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:coffield-shane",
           "name": "Coffield, Shane"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:farhat-yasmine",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:farhat-yasmine",
           "name": "Farhat, Yasmine"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:maasakkers-joannes",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:maasakkers-joannes",
           "name": "Maasakkers, Joannes"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:rti-international",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:rti-international",
           "name": "RTI International"
         }
       ],
@@ -5711,15 +5733,15 @@
       "url": "https://doi.org/10.5067/GNSS/GNSS_HIGHRATE_D_001",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:international-gnss-service-igs",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:international-gnss-service-igs",
           "name": "International GNSS Service (IGS)"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:international-gnss-service-igs",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:international-gnss-service-igs",
           "name": "International GNSS Service (IGS)"
         }
       ],
@@ -5771,15 +5793,15 @@
       ],
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:donghoon-lee-weston-anderson-and-co-authors",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:donghoon-lee-weston-anderson-and-co-authors",
           "name": "Donghoon Lee, Weston Anderson, and co-authors"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:weston-anderson-donghoon-lee-fews-net-harveststat-https-www-harveststa",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:weston-anderson-donghoon-lee-fews-net-harveststat-https-www-harveststa",
           "name": "Weston Anderson, Donghoon Lee, FEWS NET, HarvestStat (https://www.harveststat.org/)"
         }
       ],
@@ -5845,15 +5867,15 @@
       "url": "https://doi.org/10.7910/DVN/VGSN7Q",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:elizabeth-a-silber-and-rodney-w-whitaker",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:elizabeth-a-silber-and-rodney-w-whitaker",
           "name": "Elizabeth A. Silber and Rodney W. Whitaker"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:elizabeth-a-silber-and-rodney-w-whitaker",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:elizabeth-a-silber-and-rodney-w-whitaker",
           "name": "Elizabeth A. Silber and Rodney W. Whitaker"
         }
       ],
@@ -5911,15 +5933,15 @@
       "url": "https://doi.org/10.5281/zenodo.14996262",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:paola-mazzoglio-miriam-bertola",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:paola-mazzoglio-miriam-bertola",
           "name": "Paola Mazzoglio, Miriam Bertola"
         }
       ],
       "agu:curator": [
         {
           "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:paola-mazzoglio",
+          "@id": "https://orcid.org/0000-0002-3662-9439",
           "name": "Paola Mazzoglio"
         }
       ],
@@ -5962,8 +5984,8 @@
       "url": "http://www.sciencedb.cn/dataSet/handle/804",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:zhen-li",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:zhen-li",
           "name": "Zhen LI"
         },
         {
@@ -6031,35 +6053,35 @@
       "url": "https://doi.org/10.25921/x46c-3620",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:elipot-shane",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:elipot-shane",
           "name": "Elipot, Shane"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:sykulski-adam",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:sykulski-adam",
           "name": "Sykulski, Adam"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:lumpkin-rick",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:lumpkin-rick",
           "name": "Lumpkin, Rick"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:centurioni-luca",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:centurioni-luca",
           "name": "Centurioni, Luca"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:pazos-mayra",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:pazos-mayra",
           "name": "Pazos, Mayra"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:noaa-national-centers-for-environmental-information",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:noaa-national-centers-for-environmental-information",
           "name": "NOAA National Centers for Environmental Information"
         }
       ],
@@ -6121,45 +6143,45 @@
       "url": "https://doi.org/10.17603/ds2-yje5-g692",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ahmadisharaf-ebrahim",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ahmadisharaf-ebrahim",
           "name": "Ahmadisharaf, Ebrahim"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:pakdehi-maryam",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:pakdehi-maryam",
           "name": "Pakdehi, Maryam"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:azimi-parham",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:azimi-parham",
           "name": "Azimi, Parham"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:keshavarz-zahra",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:keshavarz-zahra",
           "name": "Keshavarz, Zahra"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:caballero-christian",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:caballero-christian",
           "name": "Caballero, Christian"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:yan-zhengxiao",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:yan-zhengxiao",
           "name": "Yan, Zhengxiao"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:allen-joseph",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:allen-joseph",
           "name": "Allen, Joseph"
         }
       ],
       "agu:curator": [
         {
           "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ebrahim-ahmadisharaf",
+          "@id": "https://orcid.org/0000-0002-9452-7975",
           "name": "Ebrahim Ahmadisharaf"
         }
       ],
@@ -6221,15 +6243,15 @@
       "url": "https://doi.org/10.5281/zenodo.4065266",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:paola-mazzoglio-ilaria-butera-pierluigi-claps",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:paola-mazzoglio-ilaria-butera-pierluigi-claps",
           "name": "Paola Mazzoglio, Ilaria Butera, Pierluigi Claps"
         }
       ],
       "agu:curator": [
         {
           "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:paola-mazzoglio",
+          "@id": "https://orcid.org/0000-0002-3662-9439",
           "name": "Paola Mazzoglio"
         }
       ],
@@ -6305,20 +6327,20 @@
       ],
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:a-p-joshi-prasanna-kanti-ghoshal-kunal-chakraborty-rajdeep-roy-chiranj",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:a-p-joshi-prasanna-kanti-ghoshal-kunal-chakraborty-rajdeep-roy-chiranj",
           "name": "A. P. Joshi, Prasanna Kanti Ghoshal, Kunal Chakraborty, Rajdeep Roy, Chiranjivi Jayaram, B. Sridevi, V. V. S. S. Sarma"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:incois-data-management-team",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:incois-data-management-team",
           "name": "INCOIS Data Management Team"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ncei-data-management-team",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:ncei-data-management-team",
           "name": "NCEI Data Management Team"
         }
       ],
@@ -6362,7 +6384,7 @@
       "creator": [
         {
           "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:yuan-li",
+          "@id": "https://orcid.org/0000-0002-5974-0295",
           "name": "Yuan Li"
         }
       ],
@@ -6431,8 +6453,8 @@
       "url": "https://hydrosense.users.earthengine.app/view/ilsm",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:nirdesh-sharma-manabendra-saharia-g-v-ramana",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:nirdesh-sharma-manabendra-saharia-g-v-ramana",
           "name": "Nirdesh Sharma, Manabendra Saharia, G.V. Ramana"
         }
       ],
@@ -6522,7 +6544,7 @@
       "creator": [
         {
           "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:siddharth-rout",
+          "@id": "https://orcid.org/0000-0003-0865-0916",
           "name": "Siddharth Rout"
         }
       ],
@@ -6559,15 +6581,15 @@
       "url": "https://igs.org/data-products-overview/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:igs-components",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:igs-components",
           "name": "IGS components"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:igs-central-bureau-igs-operational-products-coordination-components",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:igs-central-bureau-igs-operational-products-coordination-components",
           "name": "IGS Central Bureau, IGS Operational products coordination components"
         }
       ],
@@ -6616,15 +6638,15 @@
       "url": "https://iscn.fluxdata.org/data/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:katherine-todd-brown-data-coordinator-for-iscn-data-in-general",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:katherine-todd-brown-data-coordinator-for-iscn-data-in-general",
           "name": "Katherine Todd-Brown (Data Coordinator) for ISCN data in general."
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:luke-nave-lead-author-of-iscn3-database-et-al",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:luke-nave-lead-author-of-iscn3-database-et-al",
           "name": "Luke Nave (lead author of ISCN3 database) et al"
         }
       ],
@@ -6667,15 +6689,15 @@
       "url": "https://its-live.jpl.nasa.gov",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:alex-gardner-joe-kennedy-maria-liukis-mark-fahnestock-chad-greene-luis",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:alex-gardner-joe-kennedy-maria-liukis-mark-fahnestock-chad-greene-luis",
           "name": "Alex Gardner, Joe Kennedy, Maria Liukis, Mark Fahnestock, Chad Greene, Luis Lòpez, Ted Scambos"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:joe-kennedy-maria-liukis-luis-l-pez",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:joe-kennedy-maria-liukis-luis-l-pez",
           "name": "Joe Kennedy, Maria Liukis, Luis Lòpez"
         }
       ],
@@ -6764,15 +6786,15 @@
       ],
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ben-livneh",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ben-livneh",
           "name": "Ben Livneh"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ben-livneh",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ben-livneh",
           "name": "Ben Livneh"
         }
       ],
@@ -6821,15 +6843,15 @@
       "url": "https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-luq.153.537848",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:alonso-ramirez-and-marcelo-ardon",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:alonso-ramirez-and-marcelo-ardon",
           "name": "Alonso Ramirez and Marcelo Ardon"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:alonso-ramirez-and-marcelo-ardon",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:alonso-ramirez-and-marcelo-ardon",
           "name": "Alonso Ramirez and Marcelo Ardon"
         }
       ],
@@ -6876,15 +6898,15 @@
       "url": "https://portal.edirepository.org/nis/mapbrowse?scope=edi&identifier=135&revision=10",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:j-t-morris-and-k-sundberg",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:j-t-morris-and-k-sundberg",
           "name": "J.T. Morris and K. Sundberg"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:k-sundberg",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:k-sundberg",
           "name": "K. Sundberg"
         }
       ],
@@ -6943,8 +6965,8 @@
       "url": "https://pds-geosciences.wustl.edu/missions/magellan/gxdr/index.htm",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:peter-ford-gordon-pettengill-fang-liu-joan-quigley",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:peter-ford-gordon-pettengill-fang-liu-joan-quigley",
           "name": "Peter Ford, Gordon Pettengill, Fang Liu, Joan Quigley"
         }
       ],
@@ -6993,15 +7015,15 @@
       "url": "https://gmao.gsfc.nasa.gov/gmao-products/merra-2/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:goddard-modeling-and-assimilation-office-gmao",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:goddard-modeling-and-assimilation-office-gmao",
           "name": "Goddard Modeling and Assimilation Office (GMAO)"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:mahabaleshwara-hegde-suhung-shen-xiaohua-pan",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:mahabaleshwara-hegde-suhung-shen-xiaohua-pan",
           "name": "Mahabaleshwara Hegde, Suhung Shen, Xiaohua Pan"
         }
       ],
@@ -7048,8 +7070,8 @@
       "url": "https://www.nccs.nasa.gov/services/data-collections/land-based-products/nex-gddp-cmip6",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:bridget-thrasher",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:bridget-thrasher",
           "name": "Bridget Thrasher"
         }
       ],
@@ -7092,15 +7114,15 @@
       "url": "https://edx.netl.doe.gov/group/newts",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:rachel-yesenchak-devin-justman-lucy-romeo-isabelle-pfander-justin-mack",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:rachel-yesenchak-devin-justman-lucy-romeo-isabelle-pfander-justin-mack",
           "name": "Rachel Yesenchak, Devin Justman, Lucy Romeo, Isabelle Pfander, Justin Mackey, Sophia Bauer, Michael Sabbatino, Burt Thomas, Zineb Belarbi, Madison Wenzlick, Kathryn Smith, Chad Able, Alison Fritz, Nicholas Siefert"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:national-energy-technology-laboratory-netl",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:national-energy-technology-laboratory-netl",
           "name": "National Energy Technology Laboratory (NETL)"
         }
       ],
@@ -7165,15 +7187,15 @@
       "url": "https://www.usgs.gov/centers/eros/science/annual-national-land-cover-database",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:jesslyn-brown-heather-tollerud-suming-jin-jon-dewitz",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:jesslyn-brown-heather-tollerud-suming-jin-jon-dewitz",
           "name": "Jesslyn Brown, Heather Tollerud, Suming Jin, Jon Dewitz,"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:us-geological-survey",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:us-geological-survey",
           "name": "US Geological Survey"
         }
       ],
@@ -7267,15 +7289,15 @@
       "url": "https://doi.org/10.5067/P4HZB9N27EKU",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:pingping-xie",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:pingping-xie",
           "name": "Pingping Xie"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:mahabal-hegde-ges-disc-manager-or-ges-disc-help-desk-gsfc-dl-help-disc",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:mahabal-hegde-ges-disc-manager-or-ges-disc-help-desk-gsfc-dl-help-disc",
           "name": "Mahabal Hegde (GES DISC Manager), or GES DISC Help Desk (gsfc-dl-help-disc@mail.nasa.gov)"
         }
       ],
@@ -7328,20 +7350,20 @@
       "url": "https://www.neotomadb.org/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:neotoma-is-governed-by-the-neotoma-leadership-council-a-14-member-elec",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:neotoma-is-governed-by-the-neotoma-leadership-council-a-14-member-elec",
           "name": "Neotoma is governed by the Neotoma Leadership Council, a 14-member elected body. The 2026 NLC is: Quinn Asena, Jessica Blois, Don Charles, Thomas Giesecke, Suzette Flantua, Graciela Gil-Romera, Annika Herbert, Sarah Ivory, Bérangère Leys, Claudio Latorre, Suzanne Pilaar Birch, Alison Smith, Nichola Strandberg, John W. (Jack) Williams"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:neotoma-is-supported-by-a-community-of-dozens-of-data-stewards-who-upl",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:neotoma-is-supported-by-a-community-of-dozens-of-data-stewards-who-upl",
           "name": "Neotoma is supported by a community of dozens of Data Stewards, who upload and curate data in Neotoma."
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:data-governance-and-management-is-handled-by-neotoma-s-network-of-cons",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:data-governance-and-management-is-handled-by-neotoma-s-network-of-cons",
           "name": "Data governance and management is handled by Neotoma's network of Constituent Databases, each of which curates a particular kind of paleoenvironmental proxy data, organized by proxy type, region, and/or geological time work. Within this network, dozens of Data Stewards, upload and curate data in Neotoma."
         }
       ],
@@ -7390,8 +7412,8 @@
       "url": "https://www.ncei.noaa.gov/products/climate-data-records",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:national-centers-for-environmental-information",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:national-centers-for-environmental-information",
           "name": "National Centers for Environmental Information"
         }
       ],
@@ -7438,8 +7460,8 @@
       "url": "https://gml.noaa.gov/ccgg/obspack/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:cooperative-global-atmospheric-data-integration-project",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:cooperative-global-atmospheric-data-integration-project",
           "name": "Cooperative Global Atmospheric Data Integration Project"
         }
       ],
@@ -7485,25 +7507,25 @@
       ],
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:noaa-nasa-environment-canada-university-of-miami",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:noaa-nasa-environment-canada-university-of-miami",
           "name": "NOAA, NASA, Environment Canada, University of Miami"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:university-of-miami",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:university-of-miami",
           "name": "University of Miami"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:columbia-university",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:columbia-university",
           "name": "Columbia University"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:university-of-oklahoma",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:university-of-oklahoma",
           "name": "University of Oklahoma"
         }
       ],
@@ -7560,15 +7582,15 @@
       "url": "https://ocov2.jpl.nasa.gov/science/oco-2-data-center/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:oco-2-oco-3-science-team-vivienne-payne-abhishek-chatterjee",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:oco-2-oco-3-science-team-vivienne-payne-abhishek-chatterjee",
           "name": "OCO-2/OCO-3 Science Team, Vivienne Payne, Abhishek Chatterjee"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:oco-2-3-science-team",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:oco-2-3-science-team",
           "name": "OCO-2/3 Science Team"
         }
       ],
@@ -7615,8 +7637,8 @@
       ],
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:oco-2-and-3-operations-science-teams",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:oco-2-and-3-operations-science-teams",
           "name": "OCO-2 and -3 operations & science teams"
         }
       ],
@@ -7663,15 +7685,15 @@
       ],
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:oco-2-oco-3-science-team-vivienne-payne-abhishek-chatterjee",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:oco-2-oco-3-science-team-vivienne-payne-abhishek-chatterjee",
           "name": "OCO-2/OCO-3 Science Team, Vivienne Payne, Abhishek Chatterjee"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:nasa-goddard-earth-sciences-ges-data-and-information-services-center-d",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:nasa-goddard-earth-sciences-ges-data-and-information-services-center-d",
           "name": "NASA Goddard Earth Sciences (GES) Data and Information Services Center (DISC)"
         }
       ],
@@ -7723,8 +7745,8 @@
       "url": "https://doi.org/10.5067/70K2B2W8MNGY",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:oco-2-oco-3-science-team-vivienne-payne-abhishek-chatterjee",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:oco-2-oco-3-science-team-vivienne-payne-abhishek-chatterjee",
           "name": "OCO-2/OCO-3 Science Team, Vivienne Payne, Abhishek Chatterjee"
         }
       ],
@@ -7773,15 +7795,15 @@
       "url": "https://octopusdata.org",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:alexandru-t-codilean-henry-munack-et-al",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:alexandru-t-codilean-henry-munack-et-al",
           "name": "Alexandru T. Codilean, Henry Munack, et al."
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:alexandru-t-codilean-and-henry-munack",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:alexandru-t-codilean-and-henry-munack",
           "name": "Alexandru T. Codilean and Henry Munack"
         }
       ],
@@ -7894,15 +7916,15 @@
       "url": "https://openaq.org/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:openaq",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:openaq",
           "name": "OpenAQ"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:dr-colleen-rosales-chris-hagerbaumer-russ-biggs",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:dr-colleen-rosales-chris-hagerbaumer-russ-biggs",
           "name": "Dr. Colleen Rosales, Chris Hagerbaumer, Russ Biggs"
         }
       ],
@@ -7965,8 +7987,8 @@
       "url": "https://opentopography.org/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:opentopography-facility-san-diego-supercomputer-center-university-of-c",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:opentopography-facility-san-diego-supercomputer-center-university-of-c",
           "name": "OpenTopography Facility, San Diego Supercomputer Center, University of California San Diego"
         }
       ],
@@ -8003,15 +8025,15 @@
       "url": "https://www.earthdata.nasa.gov/data/catalog/lpcloud-opera-l3-dist-alert-hls-v1-1",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:matthew-hansen-amy-pickens-zhen-song",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:matthew-hansen-amy-pickens-zhen-song",
           "name": "Matthew Hansen, Amy Pickens, Zhen Song"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:umd-jpl",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:umd-jpl",
           "name": "UMD / JPL"
         }
       ],
@@ -8055,7 +8077,7 @@
       "creator": [
         {
           "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:tatsuhiko-sato",
+          "@id": "https://orcid.org/0000-0001-9902-7083",
           "name": "Tatsuhiko Sato"
         }
       ],
@@ -8232,15 +8254,15 @@
       "url": "https://pds.lroc.im-ldi.com/data/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:the-lroc-science-operations-center-soc",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:the-lroc-science-operations-center-soc",
           "name": "The LROC Science Operations Center (SOC)"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:nasa-planetary-data-system-imaging-node",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:nasa-planetary-data-system-imaging-node",
           "name": "NASA Planetary Data System Imaging Node"
         }
       ],
@@ -8277,15 +8299,15 @@
       "url": "https://portal.edirepository.org/nis/mapbrowse?packageid=edi.136.10",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:j-t-morris-and-k-sundberg",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:j-t-morris-and-k-sundberg",
           "name": "J.T. Morris and K. Sundberg"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:k-sundberg",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:k-sundberg",
           "name": "K. Sundberg"
         }
       ],
@@ -8328,15 +8350,15 @@
       "url": "https://sites.brown.edu/relab/relab-spectral-database/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:carle-pieters-takehiro-hiroi-ralph-milliken-brown-u-relab",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:carle-pieters-takehiro-hiroi-ralph-milliken-brown-u-relab",
           "name": "Carle Pieters, Takehiro Hiroi, Ralph Milliken (Brown U RELAB)"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:takehiro-hiroi-ralph-milliken-brown-u-relab",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:takehiro-hiroi-ralph-milliken-brown-u-relab",
           "name": "Takehiro Hiroi, Ralph Milliken (Brown U RELAB)"
         }
       ],
@@ -8376,30 +8398,30 @@
       ],
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:global-estimates-v6-gl-02-04-siyuan-shen-chi-li-aaron-van-donkelaar-na",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:global-estimates-v6-gl-02-04-siyuan-shen-chi-li-aaron-van-donkelaar-na",
           "name": "Global Estimates (V6.GL.02.04): Siyuan Shen, Chi Li, Aaron van Donkelaar, Nathan Jacobs, Chenguang Wang, & Randall V. Martin"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:global-regional-estimates-v5-gl-05-02-aaron-van-donkelaar-melanie-s-ha",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:global-regional-estimates-v5-gl-05-02-aaron-van-donkelaar-melanie-s-ha",
           "name": "Global/Regional Estimates (V5.GL.05.02): Aaron van Donkelaar, Melanie S. Hammer, Liam Bindle, Michael Brauer, Jeffery R. Brook, Michael J. Garay, N. Christina Hsu, Olga V. Kalashnikova, Ralph A. Kahn, Colin Lee, Robert C. Levy, Alexei Lyapustin, Andrew M. Sayer, & Randall V. Martin"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:north-american-regional-estimates-with-composition-v5-na-05-v5-na-05-0",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:north-american-regional-estimates-with-composition-v5-na-05-v5-na-05-0",
           "name": "North American Regional Estimates with Composition (V5.NA.05 / V5.NA.05.02): Aaron van Donkelaar, Randall V. Martin, Bonne Ford, Chi Li, Amanda J. Pappin, Siyuan Shen, & Dandan Zhang"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:repository-data-managers-curators-atmospheric-composition-analysis-gro",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:repository-data-managers-curators-atmospheric-composition-analysis-gro",
           "name": "Repository Data Managers / Curators: Atmospheric Composition Analysis Group (ACAG) at Washington University in St. Louis, with key data managers Aaron van Donkelaar, Siyuan Shen, Chi Li, and Randall Martin"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:group-name-that-support-the-dataset-atmospheric-composition-analysis-g",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:group-name-that-support-the-dataset-atmospheric-composition-analysis-g",
           "name": "Group-name that support the dataset: Atmospheric Composition Analysis Group (ACAG) at Washington University in St. Louis"
         }
       ],
@@ -8500,25 +8522,25 @@
       "url": "https://github.com/sofarocean/spotter-data-archive",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:isabel-houghton",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:isabel-houghton",
           "name": "Isabel Houghton"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:pieter-smit",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:pieter-smit",
           "name": "Pieter Smit"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ciara-dorsay",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ciara-dorsay",
           "name": "Ciara Dorsay"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:sofar-ocean-open-data-team",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:sofar-ocean-open-data-team",
           "name": "Sofar Ocean Open Data Team"
         }
       ],
@@ -8567,8 +8589,8 @@
       "url": "https://d3o6w55j8uz1ro.cloudfront.net/s3-d0f68fa49c8cba12794bb586349f2341/ornl-cumulus-prod-public.s3.us-west-2.amazonaws.com/global_soil/SRDB_V5/comp/SRDB_V5.pdf?A-userid=None&Expires=1757104741&Signature=BY3TpZNLMBBak3ao3-ZF2ggdP2NZwLJma5BneSJWZ21mmISF8Lh~SIlPV-9q2As-62u4ropmKctoTE~5IQs0Rtu-zGixAbiKh9OxONbe5KHgC5T~6DYzUhLN2G2Le5ysRREUBBwrYTrjOLl~pLLS3RDsS5xMhiIxJgWbxl2MPqVivI9FT8mH6ORSHCOr803YLhDoT99V2l7XtCR3hemgFkc1SxU7-5hOdA1hO5BqAlvaiIUfFpo2aeHl0lrAvwmlZlwgA2mQReyf-Hv6BJBACag1~JgHHHKpbg2h4jeb~5dlxNUtAV5eYEdnkSyB44t9Qlhc1cSX9cuTs1auJ7qLEg__&Key-Pair-Id=K3C82G6IBNME9J",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ben-bond-lamberty",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ben-bond-lamberty",
           "name": "Ben Bond-Lamberty"
         }
       ],
@@ -8622,40 +8644,40 @@
       "url": "https://doi.org/10.5287/ora-2nanwp4rk",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:kamolphat-atsawawaranunt",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:kamolphat-atsawawaranunt",
           "name": "Kamolphat Atsawawaranunt"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:laia-comas-bru",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:laia-comas-bru",
           "name": "Laia COmas-Bru"
         },
         {
           "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:nikita-kaushal",
+          "@id": "https://orcid.org/0000-0002-2220-9046",
           "name": "Nikita Kaushal"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:franziska-lechleitner",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:franziska-lechleitner",
           "name": "Franziska Lechleitner"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:micah-wilhelm",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:micah-wilhelm",
           "name": "Micah Wilhelm"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:the-pages-sisal-working-group-members",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:the-pages-sisal-working-group-members",
           "name": "the PAGES SISAL Working Group members"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:pages-sisal-working-group",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:pages-sisal-working-group",
           "name": "PAGES SISAL Working Group"
         }
       ],
@@ -8710,14 +8732,14 @@
       "creator": [
         {
           "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ricardo-sanchez-murillo",
+          "@id": "https://orcid.org/0000-0001-8721-8093",
           "name": "Ricardo Sanchez-Murillo"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:cuahsi",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:cuahsi",
           "name": "CUAHSI"
         }
       ],
@@ -8774,8 +8796,8 @@
       "url": "https://daac.ornl.gov/shift",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:many-https-www-earthdata-nasa-gov-data-projects-shift-data-access-tool",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:many-https-www-earthdata-nasa-gov-data-projects-shift-data-access-tool",
           "name": "Many - https://www.earthdata.nasa.gov/data/projects/shift/data-access-tools"
         }
       ],
@@ -8848,42 +8870,42 @@
       "creator": [
         {
           "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:matthias-lankhorst",
+          "@id": "https://orcid.org/0000-0002-4166-4044",
           "name": "Matthias Lankhorst"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:uwe-send",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:uwe-send",
           "name": "Uwe Send"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:andrew-lucas",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:andrew-lucas",
           "name": "Andrew Lucas"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:jeff-sevadjian",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:jeff-sevadjian",
           "name": "Jeff Sevadjian"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:scott-stalin",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:scott-stalin",
           "name": "Scott Stalin"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:jinbo-wang",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:jinbo-wang",
           "name": "Jinbo Wang"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:john-kerfoot",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:john-kerfoot",
           "name": "John Kerfoot"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:oscar-schofield",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:oscar-schofield",
           "name": "Oscar Schofield"
         }
       ],
@@ -8926,18 +8948,18 @@
       "url": "https://www.imkasf.kit.edu/english/COCCON.php",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:frank-hase",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:frank-hase",
           "name": "Frank Hase"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:darko-dubravica",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:darko-dubravica",
           "name": "Darko Dubravica"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:all-of-the-coccon-pis",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:all-of-the-coccon-pis",
           "name": "all of the COCCON PIs"
         }
       ],
@@ -8980,15 +9002,15 @@
       "url": "https://keelingcurve.ucsd.edu/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:dave-keeling-ralph-keeling",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:dave-keeling-ralph-keeling",
           "name": "Dave Keeling, Ralph Keeling"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:keeling-lab",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:keeling-lab",
           "name": "Keeling Lab"
         }
       ],
@@ -9025,15 +9047,15 @@
       "url": "https://southern.scec.org/research/cfm",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:andreas-plesch-scott-t-marshall-john-h-shaw",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:andreas-plesch-scott-t-marshall-john-h-shaw",
           "name": "Andreas Plesch, Scott T. Marshall, John H. Shaw"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:statewide-california-earthquake-center-andreas-plesch-harvard-scott-t",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:statewide-california-earthquake-center-andreas-plesch-harvard-scott-t",
           "name": "Statewide California Earthquake Center, Andreas Plesch (Harvard), Scott T. Marshall (App State), John H. Shaw (Harvard)"
         }
       ],
@@ -9186,15 +9208,15 @@
       "url": "https://www.worldwater.org/water-conflict/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:the-dataset-nominated-for-inclusion-is-the-water-conflict-chronology-t",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:the-dataset-nominated-for-inclusion-is-the-water-conflict-chronology-t",
           "name": "The dataset nominated for inclusion is the Water Conflict Chronology, the world’s most comprehensive, open-source database on water and security, created by Dr. Peter Gleick and the Pacific Institute."
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:pacific-institute-for-studies-in-development-environment-and-security",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:pacific-institute-for-studies-in-development-environment-and-security",
           "name": "Pacific Institute for Studies in Development, Environment, and Security (www.pacinst.org and www.worldwater.org)"
         }
       ],
@@ -9260,15 +9282,15 @@
       "url": "https://doi.org/10.5047/eps.2011.11.002",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:daisuke-suetsugu-hajime-shiobara-hiroko-sugioka-et-al",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:daisuke-suetsugu-hajime-shiobara-hiroko-sugioka-et-al",
           "name": "Daisuke Suetsugu, Hajime Shiobara, Hiroko Sugioka, et al."
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:daisuke-suetsugu-hajime-shiobara-hiroko-sugioka-et-al",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:daisuke-suetsugu-hajime-shiobara-hiroko-sugioka-et-al",
           "name": "Daisuke Suetsugu, Hajime Shiobara, Hiroko Sugioka, et al."
         }
       ],
@@ -9311,15 +9333,15 @@
       "url": "http://spot.colorado.edu/~koppg/TSI",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:greg-kopp-richard-willson-claus-fr-hlich-robert-lee-j-hickey-d-hoyt",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:greg-kopp-richard-willson-claus-fr-hlich-robert-lee-j-hickey-d-hoyt",
           "name": "Greg Kopp, Richard Willson, Claus Fröhlich, Robert Lee, J. Hickey, D. Hoyt"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:greg-kopp-university-of-colorado",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:greg-kopp-university-of-colorado",
           "name": "Greg Kopp, University of Colorado"
         }
       ],
@@ -9368,8 +9390,8 @@
       "url": "https://code.earthengine.google.com/a8ab0a204422bdaf13bd1eff4bc0a5ea",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:xueyuan-gao-peter-b-reich-jeffrey-r-vincent-matthew-e-fagan-robin-l-ch",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:xueyuan-gao-peter-b-reich-jeffrey-r-vincent-matthew-e-fagan-robin-l-ch",
           "name": "Xueyuan Gao, Peter B. Reich, Jeffrey R. Vincent, Matthew E. Fagan, Robin L. Chazdon, Steffen Fritz, Dmitry Schepaschenko, Matthew D. Potts, Matthew C. Hansen, Martin Jung, Pedro H. S. Brancalion, María Uriarte, Trevor F. Keenan, Thomas W. Crowther, Ralph O. Dubayah, Myroslava Lesiv, Shunlin Liang, Dongdong Wang"
         }
       ],
@@ -9412,30 +9434,30 @@
       "url": "https://www.hydroshare.org/resource/8b02895f02c14dd1a749bcc5584a5c55/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:chung-yi-lin",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:chung-yi-lin",
           "name": "Chung-Yi Lin"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:alexandra-miller",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:alexandra-miller",
           "name": "Alexandra Miller"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:musab-waqar",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:musab-waqar",
           "name": "Musab Waqar"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:landon-t-marston",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:landon-t-marston",
           "name": "Landon T. Marston"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:cuahsi",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:cuahsi",
           "name": "CUAHSI"
         }
       ],
@@ -9489,15 +9511,15 @@
       "url": "https://doi.org/10.7914/SN/TA",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:iris-data-management-center",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:iris-data-management-center",
           "name": "IRIS Data Management Center"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:earthscope-data-services",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:earthscope-data-services",
           "name": "EarthScope Data Services"
         }
       ],
@@ -9566,15 +9588,15 @@
       "url": "https://www.usgs.gov/labs/spectroscopy-lab/usgs-spectral-library",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:roger-clark-et-al-usgs-ray-kokaly-usgs-gregg-swayze-usgs-et-al",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:roger-clark-et-al-usgs-ray-kokaly-usgs-gregg-swayze-usgs-et-al",
           "name": "Roger Clark et al (USGS), Ray Kokaly (USGS), Gregg Swayze (USGS), et al."
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:ray-kokaly-usgs-et-al",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:ray-kokaly-usgs-et-al",
           "name": "Ray Kokaly (USGS) et al."
         }
       ],
@@ -9612,14 +9634,14 @@
       "creator": [
         {
           "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:jing-fang",
+          "@id": "https://orcid.org/0000-0002-4955-1212",
           "name": "Jing Fang"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:wuhan-botanical-garden",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:wuhan-botanical-garden",
           "name": "Wuhan Botanical Garden"
         }
       ],
@@ -9668,15 +9690,15 @@
       "url": "https://www.waterqualitydata.us/beta/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:us-geological-survey-us-enviornmental-protection-agency",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:us-geological-survey-us-enviornmental-protection-agency",
           "name": "US Geological Survey, US Enviornmental Protection Agency"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:wqp-usgs-gov",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:wqp-usgs-gov",
           "name": "wqp@usgs.gov"
         }
       ],
@@ -9719,15 +9741,15 @@
       "url": "https://www.ncei.noaa.gov/products/world-ocean-database",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:current-wod-version-authors-mishonov-a-v-t-p-boyer-o-k-baranova-c-n-bo",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:current-wod-version-authors-mishonov-a-v-t-p-boyer-o-k-baranova-c-n-bo",
           "name": "current (WOD@#) version authors: Mishonov A.V., T. P. Boyer, O. K. Baranova, C. N. Bouchard, S. Cross, H. E. Garcia, R. A. Locarnini, C. R. Paver, J. R. Reagan, Z. Wang, D. Seidov, A. I. Grodsky, J. G. Beauchamp"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:mishonov-a-v-t-p-boyer-o-k-baranova-c-n-bouchard-s-cross-h-e-garcia-r",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:mishonov-a-v-t-p-boyer-o-k-baranova-c-n-bouchard-s-cross-h-e-garcia-r",
           "name": "Mishonov A.V., T. P. Boyer, O. K. Baranova, C. N. Bouchard, S. Cross, H. E. Garcia, R. A. Locarnini, C. R. Paver, J. R. Reagan, Z. Wang, D. Seidov, A. I. Grodsky, J. G. Beauchamp"
         }
       ],
@@ -9764,15 +9786,15 @@
       "url": "https://wwlln.net/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:professor-dr-robert-holzworth",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:professor-dr-robert-holzworth",
           "name": "Professor Dr. Robert Holzworth"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:prof-dr-robert-holzworth",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:prof-dr-robert-holzworth",
           "name": "Prof Dr. Robert Holzworth"
         }
       ],
@@ -9815,65 +9837,65 @@
       "url": "https://zenodo.org/records/18769612",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:hendrik-boogaard",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:hendrik-boogaard",
           "name": "Hendrik Boogaard"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:arun-pratihast",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:arun-pratihast",
           "name": "Arun Pratihast"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:charlotte-van-haren",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:charlotte-van-haren",
           "name": "Charlotte Van Haren"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:juan-carlos-laso-bayas",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:juan-carlos-laso-bayas",
           "name": "Juan Carlos Laso Bayas"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:santosh-karanam",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:santosh-karanam",
           "name": "Santosh Karanam"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:steffen-fritz",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:steffen-fritz",
           "name": "Steffen Fritz"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:kristof-van-tricht",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:kristof-van-tricht",
           "name": "Kristof Van Tricht"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:jeroen-degerickx",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:jeroen-degerickx",
           "name": "Jeroen Degerickx"
         }
       ],
       "agu:curator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:part-of-esa-worldcereal-consortium",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:part-of-esa-worldcereal-consortium",
           "name": "Part of ESA WorldCereal consortium"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:i-e-wageningen-environmental-research-wenr",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:i-e-wageningen-environmental-research-wenr",
           "name": "i.e. Wageningen Environmental Research (WENR)"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:international-institute-for-applied-systems-analysis-iiasa",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:international-institute-for-applied-systems-analysis-iiasa",
           "name": "International Institute for Applied Systems Analysis (IIASA)"
         },
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:flemish-institute-for-technological-research-vito",
+          "@type": "Organization",
+          "@id": "urn:org:agu:data:impactful-datasets:id:organization:flemish-institute-for-technological-research-vito",
           "name": "Flemish Institute for Technological Research (VITO)"
         }
       ],
@@ -9962,8 +9984,8 @@
       "url": "https://www.worldclim.org/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:japan-atomic-energy-agency-765-1-funaishikawa-tokai-mura-naka-gun-ibar",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:japan-atomic-energy-agency-765-1-funaishikawa-tokai-mura-naka-gun-ibar",
           "name": "Japan Atomic Energy Agency, 765-1 Funaishikawa, Tokai-mura, Naka-gun, Ibaraki 319-1184, Japan"
         }
       ],
@@ -10020,8 +10042,8 @@
       "url": "https://www.fdsn.org/networks/detail/XA_1969/",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:nunn-c",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:nunn-c",
           "name": "Nunn, C."
         }
       ],
@@ -10070,8 +10092,8 @@
       "url": "http://hdl.handle.net/11375/32542",
       "creator": [
         {
-          "@type": "Person",
-          "@id": "urn:org:agu:data:impactful-datasets:id:person:katelyn-mountjoy-eduard-g-reinhardt",
+          "@type": "agu:ResponsibleParty",
+          "@id": "urn:org:agu:data:impactful-datasets:id:party:katelyn-mountjoy-eduard-g-reinhardt",
           "name": "Katelyn Mountjoy, Eduard G. Reinhardt"
         }
       ],
