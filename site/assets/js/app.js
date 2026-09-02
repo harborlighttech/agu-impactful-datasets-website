@@ -63,8 +63,14 @@ function attachEndorsements(nodes, rows){
       });
     }
   });
-  rows.forEach(r => { if (!r.nomCount) r.nomCount = r.nominators.length; });
+  rows.forEach(r => {
+    r.nomCount = r.nominators.length;
+    r.refsTotal = r.refs.length;
+    r.reuseTotal = r.reuse.length;
+  });
 }
+
+const asArray = v => Array.isArray(v) ? v : (v ? [v] : []);
 
 function typeOf(n){
   const t = n && n["@type"];
@@ -80,21 +86,21 @@ function adopt(sd){
   if (sd.url && sd.url !== doi) links.push(sd.url);
   (sd.sameAs || []).forEach(u => { if (u !== doi) links.push(u); });
   return {
-    id: sd["agu:datasetId"] || (idOf(sd.identifier) || {}).value,
+    id: (idOf(sd.identifier) || {}).value,
     urn: sd["@id"],
     title: sd.name,
     shortName: (sd.alternateName || "").trim(),   // spine label; blank falls back to title
     themes: themeKeysOf(sd.keywords),
-    nomCount: sd["agu:nominatorCount"] || 0,
+    nomCount: 0,                                  // counted from the endorsements
     doi, links: links.slice(0, 3),
     repo: (sd.includedInDataCatalog || {}).name || null,
     creators: (sd.creator || []).map(c => c.name).filter(Boolean),
-    curators: (sd["agu:curator"] || []).map(c => c.name).filter(Boolean),
+    curators: asArray(sd.maintainer).map(c => c.name).filter(Boolean),
     desc: sd.description || null,
-    refs: (sd.citation || []).map(c => c.text).filter(Boolean),
-    reuse: (sd["agu:reuseExample"] || []).map(c => c.text).filter(Boolean),
-    refsTotal: sd["agu:citationCount"] || 0,
-    reuseTotal: sd["agu:reuseCount"] || 0,
+    // counts are derived, never stored: a stored count can drift from the list
+    // it describes, and both lists are complete in the file
+    refs: asArray(sd.citation).map(c => c.text).filter(Boolean),
+    reuse: asArray(sd.subjectOf).map(c => c.text).filter(Boolean),
     // filled in from the endorsement actions once the whole graph is indexed
     nominators: [],
     just: [],

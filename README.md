@@ -19,8 +19,9 @@ column_statistics.json           the same, machine-readable
         │                                  graph_statistics.json
         │                                  conceptual_model.svg
         │
-        └──── 3. build_wireframe.py ────▶  impactful_datasets.data.jsonld
-                                           impactful_datasets_wireframe.html
+        └──── 3. build_wireframe.py ────▶  index.html
+                                           assets/css/*  assets/js/*  assets/img/*
+                                           data/impactful_datasets.data.jsonld
 ```
 
 ---
@@ -44,7 +45,7 @@ python build_wireframe.py out/impactful_datasets.jsonld \
 Step 2 is optional — it only produces reporting, and step 3 does not depend on it.
 Steps 1 and 3 are required, in that order.
 
-**Keep `out/impactful_datasets.data.jsonld` under version control.** Step 3 reads
+**Keep `out/data/impactful_datasets.data.jsonld` under version control.** Step 3 reads
 the ids already in that file and reuses them. Delete it and every dataset is
 renumbered, which breaks every published URL. See *Permanent identifiers* below.
 
@@ -76,7 +77,7 @@ Outputs:
 
 | File | What it is |
 |---|---|
-| `impactful_datasets.jsonld` | the full graph — 133 datasets, 149 nominators, 17,310 triples across 23 classes |
+| `impactful_datasets.jsonld` | the full graph — 133 datasets, 161 nominators, 17,310 triples across 23 classes |
 | `column_report.md` | per-column analysis: fill rate, cardinality histograms, which delimiter was guessed and why, and where the guesses are weakest |
 | `column_statistics.json` | the same figures, for diffing against a future export |
 | `_clean.csv` | the encoding-repaired intermediate, kept so you can see what changed |
@@ -97,10 +98,30 @@ diagram — comes from a query, so both stay correct when the source changes.
 
 Builds the public data file and the site prototype from the graph.
 
-| File | What it is |
-|---|---|
-| `impactful_datasets.data.jsonld` | **the published data.** A schema.org `DataCatalog` of 133 `Dataset` records, valid JSON-LD (6,992 triples). Serve this at a stable URL and anyone can consume it. |
-| `impactful_datasets_wireframe.html` | the site. Single file, no external assets — the AGU logo is embedded as a base64 CSS token. |
+Emits a static website as ordinary linked assets:
+
+```
+index.html                            markup, SEO/OpenGraph metadata, rel=alternate
+                                      link to the machine-readable data
+assets/css/tokens.css                 design tokens — brand colours, type, logo.
+                                      The only file a rebrand needs to touch.
+assets/css/site.css                   component styles
+assets/js/config.js                   deployment settings (data URL, featured record)
+assets/js/app.js                      application script
+assets/img/agu-logo.png               brand mark
+data/impactful_datasets.data.jsonld   the published collection, schema.org JSON-LD
+```
+
+`data/impactful_datasets.data.jsonld` is **the published data** — a schema.org
+`DataCatalog` of 133 `Dataset` records, valid JSON-LD. Serve it at a stable URL
+and anyone can consume it. It is also the id registry; see *Permanent identifiers*.
+
+The page fetches its data over HTTP, so **the site must be served, not opened from
+disk**. It says so on screen if the fetch fails. Any static host works:
+
+```bash
+cd out && python3 -m http.server
+```
 
 Useful flags: `--data-url` (where the page fetches its data once the file has a
 permanent home), `--base-url` (host used in `mainEntityOfPage`), `--featured`
@@ -138,15 +159,100 @@ lets a URL survive a title edit, a re-sort, or rows being added or withdrawn.
 Two rules follow: keep the data file in version control, and never renumber by
 hand. Unknown ids fall back to the collection rather than erroring.
 
+If a build ever reports `133 new ids minted` when the registry file exists, stop:
+something has changed the shape the registry is read from, and publishing would
+break every URL. The build now refuses to continue when a registry file exists but
+yields no readable ids — that guard was added after exactly this happened during a
+format change.
+
+### The shape of the published data
+
+`data/impactful_datasets.data.jsonld` is a flat JSON-LD graph — a `DataCatalog`,
+a `DefinedTermSet` of discipline groups, two property definitions, 133 `Dataset`
+nodes, and 133 `ItemList`s holding 174 `EndorseAction`s, all as siblings under
+`@graph`.
+
+**Nominations are endorsements.** A nomination is not authorship, so each one is
+a `schema.org/EndorseAction` rather than a `creator` or `contributor` link:
+
+```json
+{ "@type": "EndorseAction",
+  "identifier": { "@type": "PropertyValue", "propertyID": "AGU-Nominator-Slot", "value": "1" },
+  "agent":  { "@type": "Person", "@id": "https://orcid.org/0000-...", "name": "..." },
+  "object": { "@id": "urn:org:agu:data:impactful-datasets:id:dataset:agu-0004" },
+  "description": "how this nominator works with the dataset",
+  "result": { "@type": "CreativeWork", "text": "their justification",
+              "about": [ { "@type": "DefinedTerm", "name": "People" } ] } }
+```
+
+The action points at its dataset with `object`; schema.org has no property for
+hanging a *performed* action off the thing acted on, which is why the graph is
+flat rather than nested. The interaction statement sits on the action, not the
+agent: the same person can nominate several datasets and agent nodes share an
+ORCID `@id`, so a description there would merge across datasets.
+
+**Ordering is explicit.** A graph is unordered, so the two sequences that matter
+are declared `"@container": "@list"` in the context — `dataset` on the catalog
+(collection display order) and `itemListElement` (nominator order within a
+dataset). Both parse as genuine `rdf:List`s.
+
+**Counts are never stored.** Nominator, citation and reuse totals are derived by
+measuring the lists at load time. A stored count drifts from the list it
+describes; this pipeline has already shipped that bug once.
+
 ### Discipline vocabulary
 
-The eight discipline groups are published as a schema.org `DefinedTermSet` under
+The nine discipline groups are published as a schema.org `DefinedTermSet` under
 `agu:themes`. Each `DefinedTerm` carries the short key as its `identifier` and the
-full label as its `name`. Datasets reference the term by `@id` through
-`keywords`, so the label is stated once and never repeated per dataset.
+full label as its `name`. Datasets reference the term by `@id` through `keywords`,
+so the label is stated once and never repeated per dataset. A group can hold more
+than one keyword: one dataset was nominated under two disciplines and appears
+under both.
+
+Labels are never retyped in the site builder — they are read from the RDF graph,
+which carries them verbatim from the spreadsheet. Corrections to the source
+wording live in `DISCIPLINE_FIXES` in `restructure_impactful_datasets.py`, and the
+verbatim original survives on the `agu:SourceRow` node.
 
 Note: schema.org has no singular `keyword` property — `keywords` is the correct
 term, and it accepts a `DefinedTerm`, which is exactly this pattern.
+
+### The two AGU properties, and why they are not aliased
+
+Two keys stay in the AGU namespace: `agu:curator` and `agu:reuseExample`. Both are
+declared as `rdf:Property` nodes in the graph, each carrying an `rdfs:comment`
+that states precisely what AGU means by it, and an `owl:equivalentProperty` link
+to its schema.org counterpart — `maintainer` and `subjectOf` respectively.
+
+It is tempting to skip that and alias the keys directly in the context:
+
+```json
+"agu:curator": { "@id": "https://schema.org/maintainer" }     // DO NOT DO THIS
+```
+
+**That is invalid JSON-LD 1.1 and a conforming processor rejects the entire
+document**, not just the term. The spec requires a term whose name is in
+compact-IRI form to expand to the same IRI its prefix would give. `rdflib` accepts
+it silently, which makes the mistake easy to ship; `pyld` refuses it with
+`invalid IRI mapping`. Validate with a conforming processor before trusting a
+context change:
+
+```bash
+python -c "from pyld import jsonld, json; jsonld.expand(json.load(open('out/data/impactful_datasets.data.jsonld')))"
+```
+
+The same rule blocks putting an `rdfs:comment` *inside* a term definition — only
+JSON-LD keywords are allowed there. Hence the property nodes, where the
+documentation is an ordinary triple any consumer can read.
+
+Consumers wanting pure schema.org can apply the equivalence in three lines; it
+yields 126 `maintainer` and 397 `subjectOf` triples:
+
+```python
+for p, q in g.subject_objects(OWL.equivalentProperty):
+    for s, _, o in g.triples((None, p, None)):
+        g.add((s, q, o))
+```
 
 ### Namespaces
 
@@ -160,13 +266,6 @@ ids     urn:org:agu:data:impactful-datasets:id:{type}:{local}
 identifiers survive the site moving; the resolvable web address travels alongside
 on `schema.org/mainEntityOfPage`. People with an ORCID keep the ORCID URI as their
 `@id` — a real global identifier beats a minted local one.
-
-### Opening the prototype from disk
-
-The page fetches `impactful_datasets.data.jsonld` at load and keeps an embedded
-copy as a fallback. The fallback matters: a `file://` page cannot fetch a sibling
-file in most browsers, so without it, double-clicking the HTML would show an empty
-collection. Serve both files together, or point at a hosted URL with `--data-url`.
 
 ### Two live API calls on the dataset page
 

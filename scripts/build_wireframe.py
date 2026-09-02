@@ -293,8 +293,16 @@ known, highest = {}, 0
 if DATA_PATH.exists():
     try:
         prev = json.loads(DATA_PATH.read_text(encoding="utf-8"))
-        for item in prev.get("dataset", []):
-            pid = item.get("agu:datasetId")
+        # The published file is a flat @graph; older ones nested datasets under a
+        # "dataset" key. Read both, or a format change silently reissues every id.
+        prev_items = [n for n in prev.get("@graph", []) if n.get("@type") == "Dataset"]
+        prev_items += [n for n in prev.get("dataset", []) if isinstance(n, dict)]
+        for item in prev_items:
+            pid = None
+            for ident in (item.get("identifier") or []):
+                if isinstance(ident, dict) and ident.get("propertyID") == "AGU-Impactful-Datasets-ID":
+                    pid = ident.get("value")
+                    break
             if not pid:
                 continue
             highest = max(highest, int(re.sub(r"\D", "", pid) or 0))
@@ -302,6 +310,11 @@ if DATA_PATH.exists():
             known[published_key(item)] = pid
     except Exception as e:                      # a corrupt file must not silently remint
         raise SystemExit("could not read existing ids from %s: %s" % (DATA_PATH, e))
+    if not known:
+        raise SystemExit(
+            "%s exists but no ids could be read from it. Refusing to continue: a "
+            "rebuild would reissue every id and break every published URL. Check "
+            "the file's shape before re-running." % DATA_PATH)
 
 # Collisions would silently point two pages at one URL, so fail loudly instead.
 seen_keys = collections.Counter(stable_key(r) for r in out)
@@ -381,10 +394,6 @@ def sd_dataset(rec):
         # reference to a term rather than a repeated free-text label. A nomination
         # can name more than one group, so this is always a list.
         "keywords": [{"@id": theme_id(k)} for k in rec["themes"]],
-        "agu:datasetId": rec["id"],
-        "agu:nominatorCount": rec["nomCount"],
-        "agu:citationCount": rec["refsTotal"],
-        "agu:reuseCount": rec["reuseTotal"],
     }
     if rec.get("desc"):
         d["description"] = rec["desc"]
@@ -401,6 +410,7 @@ def sd_dataset(rec):
         d["creator"] = [{"@type": "Person", "@id": urn("person", n), "name": n}
                         for n in rec["creators"] if n]
     if rec.get("curators"):
+        # key stays agu:curator; the @context maps it to schema.org/maintainer
         d["agu:curator"] = [{"@type": "Person", "@id": urn("person", n), "name": n}
                             for n in rec["curators"] if n]
     if rec.get("repo"):
@@ -410,6 +420,7 @@ def sd_dataset(rec):
     if rec.get("refs"):
         d["citation"] = [{"@type": "CreativeWork", "text": c} for c in rec["refs"]]
     if rec.get("reuse"):
+        # key stays agu:reuseExample; the @context maps it to schema.org/subjectOf
         d["agu:reuseExample"] = [{"@type": "CreativeWork", "text": c} for c in rec["reuse"]]
     return d
 
@@ -505,11 +516,47 @@ theme_set = {
     ],
 }
 
+# The two AGU-flavoured keys are documented as real vocabulary terms rather than
+# with a comment inside their @context entry: JSON-LD 1.1 forbids anything but its
+# own keywords in a term definition, and a strict processor rejects the whole
+# document if one appears. Declared here, the definitions are ordinary triples that
+# any consumer can read, and they state the schema.org term each one resolves to.
+vocab = [
+    {"@id": NS_URN + "curator",
+     "@type": "rdf:Property",
+     "rdfs:label": "curator",
+     "rdfs:comment": (
+         "The person, team or programme responsible for stewarding a nominated "
+         "dataset: preparing, documenting, quality-checking and maintaining it, and "
+         "answering for it over time. Recorded from the nomination form's "
+         "\u201cData curator(s)\u201d field, so it names whoever the nominator "
+         "credited, which may be an individual, a group or a service desk rather "
+         "than a single person. It does not imply authorship of the data. Declared "
+         "equivalent to schema.org/maintainer, whose definition \u2014 the party "
+         "that manages a dataset and responds to questions about it \u2014 matches "
+         "this sense."),
+     "rdfs:isDefinedBy": {"@id": NS_URN[:-1]},
+     "owl:equivalentProperty": {"@id": "https://schema.org/maintainer"}},
+    {"@id": NS_URN + "reuseExample",
+     "@type": "rdf:Property",
+     "rdfs:label": "reuse example",
+     "rdfs:comment": (
+         "A documented instance of the nominated dataset being used again beyond "
+         "its original purpose: a paper, derived product, operational system, "
+         "teaching resource or policy application that a nominator offered as "
+         "evidence of the dataset's reach. Each is free text as supplied, "
+         "sometimes with a DOI or URL, and is evidence of impact rather than a "
+         "formal citation record. Declared equivalent to schema.org/subjectOf, "
+         "since each example is a work about the dataset."),
+     "rdfs:isDefinedBy": {"@id": NS_URN[:-1]},
+     "owl:equivalentProperty": {"@id": "https://schema.org/subjectOf"}},
+]
+
 # A flat graph: catalog, discipline vocabulary, datasets, and the endorsement lists
 # as siblings. Endorsements point back at their dataset with `object`, which is how
 # schema.org expects a performed action to relate to the thing acted on -- there is
 # no property for hanging one off the Thing itself.
-nodes = [catalog, theme_set]
+nodes = [catalog, theme_set] + vocab
 nodes += [sd_dataset(r) for r in out]
 nodes += [e for e in (sd_endorsements(r) for r in out) if e]
 
@@ -517,6 +564,15 @@ data_doc = {
     "@context": {
         "@vocab": "https://schema.org/",
         "agu": NS_URN,
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "owl": "http://www.w3.org/2002/07/owl#",
+        # agu:curator and agu:reuseExample are deliberately NOT aliased here.
+        # JSON-LD 1.1 requires a term whose name is in compact-IRI form to expand
+        # to the same IRI its prefix would give, so mapping "agu:curator" to
+        # schema:maintainer in the context makes the whole document invalid and a
+        # conforming processor rejects it. The schema.org equivalence is stated
+        # instead on the property definitions in the graph, as a real triple.
         # ordering is not implied by a graph, so the sequences that matter are
         # declared as lists: the collection's display order, and the order of
         # nominators within each dataset's endorsement list
@@ -1118,8 +1174,14 @@ function attachEndorsements(nodes, rows){
       });
     }
   });
-  rows.forEach(r => { if (!r.nomCount) r.nomCount = r.nominators.length; });
+  rows.forEach(r => {
+    r.nomCount = r.nominators.length;
+    r.refsTotal = r.refs.length;
+    r.reuseTotal = r.reuse.length;
+  });
 }
+
+const asArray = v => Array.isArray(v) ? v : (v ? [v] : []);
 
 function typeOf(n){
   const t = n && n["@type"];
@@ -1135,21 +1197,21 @@ function adopt(sd){
   if (sd.url && sd.url !== doi) links.push(sd.url);
   (sd.sameAs || []).forEach(u => { if (u !== doi) links.push(u); });
   return {
-    id: sd["agu:datasetId"] || (idOf(sd.identifier) || {}).value,
+    id: (idOf(sd.identifier) || {}).value,
     urn: sd["@id"],
     title: sd.name,
     shortName: (sd.alternateName || "").trim(),   // spine label; blank falls back to title
     themes: themeKeysOf(sd.keywords),
-    nomCount: sd["agu:nominatorCount"] || 0,
+    nomCount: 0,                                  // counted from the endorsements
     doi, links: links.slice(0, 3),
     repo: (sd.includedInDataCatalog || {}).name || null,
     creators: (sd.creator || []).map(c => c.name).filter(Boolean),
-    curators: (sd["agu:curator"] || []).map(c => c.name).filter(Boolean),
+    curators: asArray(sd["agu:curator"]).map(c => c.name).filter(Boolean),
     desc: sd.description || null,
-    refs: (sd.citation || []).map(c => c.text).filter(Boolean),
-    reuse: (sd["agu:reuseExample"] || []).map(c => c.text).filter(Boolean),
-    refsTotal: sd["agu:citationCount"] || 0,
-    reuseTotal: sd["agu:reuseCount"] || 0,
+    // counts are derived, never stored: a stored count can drift from the list
+    // it describes, and both lists are complete in the file
+    refs: asArray(sd.citation).map(c => c.text).filter(Boolean),
+    reuse: asArray(sd["agu:reuseExample"]).map(c => c.text).filter(Boolean),
     // filled in from the endorsement actions once the whole graph is indexed
     nominators: [],
     just: [],
