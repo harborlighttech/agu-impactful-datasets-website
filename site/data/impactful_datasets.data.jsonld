@@ -27,7 +27,7 @@
         "url": "https://www.agu.org/"
       },
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "dateModified": "2026-09-02",
+      "dateModified": "2026-09-03",
       "dataset": [
         {
           "@id": "urn:org:agu:data:impactful-datasets:id:dataset:agu-0001"

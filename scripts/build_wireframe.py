@@ -67,7 +67,7 @@ with a DOI.
 The eight discipline colours are anchored on the two brand colours and every one
 clears 4.5:1 against the white spine text.
 """
-import argparse, base64, collections, hashlib, io, json, re
+import argparse, base64, collections, csv, hashlib, io, json, re
 from pathlib import Path
 
 ap = argparse.ArgumentParser(description=__doc__,
@@ -390,7 +390,28 @@ PARTY_KIND = {"Person": "person", "Organization": "organization",
 party_tally = collections.Counter()
 
 
-def party(name, orcid=None, is_nominator=False):
+# Every branch below is a numbered rule. The same number appears in the `rule`
+# column of party_report.csv, so a row in the report can be traced to the line
+# that produced it. `confidence` is confidence in the assertion actually made,
+# not in how specific it is: calling an unparsed sentence a ResponsibleParty is
+# low confidence, while calling it *something* responsible is trivially true.
+PARTY_RULES = {
+    "R1":  ("ORCID supplied", "high"),
+    "R2":  ("agent of an EndorseAction; the form collects one person", "medium"),
+    "R3":  ("DECISION cell filled in by a reviewer", "high"),
+    "R4":  ("named exception, reviewed by hand", "high"),
+    "R5":  ("worksheet: organisation, high confidence", "high"),
+    "R6":  ("worksheet: organisation, medium confidence -- not enough to claim Organization", "medium"),
+    "R7":  ("worksheet: organisation, low confidence -- left as Person", "low"),
+    "R8":  ("worksheet: uncertain", "low"),
+    "R9":  ("worksheet: not an entity; needs re-parsing upstream", "low"),
+    "R10": ("worksheet: several entities in one string; needs splitting", "medium"),
+    "R11": ("no ORCID, not reviewed; nothing supports a narrower type", "low"),
+}
+PARTY_LOG = []
+
+
+def party(name, orcid=None, is_nominator=False, role="creator", dataset=None):
     """A credited party as a typed node, classified by the rules above.
 
     `is_nominator` marks the agent of an EndorseAction. The nomination form asks
@@ -401,26 +422,45 @@ def party(name, orcid=None, is_nominator=False):
     future export puts an institution in that field -- it flags none of the
     current 161.
     """
-    if orcid:
-        kind = "Person"
-    elif is_nominator and not REVIEW.get(name):
-        kind = "Person"
-    elif name in KEEP_AS_PERSON:
-        kind = "Person"
-    else:
-        row = REVIEW.get(name)
-        decided = (row or {}).get("DECISION", "").strip()
-        if decided:
-            kind = {"person": "Person", "organization": "Organization",
-                    "responsibleparty": "agu:ResponsibleParty"}.get(
-                        decided.lower().replace(" ", ""), "agu:ResponsibleParty")
-        elif row and row.get("suggested_action") == "Organization":
-            kind = {"high": "Organization", "medium": "agu:ResponsibleParty",
-                    "low": "Person"}.get(row.get("confidence", ""), "agu:ResponsibleParty")
-        else:
-            kind = "agu:ResponsibleParty"
+    row = REVIEW.get(name)
+    decided = (row or {}).get("DECISION", "").strip()
+
+    if orcid:                                                        # RULE R1
+        kind, rule = "Person", "R1"
+    elif is_nominator and not row:                                   # RULE R2
+        kind, rule = "Person", "R2"
+    elif decided:                                                    # RULE R3
+        kind = {"person": "Person", "organization": "Organization",
+                "responsibleparty": "agu:ResponsibleParty"}.get(
+                    decided.lower().replace(" ", ""), "agu:ResponsibleParty")
+        rule = "R3"
+    elif name in KEEP_AS_PERSON:                                     # RULE R4
+        kind, rule = "Person", "R4"
+    elif row and row.get("suggested_action") == "Organization":
+        conf = row.get("confidence", "")
+        kind, rule = {                                               # RULES R5-R7
+            "high":   ("Organization", "R5"),
+            "medium": ("agu:ResponsibleParty", "R6"),
+            "low":    ("Person", "R7"),
+        }.get(conf, ("agu:ResponsibleParty", "R6"))
+    elif row and row.get("suggested_action") == "review":            # RULE R8
+        kind, rule = "agu:ResponsibleParty", "R8"
+    elif row and row.get("suggested_action") == "re-parse or drop":  # RULE R9
+        kind, rule = "agu:ResponsibleParty", "R9"
+    elif row and row.get("suggested_action") == "split first":       # RULE R10
+        kind, rule = "agu:ResponsibleParty", "R10"
+    else:                                                            # RULE R11
+        kind, rule = "agu:ResponsibleParty", "R11"
+
     party_tally[kind] += 1
-    return {"@type": kind, "@id": orcid or urn(PARTY_KIND[kind], name), "name": name}
+    node = {"@type": kind, "@id": orcid or urn(PARTY_KIND[kind], name), "name": name}
+    PARTY_LOG.append({"name": name, "type": kind, "rule": rule, "role": role,
+                      "dataset": dataset, "id": node["@id"],
+                      "orcid": orcid or "",
+                      "worksheet_action": (row or {}).get("suggested_action", ""),
+                      "worksheet_kind": (row or {}).get("suggested_kind", ""),
+                      "worksheet_evidence": (row or {}).get("evidence", "")})
+    return node
 
 
 def urn(kind, local):
@@ -481,10 +521,12 @@ def sd_dataset(rec):
     orcid_here = {p["name"]: p["orcid"] for p in rec["nominators"]
                   if p.get("name") and p.get("orcid")}
     if rec.get("creators"):
-        d["creator"] = [party(n, orcid_here.get(n)) for n in rec["creators"] if n]
+        d["creator"] = [party(n, orcid_here.get(n), role="creator", dataset=rec["title"])
+                        for n in rec["creators"] if n]
     if rec.get("curators"):
         # key stays agu:curator; the @context maps it to schema.org/maintainer
-        d["agu:curator"] = [party(n, orcid_here.get(n)) for n in rec["curators"] if n]
+        d["agu:curator"] = [party(n, orcid_here.get(n), role="curator", dataset=rec["title"])
+                            for n in rec["curators"] if n]
     if rec.get("repo"):
         d["includedInDataCatalog"] = {"@type": "DataCatalog",
                                       "@id": urn("organization", rec["repo"]),
@@ -518,7 +560,8 @@ def sd_endorsements(rec):
     for n, p in enumerate(rec["nominators"], start=1):
         j = just.get(str(p.get("seq")))
         # a real ORCID beats a minted id, and is what marks the agent a Person
-        agent = party(p.get("name"), p.get("orcid"), is_nominator=True)
+        agent = party(p.get("name"), p.get("orcid"), is_nominator=True,
+                      role="nominator", dataset=rec["title"])
         if p.get("affil"):
             agent["affiliation"] = {"@type": "Organization",
                                     "@id": urn("organization", p["affil"]),
@@ -687,6 +730,49 @@ data_doc = {
     "@graph": nodes,
 }
 DATA_PATH.write_text(json.dumps(data_doc, indent=2, ensure_ascii=False), encoding="utf-8")
+# ------------------------------------------------- reviewable party report ----
+_by_party = {}
+for _e in PARTY_LOG:
+    _k = (_e["type"], _e["name"])
+    _r = _by_party.setdefault(_k, {"rules": set(), "roles": collections.Counter(),
+                                   "datasets": [], "id": _e["id"], "orcid": _e["orcid"],
+                                   "action": _e["worksheet_action"],
+                                   "kind": _e["worksheet_kind"],
+                                   "evidence": _e["worksheet_evidence"]})
+    _r["rules"].add(_e["rule"])
+    _r["roles"][_e["role"]] += 1
+    if _e["dataset"] and _e["dataset"] not in _r["datasets"]:
+        _r["datasets"].append(_e["dataset"])
+
+_ORDER = {"Person": 0, "Organization": 1, "agu:ResponsibleParty": 2}
+_CONF = {"high": 0, "medium": 1, "low": 2}
+_rows = []
+for (_type, _name), _r in _by_party.items():
+    _rules = sorted(_r["rules"])
+    _conf = min((PARTY_RULES[x][1] for x in _rules), key=lambda c: _CONF[c])
+    _rows.append({
+        "assigned_type": _type,
+        "name": _name,
+        "confidence": _conf,
+        "rule": ", ".join(_rules),
+        "why": " / ".join(PARTY_RULES[x][0] for x in _rules),
+        "roles": ", ".join("%s x%d" % (k, v) for k, v in sorted(_r["roles"].items())),
+        "occurrences": sum(_r["roles"].values()),
+        "orcid": _r["orcid"],
+        "node_id": _r["id"],
+        "worksheet_action": _r["action"],
+        "worksheet_kind": _r["kind"],
+        "worksheet_evidence": _r["evidence"],
+        "example_datasets": " | ".join(_r["datasets"][:3]),
+        "DECISION": "",
+    })
+_rows.sort(key=lambda r: (_ORDER[r["assigned_type"]], _CONF[r["confidence"]], r["name"].lower()))
+_report = args.outdir / "party_report.csv"
+with open(_report, "w", newline="", encoding="utf-8-sig") as _fh:
+    _w = csv.DictWriter(_fh, fieldnames=list(_rows[0].keys()))
+    _w.writeheader(); _w.writerows(_rows)
+print("party report: %s  (%d distinct parties)" % (_report, len(_rows)))
+
 for _k, _n in party_tally.most_common():
     print("party types: %-22s %4d" % (_k, _n))
 print("data file: %s  (%d datasets, %d new id%s minted)"
