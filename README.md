@@ -110,6 +110,9 @@ assets/js/config.js                   deployment settings (data URL, featured re
 assets/js/app.js                      application script
 assets/img/agu-logo.png               brand mark
 data/impactful_datasets.data.jsonld   the published collection, schema.org JSON-LD
+party_report.csv                      every credited party, its assigned type,
+                                      the rule that decided it, and a DECISION
+                                      column for overriding it
 ```
 
 `data/impactful_datasets.data.jsonld` is **the published data** — a schema.org
@@ -216,6 +219,113 @@ verbatim original survives on the `agu:SourceRow` node.
 
 Note: schema.org has no singular `keyword` property — `keywords` is the correct
 term, and it accepts a `DefinedTerm`, which is exactly this pattern.
+
+### agu:ResponsibleParty
+
+One class is declared: `agu:ResponsibleParty`, a subclass of `prov:Agent`. It
+covers whoever answers for a dataset — an individual, an institution, a standing
+team or a service desk — and exists mainly for parties that cannot honestly be
+resolved to either `schema:Person` or `schema:Organization`. Typing a science
+working group as `ResponsibleParty` records what is known; typing it `Person`
+guesses wrong.
+
+Subsumption is asserted only in the direction that is AGU's to assert. The file
+does **not** say `schema:Person rdfs:subClassOf agu:ResponsibleParty`: that is a
+global claim, and once graphs are merged it makes every `schema:Person` anywhere
+an AGU responsible party. Tested with an RDFS reasoner — an unrelated novelist and
+bakery in a merged graph get pulled in under that assertion, and are untouched
+without it. `prov:Agent` supplies the shared supertype instead, since it already
+means a party that bears responsibility.
+
+Two `skos:narrowMatch` pointers to `schema:Person` and `schema:Organization`
+record which classes a responsible party will usually turn out to be. The
+relation runs that way because this concept is the broader one: it also covers
+the teams, working groups and service desks that are neither. They are
+documentation, not logic — SKOS mapping relations carry no entailment, so the
+pointers describe the relationship without asserting anything about anybody
+else's data. Verified: a foreign `schema:Person` is untouched after reasoning,
+while `ResponsibleParty` instances still infer as `prov:Agent`.
+
+Nothing is typed `ResponsibleParty` yet. See `person_review.csv` and
+`review_person_types.py`: 191 entities currently typed `Person` are flagged, of
+which 82 look like organisations, 62 hold several entities in one string, and 43
+are parse artifacts rather than entities at all. That review is unresolved.
+
+### How a credited party gets its type
+
+Every person or body credited on a nomination is typed `schema:Person`,
+`schema:Organization` or `agu:ResponsibleParty`. The source makes this harder than
+it sounds: nominators come through a structured form with an ORCID field, but
+creators and curators are free text, and a single cell may hold an individual, an
+institution, a standing team, several people, or a fragment of a sentence.
+
+The guiding principle is **assert only what the evidence supports**. Where the
+evidence is weak, `agu:ResponsibleParty` is the honest answer — it says the party
+is responsible for the dataset without claiming to know whether it is a human.
+Guessing `Person` would be a stronger claim than the data can carry.
+
+Decisions are made in one function, `party()` in `build_wireframe.py`. Each branch
+carries an inline `# RULE Rn` marker, and the `PARTY_RULES` table just above it
+maps each id to its reason and confidence. Every build writes `party_report.csv`,
+one row per distinct name, with the rule that decided it — so any row in the
+report can be traced to the line of code that produced it.
+
+| Rule | Condition | Type | Confidence | Rows |
+|---|---|---|---|---|
+| R1 | an ORCID was supplied | Person | high | 155 |
+| R2 | agent of an `EndorseAction` | Person | medium | 6 |
+| R3 | a reviewer filled the `DECISION` cell | as decided | high | 0 |
+| R4 | named exception, ruled by hand | Person | high | 1 |
+| R5 | worksheet: organisation, high confidence | Organization | high | 42 |
+| R6 | worksheet: organisation, medium confidence | ResponsibleParty | medium | 35 |
+| R7 | worksheet: organisation, low confidence | Person | low | 5 |
+| R8 | worksheet: uncertain | ResponsibleParty | low | 3 |
+| R9 | worksheet: not an entity | ResponsibleParty | low | 43 |
+| R10 | worksheet: several entities in one string | ResponsibleParty | medium | 62 |
+| R11 | no ORCID, not reviewed | ResponsibleParty | low | 166 |
+
+Why some of these are shaped the way they are:
+
+**R1 — an ORCID settles it.** An ORCID is issued to an individual researcher, so
+its presence is direct evidence of personhood. Nothing else in the data is that
+strong.
+
+**R2 — the role can stand in for the identifier.** The nomination form asks for
+one person's name, email, ORCID and affiliation, so the agent of an endorsement is
+a person by construction; a blank ORCID means only that they did not supply one.
+Without this rule, six named researchers who left the field empty would be demoted
+to `ResponsibleParty`. The worksheet keeps a veto in case a future export puts an
+institution in that field — it flags none of the current 161.
+
+**R6 vs R5 — confidence changes the claim, not just the label.** A high-confidence
+organisation becomes an `Organization`. A medium-confidence one becomes a
+`ResponsibleParty`, because the evidence justifies "this is a responsible party"
+but not "this is an institution". The type follows the strength of the evidence.
+
+**R9 and R10 cannot be fixed by typing.** These rows are upstream parsing
+failures: one cell holding several entities, or a sentence captured as a name.
+Retyping them would put a formal class on something that is not an entity. They
+are typed `ResponsibleParty` to keep the graph honest and flagged for repair in
+`restructure_impactful_datasets.py`, which is where the parse went wrong.
+
+**R11 is the default, and it is deliberately cautious.** A name with no ORCID and
+no review has nothing behind it but a string. `ResponsibleParty` records that.
+
+**R3 is the escape hatch.** Fill `DECISION` in `person_review.csv` or
+`party_report.csv` with `person`, `organization` or `responsibleparty` and it
+overrides every heuristic at high confidence. No rows use it yet, so nothing in
+the current output is human-ruled.
+
+Two smaller mechanics. A nominator who also created or curates the dataset they
+nominated is reconciled to a single node keyed on their ORCID — the match is
+confined to the same record, since an exact name match across the collection would
+be far weaker evidence and names like "Yuan Li" recur. And node ids follow the
+assigned type, so a party minted as an organisation gets an `…:id:organization:`
+urn rather than a person one.
+
+Current distribution: 167 `Person` (156 high confidence), 42 `Organization` (all
+high), 309 `ResponsibleParty` (97 medium, 212 low). The 97 medium rows are the
+best place to start a review.
 
 ### The two AGU properties, and why they are not aliased
 
